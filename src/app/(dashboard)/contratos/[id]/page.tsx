@@ -1,5 +1,5 @@
 
-import { supabase } from "@/lib/supabase"
+import { createClient } from "@/lib/supabase/server"
 import { notFound } from "next/navigation"
 import { ContratoDetails } from "@/components/relationships/contrato-details"
 import { BackButton } from "@/components/ui/back-button"
@@ -10,7 +10,7 @@ interface PageProps {
     params: Promise<{ id: string }>
 }
 
-async function getHierarchy(rootContractId: string) {
+async function getHierarchy(supabase: Awaited<ReturnType<typeof createClient>>, rootContractId: string) {
     // 1. Fetch the specific contract
     const { data: contract } = await supabase
         .from("contratos")
@@ -71,6 +71,7 @@ async function getHierarchy(rootContractId: string) {
 }
 
 export default async function ContratoDetailsPage({ params }: PageProps) {
+    const supabase = await createClient()
     const { id } = await params
 
     const { data: contrato } = await supabase
@@ -83,7 +84,7 @@ export default async function ContratoDetailsPage({ params }: PageProps) {
         notFound()
     }
 
-    const hierarchy = await getHierarchy(id)
+    const hierarchy = await getHierarchy(supabase, id)
 
     // Fetch linked empreendimentos
     const { data: linkedEmps } = await supabase

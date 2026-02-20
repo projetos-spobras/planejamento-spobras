@@ -1,11 +1,12 @@
 
-import { supabase } from "@/lib/supabase"
+import { createClient } from "@/lib/supabase/server"
 import { PlanejamentoClient } from "./_components/client-page"
 import { PlanejamentoFase } from "@/types"
 
 export const revalidate = 0
 
 export default async function PlanejamentoPage() {
+    const supabase = await createClient()
     // Join with empreendimentos to get names
     // Supabase JS client doesn't support complex joins in one go easily without foreign key definition on the client side knowing about it?
     // Actually it does if relational key is there.

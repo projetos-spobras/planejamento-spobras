@@ -1,12 +1,12 @@
 
-import { supabase } from "@/lib/supabase"
+import { createClient } from "@/lib/supabase/server"
 import { EmpenhosClient } from "./_components/client-page"
 import { Empenho } from "@/types"
 
 export const revalidate = 0
 
 export default async function EmpenhosPage() {
-    // supabase is imported
+    const supabase = await createClient()
 
     const { data: empenhos } = await supabase
         .from("empenhos")

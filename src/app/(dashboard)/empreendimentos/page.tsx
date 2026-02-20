@@ -1,5 +1,5 @@
 
-import { supabase } from "@/lib/supabase"
+import { createClient } from "@/lib/supabase/server"
 import { EmpreendimentosClient } from "./_components/client-page"
 
 export const revalidate = 0
@@ -9,6 +9,7 @@ interface EmpreendimentosPageProps {
 }
 
 export default async function EmpreendimentosPage({ searchParams }: EmpreendimentosPageProps) {
+    const supabase = await createClient()
     const params = await searchParams
     const page = Number(params?.page || 1)
     const pageSize = Number(params?.pageSize || 12)

@@ -1,5 +1,5 @@
 
-import { supabase } from "@/lib/supabase"
+import { createClient } from "@/lib/supabase/server"
 import { notFound } from "next/navigation"
 import { EmpreendimentoDetails } from "@/components/relationships/empreendimento-details"
 import { BackButton } from "@/components/ui/back-button"
@@ -12,6 +12,7 @@ interface PageProps {
 }
 
 export default async function EmpreendimentoDetailsPage({ params }: PageProps) {
+    const supabase = await createClient()
     const { id } = await params
 
     const { data: empreendimento } = await supabase

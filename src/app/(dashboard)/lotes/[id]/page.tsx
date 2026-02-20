@@ -1,5 +1,5 @@
 
-import { supabase } from "@/lib/supabase"
+import { createClient } from "@/lib/supabase/server"
 import { notFound } from "next/navigation"
 import { LoteDetails } from "@/components/relationships/lote-details"
 import { BackButton } from "@/components/ui/back-button"
@@ -11,6 +11,7 @@ interface PageProps {
 }
 
 export default async function LoteDetailsPage({ params }: PageProps) {
+    const supabase = await createClient()
     const { id } = await params
 
     const { data: lote } = await supabase

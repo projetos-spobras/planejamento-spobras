@@ -1,10 +1,11 @@
 
-import { supabase } from "@/lib/supabase"
+import { createClient } from "@/lib/supabase/server"
 import { LotesClient } from "./_components/client-page"
 
 export const revalidate = 0
 
 export default async function LotesPage() {
+    const supabase = await createClient()
     const [minLotes, minContratos] = await Promise.all([
         supabase
             .from('lotes')

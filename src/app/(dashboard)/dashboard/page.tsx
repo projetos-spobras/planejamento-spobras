@@ -1,5 +1,5 @@
 
-import { supabase } from "@/lib/supabase"
+import { createClient } from "@/lib/supabase/server"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import {
     Users,
@@ -13,6 +13,7 @@ import {
 export const revalidate = 0
 
 export default async function DashboardPage() {
+    const supabase = await createClient()
     // Parallel data fetching for dashboard stats
     const [
         { count: empreendimentosCount },

@@ -39,7 +39,8 @@ export type Contrato = {
 export type Lote = {
     id: string
     nome: string
-    contrato_id: string
+    tipo: 'GERAL' | 'OAE' | 'ESCOLA' | null
+    contrato_id: string | null
     descricao: string | null
     created_at: string
     updated_at: string
@@ -53,6 +54,26 @@ export type Empenho = {
     data_empenho: string | null
     tipo_vinculo: 'empreendimento' | 'contrato' | 'lote' | null
     vinculo_id: string | null
+    medicao_id: string | null
+    created_at: string
+    updated_at: string
+    created_by: string | null
+}
+
+export type MedicaoStatus = 'rascunho' | 'enviada' | 'aprovada' | 'reprovada'
+
+export type Medicao = {
+    id: string
+    servico_id: string
+    empreendimento_id: string | null
+    contrato_id: string | null
+    lote_id: string | null
+    numero_medicao: number
+    data_medicao: string
+    valor_medido: number
+    percentual_executado: number | null
+    status: MedicaoStatus
+    observacoes: string | null
     created_at: string
     updated_at: string
     created_by: string | null

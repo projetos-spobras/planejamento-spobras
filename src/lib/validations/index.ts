@@ -33,9 +33,13 @@ export const contratoSchema = z.object({
 export type ContratoFormValues = z.infer<typeof contratoSchema>
 
 // --- LOTES ---
+export const TIPOS_LOTE = ['GERAL', 'OAE', 'ESCOLA'] as const
+export type TipoLote = typeof TIPOS_LOTE[number]
+
 export const loteSchema = z.object({
     nome: z.string().min(1, "Nome do lote é obrigatório"),
-    contrato_id: z.string().uuid("Selecione um contrato válido"),
+    tipo: z.enum(TIPOS_LOTE, { message: "Selecione o tipo do lote" }),
+    contrato_id: z.string().uuid().optional().nullable(),
     descricao: z.string().optional(),
 })
 
@@ -48,6 +52,7 @@ export const empenhoSchema = z.object({
     data_empenho: z.date().optional(),
     tipo_vinculo: z.enum(['empreendimento', 'contrato', 'lote']).optional().nullable(),
     vinculo_id: z.string().uuid().optional().nullable(),
+    medicao_id: z.string().uuid().optional().nullable(),
 })
 
 export type EmpenhoFormValues = z.infer<typeof empenhoSchema>
@@ -87,3 +92,40 @@ export const servicoSchema = z.object({
 })
 
 export type ServicoFormValues = z.infer<typeof servicoSchema>
+
+// --- MEDIÇÕES ---
+export const STATUS_MEDICAO = ['rascunho', 'enviada', 'aprovada', 'reprovada'] as const
+export type StatusMedicao = typeof STATUS_MEDICAO[number]
+
+export const STATUS_MEDICAO_LABELS: Record<StatusMedicao, string> = {
+    rascunho: 'Rascunho',
+    enviada: 'Enviada',
+    aprovada: 'Aprovada',
+    reprovada: 'Reprovada',
+}
+
+export const medicaoSchema = z.object({
+    servico_id: z.string().uuid("Selecione um serviço"),
+    empreendimento_id: z.string().uuid().optional().nullable(),
+    contrato_id: z.string().uuid().optional().nullable(),
+    lote_id: z.string().uuid().optional().nullable(),
+    numero_medicao: z.coerce
+        .number({ message: "Número da medição é obrigatório" })
+        .int("Deve ser um número inteiro")
+        .min(1, "Número da medição deve ser maior que zero"),
+    data_medicao: z.date({ message: "Data da medição é obrigatória" }),
+    valor_medido: z.coerce
+        .number({ message: "Valor medido é obrigatório" })
+        .min(0, "Valor não pode ser negativo"),
+    percentual_executado: z.coerce
+        .number()
+        .min(0, "Percentual não pode ser negativo")
+        .max(100, "Percentual não pode ultrapassar 100%")
+        .optional()
+        .nullable(),
+    status: z.enum(STATUS_MEDICAO, { message: "Selecione um status válido" })
+        .default('rascunho'),
+    observacoes: z.string().optional().nullable(),
+})
+
+export type MedicaoFormValues = z.infer<typeof medicaoSchema>

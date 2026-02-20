@@ -23,10 +23,6 @@ export default async function LoteDetailsPage({ params }: PageProps) {
         notFound()
     }
 
-    // We need all empreendimentos linked to this contract, to allow assignment to this lote.
-    // Query empreendimentos_contratos where contrato_id = lote.contrato_id
-
-    // Note: The structure of response will be list of link objects
     let links: any[] | null = []
 
     if (lote.contrato_id) {
@@ -45,7 +41,6 @@ export default async function LoteDetailsPage({ params }: PageProps) {
         links = linksData
     }
 
-    // Transform to simple list for the component
     const empreendimentosDoContrato = links?.map((link: any) => ({
         id: link.empreendimento.id,
         nome: link.empreendimento.nome,
@@ -59,6 +54,28 @@ export default async function LoteDetailsPage({ params }: PageProps) {
         .eq("tipo_vinculo", "lote")
         .eq("vinculo_id", id)
 
+    // [M6] Buscar avanço físico de cada empreendimento atribuído ao lote
+    const assignedEmps = empreendimentosDoContrato.filter(e => e.lote_id === id)
+
+    const avancoPromises = assignedEmps.map(emp =>
+        Promise.all([
+            supabase.rpc('get_avanco_fisico', { p_empreendimento_id: emp.id }),
+            supabase.rpc('get_valor_medido_total', { p_empreendimento_id: emp.id }),
+        ]).then(([{ data: pct }, { data: val }]) => ({
+            id: emp.id,
+            percentualExecutado: Number(pct ?? 0),
+            valorMedidoTotal: Number(val ?? 0),
+        }))
+    )
+
+    const avancosPorEmp = await Promise.all(avancoPromises)
+
+    // Média ponderada consolidada: Σ(pct * valorMedido) / Σ(valorMedido)
+    const totalMedido = avancosPorEmp.reduce((s, a) => s + a.valorMedidoTotal, 0)
+    const avancoConsolidado = totalMedido > 0
+        ? avancosPorEmp.reduce((s, a) => s + a.percentualExecutado * a.valorMedidoTotal, 0) / totalMedido
+        : 0
+
     return (
 
         <div className="space-y-6">
@@ -71,6 +88,8 @@ export default async function LoteDetailsPage({ params }: PageProps) {
                 contrato={lote.contrato}
                 empreendimentosDoContrato={empreendimentosDoContrato}
                 empenhos={empenhos || []}
+                avancosPorEmp={avancosPorEmp}
+                avancoConsolidado={avancoConsolidado}
             />
         </div>
     )

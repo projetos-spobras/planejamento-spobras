@@ -72,19 +72,34 @@ export async function assignEmpreendimentoToLote(
     contratoId: string,
     loteId: string
 ) {
-    // This updates the existing link or creates it?
-    // "Ao atribuir, atualiza o campo lote_id na tabela empreendimento_contrato"
-    // This implies the link usually already exists, or we might be creating a new one?
-    // Let's assume we are updating an existing link between Emp and Contrato to belong to Lote.
-    // OR we are creating a new link if it doesn't exist?
-    // Requirement "3. GESTÃO DE LOTES ... Buscar empreendimentos já vinculados ao contrato do lote"
-    // So distinct step: 1. Link Emp to Contrato via Empreendimento Details. 2. Assign to Lote via Lote Details.
-    // So we update.
+    // [P4] Guard: verificar cardinalidade de lotes OAE (máx. 5 empreendimentos)
+    const { data: lote } = await supabase
+        .from('lotes')
+        .select('tipo')
+        .eq('id', loteId)
+        .single()
+
+    if (lote?.tipo === 'OAE') {
+        const { count } = await supabase
+            .from('empreendimentos_contratos')
+            .select('id', { count: 'exact', head: true })
+            .eq('lote_id', loteId)
+            .neq('empreendimento_id', empreendimentoId) // não contar o próprio se já estiver
+
+        if ((count ?? 0) >= 5) {
+            return {
+                success: false,
+                error: 'Lotes do tipo OAE suportam no máximo 5 empreendimentos.'
+            }
+        }
+    }
 
     const { error } = await supabase
         .from("empreendimentos_contratos")
-        .update({ lote_id: loteId })
-        .match({ empreendimento_id: empreendimentoId, contrato_id: contratoId })
+        .upsert(
+            { empreendimento_id: empreendimentoId, contrato_id: contratoId, lote_id: loteId },
+            { onConflict: "empreendimento_id,contrato_id" }
+        )
 
     if (error) {
         return { success: false, error: error.message }
@@ -124,11 +139,21 @@ export async function getEmpreendimentosByContrato(contratoId: string) {
 }
 
 export async function updateLoteEmpreendimentos(loteId: string, empreendimentoIds: string[], contratoId: string) {
-    // 1. Unlink all empreendimentos from this lote (set lote_id = null for this contract)
-    // We only affect relationships for THIS contract.
-    // Actually, we want to clear the lote_id for any relationship in this contract for this lote.
+    // [P4] Guard: verificar cardinalidade de lotes OAE antes de fazer qualquer atualização
+    const { data: lote } = await supabase
+        .from('lotes')
+        .select('tipo')
+        .eq('id', loteId)
+        .single()
 
-    // First, clear existing lote_id for this lote
+    if (lote?.tipo === 'OAE' && empreendimentoIds.length > 5) {
+        return {
+            success: false,
+            error: `Lotes do tipo OAE suportam no máximo 5 empreendimentos. Você selecionou ${empreendimentoIds.length}.`
+        }
+    }
+
+    // Limpar lote_id existente para este lote
     const { error: clearError } = await supabase
         .from("empreendimentos_contratos")
         .update({ lote_id: null })
@@ -141,8 +166,7 @@ export async function updateLoteEmpreendimentos(loteId: string, empreendimentoId
         return { success: true }
     }
 
-    // 2. Set lote_id for selected empreendimentos
-    // We must ensure the relationship exists. It should, because we only selected from linked ones.
+    // Atribuir lote_id para os empreendimentos selecionados
     const { error: updateError } = await supabase
         .from("empreendimentos_contratos")
         .update({ lote_id: loteId })

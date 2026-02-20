@@ -68,52 +68,49 @@ export async function getServicosByEmpreendimentoId(empreendimentoId: string) {
 }
 
 export async function createServico(data: Partial<Servico>) {
-    const { error } = await supabase
+    const { data: inserted, error } = await supabase
         .from("servicos")
         .insert(data)
+        .select('id')
+        .single()
 
     if (error) {
         return { success: false, error: error.message }
     }
 
-    // Sync with Planejamento
-    // We try to create a phase. If it fails, we don't block the service creation?
-    // Or we should? Ideally transaction, but Supabase RPC or just best effort here.
-    // We'll do best effort for now or simple sequential.
+    // [P3] Sincronização com Planejamento — melhor esforço, não bloqueia o serviço
+    let planWarning = false
     if (data.empreendimento_id && data.descricao) {
         const { error: planError } = await supabase
             .from("planejamento_fases")
             .insert({
                 empreendimento_id: data.empreendimento_id,
-                fase: data.descricao.length > 255 ? data.descricao.substring(0, 252) + "..." : data.descricao, // Ensure fit
+                fase: data.descricao.length > 255 ? data.descricao.substring(0, 252) + "..." : data.descricao,
                 tipo_fase: 'execução',
                 valor_planejado: data.valor_total || 0,
-                // data_inicio and data_fim default to null
             })
 
         if (planError) {
-            console.error("Failed to sync with planejamento:", planError)
-            // Not returning error to user as service was created, but maybe toast warning?
-            // Since this is a server action, we can't toast easily from here without changing return shape.
-            // We'll proceed.
+            planWarning = true
+            console.error('[createServico] Falha ao criar fase de planejamento:', {
+                servico_id: inserted?.id,
+                empreendimento_id: data.empreendimento_id,
+                erro: planError.message,
+                codigo: planError.code,
+            })
         }
     }
 
     revalidatePath("/empreendimentos")
-    revalidatePath(`/empreendimentos/${data.empreendimento_id}`) // Also revalidate specific page
-    return { success: true }
+    revalidatePath(`/empreendimentos/${data.empreendimento_id}`)
+    return { success: true, planWarning }
 }
 
 export async function createServiceBatch(empreendimentoIds: string[], data: Partial<Servico>) {
-    // data contains description, value, etc. but NOT empreendimento_id or contract_id (usually)
-    // If contract_id is passed, it might be tricky if contracts are specific to empreendimentos.
-    // For bulk creation, usually we don't link contracts immediately unless we allow selecting "Sem contrato" or we pick contracts per empreendimento (too complex).
-    // So we assume no contract or "Sem contrato" for now.
-
     const payloads = empreendimentoIds.map(empId => ({
         ...data,
         empreendimento_id: empId,
-        contrato_id: null // Explicitly null for bulk creation to avoid invalid keys
+        contrato_id: null
     }))
 
     const { error } = await supabase
@@ -124,9 +121,8 @@ export async function createServiceBatch(empreendimentoIds: string[], data: Part
         return { success: false, error: error.message }
     }
 
-    // Sync with Planning for each
-    // We can do this in parallel or wait.
-    // Ideally we insert into planejamento_fases in batch too.
+    // [P3] Sincronização com Planejamento — melhor esforço, não bloqueia
+    let planWarning = false
     if (data.descricao) {
         const planPayloads = empreendimentoIds.map(empId => ({
             empreendimento_id: empId,
@@ -140,13 +136,19 @@ export async function createServiceBatch(empreendimentoIds: string[], data: Part
             .insert(planPayloads)
 
         if (planError) {
-            console.error("Failed to sync batch with planejamento:", planError)
+            planWarning = true
+            console.error('[createServiceBatch] Falha ao criar fases de planejamento:', {
+                empreendimento_ids: empreendimentoIds,
+                total: empreendimentoIds.length,
+                erro: planError.message,
+                codigo: planError.code,
+            })
         }
     }
 
     revalidatePath("/empreendimentos")
-    revalidatePath("/servicos") // New global page
-    return { success: true }
+    revalidatePath("/servicos")
+    return { success: true, planWarning }
 }
 
 export async function updateServico(id: string, data: Partial<Servico>) {

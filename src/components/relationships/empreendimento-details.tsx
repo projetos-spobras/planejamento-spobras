@@ -9,6 +9,8 @@ import { Link2, Trash2, ExternalLink, Coins, PieChart } from "lucide-react"
 import { toast } from "sonner"
 import Link from "next/link"
 
+import { AvancoFisicoCard } from "@/components/medicoes/avanco-fisico-card"
+
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -72,6 +74,12 @@ interface EmpreendimentoDetailsProps {
         totalEmpenhadoAno: number
         saldoPlanejado: number
     }
+    avancoFisico?: {
+        percentualExecutado: number
+        valorMedidoTotal: number
+        valorContrato: number
+        ultimaMedicao: string | null
+    }
 }
 
 export function EmpreendimentoDetails({
@@ -83,7 +91,8 @@ export function EmpreendimentoDetails({
     fases,
     servicos,
     lookups,
-    indicators
+    indicators,
+    avancoFisico,
 }: EmpreendimentoDetailsProps) {
     const [isLinkDialogOpen, setIsLinkDialogOpen] = useState(false)
     const [unlinkId, setUnlinkId] = useState<{ empId: string, contId: string } | null>(null)
@@ -109,7 +118,7 @@ export function EmpreendimentoDetails({
                 </div>
             </div>
 
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
                 <Card>
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                         <CardTitle className="text-sm font-medium">Contratos</CardTitle>
@@ -158,6 +167,14 @@ export function EmpreendimentoDetails({
                         </p>
                     </CardContent>
                 </Card>
+                {avancoFisico && (
+                    <AvancoFisicoCard
+                        percentualExecutado={avancoFisico.percentualExecutado}
+                        valorMedidoTotal={avancoFisico.valorMedidoTotal}
+                        valorContrato={avancoFisico.valorContrato}
+                        ultimaMedicao={avancoFisico.ultimaMedicao}
+                    />
+                )}
             </div>
 
             <Tabs defaultValue="detalhes" className="space-y-4">
@@ -236,6 +253,7 @@ export function EmpreendimentoDetails({
                         empreendimentoId={empreendimento.id}
                         empreendimentoNome={empreendimento.nome}
                         fases={fases}
+                        avancoFisico={avancoFisico?.percentualExecutado}
                     />
                 </TabsContent>
 

@@ -92,6 +92,26 @@ export default async function EmpreendimentoDetailsPage({ params }: PageProps) {
 
 
 
+    // [M6] Buscar avanço físico via RPC
+    const [
+        { data: avancoData },
+        { data: valorMedidoData },
+        { data: ultimaMedicaoData }
+    ] = await Promise.all([
+        supabase.rpc('get_avanco_fisico', { p_empreendimento_id: id }),
+        supabase.rpc('get_valor_medido_total', { p_empreendimento_id: id }),
+        supabase.rpc('get_ultima_medicao_aprovada', { p_empreendimento_id: id }),
+    ])
+
+    const avancoFisico = {
+        percentualExecutado: Number(avancoData ?? 0),
+        valorMedidoTotal: Number(valorMedidoData ?? 0),
+        valorContrato: (linkedContracts ?? []).reduce(
+            (sum: number, ec: any) => sum + (ec.contrato?.valor_total ?? 0), 0
+        ),
+        ultimaMedicao: ultimaMedicaoData as string | null,
+    }
+
     const indicators = calculateFinancialIndicators(
         empreendimento.valor_total,
         empenhos || [],
@@ -119,6 +139,7 @@ export default async function EmpreendimentoDetailsPage({ params }: PageProps) {
                     fases: fasesLookup || []
                 }}
                 indicators={indicators}
+                avancoFisico={avancoFisico}
             />
         </div>
     )

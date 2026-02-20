@@ -47,7 +47,7 @@ interface LinkContratoDialogProps {
     onOpenChange: (open: boolean) => void
     empreendimentoId: string
     contratos: { id: string, numero: string, tipo: string | null }[]
-    lotes: { id: string, nome: string, contrato_id: string }[]
+    lotes: { id: string, nome: string, contrato_id: string | null }[]
 }
 
 export function LinkContratoDialog({
@@ -68,7 +68,10 @@ export function LinkContratoDialog({
         },
     })
 
-    const filteredLotes = lotes.filter(l => l.contrato_id === selectedContratoId)
+    // Lotes disponíveis para vinculação: aqueles sem contrato associado ainda.
+    // Fluxo esperado: Lote criado ANTES do Contrato → ao vincular contrato ao empreendimento,
+    // o usuário pode opcionalmente associar um lote que ainda não tem contrato.
+    const filteredLotes = lotes.filter(l => !l.contrato_id)
 
     async function onSubmit(data: LinkContratoFormValues) {
         setIsPending(true)

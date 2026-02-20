@@ -34,3 +34,28 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+---
+
+## ⚠️ Configurações de Segurança Obrigatórias (Supabase)
+
+As configurações abaixo foram habilitadas intencionalmente por razões de segurança e **não devem ser revertidas** sem aprovação explícita do time de arquitetura.
+
+### [I5] Proteção contra senhas vazadas (HaveIBeenPwned)
+- **Status:** ✅ Habilitada em `Authentication → Settings → Password protection`
+- **Data de ativação:** 2026-02-20
+- **Motivo:** Impede que usuários cadastrem senhas que já foram expostas em vazamentos públicos de dados, conforme checado via [haveibeenpwned.com](https://haveibeenpwned.com).
+- **Como verificar:** Supabase Dashboard → Authentication → Settings → confirmar que "Leaked Password Protection" está ativado.
+- **⛔ Não desabilitar:** Reverter esta configuração expõe contas de usuários a ataques de credential stuffing.
+
+### [I4] `search_path` fixo nas funções do banco
+- **Status:** ✅ Aplicado via migration `fix_function_search_path_i4`
+- **Funções corrigidas:** `is_admin()`, `handle_new_user()`, `get_regional_stats()`, `update_project_location()`
+- **Motivo:** Funções sem `SET search_path` fixo são suscetíveis a ataques de substituição de schema (schema injection), onde um objeto malicioso em outro schema pode ser executado no lugar do esperado.
+- **⛔ Não remover o `SET search_path`** ao atualizar qualquer uma dessas funções.
+
+### RLS (Row Level Security)
+- **Status:** ✅ Habilitado em todas as tabelas críticas via migration `enable_rls_critical_tables`
+- **Tabelas protegidas:** `contratos`, `lotes`, `empenhos`, `planejamento_fases`, `empreendimentos_contratos`, `programas`, `distritos`, `gerencias`, `empreendimento_fases`
+- **Regra:** Todas as operações exigem `auth.role() = 'authenticated'`.
+- **⛔ Não desabilitar RLS** sem criar políticas equivalentes — deixa os dados de contratos públicos expostos sem autenticação.

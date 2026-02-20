@@ -33,7 +33,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
-import { LoteFormValues, loteSchema } from "@/lib/validations"
+import { LoteFormValues, loteSchema, TIPOS_LOTE } from "@/lib/validations"
 import { createLote, updateLote } from "@/app/(dashboard)/lotes/actions"
 import { Lote, Contrato } from "@/types"
 import { MultiCombobox } from "@/components/ui/multi-combobox"
@@ -59,10 +59,12 @@ export function LoteDialog({
         resolver: zodResolver(loteSchema),
         defaultValues: loteToEdit ? {
             nome: loteToEdit.nome,
+            tipo: (loteToEdit.tipo as any) ?? 'GERAL',
             contrato_id: loteToEdit.contrato_id,
             descricao: loteToEdit.descricao || "",
         } : {
             nome: "",
+            tipo: 'GERAL' as const,
             contrato_id: "",
             descricao: "",
         },
@@ -81,10 +83,8 @@ export function LoteDialog({
 
     useEffect(() => {
         if (formContratoId !== selectedContratoId) {
-            setSelectedContratoId(formContratoId)
-            // Reset selected empreendimentos if contract changes?
-            // Yes, because empreendimentos belong to specific contract context.
-            // Unless we are initial loading.
+            // contrato_id is now optional/nullable — coerce null → undefined for state
+            setSelectedContratoId(formContratoId ?? undefined)
         }
     }, [formContratoId, selectedContratoId])
 
@@ -146,7 +146,7 @@ export function LoteDialog({
             if (result.success) {
                 // If we have an ID (which we should for created or edited), update relationships
                 if (finalLoteId && selectedEmpreendimentos.length >= 0) { // allow empty to clear
-                    await updateLoteEmpreendimentos(finalLoteId, selectedEmpreendimentos, data.contrato_id)
+                    await updateLoteEmpreendimentos(finalLoteId, selectedEmpreendimentos, data.contrato_id ?? "")
                 }
 
                 toast.success(loteToEdit ? "Lote atualizado" : "Lote criado")
@@ -178,17 +178,40 @@ export function LoteDialog({
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                         <FormField
                             control={form.control}
-                            name="contrato_id"
+                            name="tipo"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Contrato *</FormLabel>
+                                    <FormLabel>Tipo de Lote *</FormLabel>
                                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                                         <FormControl>
                                             <SelectTrigger>
-                                                <SelectValue placeholder="Selecione o contrato" />
+                                                <SelectValue placeholder="Selecione o tipo" />
                                             </SelectTrigger>
                                         </FormControl>
                                         <SelectContent>
+                                            {TIPOS_LOTE.map(t => (
+                                                <SelectItem key={t} value={t}>{t}</SelectItem>
+                                            ))}
+                                        </SelectContent>
+                                    </Select>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="contrato_id"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Contrato</FormLabel>
+                                    <Select onValueChange={field.onChange} defaultValue={field.value || ""}>
+                                        <FormControl>
+                                            <SelectTrigger>
+                                                <SelectValue placeholder="Selecione o contrato (opcional)" />
+                                            </SelectTrigger>
+                                        </FormControl>
+                                        <SelectContent>
+                                            <SelectItem value="">Sem contrato</SelectItem>
                                             {contratos.map(c => (
                                                 <SelectItem key={c.id} value={c.id}>{c.numero} - {c.contratada}</SelectItem>
                                             ))}
@@ -225,19 +248,7 @@ export function LoteDialog({
                             )}
                         />
 
-                        <FormField
-                            control={form.control}
-                            name="descricao"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Descrição</FormLabel>
-                                    <FormControl>
-                                        <Textarea placeholder="Detalhes" {...field} />
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
+
 
                         {selectedContratoId && (
                             <div className="space-y-2">

@@ -116,6 +116,12 @@ export function ServicoDialog({
                 const res = await createServico(payload)
                 if (res.success) {
                     toast.success("Serviço criado")
+                    if (res.planWarning) {
+                        toast.warning(
+                            "Serviço criado, mas a fase de planejamento não foi gerada automaticamente. Crie-a manualmente na aba de Planejamento.",
+                            { duration: 8000 }
+                        )
+                    }
                     onOpenChange(false)
                     onSuccess()
                 } else {

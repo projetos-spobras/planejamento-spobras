@@ -1,0 +1,28 @@
+
+--- Columns of [contratos].[VW_CONTRATOS] ---
+id Contrato
+Valor Contratual P0
+Data Assinatura
+Mes Data Base
+Ano Data Base
+Vigência Data de Início
+Vigência Data Fim
+Execução Data de Início
+Execução Data Fim
+Data Execução Aditado
+Id Empreendimento
+Vl Empreendimento
+TRP
+TRD
+vlGerenciamento
+vlRepasse
+nmSetorGestor
+idSetorGestor
+
+--- Columns of [empreendimentos].[VW_EMPREENDIMENTOS] ---
+Id Programas
+Programas
+Id Empreendimentos
+Empreendimentos
+Fase
+idFase

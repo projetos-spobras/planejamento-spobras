@@ -1,0 +1,37 @@
+
+> planejamento_spobras@0.1.0 build
+> next build
+
+ÔÜá Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of C:\Users\x437719\Downloads\bun.lockb as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * C:\Users\x437719\Downloads\planejamento_spobras\package-lock.json
+
+Ôû▓ Next.js 16.1.1 (Turbopack)
+- Environments: .env.local
+
+ÔÜá The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+  Creating an optimized production build ...
+Ô£ô Compiled successfully in 4.6s
+  Running TypeScript ...
+Failed to compile.
+
+./src/components/relationships/bulk-service-dialog.tsx:68:9
+Type error: Type 'Resolver<{ empreendimentoIds: string[]; tipo: string; codigo?: string | undefined; descricao?: string | undefined; valor_total?: unknown; }, any, { empreendimentoIds: string[]; tipo: string; codigo?: string | undefined; descricao?: string | undefined; valor_total?: number | undefined; }>' is not assignable to type 'Resolver<{ empreendimentoIds: string[]; tipo: string; codigo?: string | undefined; descricao?: string | undefined; valor_total?: number | undefined; }, any, { empreendimentoIds: string[]; tipo: string; codigo?: string | undefined; descricao?: string | undefined; valor_total?: number | undefined; }>'.
+  Types of parameters 'options' and 'options' are incompatible.
+    Type 'ResolverOptions<{ empreendimentoIds: string[]; tipo: string; codigo?: string | undefined; descricao?: string | undefined; valor_total?: number | undefined; }>' is not assignable to type 'ResolverOptions<{ empreendimentoIds: string[]; tipo: string; codigo?: string | undefined; descricao?: string | undefined; valor_total?: unknown; }>'.
+      Types of property 'names' are incompatible.
+        Type 'string[] | undefined' is not assignable to type '("codigo" | "descricao" | "valor_total" | "tipo" | "empreendimentoIds")[] | undefined'.
+          Type 'string[]' is not assignable to type '("codigo" | "descricao" | "valor_total" | "tipo" | "empreendimentoIds")[]'.
+            Type 'string' is not assignable to type '"codigo" | "descricao" | "valor_total" | "tipo" | "empreendimentoIds"'.
+
+  66 |
+  67 |     const form = useForm<FormData>({
+> 68 |         resolver: zodResolver(formSchema),
+     |         ^
+  69 |         defaultValues: {
+  70 |             empreendimentoIds: [],
+  71 |             codigo: "",
+Next.js build worker exited with code: 1 and signal: null

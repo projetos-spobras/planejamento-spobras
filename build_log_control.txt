@@ -1,0 +1,33 @@
+
+> planejamento_spobras@0.1.0 build
+> next build
+
+ÔÜá Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of C:\Users\x437719\Downloads\bun.lockb as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * C:\Users\x437719\Downloads\planejamento_spobras\package-lock.json
+
+Ôû▓ Next.js 16.1.1 (Turbopack)
+- Environments: .env.local
+
+ÔÜá The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+  Creating an optimized production build ...
+Ô£ô Compiled successfully in 4.3s
+  Running TypeScript ...
+Failed to compile.
+
+./src/app/(dashboard)/contratos/_components/contrato-dialog.tsx:76:9
+Type error: Type '{ numero: string; tipo: string; objeto: string; contratada: string; status: string; valor_total: number; data_inicio: Date | undefined; data_fim: Date | undefined; contrato_pai_id: string | null; }' is not assignable to type 'AsyncDefaultValues<{ numero: string; tipo: string; contratada: string; valor_total: number; objeto?: string | undefined; status?: "A Licitar" | "Aguard. Defini├º├Áes Externas" | "Andamento" | "Autom├ítico Op. Urb." | ... 10 more ... | undefined; data_inicio?: Date | undefined; data_fim?: Date | undefined; contrato_pai_...'.
+  Types of property 'status' are incompatible.
+    Type 'string' is not assignable to type '"A Licitar" | "Aguard. Defini├º├Áes Externas" | "Andamento" | "Autom├ítico Op. Urb." | "Conceito" | "Conclu├¡do" | "DEA - Pend├¬ncias" | "Em Estudo" | "Em Licita├º├úo" | "Incorporado na Obra" | ... 4 more ... | undefined'.
+
+  74 |     const form = useForm<ContratoFormValues>({
+  75 |         resolver: zodResolver(contratoSchema) as any,
+> 76 |         defaultValues: contratoToEdit ? {
+     |         ^
+  77 |             numero: contratoToEdit.numero,
+  78 |             tipo: getSafeTipo(contratoToEdit.tipo),
+  79 |             objeto: contratoToEdit.objeto || "",
+Next.js build worker exited with code: 1 and signal: null

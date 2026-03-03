@@ -6,7 +6,7 @@ import { kml as kmlToGeoJSON } from "@tmcw/togeojson";
 import { toast } from "sonner";
 // import { supabase } from "@/integrations/supabase/client";
 import { ProjectData, MapStyleType, MapLayerType } from "../types";
-import { MAPBOX_TOKEN_FALLBACK, MAP_STYLES, LAYER_CONFIGS } from "../constants";
+import { MAP_STYLES, LAYER_CONFIGS } from "../constants";
 import { getProjectPopupHTML } from "../utils/mapHelpers";
 
 interface UseMapboxProps {
@@ -62,12 +62,48 @@ export const useMapbox = ({
         if (onSubprefectureChange) onSubprefectureChange(selectedSubprefeitura);
     }, [selectedSubprefeitura, onSubprefectureChange]);
 
-    // Fetch Token (Use Fallback/Env)
+    // Fetch Mapbox Token securely from Supabase Edge Function (JWT-protected)
     useEffect(() => {
-        // Since we are running locally without Supabase Functions, use the fallback or env token.
-        // For security in production, this should come from a secure local endpoint if needed, 
-        // but for Intranet use, the public token or restricted token is usually fine.
-        setMapboxToken(MAPBOX_TOKEN_FALLBACK);
+        const fetchMapboxToken = async () => {
+            try {
+                const { supabase } = await import("@/integrations/supabase/client");
+
+                // Get current session JWT to authenticate the Edge Function call
+                const { data: sessionData } = await supabase.auth.getSession();
+                const accessToken = sessionData?.session?.access_token;
+
+                if (!accessToken) {
+                    console.warn("No authenticated session found. Cannot fetch Mapbox token.");
+                    return;
+                }
+
+                const response = await fetch(
+                    "https://kuxryjfjbsmbhcjwgsgt.supabase.co/functions/v1/get-mapbox-token",
+                    {
+                        headers: {
+                            Authorization: `Bearer ${accessToken}`,
+                            "Content-Type": "application/json",
+                        },
+                    }
+                );
+
+                if (!response.ok) {
+                    console.error("Failed to fetch Mapbox token from Edge Function:", response.status);
+                    return;
+                }
+
+                const { token } = await response.json();
+                if (token) {
+                    setMapboxToken(token);
+                } else {
+                    console.error("Empty token returned from Edge Function.");
+                }
+            } catch (error) {
+                console.error("Error fetching Mapbox token:", error);
+            }
+        };
+
+        fetchMapboxToken();
     }, []);
 
     // Helper: Load KMZ

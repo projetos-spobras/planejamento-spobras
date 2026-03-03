@@ -1,5 +1,5 @@
 // Fallback token (will be replaced by Supabase token)
-export const MAPBOX_TOKEN_FALLBACK = "your_mapbox_token_here";
+export const MAPBOX_TOKEN_FALLBACK = import.meta.env.VITE_MAPBOX_TOKEN || "";
 
 // Estilos de mapa disponíveis
 export const MAP_STYLES = {

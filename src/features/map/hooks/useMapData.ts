@@ -38,13 +38,19 @@ export const useMapData = () => {
             console.log("🚀 Loading data from API and Supabase...");
 
             // Fetch Regional Stats (Global Counters)
-            const { data: statsData, error: statsError } = await supabase
-                .rpc('get_regional_stats');
+            // Catch 404s cleanly as this table/function may be disabled/missing on the SQL Server integration
+            try {
+                const { data: statsData, error: statsError } = await supabase
+                    .rpc('get_regional_stats');
 
-            if (statsError) {
-                console.error("Error loading regional stats:", statsError);
-            } else {
-                setRegionalStats(statsData || []);
+                if (statsError && statsError.code !== 'PGRST202') {
+                    // PGRST202 is usually "function not found"
+                    console.error("Error loading regional stats:", statsError);
+                } else if (!statsError) {
+                    setRegionalStats(statsData || []);
+                }
+            } catch (err) {
+                console.warn("Could not fetch regional stats (expected if SQL Server API replaces this).");
             }
 
             // Fetch Data from SQL API

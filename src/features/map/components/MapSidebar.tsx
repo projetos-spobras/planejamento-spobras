@@ -260,7 +260,7 @@ export const MapSidebar = ({
                                 </PopoverTrigger>
                                 <PopoverContent className="w-72" align="start">
                                     <div className="space-y-3">
-                                        <h4 className="font-medium leading-none mb-2">Status da Obra</h4>
+                                        <h4 className="font-medium leading-none mb-2">Status do Contrato</h4>
                                         <select className="w-full px-3 py-2 bg-background border border-input rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-ring" value={selectedStatus} onChange={e => setSelectedStatus(e.target.value)}>
                                             <option value="all">Todos os Status</option>
                                             {uniqueStatuses.map(status => <option key={status} value={status}>{status}</option>)}
@@ -429,23 +429,25 @@ export const MapSidebar = ({
                         </div>
 
                         {/* Search Input */}
-                        <div className="relative">
-                            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-                            <Input
-                                type="text"
-                                placeholder="Buscar nome, programa ou contrato..."
-                                value={searchTerm}
-                                onChange={e => setSearchTerm(e.target.value)}
-                                className="pl-9 pr-9"
-                            />
-                            {searchTerm && (
-                                <button
-                                    onClick={() => setSearchTerm("")}
-                                    className="absolute right-2.5 top-2.5 text-muted-foreground hover:text-foreground"
-                                >
-                                    <X className="h-4 w-4" />
-                                </button>
-                            )}
+                        <div className="pr-4">
+                            <div className="relative">
+                                <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+                                <Input
+                                    type="text"
+                                    placeholder="Buscar nome, programa ou contrato..."
+                                    value={searchTerm}
+                                    onChange={e => setSearchTerm(e.target.value)}
+                                    className="pl-9 pr-9"
+                                />
+                                {searchTerm && (
+                                    <button
+                                        onClick={() => setSearchTerm("")}
+                                        className="absolute right-2.5 top-2.5 text-muted-foreground hover:text-foreground"
+                                    >
+                                        <X className="h-4 w-4" />
+                                    </button>
+                                )}
+                            </div>
                         </div>
 
                         <ScrollArea className="h-[400px] pr-4">

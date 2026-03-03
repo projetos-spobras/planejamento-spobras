@@ -241,6 +241,22 @@ export const MapSidebar = ({
                                 <span>Subprefeituras</span>
                             </Button>
                         </div>
+
+                        {/* Priority Toggle Button - Plano de Metas */}
+                        <Button
+                            variant={selectedPriorityOnly ? "default" : "outline"}
+                            size="sm"
+                            onClick={() => setSelectedPriorityOnly(!selectedPriorityOnly)}
+                            className="w-full justify-center gap-2"
+                        >
+                            <Star className={cn("h-4 w-4 shrink-0", selectedPriorityOnly && "fill-current text-yellow-300")} />
+                            <span className="truncate">Plano de Metas</span>
+                            {filteredProjects.filter(p => p.prioritario).length > 0 && (
+                                <Badge variant="secondary" className="ml-1 h-5 px-1.5 text-[10px] leading-none shrink-0">
+                                    {filteredProjects.filter(p => p.prioritario).length}
+                                </Badge>
+                            )}
+                        </Button>
                     </div>
 
                     {/* Filter Row - New Design */}
@@ -377,21 +393,7 @@ export const MapSidebar = ({
                                 </PopoverContent>
                             </Popover>
 
-                            {/* Priority Toggle Button */}
-                            <Button
-                                variant={selectedPriorityOnly ? "default" : "outline"}
-                                size="sm"
-                                onClick={() => setSelectedPriorityOnly(!selectedPriorityOnly)}
-                                className="col-span-2 w-full justify-center gap-2"
-                            >
-                                <Star className={cn("h-4 w-4 shrink-0", selectedPriorityOnly && "fill-current text-yellow-300")} />
-                                <span className="truncate">Plano de Metas</span>
-                                {filteredProjects.filter(p => p.prioritario).length > 0 && (
-                                    <Badge variant="secondary" className="ml-1 h-5 px-1.5 text-[10px] leading-none shrink-0">
-                                        {filteredProjects.filter(p => p.prioritario).length}
-                                    </Badge>
-                                )}
-                            </Button>
+
                         </div>
                     </div>
 
@@ -414,8 +416,28 @@ export const MapSidebar = ({
                         </div>
                     </div>
 
+                    {/* Search Input - between styles and project list */}
+                    <div className="relative">
+                        <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+                        <Input
+                            type="text"
+                            placeholder="Buscar nome, programa ou contrato..."
+                            value={searchTerm}
+                            onChange={e => setSearchTerm(e.target.value)}
+                            className="pl-9 pr-9"
+                        />
+                        {searchTerm && (
+                            <button
+                                onClick={() => setSearchTerm("")}
+                                className="absolute right-2.5 top-2.5 text-muted-foreground hover:text-foreground"
+                            >
+                                <X className="h-4 w-4" />
+                            </button>
+                        )}
+                    </div>
+
                     {/* Project List */}
-                    <div className="space-y-3 pt-4 border-t border-border">
+                    <div className="space-y-3 pt-2 border-t border-border">
                         <div className="flex items-center justify-between">
                             <div className="flex items-center gap-2">
                                 <h3 className="text-sm font-semibold text-foreground">Empreendimentos</h3>
@@ -426,28 +448,6 @@ export const MapSidebar = ({
                             {selectedProjectId && <Button variant="ghost" size="sm" onClick={() => handleProjectSelect(selectedProjectId)} className="text-xs h-7">
                                 Limpar seleção
                             </Button>}
-                        </div>
-
-                        {/* Search Input */}
-                        <div className="pr-4">
-                            <div className="relative">
-                                <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-                                <Input
-                                    type="text"
-                                    placeholder="Buscar nome, programa ou contrato..."
-                                    value={searchTerm}
-                                    onChange={e => setSearchTerm(e.target.value)}
-                                    className="pl-9 pr-9"
-                                />
-                                {searchTerm && (
-                                    <button
-                                        onClick={() => setSearchTerm("")}
-                                        className="absolute right-2.5 top-2.5 text-muted-foreground hover:text-foreground"
-                                    >
-                                        <X className="h-4 w-4" />
-                                    </button>
-                                )}
-                            </div>
                         </div>
 
                         <ScrollArea className="h-[400px] pr-4">

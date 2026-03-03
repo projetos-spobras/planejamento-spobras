@@ -246,45 +246,25 @@ export const MapSidebar = ({
                     {/* Filter Row - New Design */}
                     <div className="space-y-2 pb-4 border-b border-border">
                         <span className="text-sm font-medium text-foreground">Filtros</span>
-                        <div className="flex items-center flex-wrap gap-2">
+                        <div className="grid grid-cols-2 gap-2">
 
-                            {/* Program Filter */}
+                            {/* Status Filter */}
                             <Popover>
                                 <PopoverTrigger asChild>
-                                    <Button variant={selectedPrograms.length > 0 ? "default" : "outline"} size="sm" className="gap-2 shrink-0">
-                                        <Filter className="h-4 w-4" />
-                                        {selectedPrograms.length > 0 ? `${selectedPrograms.length} Programa(s)` : "Programa"}
+                                    <Button variant={selectedStatus !== "all" ? "default" : "outline"} size="sm" className="w-full justify-start gap-2">
+                                        <Activity className="h-4 w-4 shrink-0" />
+                                        <span className="truncate flex-1 text-left">
+                                            {selectedStatus !== "all" ? selectedStatus : "Status do Contrato"}
+                                        </span>
                                     </Button>
                                 </PopoverTrigger>
-                                <PopoverContent className="w-80" align="start">
-                                    <div className="space-y-4">
-                                        <div className="flex items-center justify-between">
-                                            <h4 className="font-medium leading-none">Programa</h4>
-                                            <div className="flex gap-2 text-xs">
-                                                <button onClick={selectAllPrograms} className="text-primary hover:underline">Todos</button>
-                                                <span className="text-muted-foreground">|</span>
-                                                <button onClick={deselectAllPrograms} className="text-primary hover:underline">Nenhum</button>
-                                            </div>
-                                        </div>
-                                        <ScrollArea className="h-64 rounded-md border p-2">
-                                            <div className="space-y-1">
-                                                {uniquePrograms.map(program => {
-                                                    const projectCount = programCounts[program] || 0;
-                                                    if (projectCount === 0) return null;
-
-                                                    const isChecked = selectedPrograms.length === 0 || (!selectedPrograms.includes("__NONE__") && selectedPrograms.includes(program));
-
-                                                    return (
-                                                        <label key={program} className="flex items-center gap-2 p-2 hover:bg-accent rounded cursor-pointer transition-colors">
-                                                            <Checkbox checked={isChecked} onCheckedChange={() => toggleProgram(program)} className="w-4 h-4" />
-                                                            <div className="w-3 h-3 rounded-full flex-shrink-0" style={{ backgroundColor: getProgramColor(program) }} />
-                                                            <span className="text-sm text-foreground flex-1">{program}</span>
-                                                            <span className="text-xs text-muted-foreground">({projectCount})</span>
-                                                        </label>
-                                                    );
-                                                })}
-                                            </div>
-                                        </ScrollArea>
+                                <PopoverContent className="w-72" align="start">
+                                    <div className="space-y-3">
+                                        <h4 className="font-medium leading-none mb-2">Status da Obra</h4>
+                                        <select className="w-full px-3 py-2 bg-background border border-input rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-ring" value={selectedStatus} onChange={e => setSelectedStatus(e.target.value)}>
+                                            <option value="all">Todos os Status</option>
+                                            {uniqueStatuses.map(status => <option key={status} value={status}>{status}</option>)}
+                                        </select>
                                     </div>
                                 </PopoverContent>
                             </Popover>
@@ -292,9 +272,9 @@ export const MapSidebar = ({
                             {/* Regional Filter (Subprefeitura/Distrito) */}
                             <Popover>
                                 <PopoverTrigger asChild>
-                                    <Button variant={(currentMapLayer === "distritos" ? selectedDistrito !== "all" : selectedSubprefeitura !== "all") ? "default" : "outline"} size="sm" className="gap-2 shrink-0">
-                                        {currentMapLayer === "distritos" ? <Grid3x3 className="h-4 w-4" /> : <Building2 className="h-4 w-4" />}
-                                        <span className="max-w-[120px] truncate">
+                                    <Button variant={(currentMapLayer === "distritos" ? selectedDistrito !== "all" : selectedSubprefeitura !== "all") ? "default" : "outline"} size="sm" className="w-full justify-start gap-2">
+                                        {currentMapLayer === "distritos" ? <Grid3x3 className="h-4 w-4 shrink-0" /> : <Building2 className="h-4 w-4 shrink-0" />}
+                                        <span className="truncate flex-1 text-left">
                                             {currentMapLayer === "distritos"
                                                 ? (selectedDistrito !== "all" ? selectedDistrito : "Distrito")
                                                 : (selectedSubprefeitura !== "all" ? selectedSubprefeitura : "Subprefeitura")}
@@ -336,9 +316,9 @@ export const MapSidebar = ({
                             {/* Contract Type Filter */}
                             <Popover>
                                 <PopoverTrigger asChild>
-                                    <Button variant={selectedTipoContrato !== "all" ? "default" : "outline"} size="sm" className="gap-2 shrink-0">
-                                        <FileText className="h-4 w-4" />
-                                        <span className="max-w-[150px] truncate">
+                                    <Button variant={selectedTipoContrato !== "all" ? "default" : "outline"} size="sm" className="w-full justify-start gap-2">
+                                        <FileText className="h-4 w-4 shrink-0" />
+                                        <span className="truncate flex-1 text-left">
                                             {selectedTipoContrato !== "all" ? selectedTipoContrato : "Tipo de Contrato"}
                                         </span>
                                     </Button>
@@ -354,23 +334,45 @@ export const MapSidebar = ({
                                 </PopoverContent>
                             </Popover>
 
-                            {/* Status Filter */}
+                            {/* Program Filter */}
                             <Popover>
                                 <PopoverTrigger asChild>
-                                    <Button variant={selectedStatus !== "all" ? "default" : "outline"} size="sm" className="gap-2 shrink-0">
-                                        <Activity className="h-4 w-4" />
-                                        <span className="max-w-[150px] truncate">
-                                            {selectedStatus !== "all" ? selectedStatus : "Status do Contrato"}
+                                    <Button variant={selectedPrograms.length > 0 ? "default" : "outline"} size="sm" className="w-full justify-start gap-2">
+                                        <Filter className="h-4 w-4 shrink-0" />
+                                        <span className="truncate flex-1 text-left">
+                                            {selectedPrograms.length > 0 ? `${selectedPrograms.length} Programa(s)` : "Programa"}
                                         </span>
                                     </Button>
                                 </PopoverTrigger>
-                                <PopoverContent className="w-72" align="start">
-                                    <div className="space-y-3">
-                                        <h4 className="font-medium leading-none mb-2">Status da Obra</h4>
-                                        <select className="w-full px-3 py-2 bg-background border border-input rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-ring" value={selectedStatus} onChange={e => setSelectedStatus(e.target.value)}>
-                                            <option value="all">Todos os Status</option>
-                                            {uniqueStatuses.map(status => <option key={status} value={status}>{status}</option>)}
-                                        </select>
+                                <PopoverContent className="w-80" align="start">
+                                    <div className="space-y-4">
+                                        <div className="flex items-center justify-between">
+                                            <h4 className="font-medium leading-none">Programa</h4>
+                                            <div className="flex gap-2 text-xs">
+                                                <button onClick={selectAllPrograms} className="text-primary hover:underline">Todos</button>
+                                                <span className="text-muted-foreground">|</span>
+                                                <button onClick={deselectAllPrograms} className="text-primary hover:underline">Nenhum</button>
+                                            </div>
+                                        </div>
+                                        <ScrollArea className="h-64 rounded-md border p-2">
+                                            <div className="space-y-1">
+                                                {uniquePrograms.map(program => {
+                                                    const projectCount = programCounts[program] || 0;
+                                                    if (projectCount === 0) return null;
+
+                                                    const isChecked = selectedPrograms.length === 0 || (!selectedPrograms.includes("__NONE__") && selectedPrograms.includes(program));
+
+                                                    return (
+                                                        <label key={program} className="flex items-center gap-2 p-2 hover:bg-accent rounded cursor-pointer transition-colors">
+                                                            <Checkbox checked={isChecked} onCheckedChange={() => toggleProgram(program)} className="w-4 h-4" />
+                                                            <div className="w-3 h-3 rounded-full flex-shrink-0" style={{ backgroundColor: getProgramColor(program) }} />
+                                                            <span className="text-sm text-foreground flex-1">{program}</span>
+                                                            <span className="text-xs text-muted-foreground">({projectCount})</span>
+                                                        </label>
+                                                    );
+                                                })}
+                                            </div>
+                                        </ScrollArea>
                                     </div>
                                 </PopoverContent>
                             </Popover>
@@ -380,12 +382,12 @@ export const MapSidebar = ({
                                 variant={selectedPriorityOnly ? "default" : "outline"}
                                 size="sm"
                                 onClick={() => setSelectedPriorityOnly(!selectedPriorityOnly)}
-                                className="gap-2 shrink-0"
+                                className="col-span-2 w-full justify-center gap-2"
                             >
-                                <Star className={cn("h-4 w-4", selectedPriorityOnly && "fill-current text-yellow-300")} />
-                                Plano de Metas
+                                <Star className={cn("h-4 w-4 shrink-0", selectedPriorityOnly && "fill-current text-yellow-300")} />
+                                <span className="truncate">Plano de Metas</span>
                                 {filteredProjects.filter(p => p.prioritario).length > 0 && (
-                                    <Badge variant="secondary" className="ml-1 h-5 px-1.5 text-[10px] leading-none">
+                                    <Badge variant="secondary" className="ml-1 h-5 px-1.5 text-[10px] leading-none shrink-0">
                                         {filteredProjects.filter(p => p.prioritario).length}
                                     </Badge>
                                 )}

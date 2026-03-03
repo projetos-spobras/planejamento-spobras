@@ -1,0 +1,19 @@
+[dotenv@17.2.3] injecting env (3) from .env -- tip: 🔐 prevent building .env in docker: https://dotenvx.com/prebuild
+Connected.
+Program Mapping Found:
+ID: 20 -> "ESCOLAS" (1255 occurrences)
+ID: 16 -> "MANUTENÇÃO DE OBRAS DE ARTE ESPECIAIS" (230 occurrences)
+ID: 5 -> "VIÁRIO DE MOBILIDADE URBANA" (45 occurrences)
+ID: 8 -> "DESCOMPLICA" (19 occurrences)
+ID: 18 -> "DRENAGEM" (17 occurrences)
+ID: 24 -> "SEDES E PRÉDIOS PRÓPRIOS" (14 occurrences)
+ID: 19 -> "PLANO AÇÕES SOCIO ASSISTENCIAIS" (10 occurrences)
+ID: 11 -> "AUTÓDROMO MUNICIPAL JOSÉ CARLOS PACE - INTERLAGOS" (8 occurrences)
+ID: 2 -> "OPERAÇÃO URBANA ÁGUA ESPRAIADA" (7 occurrences)
+ID: 4 -> "OPERAÇÃO URBANA FARIA LIMA" (7 occurrences)
+ID: 23 -> "REQUALIFICAÇÃO DE CALÇADÕES" (6 occurrences)
+ID: 21 -> "PROGRAMA REENCONTRO" (4 occurrences)
+ID: 1 -> "OPERAÇÃO URBANA  ÁGUA BRANCA" (4 occurrences)
+ID: 7 -> "OUTROS" (2 occurrences)
+ID: 15 -> "MOBILIÁRIO URBANO" (1 occurrences)
+ID: 3 -> "OPERAÇÃO URBANA CENTRO" (1 occurrences)

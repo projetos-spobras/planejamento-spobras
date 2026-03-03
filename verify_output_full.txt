@@ -1,0 +1,14 @@
+[dotenv@17.2.3] injecting env (3) from .env -- tip: ⚙️  specify custom .env file path with { path: '/custom/path/.env' }
+🔍 Starting Data Integrity Check...
+📊 Loaded 1000 projects and 1000 contracts from Staging.
+---------------------------------------------------
+✅ PASS: No Orphan Contracts found. All contracts are linked to valid projects.
+---------------------------------------------------
+📝 Sample Links (First 5):
+   🔗 Contract [003/SMC-G/2012] linked to Project: "Sampaio Moreira" (ID: 13)
+   🔗 Contract [012/SMC-G/2014] linked to Project: "Sampaio Moreira" (ID: 13)
+   🔗 Contract [037/SMC-G/2019] linked to Project: "Sampaio Moreira" (ID: 13)
+   🔗 Contract [057/SMC-G/2019] linked to Project: "Sampaio Moreira" (ID: 13)
+   🔗 Contract [08/SMC-G/2012] linked to Project: "Sampaio Moreira" (ID: 13)
+---------------------------------------------------
+✨ Verification Complete.

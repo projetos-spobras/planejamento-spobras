@@ -1,0 +1,8802 @@
+[
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "001/2006/SMC-BMA"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "002/2008/SMC-BMA"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "002/SMC-BMA/2007"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "003/2007/DPH.SMC"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "003/SIURB/2013"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "003/SMC-BMA/2009"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "004/2006/DPH.SMC"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "004/SIURB/2013"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "005/2006/DPH.SMC"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "007/SIURB/2016"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "008/SIURB/2016"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "009/2016/SMS-1"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "011/SIURB/2013"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "013/SIURB/2015"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "014/SIURB/2019"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "014/SMC-G/2011"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "015/SIURB/2011"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "015/SIURB/2016"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "015/SMDT/2018"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "016/SMC-G/2011"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "017/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "017/SMC-G/2011"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "018/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "019/SIURB/2012"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "020/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "022/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "023/SP-SÉ/2008"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "026/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "03/2009-DPH/SMC"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "030/SIURB/2011"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "030/SIURB/2012"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "030/SIURB/2015"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "031/SIURB/2015"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "032/2008/DPH.SMC"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "033/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "034/SIURB/2011"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "037/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "039/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "04/SMC-G/2012"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "041/SIURB/2016"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "042/SIURB/2016"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "043/SIURB/2009"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "043/SIURB/2016"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "044/SIURB/2016"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "047/SIURB/2012 "
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "047/SIURB/2013"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "048/SIURB/2013"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "049/SIURB/2013"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "049/SIURB/2016 "
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "051/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "052/SIURB/2013"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "053/SIURB/2013"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "055/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "056/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "058/SIURB/2016"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "058/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "06/SMC-G/2012"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "061/SIURB/2015"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "065/SIURB/2015"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "068/SIURB/2014"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "068/SIURB/2015"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "069/SIURB/2013"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "070/SIURB/2013"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "070/SMC.G/2019"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "071/SIURB/NMPME/2016"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "071/SMSUB/COGEL/2021"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "072/SIURB/NMPME/2016"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "073/SIURB/NMPME/2016"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "074/SIURB/2009"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "074/SIURB/NMPME/2016"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "075/SIURB/NMPME/2016"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "076/SIURB/NMPME/2016"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "077/SIURB/NMPME/2016"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "078/SIURB/NMPME/2016"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "082/SIURB/NMPME/2016"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "086/SIURB/2011"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "091/SIURB/2014 "
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "092/SIURB/2014"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "093/SIURB/NMPME/2016"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "095/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "096/SIURB/2008"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "106/SIURB/NMPME/2016"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "107/SIURB/NMPME/2016"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "111/SIURB/2012"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "116/SIURB/2014"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "117/SMPED/2025"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "118/SIURB/2012"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "121/SIURB/2012"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "126/SIURB/2012"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "127/SIURB/2012"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "130/SIURB/2012"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "141/SIURB/2011"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "142/SIURB/2011"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "145/SIURB/2011"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "146/SIURB/2011"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "15/DPH-SMC/2010"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "151/SIURB/2010"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "164/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "19/2008/DPH/SMC"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "194/SIURB/2011"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "219/SIURB/2010"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "ARP-001/2023"
+  },
+  {
+    "codigo_empreendimento": "null",
+    "numero_contrato": "ARP-002/2023"
+  },
+  {
+    "codigo_empreendimento": "13",
+    "numero_contrato": "003/SMC-G/2012"
+  },
+  {
+    "codigo_empreendimento": "13",
+    "numero_contrato": "012/SMC-G/2014"
+  },
+  {
+    "codigo_empreendimento": "13",
+    "numero_contrato": "037/SMC-G/2019"
+  },
+  {
+    "codigo_empreendimento": "13",
+    "numero_contrato": "057/SMC-G/2019"
+  },
+  {
+    "codigo_empreendimento": "13",
+    "numero_contrato": "08/SMC-G/2012"
+  },
+  {
+    "codigo_empreendimento": "15",
+    "numero_contrato": "046/SIURB/2012"
+  },
+  {
+    "codigo_empreendimento": "15",
+    "numero_contrato": "051/SIURB/2016"
+  },
+  {
+    "codigo_empreendimento": "15",
+    "numero_contrato": "185/SIURB/2011"
+  },
+  {
+    "codigo_empreendimento": "15",
+    "numero_contrato": "NE Nº 51.009/2016"
+  },
+  {
+    "codigo_empreendimento": "15",
+    "numero_contrato": "NE nº 67.921/2018"
+  },
+  {
+    "codigo_empreendimento": "15",
+    "numero_contrato": "NE Nº 83.267/2016"
+  },
+  {
+    "codigo_empreendimento": "15",
+    "numero_contrato": "NE Nº 83.305/2016"
+  },
+  {
+    "codigo_empreendimento": "15",
+    "numero_contrato": "NE Nº 83.853/2017"
+  },
+  {
+    "codigo_empreendimento": "15",
+    "numero_contrato": "NE Nº 83.873/2017"
+  },
+  {
+    "codigo_empreendimento": "15",
+    "numero_contrato": "NE Nº 84.088/2017"
+  },
+  {
+    "codigo_empreendimento": "15",
+    "numero_contrato": "NE Nº 84.093/2017"
+  },
+  {
+    "codigo_empreendimento": "16",
+    "numero_contrato": "051/SIURB/2013"
+  },
+  {
+    "codigo_empreendimento": "17",
+    "numero_contrato": "014/SIURB/2016"
+  },
+  {
+    "codigo_empreendimento": "17",
+    "numero_contrato": "043/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "17",
+    "numero_contrato": "044/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "17",
+    "numero_contrato": "045/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "17",
+    "numero_contrato": "046/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "17",
+    "numero_contrato": "181/SIURB/2011"
+  },
+  {
+    "codigo_empreendimento": "17",
+    "numero_contrato": "182/SIURB/2011"
+  },
+  {
+    "codigo_empreendimento": "17",
+    "numero_contrato": "183/SIURB/2011"
+  },
+  {
+    "codigo_empreendimento": "17",
+    "numero_contrato": "184/SIURB/2011"
+  },
+  {
+    "codigo_empreendimento": "17",
+    "numero_contrato": "NE Nº 36.831/2018"
+  },
+  {
+    "codigo_empreendimento": "17",
+    "numero_contrato": "NE Nº 36.848/2018"
+  },
+  {
+    "codigo_empreendimento": "17",
+    "numero_contrato": "NE Nº 38.673/2020"
+  },
+  {
+    "codigo_empreendimento": "17",
+    "numero_contrato": "NE Nº 72.789/2015"
+  },
+  {
+    "codigo_empreendimento": "17",
+    "numero_contrato": "NE Nº 76.162/2017"
+  },
+  {
+    "codigo_empreendimento": "17",
+    "numero_contrato": "NE Nº 76.164/2017"
+  },
+  {
+    "codigo_empreendimento": "17",
+    "numero_contrato": "NE Nº 77.243/2018"
+  },
+  {
+    "codigo_empreendimento": "17",
+    "numero_contrato": "NE Nº 77.248/2018"
+  },
+  {
+    "codigo_empreendimento": "19",
+    "numero_contrato": "061/SIURB/2013"
+  },
+  {
+    "codigo_empreendimento": "20",
+    "numero_contrato": "020/SIURB/2015"
+  },
+  {
+    "codigo_empreendimento": "20",
+    "numero_contrato": "087/SIURB/2015"
+  },
+  {
+    "codigo_empreendimento": "31",
+    "numero_contrato": "045/SIURB/2013"
+  },
+  {
+    "codigo_empreendimento": "31",
+    "numero_contrato": "NE Nº 108.136/2018"
+  },
+  {
+    "codigo_empreendimento": "31",
+    "numero_contrato": "NE Nº 108.141/2018"
+  },
+  {
+    "codigo_empreendimento": "31",
+    "numero_contrato": "NE Nº 108.227/2018"
+  },
+  {
+    "codigo_empreendimento": "32",
+    "numero_contrato": "007/SMSO/2017"
+  },
+  {
+    "codigo_empreendimento": "32",
+    "numero_contrato": "012/SMSO/2017"
+  },
+  {
+    "codigo_empreendimento": "33",
+    "numero_contrato": "004/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "33",
+    "numero_contrato": "012/SIURB/2016"
+  },
+  {
+    "codigo_empreendimento": "33",
+    "numero_contrato": "052/FTMSP/2022"
+  },
+  {
+    "codigo_empreendimento": "34",
+    "numero_contrato": "007/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "34",
+    "numero_contrato": "013/SIURB/2016"
+  },
+  {
+    "codigo_empreendimento": "34",
+    "numero_contrato": "NE Nº 103.414/2019"
+  },
+  {
+    "codigo_empreendimento": "34",
+    "numero_contrato": "NE Nº 106.087/2019"
+  },
+  {
+    "codigo_empreendimento": "34",
+    "numero_contrato": "NE Nº 38.411/2020"
+  },
+  {
+    "codigo_empreendimento": "34",
+    "numero_contrato": "NE Nº 79.290/2019"
+  },
+  {
+    "codigo_empreendimento": "35",
+    "numero_contrato": "015/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "35",
+    "numero_contrato": "047/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "35",
+    "numero_contrato": "082/SIURB/2019"
+  },
+  {
+    "codigo_empreendimento": "35",
+    "numero_contrato": "106/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "38",
+    "numero_contrato": "002/SMSO/2018"
+  },
+  {
+    "codigo_empreendimento": "38",
+    "numero_contrato": "024/SMSO/2017"
+  },
+  {
+    "codigo_empreendimento": "39",
+    "numero_contrato": "067/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "39",
+    "numero_contrato": "070/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "50",
+    "numero_contrato": "006/SIURB/2016"
+  },
+  {
+    "codigo_empreendimento": "50",
+    "numero_contrato": "064/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "50",
+    "numero_contrato": "065/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "50",
+    "numero_contrato": "139/SIURB/2019"
+  },
+  {
+    "codigo_empreendimento": "50",
+    "numero_contrato": "140/SIURB/2019"
+  },
+  {
+    "codigo_empreendimento": "50",
+    "numero_contrato": "141/SIURB/2019"
+  },
+  {
+    "codigo_empreendimento": "50",
+    "numero_contrato": "142/SIURB/2019"
+  },
+  {
+    "codigo_empreendimento": "50",
+    "numero_contrato": "143/SIURB/2019"
+  },
+  {
+    "codigo_empreendimento": "50",
+    "numero_contrato": "205/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "50",
+    "numero_contrato": "NE N° 119524/2023"
+  },
+  {
+    "codigo_empreendimento": "50",
+    "numero_contrato": "NE N° 44.338/2023"
+  },
+  {
+    "codigo_empreendimento": "50",
+    "numero_contrato": "NE Nº 69.028/2023"
+  },
+  {
+    "codigo_empreendimento": "50",
+    "numero_contrato": "NE Nº 88.834/2023"
+  },
+  {
+    "codigo_empreendimento": "50",
+    "numero_contrato": "NT Nº 369915130"
+  },
+  {
+    "codigo_empreendimento": "50",
+    "numero_contrato": "NT Nº 371278751"
+  },
+  {
+    "codigo_empreendimento": "57",
+    "numero_contrato": "069/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "57",
+    "numero_contrato": "100/SIURB/2024"
+  },
+  {
+    "codigo_empreendimento": "57",
+    "numero_contrato": "137/SIURB/2024"
+  },
+  {
+    "codigo_empreendimento": "57",
+    "numero_contrato": "250/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "57",
+    "numero_contrato": "263/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "57",
+    "numero_contrato": "295/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "58",
+    "numero_contrato": "046/SIURB/2013"
+  },
+  {
+    "codigo_empreendimento": "59",
+    "numero_contrato": "101/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "60",
+    "numero_contrato": "009/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "60",
+    "numero_contrato": "010/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "60",
+    "numero_contrato": "054/SIURB/2024"
+  },
+  {
+    "codigo_empreendimento": "60",
+    "numero_contrato": "090/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "60",
+    "numero_contrato": "261/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "60",
+    "numero_contrato": "267/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "60",
+    "numero_contrato": "298/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "61",
+    "numero_contrato": "009/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "61",
+    "numero_contrato": "010/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "61",
+    "numero_contrato": "083/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "61",
+    "numero_contrato": "091/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "61",
+    "numero_contrato": "163/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "61",
+    "numero_contrato": "248/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "61",
+    "numero_contrato": "294/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "62",
+    "numero_contrato": "009/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "62",
+    "numero_contrato": "010/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "62",
+    "numero_contrato": "034/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "62",
+    "numero_contrato": "078/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "62",
+    "numero_contrato": "085/SIURB/2024"
+  },
+  {
+    "codigo_empreendimento": "62",
+    "numero_contrato": "243/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "62",
+    "numero_contrato": "293/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "63",
+    "numero_contrato": "009/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "63",
+    "numero_contrato": "122/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "63",
+    "numero_contrato": "187/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "64",
+    "numero_contrato": "024/SIURB/2016"
+  },
+  {
+    "codigo_empreendimento": "65",
+    "numero_contrato": "114/SIURB/2019"
+  },
+  {
+    "codigo_empreendimento": "65",
+    "numero_contrato": "287/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "67",
+    "numero_contrato": "022/SMIT/2018"
+  },
+  {
+    "codigo_empreendimento": "67",
+    "numero_contrato": "045/SIURB/2018"
+  },
+  {
+    "codigo_empreendimento": "68",
+    "numero_contrato": "011/SIURB/2019"
+  },
+  {
+    "codigo_empreendimento": "68",
+    "numero_contrato": "023/SMIT/2018"
+  },
+  {
+    "codigo_empreendimento": "68",
+    "numero_contrato": "039/SIURB/2018"
+  },
+  {
+    "codigo_empreendimento": "69",
+    "numero_contrato": "012/SIURB/2019"
+  },
+  {
+    "codigo_empreendimento": "69",
+    "numero_contrato": "024/SMIT/2018"
+  },
+  {
+    "codigo_empreendimento": "69",
+    "numero_contrato": "038/SIURB/2018"
+  },
+  {
+    "codigo_empreendimento": "70",
+    "numero_contrato": "011/SGM/2018"
+  },
+  {
+    "codigo_empreendimento": "70",
+    "numero_contrato": "035/SIURB/2018"
+  },
+  {
+    "codigo_empreendimento": "77",
+    "numero_contrato": "178/SIURB/2011"
+  },
+  {
+    "codigo_empreendimento": "85",
+    "numero_contrato": "050/SIURB/2013"
+  },
+  {
+    "codigo_empreendimento": "89",
+    "numero_contrato": "017/SIURB/2019"
+  },
+  {
+    "codigo_empreendimento": "89",
+    "numero_contrato": "103/SIURB/2019"
+  },
+  {
+    "codigo_empreendimento": "90",
+    "numero_contrato": "026/SMIT/2019"
+  },
+  {
+    "codigo_empreendimento": "90",
+    "numero_contrato": "035/SMIT/2018"
+  },
+  {
+    "codigo_empreendimento": "90",
+    "numero_contrato": "086/SIURB/2019"
+  },
+  {
+    "codigo_empreendimento": "91",
+    "numero_contrato": "030/SMIT/2019"
+  },
+  {
+    "codigo_empreendimento": "91",
+    "numero_contrato": "036/SMIT/2018"
+  },
+  {
+    "codigo_empreendimento": "91",
+    "numero_contrato": "089/SIURB/2019"
+  },
+  {
+    "codigo_empreendimento": "93",
+    "numero_contrato": "253/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "94",
+    "numero_contrato": "007/SIURB/2024"
+  },
+  {
+    "codigo_empreendimento": "94",
+    "numero_contrato": "044/SIURB/2013"
+  },
+  {
+    "codigo_empreendimento": "94",
+    "numero_contrato": "108/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "94",
+    "numero_contrato": "138/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "95",
+    "numero_contrato": "009/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "95",
+    "numero_contrato": "013/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "95",
+    "numero_contrato": "030/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "95",
+    "numero_contrato": "043/SIURB/2013"
+  },
+  {
+    "codigo_empreendimento": "95",
+    "numero_contrato": "092/SIURB/2024"
+  },
+  {
+    "codigo_empreendimento": "95",
+    "numero_contrato": "104/SIURB/2024"
+  },
+  {
+    "codigo_empreendimento": "95",
+    "numero_contrato": "121/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "95",
+    "numero_contrato": "162/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "95",
+    "numero_contrato": "203/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "96",
+    "numero_contrato": "025/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "96",
+    "numero_contrato": "067/SIURB/2024"
+  },
+  {
+    "codigo_empreendimento": "96",
+    "numero_contrato": "113/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "96",
+    "numero_contrato": "141/SIURB/2014"
+  },
+  {
+    "codigo_empreendimento": "96",
+    "numero_contrato": "198/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "99",
+    "numero_contrato": "098/SIURB/2015"
+  },
+  {
+    "codigo_empreendimento": "99",
+    "numero_contrato": "160/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "100",
+    "numero_contrato": "029/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "100",
+    "numero_contrato": "040/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "100",
+    "numero_contrato": "046/SIURB/2024"
+  },
+  {
+    "codigo_empreendimento": "100",
+    "numero_contrato": "065/SIURB/2019"
+  },
+  {
+    "codigo_empreendimento": "100",
+    "numero_contrato": "124/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "100",
+    "numero_contrato": "225/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "102",
+    "numero_contrato": "028/SMIT/2019"
+  },
+  {
+    "codigo_empreendimento": "102",
+    "numero_contrato": "038/SMIT/2018"
+  },
+  {
+    "codigo_empreendimento": "102",
+    "numero_contrato": "083/SIURB/2019"
+  },
+  {
+    "codigo_empreendimento": "103",
+    "numero_contrato": "029/SMIT/2019"
+  },
+  {
+    "codigo_empreendimento": "103",
+    "numero_contrato": "037/SMIT/2018"
+  },
+  {
+    "codigo_empreendimento": "103",
+    "numero_contrato": "091/SIURB/2019"
+  },
+  {
+    "codigo_empreendimento": "104",
+    "numero_contrato": "002/SIURB/2019"
+  },
+  {
+    "codigo_empreendimento": "104",
+    "numero_contrato": "010/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "104",
+    "numero_contrato": "013/SIURB/2019"
+  },
+  {
+    "codigo_empreendimento": "105",
+    "numero_contrato": "060/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "105",
+    "numero_contrato": "115/SIURB/2019"
+  },
+  {
+    "codigo_empreendimento": "106",
+    "numero_contrato": "051/SIURB/2019"
+  },
+  {
+    "codigo_empreendimento": "106",
+    "numero_contrato": "088/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "106",
+    "numero_contrato": "120/SIURB/2019"
+  },
+  {
+    "codigo_empreendimento": "107",
+    "numero_contrato": "046/SIURB/2019"
+  },
+  {
+    "codigo_empreendimento": "107",
+    "numero_contrato": "084/SIURB/2019"
+  },
+  {
+    "codigo_empreendimento": "107",
+    "numero_contrato": "089/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "108",
+    "numero_contrato": "049/SIURB/2019"
+  },
+  {
+    "codigo_empreendimento": "108",
+    "numero_contrato": "091/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "109",
+    "numero_contrato": "047/SIURB/2019"
+  },
+  {
+    "codigo_empreendimento": "109",
+    "numero_contrato": "085/SIURB/2019"
+  },
+  {
+    "codigo_empreendimento": "109",
+    "numero_contrato": "092/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "110",
+    "numero_contrato": "050/SIURB/2019"
+  },
+  {
+    "codigo_empreendimento": "110",
+    "numero_contrato": "095/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "111",
+    "numero_contrato": "048/SIURB/2019"
+  },
+  {
+    "codigo_empreendimento": "112",
+    "numero_contrato": "054/SIURB/2019"
+  },
+  {
+    "codigo_empreendimento": "112",
+    "numero_contrato": "093/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "113",
+    "numero_contrato": "004/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "113",
+    "numero_contrato": "055/SIURB/2019"
+  },
+  {
+    "codigo_empreendimento": "114",
+    "numero_contrato": "056/SIURB/2019"
+  },
+  {
+    "codigo_empreendimento": "114",
+    "numero_contrato": "097/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "115",
+    "numero_contrato": "057/SIURB/2019"
+  },
+  {
+    "codigo_empreendimento": "115",
+    "numero_contrato": "078/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "116",
+    "numero_contrato": "058/SIURB/2019"
+  },
+  {
+    "codigo_empreendimento": "116",
+    "numero_contrato": "125/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "117",
+    "numero_contrato": "059/SIURB/2019"
+  },
+  {
+    "codigo_empreendimento": "117",
+    "numero_contrato": "094/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "118",
+    "numero_contrato": "060/SIURB/2019"
+  },
+  {
+    "codigo_empreendimento": "118",
+    "numero_contrato": "135/SIURB/2019"
+  },
+  {
+    "codigo_empreendimento": "118",
+    "numero_contrato": "226/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "119",
+    "numero_contrato": "061/SIURB/2019"
+  },
+  {
+    "codigo_empreendimento": "119",
+    "numero_contrato": "123/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "120",
+    "numero_contrato": "023/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "120",
+    "numero_contrato": "095/SIURB/2019"
+  },
+  {
+    "codigo_empreendimento": "121",
+    "numero_contrato": "094/SIURB/2019"
+  },
+  {
+    "codigo_empreendimento": "121",
+    "numero_contrato": "138/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "122",
+    "numero_contrato": "025/SMSO/2017"
+  },
+  {
+    "codigo_empreendimento": "122",
+    "numero_contrato": "NE Nº 102.918/2020"
+  },
+  {
+    "codigo_empreendimento": "122",
+    "numero_contrato": "NE Nº 102.920/2020"
+  },
+  {
+    "codigo_empreendimento": "122",
+    "numero_contrato": "NE Nº 102.932/2020"
+  },
+  {
+    "codigo_empreendimento": "122",
+    "numero_contrato": "NE Nº 102.941/2020"
+  },
+  {
+    "codigo_empreendimento": "122",
+    "numero_contrato": "NE Nº 102.942/2020"
+  },
+  {
+    "codigo_empreendimento": "122",
+    "numero_contrato": "NE Nº 102.945/2020"
+  },
+  {
+    "codigo_empreendimento": "122",
+    "numero_contrato": "NE Nº 102.953/2020"
+  },
+  {
+    "codigo_empreendimento": "122",
+    "numero_contrato": "NE Nº 102.959/2020"
+  },
+  {
+    "codigo_empreendimento": "122",
+    "numero_contrato": "NE Nº 102.961/2020"
+  },
+  {
+    "codigo_empreendimento": "122",
+    "numero_contrato": "NE Nº 102.969/2020"
+  },
+  {
+    "codigo_empreendimento": "122",
+    "numero_contrato": "NE Nº 103.027/2020"
+  },
+  {
+    "codigo_empreendimento": "122",
+    "numero_contrato": "NE nº 110.096/2020"
+  },
+  {
+    "codigo_empreendimento": "122",
+    "numero_contrato": "NE Nº 110.126/2020"
+  },
+  {
+    "codigo_empreendimento": "122",
+    "numero_contrato": "NE Nº 110.158/2020"
+  },
+  {
+    "codigo_empreendimento": "122",
+    "numero_contrato": "NE Nº 110.184/2020"
+  },
+  {
+    "codigo_empreendimento": "122",
+    "numero_contrato": "NE Nº 110.214/2020"
+  },
+  {
+    "codigo_empreendimento": "122",
+    "numero_contrato": "NE Nº 43.757/2020"
+  },
+  {
+    "codigo_empreendimento": "122",
+    "numero_contrato": "NE Nº 43.772/2020"
+  },
+  {
+    "codigo_empreendimento": "122",
+    "numero_contrato": "NE Nº 52.294/2021"
+  },
+  {
+    "codigo_empreendimento": "123",
+    "numero_contrato": "043/SIURB/2019"
+  },
+  {
+    "codigo_empreendimento": "123",
+    "numero_contrato": "052/SIURB/2019"
+  },
+  {
+    "codigo_empreendimento": "123",
+    "numero_contrato": "053/SIURB/2019"
+  },
+  {
+    "codigo_empreendimento": "124",
+    "numero_contrato": "087/SIURB/2019"
+  },
+  {
+    "codigo_empreendimento": "125",
+    "numero_contrato": "098/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "125",
+    "numero_contrato": "103/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "125",
+    "numero_contrato": "121/SIURB/2019"
+  },
+  {
+    "codigo_empreendimento": "126",
+    "numero_contrato": "001/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "126",
+    "numero_contrato": "100/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "127",
+    "numero_contrato": "006/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "128",
+    "numero_contrato": "125/SMIT/2019"
+  },
+  {
+    "codigo_empreendimento": "129",
+    "numero_contrato": "022/SMIT/2021"
+  },
+  {
+    "codigo_empreendimento": "129",
+    "numero_contrato": "059/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "129",
+    "numero_contrato": "124/SMIT/2019"
+  },
+  {
+    "codigo_empreendimento": "131",
+    "numero_contrato": "003/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "131",
+    "numero_contrato": "009/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "131",
+    "numero_contrato": "030/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "131",
+    "numero_contrato": "030/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "131",
+    "numero_contrato": "054/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "131",
+    "numero_contrato": "059/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "131",
+    "numero_contrato": "143/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "131",
+    "numero_contrato": "195/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "131",
+    "numero_contrato": "215/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "131",
+    "numero_contrato": "228/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "131",
+    "numero_contrato": "237/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "131",
+    "numero_contrato": "249/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "131",
+    "numero_contrato": "284/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "134",
+    "numero_contrato": "009/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "134",
+    "numero_contrato": "031/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "134",
+    "numero_contrato": "090/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "134",
+    "numero_contrato": "104/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "134",
+    "numero_contrato": "147/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "134",
+    "numero_contrato": "251/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "134",
+    "numero_contrato": "282/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "136",
+    "numero_contrato": " 009/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "136",
+    "numero_contrato": "024/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "137",
+    "numero_contrato": "031/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "137",
+    "numero_contrato": "090/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "137",
+    "numero_contrato": "096/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "137",
+    "numero_contrato": "105/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "138",
+    "numero_contrato": "031/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "139",
+    "numero_contrato": "018/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "139",
+    "numero_contrato": "061/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "140",
+    "numero_contrato": "061/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "140",
+    "numero_contrato": "225/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "141",
+    "numero_contrato": "061/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "141",
+    "numero_contrato": "229/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "142",
+    "numero_contrato": "061/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "142",
+    "numero_contrato": "105/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "143",
+    "numero_contrato": "061/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "143",
+    "numero_contrato": "204/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "144",
+    "numero_contrato": "061/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "144",
+    "numero_contrato": "229/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "145",
+    "numero_contrato": "062/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "146",
+    "numero_contrato": "062/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "147",
+    "numero_contrato": "062/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "147",
+    "numero_contrato": "126/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "148",
+    "numero_contrato": "062/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "148",
+    "numero_contrato": "132/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "149",
+    "numero_contrato": "062/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "150",
+    "numero_contrato": "062/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "150",
+    "numero_contrato": "127/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "151",
+    "numero_contrato": "063/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "151",
+    "numero_contrato": "148/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "152",
+    "numero_contrato": "041/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "152",
+    "numero_contrato": "063/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "153",
+    "numero_contrato": "019/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "153",
+    "numero_contrato": "063/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "154",
+    "numero_contrato": "027/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "154",
+    "numero_contrato": "063/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "154",
+    "numero_contrato": "130/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "155",
+    "numero_contrato": "063/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "155",
+    "numero_contrato": "148/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "156",
+    "numero_contrato": "022/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "156",
+    "numero_contrato": "063/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "156",
+    "numero_contrato": "104/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "157",
+    "numero_contrato": "070/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "157",
+    "numero_contrato": "077/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "158",
+    "numero_contrato": "071/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "158",
+    "numero_contrato": "086/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "159",
+    "numero_contrato": "072/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "160",
+    "numero_contrato": "073/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "161",
+    "numero_contrato": "066/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "162",
+    "numero_contrato": "067/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "163",
+    "numero_contrato": "079/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "163",
+    "numero_contrato": "137/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "164",
+    "numero_contrato": "017/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "164",
+    "numero_contrato": "079/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "165",
+    "numero_contrato": "027/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "165",
+    "numero_contrato": "079/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "166",
+    "numero_contrato": "080/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "166",
+    "numero_contrato": "207/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "167",
+    "numero_contrato": "080/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "167",
+    "numero_contrato": "209/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "168",
+    "numero_contrato": "012/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "168",
+    "numero_contrato": "080/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "168",
+    "numero_contrato": "130/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "169",
+    "numero_contrato": "080/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "169",
+    "numero_contrato": "229/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "170",
+    "numero_contrato": "025/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "170",
+    "numero_contrato": "081/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "171",
+    "numero_contrato": "081/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "171",
+    "numero_contrato": "193/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "172",
+    "numero_contrato": "081/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "172",
+    "numero_contrato": "439/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "173",
+    "numero_contrato": "081/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "173",
+    "numero_contrato": "208/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "174",
+    "numero_contrato": "082/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "174",
+    "numero_contrato": "130/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "175",
+    "numero_contrato": "082/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "176",
+    "numero_contrato": "082/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "177",
+    "numero_contrato": "083/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "177",
+    "numero_contrato": "212/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "178",
+    "numero_contrato": "083/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "178",
+    "numero_contrato": "216/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "179",
+    "numero_contrato": "083/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "180",
+    "numero_contrato": "020/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "180",
+    "numero_contrato": "083/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "180",
+    "numero_contrato": "103/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "181",
+    "numero_contrato": "084/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "181",
+    "numero_contrato": "099/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "181",
+    "numero_contrato": "211/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "182",
+    "numero_contrato": "098/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "183",
+    "numero_contrato": "098/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "183",
+    "numero_contrato": "220/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "184",
+    "numero_contrato": "028/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "184",
+    "numero_contrato": "098/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "184",
+    "numero_contrato": "103/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "185",
+    "numero_contrato": "099/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "185",
+    "numero_contrato": "194/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "186",
+    "numero_contrato": "099/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "187",
+    "numero_contrato": "100/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "187",
+    "numero_contrato": "216/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "188",
+    "numero_contrato": "098/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "188",
+    "numero_contrato": "100/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "189",
+    "numero_contrato": "022/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "189",
+    "numero_contrato": "100/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "190",
+    "numero_contrato": "101/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "190",
+    "numero_contrato": "114/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "191",
+    "numero_contrato": "101/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "191",
+    "numero_contrato": "218/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "192",
+    "numero_contrato": "101/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "193",
+    "numero_contrato": "086/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "193",
+    "numero_contrato": "091/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "193",
+    "numero_contrato": "207/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "194",
+    "numero_contrato": "086/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "194",
+    "numero_contrato": "217/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "195",
+    "numero_contrato": "087/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "196",
+    "numero_contrato": "087/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "197",
+    "numero_contrato": "012/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "197",
+    "numero_contrato": "087/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "198",
+    "numero_contrato": "012/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "198",
+    "numero_contrato": "087/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "199",
+    "numero_contrato": "088/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "200",
+    "numero_contrato": "088/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "200",
+    "numero_contrato": "212/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "201",
+    "numero_contrato": "088/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "201",
+    "numero_contrato": "118/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "202",
+    "numero_contrato": "089/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "202",
+    "numero_contrato": "149/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "203",
+    "numero_contrato": "089/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "204",
+    "numero_contrato": "089/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "204",
+    "numero_contrato": "150/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "205",
+    "numero_contrato": "023/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "205",
+    "numero_contrato": "090/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "206",
+    "numero_contrato": "031/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "206",
+    "numero_contrato": "090/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "207",
+    "numero_contrato": "031/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "207",
+    "numero_contrato": "090/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "208",
+    "numero_contrato": "091/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "208",
+    "numero_contrato": "150/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "209",
+    "numero_contrato": "091/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "210",
+    "numero_contrato": "092/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "210",
+    "numero_contrato": "193/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "211",
+    "numero_contrato": "092/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "211",
+    "numero_contrato": "193/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "212",
+    "numero_contrato": "092/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "213",
+    "numero_contrato": "093/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "213",
+    "numero_contrato": "206/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "214",
+    "numero_contrato": "093/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "214",
+    "numero_contrato": "206/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "215",
+    "numero_contrato": "051/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "215",
+    "numero_contrato": "093/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "215",
+    "numero_contrato": "107/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "216",
+    "numero_contrato": "094/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "216",
+    "numero_contrato": "119/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "217",
+    "numero_contrato": "094/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "217",
+    "numero_contrato": "194/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "218",
+    "numero_contrato": "094/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "219",
+    "numero_contrato": "094/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "219",
+    "numero_contrato": "170/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "220",
+    "numero_contrato": "095/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "221",
+    "numero_contrato": "095/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "222",
+    "numero_contrato": "095/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "223",
+    "numero_contrato": "095/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "223",
+    "numero_contrato": "200/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "224",
+    "numero_contrato": "095/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "224",
+    "numero_contrato": "200/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "225",
+    "numero_contrato": "096/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "226",
+    "numero_contrato": "096/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "227",
+    "numero_contrato": "090/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "227",
+    "numero_contrato": "096/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "228",
+    "numero_contrato": "097/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "228",
+    "numero_contrato": "151/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "229",
+    "numero_contrato": "097/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "230",
+    "numero_contrato": "097/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "230",
+    "numero_contrato": "163/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "231",
+    "numero_contrato": "114/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "232",
+    "numero_contrato": "008/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "232",
+    "numero_contrato": "085/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "233",
+    "numero_contrato": "074/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "234",
+    "numero_contrato": "074/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "234",
+    "numero_contrato": "125/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "235",
+    "numero_contrato": "075/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "235",
+    "numero_contrato": "202/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "236",
+    "numero_contrato": "075/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "237",
+    "numero_contrato": "075/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "237",
+    "numero_contrato": "225/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "238",
+    "numero_contrato": "075/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "239",
+    "numero_contrato": "075/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "239",
+    "numero_contrato": "114/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "240",
+    "numero_contrato": "075/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "241",
+    "numero_contrato": "076/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "241",
+    "numero_contrato": "086/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "242",
+    "numero_contrato": "076/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "243",
+    "numero_contrato": "023/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "243",
+    "numero_contrato": "076/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "243",
+    "numero_contrato": "130/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "244",
+    "numero_contrato": "076/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "244",
+    "numero_contrato": "107/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "245",
+    "numero_contrato": "023/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "245",
+    "numero_contrato": "076/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "246",
+    "numero_contrato": "076/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "246",
+    "numero_contrato": "105/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "247",
+    "numero_contrato": "056/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "247",
+    "numero_contrato": "077/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "248",
+    "numero_contrato": "077/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "248",
+    "numero_contrato": "210/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "249",
+    "numero_contrato": "021/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "249",
+    "numero_contrato": "077/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "250",
+    "numero_contrato": "021/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "250",
+    "numero_contrato": "077/SIURB/2020"
+  },
+  {
+    "codigo_empreendimento": "250",
+    "numero_contrato": "103/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "251",
+    "numero_contrato": "014/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "257",
+    "numero_contrato": "012/SMIT/2021"
+  },
+  {
+    "codigo_empreendimento": "257",
+    "numero_contrato": "060/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "258",
+    "numero_contrato": "017/SMIT/2021"
+  },
+  {
+    "codigo_empreendimento": "258",
+    "numero_contrato": "021/SMIT/2022"
+  },
+  {
+    "codigo_empreendimento": "258",
+    "numero_contrato": "116/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "259",
+    "numero_contrato": "018/SMIT/2021"
+  },
+  {
+    "codigo_empreendimento": "259",
+    "numero_contrato": "020/SMIT/2022"
+  },
+  {
+    "codigo_empreendimento": "259",
+    "numero_contrato": "153/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "260",
+    "numero_contrato": "009/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "260",
+    "numero_contrato": "030/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "260",
+    "numero_contrato": "035/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "260",
+    "numero_contrato": "055/SIURB/2024"
+  },
+  {
+    "codigo_empreendimento": "260",
+    "numero_contrato": "060/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "260",
+    "numero_contrato": "087/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "260",
+    "numero_contrato": "095/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "261",
+    "numero_contrato": "041/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "261",
+    "numero_contrato": "052/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "261",
+    "numero_contrato": "059/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "262",
+    "numero_contrato": "009/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "262",
+    "numero_contrato": "011/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "262",
+    "numero_contrato": "128/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "262",
+    "numero_contrato": "145/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "263",
+    "numero_contrato": "178/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "264",
+    "numero_contrato": "017/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "264",
+    "numero_contrato": "053/SIURB/2024"
+  },
+  {
+    "codigo_empreendimento": "274",
+    "numero_contrato": "071/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "275",
+    "numero_contrato": "071/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "276",
+    "numero_contrato": "005/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "276",
+    "numero_contrato": "071/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "277",
+    "numero_contrato": "004/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "277",
+    "numero_contrato": "071/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "278",
+    "numero_contrato": "007/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "278",
+    "numero_contrato": "071/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "279",
+    "numero_contrato": "013/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "279",
+    "numero_contrato": "071/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "280",
+    "numero_contrato": "009/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "280",
+    "numero_contrato": "032/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "280",
+    "numero_contrato": "071/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "281",
+    "numero_contrato": "072/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "282",
+    "numero_contrato": "002/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "282",
+    "numero_contrato": "072/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "283",
+    "numero_contrato": "067/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "283",
+    "numero_contrato": "072/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "284",
+    "numero_contrato": "046/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "284",
+    "numero_contrato": "072/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "285",
+    "numero_contrato": "072/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "285",
+    "numero_contrato": "234/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "286",
+    "numero_contrato": "001/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "286",
+    "numero_contrato": "072/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "286",
+    "numero_contrato": "214/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "287",
+    "numero_contrato": "072/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "288",
+    "numero_contrato": "072/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "289",
+    "numero_contrato": "073/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "289",
+    "numero_contrato": "078/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "290",
+    "numero_contrato": "073/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "290",
+    "numero_contrato": "285/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "291",
+    "numero_contrato": "073/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "292",
+    "numero_contrato": "073/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "292",
+    "numero_contrato": "089/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "293",
+    "numero_contrato": "073/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "293",
+    "numero_contrato": "089/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "294",
+    "numero_contrato": "073/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "294",
+    "numero_contrato": "078/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "295",
+    "numero_contrato": "073/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "295",
+    "numero_contrato": "229/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "296",
+    "numero_contrato": "073/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "297",
+    "numero_contrato": "073/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "298",
+    "numero_contrato": "074/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "299",
+    "numero_contrato": "074/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "300",
+    "numero_contrato": "074/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "300",
+    "numero_contrato": "165/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "301",
+    "numero_contrato": "019/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "301",
+    "numero_contrato": "074/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "302",
+    "numero_contrato": "074/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "303",
+    "numero_contrato": "074/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "304",
+    "numero_contrato": "074/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "305",
+    "numero_contrato": "074/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "306",
+    "numero_contrato": "075/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "307",
+    "numero_contrato": "075/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "308",
+    "numero_contrato": "075/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "309",
+    "numero_contrato": "075/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "309",
+    "numero_contrato": "239/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "310",
+    "numero_contrato": "075/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "311",
+    "numero_contrato": "075/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "311",
+    "numero_contrato": "310/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "312",
+    "numero_contrato": "075/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "313",
+    "numero_contrato": "075/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "314",
+    "numero_contrato": "076/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "314",
+    "numero_contrato": "232/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "315",
+    "numero_contrato": "076/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "316",
+    "numero_contrato": "015/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "316",
+    "numero_contrato": "060/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "316",
+    "numero_contrato": "076/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "317",
+    "numero_contrato": "019/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "317",
+    "numero_contrato": "076/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "318",
+    "numero_contrato": "004/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "318",
+    "numero_contrato": "076/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "319",
+    "numero_contrato": "016/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "319",
+    "numero_contrato": "076/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "320",
+    "numero_contrato": "076/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "321",
+    "numero_contrato": "076/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "322",
+    "numero_contrato": "076/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "322",
+    "numero_contrato": "306/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "323",
+    "numero_contrato": "077/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "323",
+    "numero_contrato": "223/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "324",
+    "numero_contrato": "064/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "324",
+    "numero_contrato": "077/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "325",
+    "numero_contrato": "007/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "325",
+    "numero_contrato": "077/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "326",
+    "numero_contrato": "077/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "326",
+    "numero_contrato": "182/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "327",
+    "numero_contrato": "077/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "327",
+    "numero_contrato": "162/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "328",
+    "numero_contrato": "077/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "328",
+    "numero_contrato": "250/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "329",
+    "numero_contrato": "077/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "330",
+    "numero_contrato": "051/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "330",
+    "numero_contrato": "055/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "330",
+    "numero_contrato": "077/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "331",
+    "numero_contrato": "054/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "331",
+    "numero_contrato": "077/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "332",
+    "numero_contrato": "078/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "332",
+    "numero_contrato": "213/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "333",
+    "numero_contrato": "078/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "334",
+    "numero_contrato": "014/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "334",
+    "numero_contrato": "078/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "335",
+    "numero_contrato": "078/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "336",
+    "numero_contrato": "078/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "337",
+    "numero_contrato": "078/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "337",
+    "numero_contrato": "108/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "338",
+    "numero_contrato": "078/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "339",
+    "numero_contrato": "078/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "340",
+    "numero_contrato": "054/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "340",
+    "numero_contrato": "078/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "341",
+    "numero_contrato": "015/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "341",
+    "numero_contrato": "079/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "342",
+    "numero_contrato": "079/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "343",
+    "numero_contrato": "079/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "344",
+    "numero_contrato": "079/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "344",
+    "numero_contrato": "251/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "345",
+    "numero_contrato": "079/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "346",
+    "numero_contrato": "079/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "346",
+    "numero_contrato": "295/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "347",
+    "numero_contrato": "079/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "347",
+    "numero_contrato": "309/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "348",
+    "numero_contrato": "079/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "349",
+    "numero_contrato": "079/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "349",
+    "numero_contrato": "221/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "350",
+    "numero_contrato": "080/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "351",
+    "numero_contrato": "013/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "351",
+    "numero_contrato": "080/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "352",
+    "numero_contrato": "080/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "353",
+    "numero_contrato": "008/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "353",
+    "numero_contrato": "080/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "354",
+    "numero_contrato": "006/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "354",
+    "numero_contrato": "080/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "355",
+    "numero_contrato": "080/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "356",
+    "numero_contrato": "080/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "357",
+    "numero_contrato": "080/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "358",
+    "numero_contrato": "011/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "358",
+    "numero_contrato": "080/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "359",
+    "numero_contrato": "081/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "359",
+    "numero_contrato": "182/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "360",
+    "numero_contrato": "030/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "360",
+    "numero_contrato": "042/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "360",
+    "numero_contrato": "081/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "361",
+    "numero_contrato": "034/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "361",
+    "numero_contrato": "045/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "361",
+    "numero_contrato": "081/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "362",
+    "numero_contrato": "081/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "362",
+    "numero_contrato": "249/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "363",
+    "numero_contrato": "021/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "363",
+    "numero_contrato": "081/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "364",
+    "numero_contrato": "081/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "364",
+    "numero_contrato": "121/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "365",
+    "numero_contrato": "018/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "365",
+    "numero_contrato": "081/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "366",
+    "numero_contrato": "025/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "366",
+    "numero_contrato": "046/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "366",
+    "numero_contrato": "081/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "367",
+    "numero_contrato": "034/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "367",
+    "numero_contrato": "081/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "367",
+    "numero_contrato": "129/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "367",
+    "numero_contrato": "147/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "368",
+    "numero_contrato": "130/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "369",
+    "numero_contrato": "103/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "370",
+    "numero_contrato": "071/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "371",
+    "numero_contrato": "007/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "371",
+    "numero_contrato": "029/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "371",
+    "numero_contrato": "038/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "371",
+    "numero_contrato": "064/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "371",
+    "numero_contrato": "072/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "371",
+    "numero_contrato": "072/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "371",
+    "numero_contrato": "077/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "371",
+    "numero_contrato": "117/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "371",
+    "numero_contrato": "119/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "371",
+    "numero_contrato": "128/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "372",
+    "numero_contrato": "066/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "372",
+    "numero_contrato": "252/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "374",
+    "numero_contrato": "001/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "374",
+    "numero_contrato": "066/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "375",
+    "numero_contrato": "001/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "375",
+    "numero_contrato": "063/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "375",
+    "numero_contrato": "076/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "376",
+    "numero_contrato": "001/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "376",
+    "numero_contrato": "076/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "377",
+    "numero_contrato": "001/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "378",
+    "numero_contrato": "001/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "379",
+    "numero_contrato": "001/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "379",
+    "numero_contrato": "063/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "380",
+    "numero_contrato": "001/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "380",
+    "numero_contrato": "076/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "381",
+    "numero_contrato": "001/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "381",
+    "numero_contrato": "063/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "382",
+    "numero_contrato": "001/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "383",
+    "numero_contrato": "001/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "383",
+    "numero_contrato": "076/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "384",
+    "numero_contrato": "002/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "384",
+    "numero_contrato": "039/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "384",
+    "numero_contrato": "216/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "385",
+    "numero_contrato": "002/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "385",
+    "numero_contrato": "076/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "386",
+    "numero_contrato": "002/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "386",
+    "numero_contrato": "076/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "387",
+    "numero_contrato": "002/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "388",
+    "numero_contrato": "002/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "388",
+    "numero_contrato": "046/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "388",
+    "numero_contrato": "216/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "389",
+    "numero_contrato": "002/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "389",
+    "numero_contrato": "228/SPOBRAS/2023 "
+  },
+  {
+    "codigo_empreendimento": "390",
+    "numero_contrato": "002/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "390",
+    "numero_contrato": "076/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "391",
+    "numero_contrato": "002/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "391",
+    "numero_contrato": "076/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "392",
+    "numero_contrato": "002/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "392",
+    "numero_contrato": "076/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "393",
+    "numero_contrato": "002/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "393",
+    "numero_contrato": "216/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "394",
+    "numero_contrato": "002/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "395",
+    "numero_contrato": "003/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "395",
+    "numero_contrato": "067/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "396",
+    "numero_contrato": "003/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "396",
+    "numero_contrato": "067/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "397",
+    "numero_contrato": "003/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "398",
+    "numero_contrato": "003/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "398",
+    "numero_contrato": "021/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "398",
+    "numero_contrato": "096/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "398",
+    "numero_contrato": "122/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "399",
+    "numero_contrato": "003/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "400",
+    "numero_contrato": "003/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "400",
+    "numero_contrato": "067/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "401",
+    "numero_contrato": "003/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "401",
+    "numero_contrato": "055/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "401",
+    "numero_contrato": "067/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "402",
+    "numero_contrato": "003/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "402",
+    "numero_contrato": "067/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "402",
+    "numero_contrato": "096/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "403",
+    "numero_contrato": "003/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "403",
+    "numero_contrato": "067/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "403",
+    "numero_contrato": "096/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "404",
+    "numero_contrato": "003/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "404",
+    "numero_contrato": "067/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "405",
+    "numero_contrato": "003/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "406",
+    "numero_contrato": "003/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "407",
+    "numero_contrato": "004/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "408",
+    "numero_contrato": "004/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "409",
+    "numero_contrato": "004/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "410",
+    "numero_contrato": "004/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "410",
+    "numero_contrato": "112/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "411",
+    "numero_contrato": "004/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "411",
+    "numero_contrato": "112/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "412",
+    "numero_contrato": "004/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "413",
+    "numero_contrato": "004/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "414",
+    "numero_contrato": "004/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "414",
+    "numero_contrato": "112/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "415",
+    "numero_contrato": "004/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "415",
+    "numero_contrato": "063/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "415",
+    "numero_contrato": "113/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "416",
+    "numero_contrato": "004/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "417",
+    "numero_contrato": "005/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "418",
+    "numero_contrato": "005/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "419",
+    "numero_contrato": "005/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "419",
+    "numero_contrato": "077/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "420",
+    "numero_contrato": "005/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "420",
+    "numero_contrato": "077/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "421",
+    "numero_contrato": "005/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "421",
+    "numero_contrato": "077/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "422",
+    "numero_contrato": "005/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "423",
+    "numero_contrato": "005/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "424",
+    "numero_contrato": "005/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "424",
+    "numero_contrato": "077/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "425",
+    "numero_contrato": "005/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "427",
+    "numero_contrato": "005/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "427",
+    "numero_contrato": "283/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "428",
+    "numero_contrato": "005/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "428",
+    "numero_contrato": "077/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "429",
+    "numero_contrato": "006/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "429",
+    "numero_contrato": "057/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "429",
+    "numero_contrato": "112/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "430",
+    "numero_contrato": "006/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "430",
+    "numero_contrato": "112/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "431",
+    "numero_contrato": "006/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "432",
+    "numero_contrato": "006/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "432",
+    "numero_contrato": "112/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "433",
+    "numero_contrato": "006/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "434",
+    "numero_contrato": "006/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "434",
+    "numero_contrato": "112/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "435",
+    "numero_contrato": "006/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "436",
+    "numero_contrato": "006/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "436",
+    "numero_contrato": "091/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "437",
+    "numero_contrato": "006/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "438",
+    "numero_contrato": "006/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "439",
+    "numero_contrato": "006/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "439",
+    "numero_contrato": "091/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "440",
+    "numero_contrato": "007/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "441",
+    "numero_contrato": "007/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "441",
+    "numero_contrato": "077/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "442",
+    "numero_contrato": "007/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "442",
+    "numero_contrato": "077/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "443",
+    "numero_contrato": "007/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "444",
+    "numero_contrato": "007/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "445",
+    "numero_contrato": "007/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "446",
+    "numero_contrato": "007/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "447",
+    "numero_contrato": "007/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "447",
+    "numero_contrato": "077/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "448",
+    "numero_contrato": "007/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "449",
+    "numero_contrato": "007/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "450",
+    "numero_contrato": "007/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "451",
+    "numero_contrato": "008/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "451",
+    "numero_contrato": "077/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "452",
+    "numero_contrato": "008/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "452",
+    "numero_contrato": "077/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "453",
+    "numero_contrato": "008/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "453",
+    "numero_contrato": "025/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "454",
+    "numero_contrato": "008/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "455",
+    "numero_contrato": "008/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "456",
+    "numero_contrato": "008/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "457",
+    "numero_contrato": "008/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "457",
+    "numero_contrato": "077/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "458",
+    "numero_contrato": "008/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "458",
+    "numero_contrato": "077/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "459",
+    "numero_contrato": "008/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "459",
+    "numero_contrato": "219/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "460",
+    "numero_contrato": "008/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "460",
+    "numero_contrato": "096/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "460",
+    "numero_contrato": "219/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "461",
+    "numero_contrato": "008/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "461",
+    "numero_contrato": "104/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "462",
+    "numero_contrato": "009/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "463",
+    "numero_contrato": "009/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "464",
+    "numero_contrato": "009/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "465",
+    "numero_contrato": "009/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "466",
+    "numero_contrato": "009/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "467",
+    "numero_contrato": "009/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "468",
+    "numero_contrato": "009/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "468",
+    "numero_contrato": "075/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "469",
+    "numero_contrato": "009/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "470",
+    "numero_contrato": "009/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "471",
+    "numero_contrato": "009/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "472",
+    "numero_contrato": "010/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "473",
+    "numero_contrato": "010/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "473",
+    "numero_contrato": "068/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "474",
+    "numero_contrato": "010/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "475",
+    "numero_contrato": "010/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "476",
+    "numero_contrato": "010/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "477",
+    "numero_contrato": "010/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "477",
+    "numero_contrato": "068/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "478",
+    "numero_contrato": "010/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "478",
+    "numero_contrato": "068/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "479",
+    "numero_contrato": "010/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "479",
+    "numero_contrato": "068/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "480",
+    "numero_contrato": "010/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "481",
+    "numero_contrato": "010/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "482",
+    "numero_contrato": "010/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "483",
+    "numero_contrato": "010/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "483",
+    "numero_contrato": "068/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "484",
+    "numero_contrato": "011/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "485",
+    "numero_contrato": "011/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "485",
+    "numero_contrato": "091/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "485",
+    "numero_contrato": "112/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "486",
+    "numero_contrato": "011/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "487",
+    "numero_contrato": "011/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "488",
+    "numero_contrato": "011/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "488",
+    "numero_contrato": "061/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "488",
+    "numero_contrato": "112/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "489",
+    "numero_contrato": "011/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "490",
+    "numero_contrato": "011/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "490",
+    "numero_contrato": "061/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "490",
+    "numero_contrato": "112/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "491",
+    "numero_contrato": "011/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "492",
+    "numero_contrato": "011/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "492",
+    "numero_contrato": "091/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "493",
+    "numero_contrato": "011/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "494",
+    "numero_contrato": "011/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "495",
+    "numero_contrato": "012/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "496",
+    "numero_contrato": "012/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "496",
+    "numero_contrato": "218/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "497",
+    "numero_contrato": "012/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "497",
+    "numero_contrato": "246/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "498",
+    "numero_contrato": "012/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "499",
+    "numero_contrato": "012/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "499",
+    "numero_contrato": "104/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "500",
+    "numero_contrato": "012/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "500",
+    "numero_contrato": "061/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "500",
+    "numero_contrato": "104/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "501",
+    "numero_contrato": "012/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "501",
+    "numero_contrato": "061/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "502",
+    "numero_contrato": "012/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "503",
+    "numero_contrato": "012/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "504",
+    "numero_contrato": "012/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "504",
+    "numero_contrato": "109/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "505",
+    "numero_contrato": "012/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "505",
+    "numero_contrato": "109/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "506",
+    "numero_contrato": "012/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "507",
+    "numero_contrato": "013/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "507",
+    "numero_contrato": "110/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "508",
+    "numero_contrato": "013/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "508",
+    "numero_contrato": "110/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "509",
+    "numero_contrato": "013/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "510",
+    "numero_contrato": "013/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "510",
+    "numero_contrato": "110/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "511",
+    "numero_contrato": "013/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "512",
+    "numero_contrato": "013/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "513",
+    "numero_contrato": "013/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "514",
+    "numero_contrato": "013/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "514",
+    "numero_contrato": "110/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "515",
+    "numero_contrato": "013/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "515",
+    "numero_contrato": "110/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "516",
+    "numero_contrato": "013/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "517",
+    "numero_contrato": "013/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "517",
+    "numero_contrato": "110/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "518",
+    "numero_contrato": "014/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "518",
+    "numero_contrato": "215/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "519",
+    "numero_contrato": "014/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "519",
+    "numero_contrato": "095/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "519",
+    "numero_contrato": "215/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "520",
+    "numero_contrato": "014/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "520",
+    "numero_contrato": "246/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "521",
+    "numero_contrato": "014/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "521",
+    "numero_contrato": "125/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "521",
+    "numero_contrato": "246/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "522",
+    "numero_contrato": "014/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "522",
+    "numero_contrato": "095/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "523",
+    "numero_contrato": "014/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "523",
+    "numero_contrato": "246/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "524",
+    "numero_contrato": "014/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "524",
+    "numero_contrato": "215/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "525",
+    "numero_contrato": "014/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "525",
+    "numero_contrato": "095/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "525",
+    "numero_contrato": "215/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "526",
+    "numero_contrato": "014/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "526",
+    "numero_contrato": "246/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "527",
+    "numero_contrato": "014/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "527",
+    "numero_contrato": "109/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "528",
+    "numero_contrato": "014/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "528",
+    "numero_contrato": "109/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "529",
+    "numero_contrato": "014/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "530",
+    "numero_contrato": "015/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "530",
+    "numero_contrato": "060/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "531",
+    "numero_contrato": "015/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "532",
+    "numero_contrato": "015/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "533",
+    "numero_contrato": "015/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "534",
+    "numero_contrato": "015/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "534",
+    "numero_contrato": "060/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "535",
+    "numero_contrato": "015/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "535",
+    "numero_contrato": "060/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "536",
+    "numero_contrato": "015/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "537",
+    "numero_contrato": "015/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "537",
+    "numero_contrato": "060/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "538",
+    "numero_contrato": "015/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "538",
+    "numero_contrato": "078/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "539",
+    "numero_contrato": "015/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "540",
+    "numero_contrato": "016/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "541",
+    "numero_contrato": "016/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "542",
+    "numero_contrato": "016/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "542",
+    "numero_contrato": "078/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "543",
+    "numero_contrato": "016/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "544",
+    "numero_contrato": "016/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "545",
+    "numero_contrato": "016/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "546",
+    "numero_contrato": "016/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "547",
+    "numero_contrato": "016/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "548",
+    "numero_contrato": "016/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "550",
+    "numero_contrato": "016/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "550",
+    "numero_contrato": "078/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "551",
+    "numero_contrato": "016/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "552",
+    "numero_contrato": "017/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "553",
+    "numero_contrato": "017/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "553",
+    "numero_contrato": "052/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "553",
+    "numero_contrato": "113/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "554",
+    "numero_contrato": "017/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "554",
+    "numero_contrato": "059/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "554",
+    "numero_contrato": "113/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "555",
+    "numero_contrato": "017/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "556",
+    "numero_contrato": "003/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "556",
+    "numero_contrato": "017/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "556",
+    "numero_contrato": "113/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "557",
+    "numero_contrato": "017/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "557",
+    "numero_contrato": "113/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "558",
+    "numero_contrato": "017/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "559",
+    "numero_contrato": "017/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "560",
+    "numero_contrato": "017/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "561",
+    "numero_contrato": "017/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "562",
+    "numero_contrato": "017/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "562",
+    "numero_contrato": "113/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "563",
+    "numero_contrato": "017/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "564",
+    "numero_contrato": "017/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "564",
+    "numero_contrato": "051/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "564",
+    "numero_contrato": "113/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "565",
+    "numero_contrato": "018/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "566",
+    "numero_contrato": "018/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "566",
+    "numero_contrato": "060/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "566",
+    "numero_contrato": "065/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "567",
+    "numero_contrato": "002/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "567",
+    "numero_contrato": "018/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "568",
+    "numero_contrato": "018/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "569",
+    "numero_contrato": "018/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "570",
+    "numero_contrato": "018/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "571",
+    "numero_contrato": "018/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "572",
+    "numero_contrato": "018/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "573",
+    "numero_contrato": "018/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "574",
+    "numero_contrato": "018/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "575",
+    "numero_contrato": "018/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "577",
+    "numero_contrato": "019/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "577",
+    "numero_contrato": "061/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "577",
+    "numero_contrato": "078/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "578",
+    "numero_contrato": "019/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "579",
+    "numero_contrato": "019/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "579",
+    "numero_contrato": "078/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "580",
+    "numero_contrato": "019/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "581",
+    "numero_contrato": "019/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "582",
+    "numero_contrato": "019/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "582",
+    "numero_contrato": "078/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "583",
+    "numero_contrato": "019/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "583",
+    "numero_contrato": "060/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "583",
+    "numero_contrato": "078/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "584",
+    "numero_contrato": "019/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "585",
+    "numero_contrato": "020/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "585",
+    "numero_contrato": "217/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "586",
+    "numero_contrato": "020/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "587",
+    "numero_contrato": "020/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "588",
+    "numero_contrato": "020/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "589",
+    "numero_contrato": "020/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "589",
+    "numero_contrato": "113/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "590",
+    "numero_contrato": "020/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "590",
+    "numero_contrato": "113/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "591",
+    "numero_contrato": "020/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "592",
+    "numero_contrato": "020/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "593",
+    "numero_contrato": "020/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "593",
+    "numero_contrato": "095/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "594",
+    "numero_contrato": "020/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "594",
+    "numero_contrato": "113/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "595",
+    "numero_contrato": "020/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "596",
+    "numero_contrato": "020/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "598",
+    "numero_contrato": "186/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "598",
+    "numero_contrato": "232/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "601",
+    "numero_contrato": "035/SMIT/2022"
+  },
+  {
+    "codigo_empreendimento": "601",
+    "numero_contrato": "059/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "602",
+    "numero_contrato": "038/SMIT/2022"
+  },
+  {
+    "codigo_empreendimento": "602",
+    "numero_contrato": "069/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "603",
+    "numero_contrato": "037/SMIT/2022"
+  },
+  {
+    "codigo_empreendimento": "603",
+    "numero_contrato": "065/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "604",
+    "numero_contrato": "039/SMIT/2022"
+  },
+  {
+    "codigo_empreendimento": "604",
+    "numero_contrato": "057/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "604",
+    "numero_contrato": "AF n°0422232100"
+  },
+  {
+    "codigo_empreendimento": "605",
+    "numero_contrato": "036/SMIT/2022"
+  },
+  {
+    "codigo_empreendimento": "605",
+    "numero_contrato": "070/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "606",
+    "numero_contrato": "040/SMIT/2022"
+  },
+  {
+    "codigo_empreendimento": "606",
+    "numero_contrato": "058/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "609",
+    "numero_contrato": "009/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "609",
+    "numero_contrato": "012/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "609",
+    "numero_contrato": "032/SIURB/2024"
+  },
+  {
+    "codigo_empreendimento": "609",
+    "numero_contrato": "070/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "609",
+    "numero_contrato": "084/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "609",
+    "numero_contrato": "149/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "610",
+    "numero_contrato": "224/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "611",
+    "numero_contrato": "009/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "611",
+    "numero_contrato": "012/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "611",
+    "numero_contrato": "108/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "612",
+    "numero_contrato": "023/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "612",
+    "numero_contrato": "032/SMPED/2021"
+  },
+  {
+    "codigo_empreendimento": "612",
+    "numero_contrato": "038/SMPED/2022"
+  },
+  {
+    "codigo_empreendimento": "612",
+    "numero_contrato": "111/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "613",
+    "numero_contrato": "002/SMDET/2022"
+  },
+  {
+    "codigo_empreendimento": "613",
+    "numero_contrato": "003/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "613",
+    "numero_contrato": "015/SMDET/2022"
+  },
+  {
+    "codigo_empreendimento": "613",
+    "numero_contrato": "022/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "661",
+    "numero_contrato": "009/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "661",
+    "numero_contrato": "014/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "661",
+    "numero_contrato": "125/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "661",
+    "numero_contrato": "161/SIURB/2024"
+  },
+  {
+    "codigo_empreendimento": "665",
+    "numero_contrato": "001/SMPED/2024"
+  },
+  {
+    "codigo_empreendimento": "665",
+    "numero_contrato": "002/SMPED/2022"
+  },
+  {
+    "codigo_empreendimento": "665",
+    "numero_contrato": "074/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "665",
+    "numero_contrato": "079/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "665",
+    "numero_contrato": "083/SMPED/2023"
+  },
+  {
+    "codigo_empreendimento": "665",
+    "numero_contrato": "124/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "665",
+    "numero_contrato": "264/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "671",
+    "numero_contrato": "048/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "672",
+    "numero_contrato": "055/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "673",
+    "numero_contrato": "050/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "674",
+    "numero_contrato": "052/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "675",
+    "numero_contrato": "006/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "675",
+    "numero_contrato": "016/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "675",
+    "numero_contrato": "031/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "675",
+    "numero_contrato": "032/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "675",
+    "numero_contrato": "054/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "675",
+    "numero_contrato": "072/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "675",
+    "numero_contrato": "115/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "675",
+    "numero_contrato": "199/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "676",
+    "numero_contrato": "056/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "677",
+    "numero_contrato": "049/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "678",
+    "numero_contrato": "030/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "678",
+    "numero_contrato": "047/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "679",
+    "numero_contrato": "044/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "679",
+    "numero_contrato": "050/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "680",
+    "numero_contrato": "043/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "681",
+    "numero_contrato": "040/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "682",
+    "numero_contrato": "039/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "683",
+    "numero_contrato": "037/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "684",
+    "numero_contrato": "035/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "685",
+    "numero_contrato": "036/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "685",
+    "numero_contrato": "130/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "685",
+    "numero_contrato": "147/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "686",
+    "numero_contrato": "032/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "686",
+    "numero_contrato": "033/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "687",
+    "numero_contrato": "029/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "687",
+    "numero_contrato": "031/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "688",
+    "numero_contrato": "041/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "689",
+    "numero_contrato": "024/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "689",
+    "numero_contrato": "053/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "988",
+    "numero_contrato": "055/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "989",
+    "numero_contrato": "022/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "990",
+    "numero_contrato": "050/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "991",
+    "numero_contrato": "088/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "992",
+    "numero_contrato": "133/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "993",
+    "numero_contrato": "078/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "994",
+    "numero_contrato": "078/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "996",
+    "numero_contrato": "154/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "998",
+    "numero_contrato": "007/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "999",
+    "numero_contrato": "006/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1000",
+    "numero_contrato": "001/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1001",
+    "numero_contrato": "109/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1002",
+    "numero_contrato": "048/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1003",
+    "numero_contrato": "006/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1004",
+    "numero_contrato": "109/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1005",
+    "numero_contrato": "009/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1006",
+    "numero_contrato": "009/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1007",
+    "numero_contrato": "009/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1008",
+    "numero_contrato": "109/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1009",
+    "numero_contrato": "006/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1010",
+    "numero_contrato": "006/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1011",
+    "numero_contrato": "009/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1012",
+    "numero_contrato": "008/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1013",
+    "numero_contrato": "052/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1014",
+    "numero_contrato": "088/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1015",
+    "numero_contrato": "106/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1016",
+    "numero_contrato": "106/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1017",
+    "numero_contrato": "011/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1018",
+    "numero_contrato": "044/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1019",
+    "numero_contrato": "055/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1020",
+    "numero_contrato": "001/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1021",
+    "numero_contrato": "087/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1022",
+    "numero_contrato": "052/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1023",
+    "numero_contrato": "106/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1024",
+    "numero_contrato": "080/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1025",
+    "numero_contrato": "014/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1026",
+    "numero_contrato": "106/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1027",
+    "numero_contrato": "106/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1028",
+    "numero_contrato": "087/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1029",
+    "numero_contrato": "001/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1030",
+    "numero_contrato": "053/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1031",
+    "numero_contrato": "048/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1032",
+    "numero_contrato": "104/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1033",
+    "numero_contrato": "088/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1034",
+    "numero_contrato": "043/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1035",
+    "numero_contrato": "104/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1036",
+    "numero_contrato": "088/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1037",
+    "numero_contrato": "103/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1038",
+    "numero_contrato": "009/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1039",
+    "numero_contrato": "008/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1040",
+    "numero_contrato": "110/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1041",
+    "numero_contrato": "104/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1042",
+    "numero_contrato": "086/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1043",
+    "numero_contrato": "009/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1044",
+    "numero_contrato": "106/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1045",
+    "numero_contrato": "106/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1046",
+    "numero_contrato": "110/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1047",
+    "numero_contrato": "112/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1048",
+    "numero_contrato": "008/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1048",
+    "numero_contrato": "052/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "1049",
+    "numero_contrato": "064/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1049",
+    "numero_contrato": "106/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1050",
+    "numero_contrato": "006/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1051",
+    "numero_contrato": "088/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1052",
+    "numero_contrato": "006/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1053",
+    "numero_contrato": "108/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1054",
+    "numero_contrato": "008/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1055",
+    "numero_contrato": "101/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1056",
+    "numero_contrato": "014/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1057",
+    "numero_contrato": "110/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1058",
+    "numero_contrato": "022/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1059",
+    "numero_contrato": "048/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1060",
+    "numero_contrato": "088/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1061",
+    "numero_contrato": "106/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1062",
+    "numero_contrato": "109/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1063",
+    "numero_contrato": "047/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1064",
+    "numero_contrato": "002/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1065",
+    "numero_contrato": "103/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1066",
+    "numero_contrato": "106/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1067",
+    "numero_contrato": "008/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1068",
+    "numero_contrato": "067/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1070",
+    "numero_contrato": "009/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1071",
+    "numero_contrato": "078/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1072",
+    "numero_contrato": "067/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1073",
+    "numero_contrato": "110/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1074",
+    "numero_contrato": "009/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1075",
+    "numero_contrato": "090/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1076",
+    "numero_contrato": "014/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1077",
+    "numero_contrato": "083/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1078",
+    "numero_contrato": "075/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1079",
+    "numero_contrato": "084/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1080",
+    "numero_contrato": "083/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1081",
+    "numero_contrato": "084/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1082",
+    "numero_contrato": "083/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1083",
+    "numero_contrato": "084/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1084",
+    "numero_contrato": "083/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1085",
+    "numero_contrato": "083/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1086",
+    "numero_contrato": "097/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1087",
+    "numero_contrato": "097/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1088",
+    "numero_contrato": "097/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1089",
+    "numero_contrato": "097/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1090",
+    "numero_contrato": "097/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1091",
+    "numero_contrato": "097/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1092",
+    "numero_contrato": "049/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1093",
+    "numero_contrato": "049/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1094",
+    "numero_contrato": "100/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1095",
+    "numero_contrato": "050/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1096",
+    "numero_contrato": "055/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1097",
+    "numero_contrato": "062/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1098",
+    "numero_contrato": "090/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1099",
+    "numero_contrato": "053/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1100",
+    "numero_contrato": "006/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1101",
+    "numero_contrato": "090/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1102",
+    "numero_contrato": "010/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1103",
+    "numero_contrato": "101/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1104",
+    "numero_contrato": "056/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1105",
+    "numero_contrato": "106/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1106",
+    "numero_contrato": "109/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1107",
+    "numero_contrato": "048/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1108",
+    "numero_contrato": "105/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1109",
+    "numero_contrato": "085/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1110",
+    "numero_contrato": "073/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1111",
+    "numero_contrato": "105/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1112",
+    "numero_contrato": "076/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1113",
+    "numero_contrato": "068/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1114",
+    "numero_contrato": "076/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1115",
+    "numero_contrato": "068/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1116",
+    "numero_contrato": "105/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1117",
+    "numero_contrato": "073/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1118",
+    "numero_contrato": "107/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1119",
+    "numero_contrato": "105/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1120",
+    "numero_contrato": "068/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1121",
+    "numero_contrato": "107/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1122",
+    "numero_contrato": "073/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1123",
+    "numero_contrato": "068/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1124",
+    "numero_contrato": "105/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1125",
+    "numero_contrato": "066/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1125",
+    "numero_contrato": "255/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1126",
+    "numero_contrato": "068/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1126",
+    "numero_contrato": "082/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1127",
+    "numero_contrato": "097/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1128",
+    "numero_contrato": "040/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1128",
+    "numero_contrato": "075/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1129",
+    "numero_contrato": "105/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1130",
+    "numero_contrato": "097/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1131",
+    "numero_contrato": "076/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1132",
+    "numero_contrato": "068/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1133",
+    "numero_contrato": "097/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1134",
+    "numero_contrato": "075/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1134",
+    "numero_contrato": "167/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1135",
+    "numero_contrato": "081/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1136",
+    "numero_contrato": "085/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1136",
+    "numero_contrato": "161/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1137",
+    "numero_contrato": "097/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1138",
+    "numero_contrato": "105/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1138",
+    "numero_contrato": "178/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1139",
+    "numero_contrato": "076/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1140",
+    "numero_contrato": "066/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1141",
+    "numero_contrato": "076/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1142",
+    "numero_contrato": "076/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1142",
+    "numero_contrato": "254/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1143",
+    "numero_contrato": "073/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1144",
+    "numero_contrato": "053/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1144",
+    "numero_contrato": "105/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1145",
+    "numero_contrato": "066/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1146",
+    "numero_contrato": "097/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1147",
+    "numero_contrato": "075/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1147",
+    "numero_contrato": "114/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1148",
+    "numero_contrato": "079/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1149",
+    "numero_contrato": "084/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1150",
+    "numero_contrato": "076/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1150",
+    "numero_contrato": "194/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1151",
+    "numero_contrato": "084/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1151",
+    "numero_contrato": "171/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1152",
+    "numero_contrato": "076/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1153",
+    "numero_contrato": "076/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1154",
+    "numero_contrato": "101/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1154",
+    "numero_contrato": "105/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1155",
+    "numero_contrato": "081/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1155",
+    "numero_contrato": "256/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1156",
+    "numero_contrato": "085/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1157",
+    "numero_contrato": "073/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1157",
+    "numero_contrato": "081/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1158",
+    "numero_contrato": "085/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1159",
+    "numero_contrato": "079/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1160",
+    "numero_contrato": "076/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1160",
+    "numero_contrato": "084/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1161",
+    "numero_contrato": "066/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1162",
+    "numero_contrato": "073/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1163",
+    "numero_contrato": "066/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1164",
+    "numero_contrato": "085/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1164",
+    "numero_contrato": "253/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1165",
+    "numero_contrato": "076/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1165",
+    "numero_contrato": "096/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1166",
+    "numero_contrato": "066/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1167",
+    "numero_contrato": "085/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1168",
+    "numero_contrato": "004/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "1168",
+    "numero_contrato": "066/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1169",
+    "numero_contrato": "066/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1170",
+    "numero_contrato": "068/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1171",
+    "numero_contrato": "068/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1172",
+    "numero_contrato": "107/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1173",
+    "numero_contrato": "076/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1174",
+    "numero_contrato": "068/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1175",
+    "numero_contrato": "083/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1175",
+    "numero_contrato": "085/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1176",
+    "numero_contrato": "085/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1177",
+    "numero_contrato": "085/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1178",
+    "numero_contrato": "085/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1178",
+    "numero_contrato": "252/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1179",
+    "numero_contrato": "066/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1180",
+    "numero_contrato": "066/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1181",
+    "numero_contrato": "047/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1183",
+    "numero_contrato": "049/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1184",
+    "numero_contrato": "063/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1185",
+    "numero_contrato": "021/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1186",
+    "numero_contrato": "049/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1187",
+    "numero_contrato": "100/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1188",
+    "numero_contrato": "100/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1189",
+    "numero_contrato": "063/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1190",
+    "numero_contrato": "057/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1191",
+    "numero_contrato": "048/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1192",
+    "numero_contrato": "101/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1193",
+    "numero_contrato": "101/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1194",
+    "numero_contrato": "062/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1194",
+    "numero_contrato": "311/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1195",
+    "numero_contrato": "050/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1196",
+    "numero_contrato": "050/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1197",
+    "numero_contrato": "062/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1198",
+    "numero_contrato": "055/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "1198",
+    "numero_contrato": "093/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1199",
+    "numero_contrato": "052/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1199",
+    "numero_contrato": "102/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1200",
+    "numero_contrato": "048/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1201",
+    "numero_contrato": "047/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1202",
+    "numero_contrato": "062/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1203",
+    "numero_contrato": "090/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1204",
+    "numero_contrato": "044/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1205",
+    "numero_contrato": "057/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1206",
+    "numero_contrato": "022/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1207",
+    "numero_contrato": "047/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1208",
+    "numero_contrato": "079/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1209",
+    "numero_contrato": "062/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1210",
+    "numero_contrato": "062/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1211",
+    "numero_contrato": "046/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1212",
+    "numero_contrato": "001/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1213",
+    "numero_contrato": "079/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1214",
+    "numero_contrato": "101/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1215",
+    "numero_contrato": "046/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1216",
+    "numero_contrato": "078/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1217",
+    "numero_contrato": "046/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1218",
+    "numero_contrato": "053/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1219",
+    "numero_contrato": "022/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1220",
+    "numero_contrato": "011/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1221",
+    "numero_contrato": "056/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1222",
+    "numero_contrato": "079/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1223",
+    "numero_contrato": "087/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1224",
+    "numero_contrato": "051/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1225",
+    "numero_contrato": "079/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1226",
+    "numero_contrato": "183/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1227",
+    "numero_contrato": "052/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1228",
+    "numero_contrato": "043/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1229",
+    "numero_contrato": "062/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1230",
+    "numero_contrato": "090/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1231",
+    "numero_contrato": "043/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1232",
+    "numero_contrato": "043/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1233",
+    "numero_contrato": "089/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1234",
+    "numero_contrato": "021/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1235",
+    "numero_contrato": "052/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1236",
+    "numero_contrato": "058/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1237",
+    "numero_contrato": "011/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1238",
+    "numero_contrato": "108/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1239",
+    "numero_contrato": "112/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1240",
+    "numero_contrato": "056/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1241",
+    "numero_contrato": "056/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1242",
+    "numero_contrato": "001/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1243",
+    "numero_contrato": "087/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1244",
+    "numero_contrato": "043/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1245",
+    "numero_contrato": "067/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1246",
+    "numero_contrato": "082/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1247",
+    "numero_contrato": "093/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1248",
+    "numero_contrato": "047/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1249",
+    "numero_contrato": "021/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1250",
+    "numero_contrato": "089/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1251",
+    "numero_contrato": "089/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1252",
+    "numero_contrato": "064/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1253",
+    "numero_contrato": "057/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1254",
+    "numero_contrato": "010/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1255",
+    "numero_contrato": "046/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1256",
+    "numero_contrato": "049/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1257",
+    "numero_contrato": "064/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1258",
+    "numero_contrato": "064/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1259",
+    "numero_contrato": "183/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1260",
+    "numero_contrato": "046/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1261",
+    "numero_contrato": "074/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1262",
+    "numero_contrato": "183/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1263",
+    "numero_contrato": "050/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1264",
+    "numero_contrato": "057/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1265",
+    "numero_contrato": "183/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1266",
+    "numero_contrato": "093/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1267",
+    "numero_contrato": "089/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1268",
+    "numero_contrato": "020/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1269",
+    "numero_contrato": "093/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1270",
+    "numero_contrato": "050/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1271",
+    "numero_contrato": "055/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1272",
+    "numero_contrato": "051/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1273",
+    "numero_contrato": "048/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1274",
+    "numero_contrato": "022/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1275",
+    "numero_contrato": "050/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1276",
+    "numero_contrato": "103/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1277",
+    "numero_contrato": "058/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1278",
+    "numero_contrato": "011/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1279",
+    "numero_contrato": "010/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1280",
+    "numero_contrato": "052/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1281",
+    "numero_contrato": "062/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1282",
+    "numero_contrato": "062/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1283",
+    "numero_contrato": "062/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1284",
+    "numero_contrato": "108/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1285",
+    "numero_contrato": "120/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1286",
+    "numero_contrato": "074/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1287",
+    "numero_contrato": "053/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1288",
+    "numero_contrato": "104/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1289",
+    "numero_contrato": "050/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1290",
+    "numero_contrato": "002/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1291",
+    "numero_contrato": "001/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1292",
+    "numero_contrato": "090/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1293",
+    "numero_contrato": "074/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1294",
+    "numero_contrato": "074/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1295",
+    "numero_contrato": "108/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1296",
+    "numero_contrato": "052/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1297",
+    "numero_contrato": "074/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1298",
+    "numero_contrato": "044/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1299",
+    "numero_contrato": "022/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1300",
+    "numero_contrato": "093/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1301",
+    "numero_contrato": "063/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1302",
+    "numero_contrato": "062/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1303",
+    "numero_contrato": "044/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1304",
+    "numero_contrato": "043/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1305",
+    "numero_contrato": "090/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1306",
+    "numero_contrato": "063/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1307",
+    "numero_contrato": "053/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1308",
+    "numero_contrato": "104/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1309",
+    "numero_contrato": "048/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1310",
+    "numero_contrato": "093/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1311",
+    "numero_contrato": "051/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1312",
+    "numero_contrato": "049/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1313",
+    "numero_contrato": "093/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1314",
+    "numero_contrato": "058/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1315",
+    "numero_contrato": "044/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1316",
+    "numero_contrato": "058/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1317",
+    "numero_contrato": "052/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1318",
+    "numero_contrato": "108/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1319",
+    "numero_contrato": "108/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1320",
+    "numero_contrato": "090/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1321",
+    "numero_contrato": "011/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1322",
+    "numero_contrato": "056/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1323",
+    "numero_contrato": "109/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1324",
+    "numero_contrato": "074/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1325",
+    "numero_contrato": "074/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1326",
+    "numero_contrato": "054/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1327",
+    "numero_contrato": "006/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1328",
+    "numero_contrato": "087/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1330",
+    "numero_contrato": "063/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1331",
+    "numero_contrato": "019/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1332",
+    "numero_contrato": "037/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1332",
+    "numero_contrato": "195/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1332",
+    "numero_contrato": "AF n° 0432232100"
+  },
+  {
+    "codigo_empreendimento": "1333",
+    "numero_contrato": "042/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1334",
+    "numero_contrato": "028/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1334",
+    "numero_contrato": "086/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1335",
+    "numero_contrato": "028/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1336",
+    "numero_contrato": "035/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1337",
+    "numero_contrato": "036/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1338",
+    "numero_contrato": "041/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1339",
+    "numero_contrato": "038/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1339",
+    "numero_contrato": "AF nº 0412232100"
+  },
+  {
+    "codigo_empreendimento": "1340",
+    "numero_contrato": "094/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1340",
+    "numero_contrato": "AF n°0242232500"
+  },
+  {
+    "codigo_empreendimento": "1341",
+    "numero_contrato": "102/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1342",
+    "numero_contrato": "092/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1343",
+    "numero_contrato": "158/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1344",
+    "numero_contrato": "027/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1345",
+    "numero_contrato": "069/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1346",
+    "numero_contrato": "080/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1347",
+    "numero_contrato": "026/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1348",
+    "numero_contrato": "023/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1349",
+    "numero_contrato": "079/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1350",
+    "numero_contrato": "065/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1351",
+    "numero_contrato": "105/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1352",
+    "numero_contrato": "107/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1353",
+    "numero_contrato": "106/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1354",
+    "numero_contrato": "145/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1355",
+    "numero_contrato": "011/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1355",
+    "numero_contrato": "103/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1356",
+    "numero_contrato": "126/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1357",
+    "numero_contrato": "051/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1358",
+    "numero_contrato": "045/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1358",
+    "numero_contrato": "114/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1358",
+    "numero_contrato": "118/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1358",
+    "numero_contrato": "AF n° 0432232100"
+  },
+  {
+    "codigo_empreendimento": "1359",
+    "numero_contrato": "033/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1359",
+    "numero_contrato": "225/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1359",
+    "numero_contrato": "AF nº 0452232100"
+  },
+  {
+    "codigo_empreendimento": "1360",
+    "numero_contrato": "127/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1361",
+    "numero_contrato": "127/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1362",
+    "numero_contrato": "085/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1362",
+    "numero_contrato": "115/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1363",
+    "numero_contrato": "013/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1363",
+    "numero_contrato": "098/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1364",
+    "numero_contrato": "087/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1364",
+    "numero_contrato": "168/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1365",
+    "numero_contrato": "015/SIURB/2024"
+  },
+  {
+    "codigo_empreendimento": "1365",
+    "numero_contrato": "089/SIURB/2024"
+  },
+  {
+    "codigo_empreendimento": "1365",
+    "numero_contrato": "227/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "1366",
+    "numero_contrato": "AF n°0302232100"
+  },
+  {
+    "codigo_empreendimento": "1367",
+    "numero_contrato": "133/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1370",
+    "numero_contrato": "211/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1371",
+    "numero_contrato": "270/SPOBRAS/2023 "
+  },
+  {
+    "codigo_empreendimento": "1373",
+    "numero_contrato": "008/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "1375",
+    "numero_contrato": "271/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1376",
+    "numero_contrato": "184/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1377",
+    "numero_contrato": "184/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1378",
+    "numero_contrato": "036/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "1378",
+    "numero_contrato": "184/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1379",
+    "numero_contrato": "184/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1380",
+    "numero_contrato": "184/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1381",
+    "numero_contrato": "182/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1382",
+    "numero_contrato": "182/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1383",
+    "numero_contrato": "182/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1384",
+    "numero_contrato": "140/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1385",
+    "numero_contrato": "140/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1386",
+    "numero_contrato": "140/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1387",
+    "numero_contrato": "140/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1388",
+    "numero_contrato": "162/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1389",
+    "numero_contrato": "162/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1390",
+    "numero_contrato": "162/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1391",
+    "numero_contrato": "142/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1392",
+    "numero_contrato": "142/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1393",
+    "numero_contrato": "142/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1394",
+    "numero_contrato": "142/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1395",
+    "numero_contrato": "152/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1396",
+    "numero_contrato": "152/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1397",
+    "numero_contrato": "152/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1398",
+    "numero_contrato": "152/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1399",
+    "numero_contrato": "153/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1400",
+    "numero_contrato": "153/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1401",
+    "numero_contrato": "153/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1402",
+    "numero_contrato": "153/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1403",
+    "numero_contrato": "153/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1404",
+    "numero_contrato": "185/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1405",
+    "numero_contrato": "187/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1406",
+    "numero_contrato": "187/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1407",
+    "numero_contrato": "187/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1408",
+    "numero_contrato": "187/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1409",
+    "numero_contrato": "133/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1410",
+    "numero_contrato": "133/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1411",
+    "numero_contrato": "188/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1412",
+    "numero_contrato": "188/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1413",
+    "numero_contrato": "188/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1414",
+    "numero_contrato": "188/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1415",
+    "numero_contrato": "163/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1416",
+    "numero_contrato": "163/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1417",
+    "numero_contrato": "163/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1418",
+    "numero_contrato": "163/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1419",
+    "numero_contrato": "155/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1420",
+    "numero_contrato": "201/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1421",
+    "numero_contrato": "201/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1422",
+    "numero_contrato": "201/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1424",
+    "numero_contrato": "134/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1425",
+    "numero_contrato": "134/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1426",
+    "numero_contrato": "189/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1427",
+    "numero_contrato": "189/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1428",
+    "numero_contrato": "189/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1429",
+    "numero_contrato": "015/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1430",
+    "numero_contrato": "015/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1431",
+    "numero_contrato": "012/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1432",
+    "numero_contrato": "012/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1432",
+    "numero_contrato": "039/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1432",
+    "numero_contrato": "247/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1433",
+    "numero_contrato": "012/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1434",
+    "numero_contrato": "012/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1434",
+    "numero_contrato": "247/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1435",
+    "numero_contrato": "012/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1436",
+    "numero_contrato": "012/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1436",
+    "numero_contrato": "243/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1436",
+    "numero_contrato": "297/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1437",
+    "numero_contrato": "012/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1438",
+    "numero_contrato": "012/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1438",
+    "numero_contrato": "045/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1439",
+    "numero_contrato": "012/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1439",
+    "numero_contrato": "042/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1439",
+    "numero_contrato": "247/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1440",
+    "numero_contrato": "099/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1441",
+    "numero_contrato": "073/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1442",
+    "numero_contrato": "033/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "1442",
+    "numero_contrato": "175/SIURB/2024"
+  },
+  {
+    "codigo_empreendimento": "1442",
+    "numero_contrato": "210/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "1443",
+    "numero_contrato": "014/SIURB/2024"
+  },
+  {
+    "codigo_empreendimento": "1443",
+    "numero_contrato": "095/SIURB/2024"
+  },
+  {
+    "codigo_empreendimento": "1443",
+    "numero_contrato": "164/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "1444",
+    "numero_contrato": "144/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "1445",
+    "numero_contrato": "019/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "1446",
+    "numero_contrato": "040/SIURB/2024"
+  },
+  {
+    "codigo_empreendimento": "1447",
+    "numero_contrato": "020/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "1447",
+    "numero_contrato": "064/SIURB/2024"
+  },
+  {
+    "codigo_empreendimento": "1447",
+    "numero_contrato": "106/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1448",
+    "numero_contrato": "002/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "1449",
+    "numero_contrato": "093/SIURB/2024"
+  },
+  {
+    "codigo_empreendimento": "1449",
+    "numero_contrato": "154/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "1450",
+    "numero_contrato": "018/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "1450",
+    "numero_contrato": "068/SIURB/2024"
+  },
+  {
+    "codigo_empreendimento": "1450",
+    "numero_contrato": "103/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1451",
+    "numero_contrato": "291/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "1453",
+    "numero_contrato": "043/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "1453",
+    "numero_contrato": "292/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "1454",
+    "numero_contrato": "070/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1454",
+    "numero_contrato": "288/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1455",
+    "numero_contrato": "070/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1455",
+    "numero_contrato": "247/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1456",
+    "numero_contrato": "041/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1456",
+    "numero_contrato": "070/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1456",
+    "numero_contrato": "105/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1457",
+    "numero_contrato": "071/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1457",
+    "numero_contrato": "293/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1458",
+    "numero_contrato": "071/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1458",
+    "numero_contrato": "300/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1459",
+    "numero_contrato": "071/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1460",
+    "numero_contrato": "071/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1460",
+    "numero_contrato": "294/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1461",
+    "numero_contrato": "071/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1461",
+    "numero_contrato": "289/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1462",
+    "numero_contrato": "072/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1463",
+    "numero_contrato": "164/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1464",
+    "numero_contrato": "164/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1465",
+    "numero_contrato": "164/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1466",
+    "numero_contrato": "164/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1467",
+    "numero_contrato": "170/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1468",
+    "numero_contrato": "023/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1468",
+    "numero_contrato": "170/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1469",
+    "numero_contrato": "023/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1469",
+    "numero_contrato": "170/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1470",
+    "numero_contrato": "191/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1471",
+    "numero_contrato": "191/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1472",
+    "numero_contrato": "191/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1474",
+    "numero_contrato": "191/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1475",
+    "numero_contrato": "132/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1476",
+    "numero_contrato": "193/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1477",
+    "numero_contrato": "157/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1479",
+    "numero_contrato": "224/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1480",
+    "numero_contrato": "181/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1481",
+    "numero_contrato": "047/SMADS/2023"
+  },
+  {
+    "codigo_empreendimento": "1481",
+    "numero_contrato": "207/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1481",
+    "numero_contrato": "209/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1481",
+    "numero_contrato": "236/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1482",
+    "numero_contrato": "070/SMADS/2023"
+  },
+  {
+    "codigo_empreendimento": "1483",
+    "numero_contrato": "048/SMADS/2023"
+  },
+  {
+    "codigo_empreendimento": "1483",
+    "numero_contrato": "206/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1483",
+    "numero_contrato": "242/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1484",
+    "numero_contrato": "177/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1485",
+    "numero_contrato": "148/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1486",
+    "numero_contrato": "039/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "1487",
+    "numero_contrato": "039/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "1487",
+    "numero_contrato": "149/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1488",
+    "numero_contrato": "039/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "1488",
+    "numero_contrato": "150/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1488",
+    "numero_contrato": "266/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1489",
+    "numero_contrato": "186/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1490",
+    "numero_contrato": "039/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "1490",
+    "numero_contrato": "151/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1491",
+    "numero_contrato": "020/SEGES/2023"
+  },
+  {
+    "codigo_empreendimento": "1492",
+    "numero_contrato": "008/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1492",
+    "numero_contrato": "026/SEGES/2023"
+  },
+  {
+    "codigo_empreendimento": "1496",
+    "numero_contrato": "100/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "1496",
+    "numero_contrato": "155/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "1498",
+    "numero_contrato": "033/SIURB/2024"
+  },
+  {
+    "codigo_empreendimento": "1500",
+    "numero_contrato": "197/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "1502",
+    "numero_contrato": "237/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1503",
+    "numero_contrato": "237/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1509",
+    "numero_contrato": "212/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1510",
+    "numero_contrato": "212/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1511",
+    "numero_contrato": "212/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1512",
+    "numero_contrato": "143/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1513",
+    "numero_contrato": "143/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1514",
+    "numero_contrato": "143/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1515",
+    "numero_contrato": "143/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1516",
+    "numero_contrato": "143/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1517",
+    "numero_contrato": "166/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1518",
+    "numero_contrato": "166/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1519",
+    "numero_contrato": "166/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1520",
+    "numero_contrato": "166/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1521",
+    "numero_contrato": "166/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1522",
+    "numero_contrato": "141/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1523",
+    "numero_contrato": "141/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1524",
+    "numero_contrato": "141/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1525",
+    "numero_contrato": "141/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1526",
+    "numero_contrato": "141/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1527",
+    "numero_contrato": "144/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1528",
+    "numero_contrato": "144/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1529",
+    "numero_contrato": "144/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1530",
+    "numero_contrato": "144/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1531",
+    "numero_contrato": "144/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1532",
+    "numero_contrato": "144/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1533",
+    "numero_contrato": "024/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1533",
+    "numero_contrato": "135/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1534",
+    "numero_contrato": "135/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1535",
+    "numero_contrato": "024/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1535",
+    "numero_contrato": "135/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1536",
+    "numero_contrato": "023/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1536",
+    "numero_contrato": "135/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1537",
+    "numero_contrato": "024/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1537",
+    "numero_contrato": "135/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1538",
+    "numero_contrato": "023/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1538",
+    "numero_contrato": "156/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1539",
+    "numero_contrato": "024/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1539",
+    "numero_contrato": "156/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1540",
+    "numero_contrato": "024/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1540",
+    "numero_contrato": "156/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1541",
+    "numero_contrato": "024/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1541",
+    "numero_contrato": "156/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1542",
+    "numero_contrato": "156/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1543",
+    "numero_contrato": "024/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1543",
+    "numero_contrato": "156/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1544",
+    "numero_contrato": "024/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1544",
+    "numero_contrato": "139/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1545",
+    "numero_contrato": "139/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1546",
+    "numero_contrato": "023/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1546",
+    "numero_contrato": "139/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1547",
+    "numero_contrato": "139/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1548",
+    "numero_contrato": "023/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1548",
+    "numero_contrato": "139/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1549",
+    "numero_contrato": "190/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1550",
+    "numero_contrato": "190/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1551",
+    "numero_contrato": "190/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1552",
+    "numero_contrato": "023/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1552",
+    "numero_contrato": "190/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1553",
+    "numero_contrato": "023/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1553",
+    "numero_contrato": "190/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1560",
+    "numero_contrato": "191/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1563",
+    "numero_contrato": "214/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1564",
+    "numero_contrato": "214/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1565",
+    "numero_contrato": "214/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1566",
+    "numero_contrato": "214/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1567",
+    "numero_contrato": "169/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1568",
+    "numero_contrato": "169/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1569",
+    "numero_contrato": "169/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1570",
+    "numero_contrato": "169/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1571",
+    "numero_contrato": "192/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1572",
+    "numero_contrato": "192/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1573",
+    "numero_contrato": "192/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1574",
+    "numero_contrato": "192/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1575",
+    "numero_contrato": "192/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1576",
+    "numero_contrato": "192/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1586",
+    "numero_contrato": "218/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1616",
+    "numero_contrato": "023/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1616",
+    "numero_contrato": "220/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1619",
+    "numero_contrato": "056/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "1619",
+    "numero_contrato": "099/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "1619",
+    "numero_contrato": "123/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1619",
+    "numero_contrato": "148/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "1619",
+    "numero_contrato": "196/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "1619",
+    "numero_contrato": "226/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1620",
+    "numero_contrato": "221/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1621",
+    "numero_contrato": "221/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1622",
+    "numero_contrato": "222/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1623",
+    "numero_contrato": "222/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1624",
+    "numero_contrato": "222/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1625",
+    "numero_contrato": "222/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1626",
+    "numero_contrato": "222/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1627",
+    "numero_contrato": "273/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1628",
+    "numero_contrato": "273/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1629",
+    "numero_contrato": "273/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1630",
+    "numero_contrato": "273/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1631",
+    "numero_contrato": "273/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1632",
+    "numero_contrato": "223/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1633",
+    "numero_contrato": "223/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1634",
+    "numero_contrato": "223/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1635",
+    "numero_contrato": "223/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1636",
+    "numero_contrato": "007/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1637",
+    "numero_contrato": "007/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1638",
+    "numero_contrato": "007/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1639",
+    "numero_contrato": "250/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1640",
+    "numero_contrato": "250/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1642",
+    "numero_contrato": "250/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1643",
+    "numero_contrato": "250/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1644",
+    "numero_contrato": "229/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1645",
+    "numero_contrato": "229/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1646",
+    "numero_contrato": "006/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1647",
+    "numero_contrato": "006/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1648",
+    "numero_contrato": "006/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1652",
+    "numero_contrato": "231/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1653",
+    "numero_contrato": "231/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1654",
+    "numero_contrato": "231/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1655",
+    "numero_contrato": "231/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1656",
+    "numero_contrato": "231/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1657",
+    "numero_contrato": "272/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1658",
+    "numero_contrato": "272/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1659",
+    "numero_contrato": "272/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1660",
+    "numero_contrato": "230/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1661",
+    "numero_contrato": "230/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1662",
+    "numero_contrato": "230/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1663",
+    "numero_contrato": "230/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1664",
+    "numero_contrato": "230/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1665",
+    "numero_contrato": "299/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1666",
+    "numero_contrato": "299/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1667",
+    "numero_contrato": "299/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1668",
+    "numero_contrato": "299/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1669",
+    "numero_contrato": "299/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1670",
+    "numero_contrato": "274/SPOBRAS/2023 "
+  },
+  {
+    "codigo_empreendimento": "1671",
+    "numero_contrato": "274/SPOBRAS/2023 "
+  },
+  {
+    "codigo_empreendimento": "1672",
+    "numero_contrato": "274/SPOBRAS/2023 "
+  },
+  {
+    "codigo_empreendimento": "1673",
+    "numero_contrato": "274/SPOBRAS/2023 "
+  },
+  {
+    "codigo_empreendimento": "1677",
+    "numero_contrato": "284/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1678",
+    "numero_contrato": "284/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1679",
+    "numero_contrato": "284/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1680",
+    "numero_contrato": "284/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1681",
+    "numero_contrato": "306/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1682",
+    "numero_contrato": "306/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1683",
+    "numero_contrato": "306/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1684",
+    "numero_contrato": "233/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1685",
+    "numero_contrato": "233/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1686",
+    "numero_contrato": "233/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1687",
+    "numero_contrato": "295/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1688",
+    "numero_contrato": "295/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1689",
+    "numero_contrato": "295/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1690",
+    "numero_contrato": "010/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1691",
+    "numero_contrato": "010/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1692",
+    "numero_contrato": "010/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1693",
+    "numero_contrato": "010/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1694",
+    "numero_contrato": "285/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1695",
+    "numero_contrato": "285/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1696",
+    "numero_contrato": "232/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1697",
+    "numero_contrato": "232/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1698",
+    "numero_contrato": "019/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1699",
+    "numero_contrato": "019/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1700",
+    "numero_contrato": "019/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1701",
+    "numero_contrato": "002/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1702",
+    "numero_contrato": "002/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1703",
+    "numero_contrato": "002/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1704",
+    "numero_contrato": "025/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1705",
+    "numero_contrato": "025/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1706",
+    "numero_contrato": "025/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1707",
+    "numero_contrato": "310/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1708",
+    "numero_contrato": "310/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1709",
+    "numero_contrato": "310/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1710",
+    "numero_contrato": "310/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1711",
+    "numero_contrato": "239/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1712",
+    "numero_contrato": "239/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1713",
+    "numero_contrato": "239/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1714",
+    "numero_contrato": "251/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1715",
+    "numero_contrato": "251/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1716",
+    "numero_contrato": "251/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1717",
+    "numero_contrato": "251/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1718",
+    "numero_contrato": "265/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1719",
+    "numero_contrato": "265/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1720",
+    "numero_contrato": "265/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1721",
+    "numero_contrato": "240/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1722",
+    "numero_contrato": "240/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1723",
+    "numero_contrato": "240/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1724",
+    "numero_contrato": "240/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1725",
+    "numero_contrato": "240/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1726",
+    "numero_contrato": "241/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1727",
+    "numero_contrato": "241/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1728",
+    "numero_contrato": "241/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1729",
+    "numero_contrato": "042/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "1729",
+    "numero_contrato": "136/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1729",
+    "numero_contrato": "146/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "1730",
+    "numero_contrato": "169/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1731",
+    "numero_contrato": "196/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1731",
+    "numero_contrato": "235/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1732",
+    "numero_contrato": "041/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "1732",
+    "numero_contrato": "197/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1732",
+    "numero_contrato": "235/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1733",
+    "numero_contrato": "034/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1733",
+    "numero_contrato": "159/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1734",
+    "numero_contrato": "172/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1735",
+    "numero_contrato": "174/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1735",
+    "numero_contrato": "276/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1736",
+    "numero_contrato": "173/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1737",
+    "numero_contrato": "175/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1737",
+    "numero_contrato": "260/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1738",
+    "numero_contrato": "176/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1738",
+    "numero_contrato": "280/SPOBRAS/2023 "
+  },
+  {
+    "codigo_empreendimento": "1739",
+    "numero_contrato": "179/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1739",
+    "numero_contrato": "291/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1742",
+    "numero_contrato": "016/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1743",
+    "numero_contrato": "200/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1745",
+    "numero_contrato": "029/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "1747",
+    "numero_contrato": "017/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1751",
+    "numero_contrato": "035/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "1752",
+    "numero_contrato": "014/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1754",
+    "numero_contrato": "134/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1756",
+    "numero_contrato": "213/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1759",
+    "numero_contrato": "202/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1760",
+    "numero_contrato": "208/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1760",
+    "numero_contrato": "235/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1765",
+    "numero_contrato": "262/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1765",
+    "numero_contrato": "286/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1768",
+    "numero_contrato": "245/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1768",
+    "numero_contrato": "298/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1769",
+    "numero_contrato": "259/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1769",
+    "numero_contrato": "279/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1770",
+    "numero_contrato": "203/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1770",
+    "numero_contrato": "235/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1771",
+    "numero_contrato": "244/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1771",
+    "numero_contrato": "278/SPOBRAS/2023 "
+  },
+  {
+    "codigo_empreendimento": "1772",
+    "numero_contrato": "038/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1772",
+    "numero_contrato": "275/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1773",
+    "numero_contrato": "263/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1773",
+    "numero_contrato": "281/SPOBRAS/2023 "
+  },
+  {
+    "codigo_empreendimento": "1774",
+    "numero_contrato": "238/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1774",
+    "numero_contrato": "290/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1775",
+    "numero_contrato": "040/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1775",
+    "numero_contrato": "275/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1779",
+    "numero_contrato": "305/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1785",
+    "numero_contrato": "027/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1786",
+    "numero_contrato": "048/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1789",
+    "numero_contrato": "027/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1790",
+    "numero_contrato": "027/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1791",
+    "numero_contrato": "047/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1794",
+    "numero_contrato": "305/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1796",
+    "numero_contrato": "050/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1798",
+    "numero_contrato": "305/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1800",
+    "numero_contrato": "050/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1804",
+    "numero_contrato": "050/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1807",
+    "numero_contrato": "001/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1808",
+    "numero_contrato": "004/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1810",
+    "numero_contrato": "023/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1810",
+    "numero_contrato": "047/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1812",
+    "numero_contrato": "027/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1814",
+    "numero_contrato": "027/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1815",
+    "numero_contrato": "050/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1817",
+    "numero_contrato": "305/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1820",
+    "numero_contrato": "024/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1820",
+    "numero_contrato": "305/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1822",
+    "numero_contrato": "050/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1828",
+    "numero_contrato": "027/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1832",
+    "numero_contrato": "296/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1839",
+    "numero_contrato": "305/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1841",
+    "numero_contrato": "027/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1842",
+    "numero_contrato": "047/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1844",
+    "numero_contrato": "012/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1845",
+    "numero_contrato": "050/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1848",
+    "numero_contrato": "302/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1849",
+    "numero_contrato": "308/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1851",
+    "numero_contrato": "012/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1852",
+    "numero_contrato": "050/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1853",
+    "numero_contrato": "003/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1855",
+    "numero_contrato": "048/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1860",
+    "numero_contrato": "003/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1863",
+    "numero_contrato": "308/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1864",
+    "numero_contrato": "302/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1865",
+    "numero_contrato": "003/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1866",
+    "numero_contrato": "005/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1867",
+    "numero_contrato": "024/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1867",
+    "numero_contrato": "047/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1870",
+    "numero_contrato": "015/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1871",
+    "numero_contrato": "004/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1874",
+    "numero_contrato": "296/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1876",
+    "numero_contrato": "296/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1877",
+    "numero_contrato": "004/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1881",
+    "numero_contrato": "307/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1882",
+    "numero_contrato": "048/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1883",
+    "numero_contrato": "303/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1884",
+    "numero_contrato": "303/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1885",
+    "numero_contrato": "003/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1886",
+    "numero_contrato": "296/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1887",
+    "numero_contrato": "302/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1890",
+    "numero_contrato": "015/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1892",
+    "numero_contrato": "307/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1893",
+    "numero_contrato": "302/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1894",
+    "numero_contrato": "015/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1896",
+    "numero_contrato": "303/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1901",
+    "numero_contrato": "048/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1902",
+    "numero_contrato": "048/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1904",
+    "numero_contrato": "309/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1905",
+    "numero_contrato": "308/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1906",
+    "numero_contrato": "004/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1908",
+    "numero_contrato": "012/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1910",
+    "numero_contrato": "307/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1911",
+    "numero_contrato": "303/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1912",
+    "numero_contrato": "005/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1913",
+    "numero_contrato": "309/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1914",
+    "numero_contrato": "012/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1916",
+    "numero_contrato": "309/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1917",
+    "numero_contrato": "011/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1918",
+    "numero_contrato": "015/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1919",
+    "numero_contrato": "011/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1920",
+    "numero_contrato": "015/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1921",
+    "numero_contrato": "307/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1922",
+    "numero_contrato": "011/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1923",
+    "numero_contrato": "013/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1923",
+    "numero_contrato": "015/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "1923",
+    "numero_contrato": "056/SIURB/2024"
+  },
+  {
+    "codigo_empreendimento": "1923",
+    "numero_contrato": "059/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1923",
+    "numero_contrato": "061/SPOBRAS/2022"
+  },
+  {
+    "codigo_empreendimento": "1923",
+    "numero_contrato": "086/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "1923",
+    "numero_contrato": "095/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1923",
+    "numero_contrato": "096/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1923",
+    "numero_contrato": "097/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1923",
+    "numero_contrato": "128/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "1923",
+    "numero_contrato": "129/SIURB/2021"
+  },
+  {
+    "codigo_empreendimento": "1923",
+    "numero_contrato": "133/SIURB/2024"
+  },
+  {
+    "codigo_empreendimento": "1923",
+    "numero_contrato": "277/SPOBRAS/2023 "
+  },
+  {
+    "codigo_empreendimento": "1923",
+    "numero_contrato": "286/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "1923",
+    "numero_contrato": "301/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "1923",
+    "numero_contrato": "303/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "1923",
+    "numero_contrato": "304/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "1924",
+    "numero_contrato": "026/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1924",
+    "numero_contrato": "063/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1932",
+    "numero_contrato": "056/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1933",
+    "numero_contrato": "053/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "1946",
+    "numero_contrato": "140/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1948",
+    "numero_contrato": "131/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1960",
+    "numero_contrato": "066/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1968",
+    "numero_contrato": "054/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "1972",
+    "numero_contrato": "062/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1978",
+    "numero_contrato": "006/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "1978",
+    "numero_contrato": "008/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "1978",
+    "numero_contrato": "012/SIURB/2024"
+  },
+  {
+    "codigo_empreendimento": "1978",
+    "numero_contrato": "019/SIURB/2024"
+  },
+  {
+    "codigo_empreendimento": "1978",
+    "numero_contrato": "040/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "1978",
+    "numero_contrato": "099/SIURB/2024"
+  },
+  {
+    "codigo_empreendimento": "1978",
+    "numero_contrato": "206/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "1978",
+    "numero_contrato": "254/SIURB/2022"
+  },
+  {
+    "codigo_empreendimento": "1978",
+    "numero_contrato": "267/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1978",
+    "numero_contrato": "268/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1979",
+    "numero_contrato": "257/SPOBRAS/2023"
+  },
+  {
+    "codigo_empreendimento": "1985",
+    "numero_contrato": "058/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1997",
+    "numero_contrato": "000/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1998",
+    "numero_contrato": "000/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "1999",
+    "numero_contrato": "000/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "2001",
+    "numero_contrato": "028/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "2002",
+    "numero_contrato": "028/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "2006",
+    "numero_contrato": "039/SIURB/2024"
+  },
+  {
+    "codigo_empreendimento": "2006",
+    "numero_contrato": "042/SIURB/2024"
+  },
+  {
+    "codigo_empreendimento": "2006",
+    "numero_contrato": "088/SIURB/2024"
+  },
+  {
+    "codigo_empreendimento": "2006",
+    "numero_contrato": "109/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "2006",
+    "numero_contrato": "157/SIURB/2024"
+  },
+  {
+    "codigo_empreendimento": "2007",
+    "numero_contrato": "086/SPOBRAS/2024"
+  },
+  {
+    "codigo_empreendimento": "2008",
+    "numero_contrato": "057/SIURB/2024"
+  },
+  {
+    "codigo_empreendimento": "2009",
+    "numero_contrato": "039/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "2009",
+    "numero_contrato": "046/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "2010",
+    "numero_contrato": "039/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "2011",
+    "numero_contrato": "058/SIURB/2024"
+  },
+  {
+    "codigo_empreendimento": "2011",
+    "numero_contrato": "059/SIURB/2024"
+  },
+  {
+    "codigo_empreendimento": "2012",
+    "numero_contrato": "136/SIURB/2024"
+  },
+  {
+    "codigo_empreendimento": "2013",
+    "numero_contrato": "045/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "2014",
+    "numero_contrato": "053/SPCINE/2024"
+  },
+  {
+    "codigo_empreendimento": "2015",
+    "numero_contrato": "035/SIURB/2024"
+  },
+  {
+    "codigo_empreendimento": "2016",
+    "numero_contrato": "018/SIURB/2024"
+  },
+  {
+    "codigo_empreendimento": "2017",
+    "numero_contrato": "017/SIURB/2024"
+  },
+  {
+    "codigo_empreendimento": "2018",
+    "numero_contrato": "016/SIURB/2024"
+  },
+  {
+    "codigo_empreendimento": "2018",
+    "numero_contrato": "128/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "2019",
+    "numero_contrato": "254/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "2020",
+    "numero_contrato": "252/SIURB/2023"
+  },
+  {
+    "codigo_empreendimento": "2021",
+    "numero_contrato": "009/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "2021",
+    "numero_contrato": "010/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "2021",
+    "numero_contrato": "012/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "2021",
+    "numero_contrato": "030/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "2021",
+    "numero_contrato": "031/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "2022",
+    "numero_contrato": "008/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "2023",
+    "numero_contrato": "008/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "2024",
+    "numero_contrato": "008/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "2025",
+    "numero_contrato": "008/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "2026",
+    "numero_contrato": "008/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "2027",
+    "numero_contrato": "008/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "2028",
+    "numero_contrato": "008/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "2029",
+    "numero_contrato": "008/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "2030",
+    "numero_contrato": "008/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "2031",
+    "numero_contrato": "008/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "2032",
+    "numero_contrato": "010/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "2033",
+    "numero_contrato": "010/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "2034",
+    "numero_contrato": "010/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "2035",
+    "numero_contrato": "010/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "2036",
+    "numero_contrato": "010/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "2037",
+    "numero_contrato": "010/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "2038",
+    "numero_contrato": "010/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "2039",
+    "numero_contrato": " 009/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "2040",
+    "numero_contrato": " 009/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "2041",
+    "numero_contrato": " 009/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "2042",
+    "numero_contrato": "038/SPOBRAS/2025"
+  },
+  {
+    "codigo_empreendimento": "2042",
+    "numero_contrato": "044/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "2042",
+    "numero_contrato": "059/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "2042",
+    "numero_contrato": "068/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "2042",
+    "numero_contrato": "076/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "2042",
+    "numero_contrato": "077/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "2042",
+    "numero_contrato": "099/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "2042",
+    "numero_contrato": "127/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "2043",
+    "numero_contrato": " 009/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "2044",
+    "numero_contrato": " 009/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "2045",
+    "numero_contrato": " 009/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "2046",
+    "numero_contrato": " 009/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "2047",
+    "numero_contrato": " 009/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "2048",
+    "numero_contrato": " 009/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "2049",
+    "numero_contrato": "010/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "2050",
+    "numero_contrato": "093/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "2051",
+    "numero_contrato": "066/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "2057",
+    "numero_contrato": "092/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "2059",
+    "numero_contrato": "042/SIURB/2025"
+  },
+  {
+    "codigo_empreendimento": "2077",
+    "numero_contrato": "091/SIURB/2025"
+  }
+]

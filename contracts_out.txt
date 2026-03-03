@@ -1,0 +1,16 @@
+============ CONTRATO KEYS ============
+idContrato, nmContrato, nmObjeto, vlContrato, vlAditamento, vlTotalContrato, dtInicioVigencia, dtTerminoVigencia, idStatus, nmStatus, idContratada, nmContratada
+{
+  "idContrato": 1212,
+  "nmContrato": "ARP-001/2025",
+  "nmObjeto": "Contratação de Serviços de Agrimensura em Próprios Municipais e Áreas Públicas, em terrenos e/ou áreas que serão alvo de construção e/ou reforma e ampliação de empreendimentos sob responsabilidade da SPObras, nas condições estabelecidas nos termos, quantitativos, critérios e especificidades detalhadas no Anexo I - Termo de Referência e demais anexos. ",
+  "vlContrato": 27976148.35,
+  "vlAditamento": 0,
+  "vlTotalContrato": 27976148.35,
+  "dtInicioVigencia": "2025-09-22T00:00:00",
+  "dtTerminoVigencia": "2026-09-22T00:00:00",
+  "idStatus": 6,
+  "nmStatus": "VIGENTE",
+  "idContratada": 392,
+  "nmContratada": "SMS ENGENHARIA E GEOTECNIA LTDA ME (ANTIGA - FLAVIA  ARAUJO ME, MESMO CNPJ)"
+}

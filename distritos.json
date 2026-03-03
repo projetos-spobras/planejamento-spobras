@@ -1,0 +1,289 @@
+[
+    {
+        "id": 1,
+        "nome": "Água Rasa "
+    },
+    {
+        "id": 2,
+        "nome": "Alto de Pinheiros "
+    },
+    {
+        "id": 3,
+        "nome": "Anhangüera "
+    },
+    {
+        "id": 4,
+        "nome": "Aricanduva "
+    },
+    {
+        "id": 5,
+        "nome": "Artur Alvim "
+    },
+    {
+        "id": 6,
+        "nome": "Barra Funda "
+    },
+    {
+        "id": 7,
+        "nome": "Bela Vista "
+    },
+    {
+        "id": 8,
+        "nome": "Belém "
+    },
+    {
+        "id": 9,
+        "nome": "Bom Retiro "
+    },
+    {
+        "id": 10,
+        "nome": "Brás "
+    },
+    {
+        "id": 11,
+        "nome": "Brasilândia "
+    },
+    {
+        "id": 12,
+        "nome": "Butantã "
+    },
+    {
+        "id": 13,
+        "nome": "Cachoeirinha "
+    },
+    {
+        "id": 14,
+        "nome": "Cambuci "
+    },
+    {
+        "id": 15,
+        "nome": "Campo Belo "
+    },
+    {
+        "id": 16,
+        "nome": "Campo Grande "
+    },
+    {
+        "id": 17,
+        "nome": "Campo Limpo "
+    },
+    {
+        "id": 18,
+        "nome": "Cangaíba "
+    },
+    {
+        "id": 19,
+        "nome": "Capão Redondo "
+    },
+    {
+        "id": 20,
+        "nome": "Carrão "
+    },
+    {
+        "id": 21,
+        "nome": "Casa Verde "
+    },
+    {
+        "id": 22,
+        "nome": "Cidade Ademar "
+    },
+    {
+        "id": 23,
+        "nome": "Cidade Dutra "
+    },
+    {
+        "id": 24,
+        "nome": "Cidade Líder "
+    },
+    {
+        "id": 25,
+        "nome": "Cidade Tiradentes "
+    },
+    {
+        "id": 26,
+        "nome": "Consolação "
+    },
+    {
+        "id": 27,
+        "nome": "Cursino "
+    },
+    {
+        "id": 28,
+        "nome": "Ermelino Matarazzo "
+    },
+    {
+        "id": 29,
+        "nome": "Freguesia do Ó "
+    },
+    {
+        "id": 30,
+        "nome": "Grajaú "
+    },
+    {
+        "id": 31,
+        "nome": "Guaianases"
+    },
+    {
+        "id": 32,
+        "nome": "Iguatemi "
+    },
+    {
+        "id": 33,
+        "nome": "Ipiranga "
+    },
+    {
+        "id": 34,
+        "nome": "Itaim Bibi "
+    },
+    {
+        "id": 35,
+        "nome": "Itaim Paulista "
+    },
+    {
+        "id": 36,
+        "nome": "Itaquera "
+    },
+    {
+        "id": 37,
+        "nome": "Jabaquara "
+    },
+    {
+        "id": 38,
+        "nome": "Jaçanã "
+    },
+    {
+        "id": 39,
+        "nome": "Jaguara "
+    },
+    {
+        "id": 40,
+        "nome": "Jaguaré "
+    },
+    {
+        "id": 41,
+        "nome": "Jaraguá "
+    },
+    {
+        "id": 42,
+        "nome": "Jardim Ângela "
+    },
+    {
+        "id": 43,
+        "nome": "Jardim Helena "
+    },
+    {
+        "id": 44,
+        "nome": "Jardim Paulista "
+    },
+    {
+        "id": 45,
+        "nome": "Jardim São Luís "
+    },
+    {
+        "id": 46,
+        "nome": "José Bonifácio "
+    },
+    {
+        "id": 47,
+        "nome": "Lajeado "
+    },
+    {
+        "id": 48,
+        "nome": "Lapa "
+    },
+    {
+        "id": 49,
+        "nome": "Liberdade "
+    },
+    {
+        "id": 50,
+        "nome": "Limão "
+    },
+    {
+        "id": 51,
+        "nome": "Mandaqui "
+    },
+    {
+        "id": 53,
+        "nome": "Moema "
+    },
+    {
+        "id": 54,
+        "nome": "Mooca "
+    },
+    {
+        "id": 55,
+        "nome": "Morumbi "
+    },
+    {
+        "id": 56,
+        "nome": "Parelheiros "
+    },
+    {
+        "id": 57,
+        "nome": "Pari "
+    },
+    {
+        "id": 58,
+        "nome": "Parque do Carmo"
+    },
+    {
+        "id": 59,
+        "nome": "Pedreira "
+    },
+    {
+        "id": 60,
+        "nome": "Penha "
+    },
+    {
+        "id": 61,
+        "nome": "Perdizes "
+    },
+    {
+        "id": 62,
+        "nome": "Perus "
+    },
+    {
+        "id": 63,
+        "nome": "Pinheiros "
+    },
+    {
+        "id": 64,
+        "nome": "Pirituba "
+    },
+    {
+        "id": 65,
+        "nome": "Ponte Rasa "
+    },
+    {
+        "id": 66,
+        "nome": "Raposo Tavares "
+    },
+    {
+        "id": 67,
+        "nome": "República "
+    },
+    {
+        "id": 68,
+        "nome": "Rio Pequeno "
+    },
+    {
+        "id": 69,
+        "nome": "Sacomã "
+    },
+    {
+        "id": 70,
+        "nome": "Santa Cecília "
+    },
+    {
+        "id": 71,
+        "nome": "Santana"
+    },
+    {
+        "id": 72,
+        "nome": "Santo Amaro "
+    },
+    {
+        "id": 73,
+        "nome\":\"São Domingos\"},{"id":74,"nome":"São Lucas "},{"id":75,"nome":"São Mateus "},{"id":76,"nome":"São Miguel Paulista "},{"id":77,"nome":"São Rafael "},{"id":79,"nome":"Saúde "},{"id":80,"nome":"Sé "},{"id":81,"nome":"Socorro "},{"id":82,"nome":"Tatuapé "},{"id":83,"nome":"Tremembé"},{"id":84,"nome":"Tucuruvi "},{"id":85,"nome":"Vila Andrade "},{"id":86,"nome":"Vila Curuçá "},{"id":87,"nome":"Vila Formosa "},{"id":88,"nome":"Vila Guilherme "},{"id":89,"nome":"Vila Jacuí "},{"id":90,"nome":"Vila Leopoldina "},{"id":91,"nome":"Vila Maria"},{"id":92,"nome":"Vila Mariana "},{"id":93,"nome":"Vila Matilde "},{"id":94,"nome":"Vila Medeiros"},{"id":95,"nome":"Vila Prudente "},{"id":96,"nome":"Vila Sônia "},{"id":101,"nome":"Sapopemba"}
+    ]

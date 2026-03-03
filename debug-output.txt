@@ -1,0 +1,5 @@
+[dotenv@17.2.3] injecting env (3) from .env -- tip: ⚙️  suppress all logs with { quiet: true }
+Connected.
+Found tables: [ { name: 'TB_EMPREENDIMENTOS' } ]
+Checking columns for undefined.undefined...
+Error checking undefined: Invalid object name 'undefined.undefined'.

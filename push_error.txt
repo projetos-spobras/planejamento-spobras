@@ -1,0 +1,39 @@
+remote: error: GH013: Repository rule violations found for refs/heads/feature/ui-filters.        
+remote: 
+remote: - GITHUB PUSH PROTECTION        
+remote:   ÔÇöÔÇöÔÇöÔÇöÔÇöÔÇöÔÇöÔÇöÔÇöÔÇöÔÇöÔÇöÔÇöÔÇöÔÇöÔÇöÔÇöÔÇöÔÇöÔÇöÔÇöÔÇöÔÇöÔÇöÔÇöÔÇöÔÇöÔÇöÔÇöÔÇöÔÇöÔÇöÔÇöÔÇöÔÇöÔÇöÔÇöÔÇöÔÇöÔÇöÔÇö        
+remote:     Resolve the following violations before pushing again        
+remote: 
+remote:     - Push cannot contain secrets        
+remote: 
+remote:             
+remote:      (?) Learn how to resolve a blocked push        
+remote:      https://docs.github.com/code-security/secret-scanning/working-with-secret-scanning-and-push-protection/working-with-push-protection-from-the-command-line#resolving-a-blocked-push        
+remote:             
+remote:             
+remote:       ÔÇöÔÇö Mapbox Secret Access Token ÔÇöÔÇöÔÇöÔÇöÔÇöÔÇöÔÇöÔÇöÔÇöÔÇöÔÇöÔÇöÔÇöÔÇöÔÇöÔÇöÔÇöÔÇöÔÇöÔÇöÔÇöÔÇöÔÇöÔÇö        
+remote:        locations:        
+remote:          - commit: dcc76efd6b17cca8393ac6f544402d47d417122b        
+remote:            path: src/features/map/constants/index.ts:2        
+remote:             
+remote:        (?) To push, remove secret from commit(s) or follow this URL to allow the secret.        
+remote:        https://github.com/projetos-spobras/planejamento-spobras/security/secret-scanning/unblock-secret/3AQyEPyIsGGVy4FF3k8jfiAzXkv        
+remote:             
+remote:             
+remote:       ÔÇöÔÇö Azure Active Directory Application Secret ÔÇöÔÇöÔÇöÔÇöÔÇöÔÇöÔÇöÔÇöÔÇö        
+remote:        locations:        
+remote:          - commit: dcc76efd6b17cca8393ac6f544402d47d417122b        
+remote:            path: SUPABASE_SETUP.md:19        
+remote:          - commit: dcc76efd6b17cca8393ac6f544402d47d417122b        
+remote:            path: SUPABASE_SETUP.md:32        
+remote:          - commit: dcc76efd6b17cca8393ac6f544402d47d417122b        
+remote:            path: supabase/functions/embed-powerbi/index.ts:28        
+remote:             
+remote:        (?) To push, remove secret from commit(s) or follow this URL to allow the secret.        
+remote:        https://github.com/projetos-spobras/planejamento-spobras/security/secret-scanning/unblock-secret/3AQyESdS8jFT9QNieovGQNn06IL        
+remote:             
+remote: 
+remote: 
+To https://github.com/projetos-spobras/planejamento-spobras.git
+ ! [remote rejected] feature/ui-filters -> feature/ui-filters (push declined due to repository rule violations)
+error: failed to push some refs to 'https://github.com/projetos-spobras/planejamento-spobras.git'

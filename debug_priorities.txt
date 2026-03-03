@@ -1,0 +1,8 @@
+📥 Fetching Priority Projects from Supabase...
+✅ Found 25 priority projects in Supabase.
+🔌 Connecting to SQL Server...
+📊 Found 1700 projects in SQL Server.
+
+🔍 Mismatch Analysis:
+
+✅ ALL priority projects found in SQL Server. Debug ETL merge logic.

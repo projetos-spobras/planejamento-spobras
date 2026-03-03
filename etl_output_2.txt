@@ -1,0 +1,43 @@
+[dotenv@17.2.3] injecting env (3) from .env -- tip: ÔÜÖ´©Å  enable debug logging with { debug: true }
+­ƒöî Connecting to SQL Server...
+Ô£à Connected.
+­ƒôÑ Fetching existing data from Supabase (this may take a moment)...
+Ô£à Loaded 1341 existing projects and 885 existing contracts.
+­ƒôÑ Fetching Projects from SQL Server...
+­ƒôè Found 1700 projects in SQL.
+­ƒôÑ Fetching Contracts from SQL Server...
+­ƒôä Found 2087 contracts in SQL.
+­ƒöä Merging SQL data with Legacy Supabase data...
+  Ô×ò Using Legacy Data for 25 Priority Projects.
+  Ô×ò Preserved 0 other legacy projects.
+    [PRESERVED CONTRACT] Project: 2050, Contract: 155/SIURB/2023
+    [PRESERVED CONTRACT] Project: 389, Contract: 228/SPOBRAS/2023
+    [PRESERVED CONTRACT] Project: 1371, Contract: 270/SPOBRAS/2023
+    [PRESERVED CONTRACT] Project: 1670, Contract: 274/SPOBRAS/2023
+    [PRESERVED CONTRACT] Project: 1671, Contract: 274/SPOBRAS/2023
+    [PRESERVED CONTRACT] Project: 1672, Contract: 274/SPOBRAS/2023
+    [PRESERVED CONTRACT] Project: 1673, Contract: 274/SPOBRAS/2023
+  Ô×ò Preserved 7 legacy contracts (not in SQL).
+  Filtered Contracts: Keeping 2094 (from 2094) to prevent orphan FK errors.
+  Dropped 0 orphan contracts.
+­ƒôñ Upserting to Supabase Staging...
+  Cleaning existing empreendimentos_staging...
+Ô£à No duplicate Project IDs found.
+­ƒöì DEBUG: Project 1924 is awaiting insertion: {
+  id: 'c31baa0d-eb1f-4247-99b0-c78790acd98d',
+  id_empreendimento: 1924,
+  empreendimentos: 'CEI - Indireta Santa Monica',
+  programas: 'ESCOLAS',
+  latitude: -23.48021,
+  longitude: -46.748631,
+  prioritario: false,
+  gestor: '339',
+  subprefeitura: 'Pirituba / Jaragu├í',
+  distrito: 'Pirituba '
+}
+.................
+  Projects Done.
+  Cleaning existing contracts_staging...
+.....................
+  Contracts Done.
+Ô£¿ Sync Complete!

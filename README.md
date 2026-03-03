@@ -1,61 +1,73 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Welcome to your Lovable project
 
-## Getting Started
+## Project info
 
-First, run the development server:
+**URL**: https://lovable.dev/projects/c881ba3c-78b3-4e10-9965-a7a277106724
 
-```bash
+## How can I edit this code?
+
+There are several ways of editing your application.
+
+**Use Lovable**
+
+Simply visit the [Lovable Project](https://lovable.dev/projects/c881ba3c-78b3-4e10-9965-a7a277106724) and start prompting.
+
+Changes made via Lovable will be committed automatically to this repo.
+
+**Use your preferred IDE**
+
+If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+
+The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+
+Follow these steps:
+
+```sh
+# Step 1: Clone the repository using the project's Git URL.
+git clone <YOUR_GIT_URL>
+
+# Step 2: Navigate to the project directory.
+cd <YOUR_PROJECT_NAME>
+
+# Step 3: Install the necessary dependencies.
+npm i
+
+# Step 4: Start the development server with auto-reloading and an instant preview.
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**Edit a file directly in GitHub**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Navigate to the desired file(s).
+- Click the "Edit" button (pencil icon) at the top right of the file view.
+- Make your changes and commit the changes.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**Use GitHub Codespaces**
 
-## Learn More
+- Navigate to the main page of your repository.
+- Click on the "Code" button (green button) near the top right.
+- Select the "Codespaces" tab.
+- Click on "New codespace" to launch a new Codespace environment.
+- Edit files directly within the Codespace and commit and push your changes once you're done.
 
-To learn more about Next.js, take a look at the following resources:
+## What technologies are used for this project?
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+This project is built with:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Vite
+- TypeScript
+- React
+- shadcn-ui
+- Tailwind CSS
 
-## Deploy on Vercel
+## How can I deploy this project?
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Simply open [Lovable](https://lovable.dev/projects/c881ba3c-78b3-4e10-9965-a7a277106724) and click on Share -> Publish.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Can I connect a custom domain to my Lovable project?
 
----
+Yes, you can!
 
-## ⚠️ Configurações de Segurança Obrigatórias (Supabase)
+To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
 
-As configurações abaixo foram habilitadas intencionalmente por razões de segurança e **não devem ser revertidas** sem aprovação explícita do time de arquitetura.
-
-### [I5] Proteção contra senhas vazadas (HaveIBeenPwned)
-- **Status:** ✅ Habilitada em `Authentication → Settings → Password protection`
-- **Data de ativação:** 2026-02-20
-- **Motivo:** Impede que usuários cadastrem senhas que já foram expostas em vazamentos públicos de dados, conforme checado via [haveibeenpwned.com](https://haveibeenpwned.com).
-- **Como verificar:** Supabase Dashboard → Authentication → Settings → confirmar que "Leaked Password Protection" está ativado.
-- **⛔ Não desabilitar:** Reverter esta configuração expõe contas de usuários a ataques de credential stuffing.
-
-### [I4] `search_path` fixo nas funções do banco
-- **Status:** ✅ Aplicado via migration `fix_function_search_path_i4`
-- **Funções corrigidas:** `is_admin()`, `handle_new_user()`, `get_regional_stats()`, `update_project_location()`
-- **Motivo:** Funções sem `SET search_path` fixo são suscetíveis a ataques de substituição de schema (schema injection), onde um objeto malicioso em outro schema pode ser executado no lugar do esperado.
-- **⛔ Não remover o `SET search_path`** ao atualizar qualquer uma dessas funções.
-
-### RLS (Row Level Security)
-- **Status:** ✅ Habilitado em todas as tabelas críticas via migration `enable_rls_critical_tables`
-- **Tabelas protegidas:** `contratos`, `lotes`, `empenhos`, `planejamento_fases`, `empreendimentos_contratos`, `programas`, `distritos`, `gerencias`, `empreendimento_fases`
-- **Regra:** Todas as operações exigem `auth.role() = 'authenticated'`.
-- **⛔ Não desabilitar RLS** sem criar políticas equivalentes — deixa os dados de contratos públicos expostos sem autenticação.
+Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)

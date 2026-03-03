@@ -63,20 +63,11 @@ export const useMapbox = ({
     }, [selectedSubprefeitura, onSubprefectureChange]);
 
     // Fetch Mapbox Token securely from Supabase Edge Function (JWT-protected)
+    // Subscribes to auth state changes to handle race conditions where auth 
+    // hasn't resolved yet when the component mounts (fixes Vercel blank map issue)
     useEffect(() => {
-        const fetchMapboxToken = async () => {
+        const fetchMapboxToken = async (accessToken: string) => {
             try {
-                const { supabase } = await import("@/integrations/supabase/client");
-
-                // Get current session JWT to authenticate the Edge Function call
-                const { data: sessionData } = await supabase.auth.getSession();
-                const accessToken = sessionData?.session?.access_token;
-
-                if (!accessToken) {
-                    console.warn("No authenticated session found. Cannot fetch Mapbox token.");
-                    return;
-                }
-
                 const response = await fetch(
                     "https://kuxryjfjbsmbhcjwgsgt.supabase.co/functions/v1/get-mapbox-token",
                     {
@@ -103,7 +94,28 @@ export const useMapbox = ({
             }
         };
 
-        fetchMapboxToken();
+        import("@/integrations/supabase/client").then(({ supabase }) => {
+            // Try fetching immediately if there's already a session
+            supabase.auth.getSession().then(({ data }: any) => {
+                if (data?.session?.access_token) {
+                    fetchMapboxToken(data.session.access_token);
+                }
+            });
+
+            // Also subscribe to auth changes (handles SIGNED_IN after redirect or token refresh)
+            const { data: { subscription } } = supabase.auth.onAuthStateChange(
+                (event: string, session: any) => {
+                    if (
+                        (event === "SIGNED_IN" || event === "INITIAL_SESSION" || event === "TOKEN_REFRESHED") &&
+                        session?.access_token
+                    ) {
+                        fetchMapboxToken(session.access_token);
+                    }
+                }
+            );
+
+            return () => subscription.unsubscribe();
+        });
     }, []);
 
     // Helper: Load KMZ

@@ -1,11 +1,12 @@
 
 "use server"
 
-import { supabase } from "@/lib/supabase"
+import { createClient } from "@/lib/supabase/server"
 import { revalidatePath } from "next/cache"
 import { Servico } from "@/types"
 
 export async function getServicosByEmpreendimento(empreendimentoId: string) {
+    const supabase = await createClient()
     // First get linked contracts
     // We assume there is a relationship table or logic. Based on EmpreendimentoDetails, lets check how it gets contracts.
     // It seems it passes `contratosVinculados`. 
@@ -38,6 +39,7 @@ export async function getServicosByEmpreendimento(empreendimentoId: string) {
 }
 
 export async function getServicosByEmpreendimentoId(empreendimentoId: string) {
+    const supabase = await createClient()
     // We need to find the Contracts linked to this Empreendimento.
     // Assuming table `empreendimento_contratos`.
     const { data: links } = await supabase
@@ -68,6 +70,7 @@ export async function getServicosByEmpreendimentoId(empreendimentoId: string) {
 }
 
 export async function createServico(data: Partial<Servico>) {
+    const supabase = await createClient()
     const { data: inserted, error } = await supabase
         .from("servicos")
         .insert(data)
@@ -107,6 +110,7 @@ export async function createServico(data: Partial<Servico>) {
 }
 
 export async function createServiceBatch(empreendimentoIds: string[], data: Partial<Servico>) {
+    const supabase = await createClient()
     const payloads = empreendimentoIds.map(empId => ({
         ...data,
         empreendimento_id: empId,
@@ -152,6 +156,7 @@ export async function createServiceBatch(empreendimentoIds: string[], data: Part
 }
 
 export async function updateServico(id: string, data: Partial<Servico>) {
+    const supabase = await createClient()
     const { error } = await supabase
         .from("servicos")
         .update(data)
@@ -166,6 +171,7 @@ export async function updateServico(id: string, data: Partial<Servico>) {
 }
 
 export async function deleteServico(id: string) {
+    const supabase = await createClient()
     const { error } = await supabase
         .from("servicos")
         .delete()

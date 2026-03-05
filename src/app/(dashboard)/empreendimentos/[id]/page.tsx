@@ -4,6 +4,7 @@ import { notFound } from "next/navigation"
 import { EmpreendimentoDetails } from "@/components/relationships/empreendimento-details"
 import { BackButton } from "@/components/ui/back-button"
 import { calculateFinancialIndicators } from "@/lib/financial-utils"
+import { getEmpreendimentos, getContratos, getContratoEmpreendimentos } from "@/lib/api-client"
 
 export const revalidate = 0
 
@@ -15,47 +16,54 @@ export default async function EmpreendimentoDetailsPage({ params }: PageProps) {
     const supabase = await createClient()
     const { id } = await params
 
-    const { data: empreendimento } = await supabase
-        .from("empreendimentos")
-        .select("*")
-        .eq("id", id)
-        .single()
+    const allEmpreendimentos = await getEmpreendimentos(supabase)
+    const empreendimento = allEmpreendimentos.find((e: any) => e.id === id)
 
     if (!empreendimento) {
         notFound()
     }
 
-    // Fetch linked contracts
-    const { data: linkedContracts } = await supabase
+    // Fetch all available contracts for the dialog
+    const allContratos = await getContratos(supabase)
+
+    // Fetch linked contracts from Supabase to preserve user-assigned lotes
+    const { data: rawLinks } = await supabase
         .from("empreendimentos_contratos")
-        .select(`
-            id,
-            contrato_id,
-            lote_id,
-            contrato:contratos (
-                id,
-                numero,
-                tipo,
-                contratada,
-                valor_total
-            ),
-            lote:lotes (
-                id,
-                nome
-            )
-        `)
+        .select("id, contrato_id, lote_id")
         .eq("empreendimento_id", id)
 
-    // Fetch all available contracts for the dialog
-    const { data: allContratos } = await supabase
-        .from("contratos")
-        .select("id, numero, tipo")
-        .order("numero")
-
-    // Fetch all lotes for the dialog (ideally should be filtered by selected contract in client)
+    // Fetch all lotes for the dialog
     const { data: allLotes } = await supabase
         .from("lotes")
         .select("id, nome, contrato_id")
+
+    // Hydrate linkedContracts with API contract data and Supabase lote data
+    let linkedContracts = (rawLinks || []).map((link: any) => {
+        const c = allContratos.find((c: any) => c.id === link.contrato_id);
+        const l = allLotes?.find((lote: any) => lote.id === link.lote_id);
+        return {
+            id: link.id,
+            contrato_id: link.contrato_id,
+            lote_id: link.lote_id,
+            contrato: c ? {
+                id: c.id,
+                numero: c.numero,
+                tipo: c.tipo,
+                contratada: c.contratada,
+                valor_total: c.valor_total
+            } : {
+                id: link.contrato_id,
+                numero: 'Desconhecido',
+                tipo: '-',
+                contratada: '-',
+                valor_total: 0
+            },
+            lote: l ? {
+                id: l.id,
+                nome: l.nome
+            } : null
+        }
+    });
 
     // Fetch direct empenhos
     const { data: empenhos } = await supabase
@@ -77,19 +85,38 @@ export default async function EmpreendimentoDetailsPage({ params }: PageProps) {
     const { data: gerencias } = await supabase.from("gerencias").select("*")
     const { data: fasesLookup } = await supabase.from("empreendimento_fases").select("*")
 
-    // Fetch servicos linked to these contracts
+    // Fetch servicos: by empreendimento_id (direct) + by contrato_id (contract-linked), deduped
     const contratoIds = linkedContracts?.map(c => c.contrato_id) || []
 
-    let servicos: any[] = []
-    if (contratoIds.length > 0) {
-        const { data: servicosData } = await supabase
+    const [{ data: servicosByEmp }, { data: servicosByContrato }] = await Promise.all([
+        supabase
             .from("servicos")
-            .select("*, contrato:contratos(numero, contratada)")
-            .in("contrato_id", contratoIds)
-            .order("created_at", { ascending: false })
+            .select("*")
+            .eq("empreendimento_id", id)
+            .order("created_at", { ascending: false }),
+        contratoIds.length > 0
+            ? supabase
+                .from("servicos")
+                .select("*")
+                .in("contrato_id", contratoIds)
+                .order("created_at", { ascending: false })
+            : Promise.resolve({ data: [] as any[] }),
+    ])
 
-        servicos = servicosData || []
-    }
+    // Merge and deduplicate by id
+    const allServicos = [...(servicosByEmp || []), ...(servicosByContrato || [])]
+    const seen = new Set<string>()
+    const servicosSemContratosLocalizados = allServicos.filter(s => {
+        if (seen.has(s.id)) return false
+        seen.add(s.id)
+        return true
+    })
+
+    // Hydrate contratos for all servicos
+    const servicos = servicosSemContratosLocalizados.map(s => ({
+        ...s,
+        contrato: s.contrato_id ? allContratos.find((c: any) => c.id === s.contrato_id) : null
+    }))
 
 
 

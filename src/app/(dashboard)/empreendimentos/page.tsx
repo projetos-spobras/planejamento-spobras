@@ -1,6 +1,7 @@
 
 import { createClient } from "@/lib/supabase/server"
 import { EmpreendimentosClient } from "./_components/client-page"
+import { getEmpreendimentos } from "@/lib/api-client"
 
 export const revalidate = 0
 
@@ -16,23 +17,27 @@ export default async function EmpreendimentosPage({ searchParams }: Empreendimen
     const search = params?.search as string | undefined
     const status = params?.status as string || 'all'
 
-    let query = supabase
-        .from("empreendimentos")
-        .select("*", { count: 'exact' })
-        .order("created_at", { ascending: false })
+    // Remove dup declarations
+
+    // Fetch from API
+    let empreendimentos = await getEmpreendimentos(supabase);
 
     if (status !== 'all') {
-        query = query.eq('status', status)
+        empreendimentos = empreendimentos.filter((e: any) => e.status === status);
     }
-
     if (search) {
-        query = query.or(`nome.ilike.%${search}%,codigo.ilike.%${search}%`)
+        const lowerSearch = search.toLowerCase();
+        empreendimentos = empreendimentos.filter((e: any) =>
+            (e.nome && e.nome.toLowerCase().includes(lowerSearch)) ||
+            (e.codigo && e.codigo.toLowerCase().includes(lowerSearch))
+        );
     }
 
-    const from = (page - 1) * pageSize
-    const to = from + pageSize - 1
+    const count = empreendimentos.length;
+    const from = (page - 1) * pageSize;
+    const to = from + pageSize;
 
-    const { data: empreendimentos, count } = await query.range(from, to)
+    const paginated = empreendimentos.slice(from, to);
 
     const { data: programas } = await supabase.from("programas").select("*")
     const { data: distritos } = await supabase.from("distritos").select("*")
@@ -44,7 +49,7 @@ export default async function EmpreendimentosPage({ searchParams }: Empreendimen
 
     return (
         <EmpreendimentosClient
-            data={empreendimentos || []}
+            data={paginated || []}
             totalItems={count || 0}
             programas={programas || []}
             distritos={distritos || []}

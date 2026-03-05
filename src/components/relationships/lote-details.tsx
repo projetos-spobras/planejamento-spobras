@@ -19,6 +19,8 @@ import {
 
 import { AssignLoteDialog } from "@/components/relationships/assign-lote-dialog"
 import { RelatedEmpenhosList, RelatedEmpenho } from "@/components/relationships/related-empenhos-list"
+import { ServicosTabContent } from "@/components/relationships/servicos-tab-content"
+import { Servico } from "@/types"
 
 interface LoteDetailsProps {
     lote: { id: string, nome: string, tipo: 'GERAL' | 'OAE' | 'ESCOLA' | null, descricao: string | null, contrato_id: string | null }
@@ -27,6 +29,8 @@ interface LoteDetailsProps {
     empenhos: RelatedEmpenho[]
     avancosPorEmp?: { id: string, percentualExecutado: number, valorMedidoTotal: number }[]
     avancoConsolidado?: number
+    servicos?: (Servico & { contrato?: { numero: string, contratada?: string | null } })[]
+    contratos?: { id: string, numero: string, contratada: string | null, valor_total?: number | null }[]
 }
 
 export function LoteDetails({
@@ -36,6 +40,8 @@ export function LoteDetails({
     empenhos,
     avancosPorEmp = [],
     avancoConsolidado = 0,
+    servicos = [],
+    contratos = [],
 }: LoteDetailsProps) {
     const [isAssignDialogOpen, setIsAssignDialogOpen] = useState(false)
 
@@ -99,8 +105,8 @@ export function LoteDetails({
                         <div className="relative h-2 w-full overflow-hidden rounded-full bg-muted">
                             <div
                                 className={`h-full transition-all duration-500 ${avancoConsolidado >= 80 ? 'bg-emerald-500' :
-                                        avancoConsolidado >= 50 ? 'bg-blue-500' :
-                                            avancoConsolidado >= 20 ? 'bg-amber-500' : 'bg-rose-400'
+                                    avancoConsolidado >= 50 ? 'bg-blue-500' :
+                                        avancoConsolidado >= 20 ? 'bg-amber-500' : 'bg-rose-400'
                                     }`}
                                 style={{ width: `${Math.min(avancoConsolidado, 100)}%` }}
                             />
@@ -115,6 +121,7 @@ export function LoteDetails({
             <Tabs defaultValue="empreendimentos" className="space-y-4">
                 <TabsList>
                     <TabsTrigger value="empreendimentos">Empreendimentos</TabsTrigger>
+                    <TabsTrigger value="servicos">Serviços</TabsTrigger>
                     <TabsTrigger value="empenhos">Empenhos</TabsTrigger>
                 </TabsList>
 
@@ -185,6 +192,21 @@ export function LoteDetails({
                             </Table>
                         </CardContent>
                     </Card>
+                </TabsContent>
+
+                {/* [F2] Aba de Serviços do Lote */}
+                <TabsContent value="servicos">
+                    {assignedEmps.length === 0 ? (
+                        <div className="rounded-md border p-6 text-center text-muted-foreground">
+                            Nenhum empreendimento atribuído a este lote. Atribua empreendimentos primeiro para gerenciar serviços.
+                        </div>
+                    ) : (
+                        <ServicosTabContent
+                            servicos={servicos}
+                            contratos={contratos}
+                            empreendimentoId={assignedEmps[0].id}
+                        />
+                    )}
                 </TabsContent>
 
                 <TabsContent value="empenhos">

@@ -109,6 +109,7 @@ export type Servico = {
     valor_total: number | null
     tipo: string | null
     status: string | null
+    subtipo_receita: string[] | null
     created_at: string
     updated_at: string
 }

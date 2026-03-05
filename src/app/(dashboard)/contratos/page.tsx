@@ -1,6 +1,7 @@
 
 import { createClient } from "@/lib/supabase/server"
 import { ContratosClient } from "./_components/client-page"
+import { getContratos } from "@/lib/api-client"
 
 export const revalidate = 0
 
@@ -16,27 +17,24 @@ export default async function ContratosPage({ searchParams }: ContratosPageProps
     const search = params?.search as string | undefined
     const status = params?.status as string || 'all'
 
-    let query = supabase
-        .from('contratos')
-        .select('*', { count: 'exact' })
-        .order('created_at', { ascending: false })
+    let contratos = await getContratos(supabase);
 
     if (status !== 'all') {
-        query = query.eq('status', status)
+        contratos = contratos.filter((c: any) => c.status === status);
     }
 
     if (search) {
-        query = query.or(`numero.ilike.%${search}%,contratada.ilike.%${search}%`)
+        const lowerSearch = search.toLowerCase();
+        contratos = contratos.filter((c: any) =>
+            (c.numero && c.numero.toLowerCase().includes(lowerSearch)) ||
+            (c.contratada && c.contratada.toLowerCase().includes(lowerSearch))
+        );
     }
 
-    const from = (page - 1) * pageSize
-    const to = from + pageSize - 1
+    const count = contratos.length;
+    const from = (page - 1) * pageSize;
+    const to = from + pageSize;
+    const paginated = contratos.slice(from, to);
 
-    const { data: contratos, count } = await query.range(from, to)
-
-    if (!contratos) {
-        return <div>Erro ao carregar dados</div>
-    }
-
-    return <ContratosClient data={contratos} totalItems={count || 0} />
+    return <ContratosClient data={paginated} totalItems={count || 0} />
 }

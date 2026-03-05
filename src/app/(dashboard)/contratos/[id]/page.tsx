@@ -3,6 +3,7 @@ import { createClient } from "@/lib/supabase/server"
 import { notFound } from "next/navigation"
 import { ContratoDetails } from "@/components/relationships/contrato-details"
 import { BackButton } from "@/components/ui/back-button"
+import { getContratos, getEmpreendimentos } from "@/lib/api-client"
 
 export const revalidate = 0
 
@@ -10,23 +11,14 @@ interface PageProps {
     params: Promise<{ id: string }>
 }
 
-async function getHierarchy(supabase: Awaited<ReturnType<typeof createClient>>, rootContractId: string) {
+async function getHierarchy(supabase: Awaited<ReturnType<typeof createClient>>, rootContractId: string, allContracts: any[]) {
     // 1. Fetch the specific contract
-    const { data: contract } = await supabase
-        .from("contratos")
-        .select("*")
-        .eq("id", rootContractId)
-        .single()
+    const contract = allContracts.find(c => c.id === rootContractId);
 
     if (!contract) return []
 
-    // 2. Fetch all contracts to build tree (naive approach for prototype, better to use recursive CTE in SQL)
-    // For now, let's just fetch the parent chain and direct children to show context.
-    // Or just fetch all and build tree in JS? If < 1000 items it's fine.
-
-    const { data: allContracts } = await supabase
-        .from("contratos")
-        .select("id, numero, tipo, objeto, contrato_pai_id")
+    // 2. Fetch all contracts to build tree
+    // we already have allContracts passed from the page component
 
     if (!allContracts) return []
 
@@ -74,36 +66,19 @@ export default async function ContratoDetailsPage({ params }: PageProps) {
     const supabase = await createClient()
     const { id } = await params
 
-    const { data: contrato } = await supabase
-        .from("contratos")
-        .select("*")
-        .eq("id", id)
-        .single()
+    const allContratos = await getContratos(supabase)
+    const contrato = allContratos.find((c: any) => c.id === id)
 
     if (!contrato) {
         notFound()
     }
 
-    const hierarchy = await getHierarchy(supabase, id)
+    const hierarchy = await getHierarchy(supabase, id, allContratos)
 
-    // Fetch linked empreendimentos
-    const { data: linkedEmps } = await supabase
+    // Fetch linked empreendimentos from Supabase to preserve custom lotes
+    const { data: rawLinks } = await supabase
         .from("empreendimentos_contratos")
-        .select(`
-            id,
-            empreendimento_id,
-            lote_id,
-            empreendimento:empreendimentos (
-                id,
-                codigo,
-                nome,
-                localizacao
-            ),
-            lote:lotes (
-                id,
-                nome
-            )
-        `)
+        .select("id, empreendimento_id, lote_id")
         .eq("contrato_id", id)
 
     // Fetch lotes of this contract
@@ -113,9 +88,28 @@ export default async function ContratoDetailsPage({ params }: PageProps) {
         .eq("contrato_id", id)
 
     // Fetch all empreendimentos for availability in dialog
-    const { data: allEmpreendimentos } = await supabase
-        .from("empreendimentos")
-        .select("id, nome")
+    const allEmpreendimentos = await getEmpreendimentos(supabase);
+
+    // Hydrate linkedEmps
+    const linkedEmps = (rawLinks || []).map((link: any) => {
+        const emp = allEmpreendimentos.find((e: any) => e.id === link.empreendimento_id);
+        const l = lotes?.find((lote: any) => lote.id === link.lote_id);
+        return {
+            id: link.id,
+            empreendimento_id: link.empreendimento_id,
+            lote_id: link.lote_id,
+            empreendimento: emp ? {
+                id: emp.id,
+                codigo: emp.codigo,
+                nome: emp.nome,
+                localizacao: emp.localizacao
+            } : null,
+            lote: l ? {
+                id: l.id,
+                nome: l.nome
+            } : null
+        }
+    });
 
     // Fetch direct empenhos
     const { data: empenhos } = await supabase

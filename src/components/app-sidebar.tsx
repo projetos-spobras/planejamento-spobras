@@ -36,12 +36,6 @@ export function AppSidebar({ className, isCollapsed = false, toggleCollapse, use
 
     const routes = [
         {
-            label: "Dashboard",
-            icon: LayoutDashboard,
-            href: "/dashboard",
-            active: pathname === "/dashboard",
-        },
-        {
             label: "Empreendimentos",
             icon: Building2,
             href: "/empreendimentos",

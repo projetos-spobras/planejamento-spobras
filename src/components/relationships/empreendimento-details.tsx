@@ -227,6 +227,31 @@ export function EmpreendimentoDetails({
                                         {(lookups?.gerencias?.find(g => g.id === Number(empreendimento.gerencia))?.nome) || empreendimento.gerencia || "-"}
                                     </dd>
                                 </div>
+                                {/* [F3] Lotes aos quais este empreendimento pertence */}
+                                {(() => {
+                                    const lotes = contratosVinculados
+                                        .filter(cv => cv.lote)
+                                        .map(cv => cv.lote!)
+                                        .filter((l, i, arr) => arr.findIndex(x => x.id === l.id) === i)
+                                    if (lotes.length === 0) return null
+                                    return (
+                                        <div>
+                                            <dt className="text-sm font-medium text-muted-foreground">Lote</dt>
+                                            <dd className="flex flex-wrap gap-2 mt-1">
+                                                {lotes.map(lote => (
+                                                    <Link
+                                                        key={lote.id}
+                                                        href={`/lotes/${lote.id}`}
+                                                        className="inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline"
+                                                    >
+                                                        Lote {lote.nome}
+                                                        <ExternalLink className="h-3 w-3" />
+                                                    </Link>
+                                                ))}
+                                            </dd>
+                                        </div>
+                                    )
+                                })()}
                                 <div className="sm:col-span-2">
                                     <dt className="text-sm font-medium text-muted-foreground">Descrição</dt>
                                     <dd>{empreendimento.descricao || "-"}</dd>

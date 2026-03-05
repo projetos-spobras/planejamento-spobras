@@ -39,7 +39,7 @@ import { ServicoDialog } from "./servico-dialog"
 
 interface ServicosTabContentProps {
     servicos: (Servico & { contrato?: { numero: string, contratada?: string | null } })[]
-    contratos: { id: string, numero: string, contratada: string | null }[]
+    contratos: { id: string, numero: string, contratada: string | null, valor_total?: number | null }[]
     empreendimentoId: string
 }
 
@@ -92,19 +92,18 @@ export function ServicosTabContent({ servicos, contratos, empreendimentoId }: Se
                         <TableHeader>
                             <TableRow>
                                 <TableHead>Contrato</TableHead>
-                                <TableHead>Item</TableHead>
+                                <TableHead>Tipo</TableHead>
+                                <TableHead>Subtipo</TableHead>
                                 <TableHead>Descrição</TableHead>
-                                <TableHead>Und</TableHead>
-                                <TableHead>Qtd</TableHead>
-                                <TableHead>Unitário</TableHead>
-                                <TableHead className="text-right">Total</TableHead>
+                                <TableHead className="text-right">Valor Estimado</TableHead>
+                                <TableHead>Status</TableHead>
                                 <TableHead className="w-[100px]">Ações</TableHead>
                             </TableRow>
                         </TableHeader>
                         <TableBody>
                             {servicos.length === 0 ? (
                                 <TableRow>
-                                    <TableCell colSpan={8} className="text-center h-24 text-muted-foreground">
+                                    <TableCell colSpan={7} className="text-center h-24 text-muted-foreground">
                                         Nenhum serviço cadastrado.
                                     </TableCell>
                                 </TableRow>
@@ -114,17 +113,20 @@ export function ServicosTabContent({ servicos, contratos, empreendimentoId }: Se
                                         <TableCell className="font-medium text-xs">
                                             {item.contrato?.numero || "Sem contrato"}
                                         </TableCell>
-                                        <TableCell>{item.codigo}</TableCell>
+                                        <TableCell className="text-xs whitespace-nowrap">{item.tipo}</TableCell>
+                                        <TableCell className="max-w-[150px] truncate text-xs" title={item.subtipo_receita?.join(', ')}>
+                                            {item.subtipo_receita?.join(', ') || '-'}
+                                        </TableCell>
                                         <TableCell className="max-w-[200px] truncate" title={item.descricao}>
                                             {item.descricao}
                                         </TableCell>
-                                        <TableCell>{item.unidade}</TableCell>
-                                        <TableCell>{item.quantidade}</TableCell>
-                                        <TableCell>
-                                            {item.preco_unitario ? new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(item.preco_unitario) : '-'}
-                                        </TableCell>
                                         <TableCell className="text-right font-semibold">
                                             {item.valor_total ? new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(item.valor_total) : '-'}
+                                        </TableCell>
+                                        <TableCell className="text-xs whitespace-nowrap">
+                                            <span className="px-2 py-1 rounded-full bg-secondary text-secondary-foreground text-[10px] uppercase font-bold">
+                                                {item.status || '-'}
+                                            </span>
                                         </TableCell>
                                         <TableCell>
                                             <div className="flex items-center gap-2">

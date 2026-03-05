@@ -1,7 +1,7 @@
 
 "use server"
 
-import { supabase } from "@/lib/supabase"
+import { createClient } from "@/lib/supabase/server"
 import { revalidatePath } from "next/cache"
 
 export async function linkContratoToEmpreendimento(
@@ -9,6 +9,7 @@ export async function linkContratoToEmpreendimento(
     contratoId: string,
     loteId?: string | null
 ) {
+    const supabase = await createClient()
     const { error } = await supabase
         .from("empreendimentos_contratos")
         .insert({
@@ -36,20 +37,7 @@ export async function unlinkContratoFromEmpreendimento(
     empreendimentoId: string,
     contratoId: string
 ) {
-    // Check for dependencies (Empenhos linked to this relationship?)
-    // The requirement says: "Ao desvincular contrato de empreendimento, verificar se há empenhos vinculados"
-    // Currently Empenhos link to Empreendimento OR Contrato independent of the link between them.
-    // However, if we delete the link, the empenhos directly to Empreendimento or Contrato stay.
-    // But if we have empenhos linked to this SPECIFIC relationship? The schema for Empenhos only has 'vinculo_id'.
-    // Allowed types: 'empreendimento' | 'contrato' | 'lote'.
-    // So there is no direct link to 'empreendimentos_contratos'.
-    // Thus, unlinking is safe regarding Empenhos constraints unless we implement stricter logic.
-    // However, the prompt says "verificar se há empenhos vinculados (avisar usuário)".
-    // Maybe it means: check if there are empenhos for this Empreendimento AND this Contrato?
-    // Let's implement a basic check: if the user explicitly linked an Empenho to THIS Empreendimento or THIS Contrato, warn them?
-    // Actually, usually "Empenho" is linked to a contract. If we remove the contract from the project, the empenho (linked to contract) technically still exists on the contract.
-    // So I will proceed with simple delete for now, as the schema doesn't link empenho to the *pair*.
-
+    const supabase = await createClient()
     const { error } = await supabase
         .from("empreendimentos_contratos")
         .delete()
@@ -72,6 +60,7 @@ export async function assignEmpreendimentoToLote(
     contratoId: string,
     loteId: string
 ) {
+    const supabase = await createClient()
     // [P4] Guard: verificar cardinalidade de lotes OAE (máx. 5 empreendimentos)
     const { data: lote } = await supabase
         .from('lotes')
@@ -109,18 +98,12 @@ export async function assignEmpreendimentoToLote(
 }
 
 export async function getEmpreendimentosByContrato(contratoId: string) {
-    // Return empreendimentos linked to this contract
-    // We need to join empreendimentos_contratos with empreendimentos
+    const supabase = await createClient()
     const { data, error } = await supabase
         .from("empreendimentos_contratos")
         .select(`
             empreendimento_id,
-            lote_id,
-            empreendimentos (
-                id,
-                nome,
-                codigo
-            )
+            lote_id
         `)
         .eq("contrato_id", contratoId)
 
@@ -129,16 +112,24 @@ export async function getEmpreendimentosByContrato(contratoId: string) {
         return []
     }
 
+    const { getEmpreendimentos } = await import("@/lib/api-client")
+    const apiEmps = await getEmpreendimentos(supabase);
+
     // Transform to flatten
-    return data.map((item: any) => ({
-        id: item.empreendimentos.id,
-        nome: item.empreendimentos.nome,
-        codigo: item.empreendimentos.codigo,
-        lote_id: item.lote_id
-    }))
+    return data.map((item: any) => {
+        const emp = apiEmps.find((e: any) => e.id === item.empreendimento_id);
+        if (!emp) return null;
+        return {
+            id: emp.id,
+            nome: emp.nome,
+            codigo: emp.codigo,
+            lote_id: item.lote_id
+        }
+    }).filter(Boolean)
 }
 
 export async function updateLoteEmpreendimentos(loteId: string, empreendimentoIds: string[], contratoId: string) {
+    const supabase = await createClient()
     // [P4] Guard: verificar cardinalidade de lotes OAE antes de fazer qualquer atualização
     const { data: lote } = await supabase
         .from('lotes')

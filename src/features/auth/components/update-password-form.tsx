@@ -41,8 +41,9 @@ export function UpdatePasswordForm() {
             if (result?.error) {
                 toast.error('Erro', { description: result.error })
             } else {
-                toast.success('Sucesso', { description: 'Senha atualizada com sucesso!' })
-                router.push('/dashboard')
+                toast.success('Senha atualizada com sucesso!')
+                router.push('/empreendimentos')
+                router.refresh()
             }
         })
     }

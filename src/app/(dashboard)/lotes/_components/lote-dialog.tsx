@@ -204,14 +204,14 @@ export function LoteDialog({
                             render={({ field }) => (
                                 <FormItem>
                                     <FormLabel>Contrato</FormLabel>
-                                    <Select onValueChange={field.onChange} defaultValue={field.value || ""}>
+                                    <Select onValueChange={(v) => field.onChange(v === "none" ? "" : v)} defaultValue={field.value || "none"}>
                                         <FormControl>
                                             <SelectTrigger>
                                                 <SelectValue placeholder="Selecione o contrato (opcional)" />
                                             </SelectTrigger>
                                         </FormControl>
                                         <SelectContent>
-                                            <SelectItem value="">Sem contrato</SelectItem>
+                                            <SelectItem value="none">Sem contrato</SelectItem>
                                             {contratos.map(c => (
                                                 <SelectItem key={c.id} value={c.id}>{c.numero} - {c.contratada}</SelectItem>
                                             ))}

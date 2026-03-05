@@ -24,9 +24,11 @@ export default async function UsuariosPage() {
             <div className="flex justify-between items-center mb-6">
                 <div>
                     <h1 className="text-3xl font-bold">Gestão de Usuários</h1>
-                    <Link href="/dashboard" className="text-sm text-muted-foreground hover:underline">
-                        &larr; Voltar ao Dashboard
-                    </Link>
+                    <div className="flex items-center space-x-2">
+                        <Link href="/empreendimentos" className="text-sm text-muted-foreground hover:underline">
+                            Voltar
+                        </Link>
+                    </div>
                 </div>
                 <CreateUserDialog />
             </div>

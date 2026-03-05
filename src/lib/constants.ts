@@ -29,4 +29,23 @@ export const STATUS_CONTRATO = [
     "Transferido"
 ] as const
 
+export const STATUS_SERVICO = [
+    "A Licitar",
+    "Aguard. Definições Externas",
+    "Andamento",
+    "Automático Op. Urb.",
+    "Conceito",
+    "Concluído",
+    "DEA - Pendências",
+    "Em Estudo",
+    "Em Licitação",
+    "Incorporado na Obra",
+    "Não Prosseguirá",
+    "Não Escopo",
+    "Não Iniciaram Estudos",
+    "Proposta",
+    "Suspenso",
+    "Transferido"
+] as const
+
 export const MAP_TIPOS_SERVICO = TIPOS_SERVICO.reduce((acc, val) => ({ ...acc, [val]: val }), {} as Record<typeof TIPOS_SERVICO[number], typeof TIPOS_SERVICO[number]>)

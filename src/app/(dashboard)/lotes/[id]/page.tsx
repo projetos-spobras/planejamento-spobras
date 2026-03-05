@@ -10,18 +10,25 @@ interface PageProps {
     params: Promise<{ id: string }>
 }
 
+import { getContratos } from "@/lib/api-client"
+
 export default async function LoteDetailsPage({ params }: PageProps) {
     const supabase = await createClient()
     const { id } = await params
 
     const { data: lote } = await supabase
         .from("lotes")
-        .select("*, contrato:contratos(id, numero, contratada)")
+        .select("*")
         .eq("id", id)
         .single()
 
     if (!lote) {
         notFound()
+    }
+
+    if (lote.contrato_id) {
+        const allContratos = await getContratos(supabase);
+        lote.contrato = allContratos.find((c: any) => c.id === lote.contrato_id) || null;
     }
 
     let links: any[] | null = []
@@ -77,6 +84,29 @@ export default async function LoteDetailsPage({ params }: PageProps) {
         ? avancosPorEmp.reduce((s, a) => s + a.percentualExecutado * a.valorMedidoTotal, 0) / totalMedido
         : 0
 
+    let servicos: any[] = []
+    const assignedEmpIds = assignedEmps.map(e => e.id)
+    if (assignedEmpIds.length > 0) {
+        const { data: servicosData } = await supabase
+            .from('servicos')
+            .select('*')
+            .in('empreendimento_id', assignedEmpIds)
+            .order('created_at', { ascending: false })
+
+        if (servicosData) {
+            const allContratos = await getContratos(supabase)
+            servicos = servicosData.map(s => ({
+                ...s,
+                contrato: s.contrato_id ? allContratos.find((c: any) => c.id === s.contrato_id) : null
+            }))
+        }
+    }
+
+    // [F2] Contratos disponíveis para o dialog (o contrato do lote)
+    const lotContratoForDialog = lote.contrato
+        ? [{ id: (lote.contrato as any).id, numero: (lote.contrato as any).numero, contratada: (lote.contrato as any).contratada, valor_total: (lote.contrato as any).valor_total ?? null }]
+        : []
+
     return (
 
         <div className="space-y-6">
@@ -91,6 +121,8 @@ export default async function LoteDetailsPage({ params }: PageProps) {
                 empenhos={empenhos || []}
                 avancosPorEmp={avancosPorEmp}
                 avancoConsolidado={avancoConsolidado}
+                servicos={servicos}
+                contratos={lotContratoForDialog}
             />
         </div>
     )

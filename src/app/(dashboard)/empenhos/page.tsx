@@ -1,6 +1,7 @@
 
 import { createClient } from "@/lib/supabase/server"
 import { EmpenhosClient } from "./_components/client-page"
+import { getEmpreendimentos, getContratos } from "@/lib/api-client"
 import { Empenho } from "@/types"
 
 export const revalidate = 0
@@ -13,14 +14,11 @@ export default async function EmpenhosPage() {
         .select("*")
         .order("created_at", { ascending: false })
 
-    // Fetch linkable items
-    const { data: empreendimentos } = await supabase
-        .from("empreendimentos")
-        .select("id, nome")
-
-    const { data: contratos } = await supabase
-        .from("contratos")
-        .select("id, numero")
+    // Fetch linkable items using API
+    const [empreendimentos, contratos] = await Promise.all([
+        getEmpreendimentos(supabase),
+        getContratos(supabase)
+    ])
 
     const { data: lotes } = await supabase
         .from("lotes")

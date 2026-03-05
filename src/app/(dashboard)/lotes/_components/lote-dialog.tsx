@@ -74,7 +74,7 @@ export function LoteDialog({
     const [selectedContratoId, setSelectedContratoId] = useState<string | undefined>(
         loteToEdit?.contrato_id || undefined
     )
-    const [availableEmpreendimentos, setAvailableEmpreendimentos] = useState<{ id: string, nome: string, codigo: string, lote_id?: string }[]>([])
+    const [availableEmpreendimentos, setAvailableEmpreendimentos] = useState<any[]>([])
     const [selectedEmpreendimentos, setSelectedEmpreendimentos] = useState<string[]>([])
     const [isLoadingEmpreendimentos, setIsLoadingEmpreendimentos] = useState(false)
 

@@ -2,14 +2,14 @@ import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import fs from 'fs';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!; 
-const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || supabaseKey;
-
-const supabase = createClient(supabaseUrl, serviceKey);
-
 export async function GET(req: Request) {
     try {
+        const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
+        const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
+        const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || supabaseKey;
+        
+        const supabase = createClient(supabaseUrl, serviceKey);
+
         const { searchParams } = new URL(req.url);
         const enterpriseId = searchParams.get('id') || '61';
         
@@ -29,8 +29,8 @@ export async function GET(req: Request) {
         
         const rawRows = data || [];
         
-        // Literal absolute path
-        const debugPath = 'c:\\Users\\x437719\\Downloads\\planejamento_spobras\\api_debug_61.json';
+        // Use a relative path for debug file
+        const debugPath = './api_debug_61.json';
         fs.writeFileSync(debugPath, JSON.stringify(rawRows, null, 2));
 
         return NextResponse.json({ 

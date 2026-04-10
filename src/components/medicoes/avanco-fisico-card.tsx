@@ -1,9 +1,7 @@
 
 "use client"
 
-import { TrendingUp } from "lucide-react"
-import { format } from "date-fns"
-import { ptBR } from "date-fns/locale"
+import { HardHat } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
 interface AvancoFisicoCardProps {
@@ -11,16 +9,19 @@ interface AvancoFisicoCardProps {
     valorMedidoTotal: number
     valorContrato: number
     ultimaMedicao: string | null
+    /** Optional label override for the "medido" text (defaults to "planejado Execução de Obras") */
+    valorLabel?: string
 }
 
 const brl = (v: number) =>
-    new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(v)
+    new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL", notation: "compact" }).format(v)
 
 export function AvancoFisicoCard({
     percentualExecutado,
     valorMedidoTotal,
     valorContrato,
     ultimaMedicao,
+    valorLabel = "planejado p/ Execução de Obras",
 }: AvancoFisicoCardProps) {
     const pct = Math.min(Math.max(Number(percentualExecutado) || 0, 0), 100)
 
@@ -34,7 +35,7 @@ export function AvancoFisicoCard({
         <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">Avanço Físico</CardTitle>
-                <TrendingUp className="h-4 w-4 text-muted-foreground" />
+                <HardHat className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent className="space-y-3">
                 {/* Percentual principal */}
@@ -52,15 +53,18 @@ export function AvancoFisicoCard({
 
                 {/* Valor medido vs contrato */}
                 <p className="text-xs text-muted-foreground">
-                    {brl(valorMedidoTotal)} medido de{" "}
-                    <span className="font-medium text-foreground">{brl(valorContrato)}</span>
+                    {brl(valorMedidoTotal)}{" "}
+                    <span className="font-medium text-foreground">{valorLabel}</span>
+                    {valorContrato > 0 && (
+                        <> de {brl(valorContrato)} no total</>
+                    )}
                 </p>
 
-                {/* Última medição aprovada */}
-                <p className="text-xs text-muted-foreground">
+                {/* Estado provisório */}
+                <p className="text-xs text-muted-foreground italic">
                     {ultimaMedicao
-                        ? `Última medição aprovada: ${format(new Date(ultimaMedicao + "T12:00:00"), "dd/MM/yyyy", { locale: ptBR })}`
-                        : "Sem medições aprovadas"}
+                        ? `Módulo de medições em breve`
+                        : "Baseado em valores planejados"}
                 </p>
             </CardContent>
         </Card>

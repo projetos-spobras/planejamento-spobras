@@ -4,6 +4,8 @@
 import { useState } from "react"
 import { AppSidebar, MobileSidebar } from "@/components/app-sidebar"
 import { cn } from "@/lib/utils"
+import Image from "next/image"
+
 
 interface DashboardShellProps {
     children: React.ReactNode
@@ -36,10 +38,33 @@ export function DashboardShell({ children, userRole }: DashboardShellProps) {
                     isCollapsed ? "md:pl-16" : "md:pl-64"
                 )}
             >
-                <header className="h-14 border-b flex items-center px-4 md:hidden shrink-0">
+                <header className="h-14 border-b flex items-center px-4 md:hidden shrink-0 gap-3">
                     <MobileSidebar />
-                    <span className="font-bold ml-2">SPObras</span>
+                    <div className="flex items-center gap-2">
+                        <div className="relative w-28 h-8">
+                            <Image
+                                src="/logo-prefeitura.png"
+                                alt="Prefeitura"
+                                fill
+                                unoptimized
+                                className="object-contain"
+                            />
+                        </div>
+                        <div className="h-6 w-[1px] bg-border" />
+                        <div className="relative w-16 h-6">
+                            <Image
+                                src="/logo-spobras.png"
+                                alt="SPObras"
+                                fill
+                                unoptimized
+                                className="object-contain"
+                            />
+                        </div>
+                    </div>
                 </header>
+
+
+
                 <main className="flex-1 p-6 overflow-x-hidden overflow-y-auto">
                     {children}
                 </main>

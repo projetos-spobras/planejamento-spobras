@@ -3,7 +3,7 @@ import { createClient } from "@/lib/supabase/server"
 import { ContratosClient } from "./_components/client-page"
 import { getContratos } from "@/lib/api-client"
 
-export const revalidate = 0
+export const dynamic = "force-dynamic"
 
 interface ContratosPageProps {
     searchParams: Promise<{ [key: string]: string | string[] | undefined }>

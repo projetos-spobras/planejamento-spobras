@@ -1,6 +1,5 @@
-
 "use client"
-
+ 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import {
@@ -8,17 +7,20 @@ import {
     ChevronRight,
     LayoutDashboard,
     Building2,
-    FileText,
+    FilePen,
     Layers,
-    PieChart,
+    CalendarDays,
     Settings,
     Menu,
-    Coins,
-    Users
+    Banknote,
+    Hammer,
+    Users,
+    Leaf,
+    Home
 } from "lucide-react"
 import Image from "next/image"
-
 import { cn } from "@/lib/utils"
+
 import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
@@ -43,13 +45,13 @@ export function AppSidebar({ className, isCollapsed = false, toggleCollapse, use
         },
         {
             label: "Contratos",
-            icon: FileText,
+            icon: FilePen,
             href: "/contratos",
             active: pathname.startsWith("/contratos"),
         },
         {
             label: "Serviços",
-            icon: FileText,
+            icon: Hammer,
             href: "/servicos",
             active: pathname.startsWith("/servicos"),
         },
@@ -61,13 +63,25 @@ export function AppSidebar({ className, isCollapsed = false, toggleCollapse, use
         },
         {
             label: "Planejamento",
-            icon: PieChart,
+            icon: CalendarDays,
             href: "/planejamento",
             active: pathname.startsWith("/planejamento"),
         },
         {
+            label: "Meio Ambiente",
+            icon: Leaf,
+            href: "/meio-ambiente",
+            active: pathname.startsWith("/meio-ambiente"),
+        },
+        {
+            label: "Desapropriações",
+            icon: Home,
+            href: "/desapropriacoes",
+            active: pathname.startsWith("/desapropriacoes"),
+        },
+        {
             label: "Empenhos",
-            icon: Coins,
+            icon: Banknote,
             href: "/empenhos",
             active: pathname.startsWith("/empenhos"),
         },
@@ -116,35 +130,41 @@ export function AppSidebar({ className, isCollapsed = false, toggleCollapse, use
             <div className={cn("flex flex-col h-full bg-background", className)}>
                 <div className={cn("flex items-center h-14 border-b shrink-0", isCollapsed ? "justify-center" : "px-6")}>
                     {isCollapsed ? (
-                        <div className="relative w-8 h-8">
+                        <div className="relative w-10 h-10">
                             <Image
-                                src="/logo-spobras.png"
-                                alt="SPObras"
+                                src="/logo-prefeitura.png"
+                                alt="Prefeitura"
                                 fill
+                                unoptimized
                                 className="object-contain"
                             />
                         </div>
+
                     ) : (
-                        <div className="flex items-center justify-between w-full gap-2">
-                            <div className="relative w-28 h-10">
+                        <div className="flex items-center justify-between w-full">
+                            <div className="relative w-40 h-12">
                                 <Image
                                     src="/logo-prefeitura.png"
                                     alt="Prefeitura de São Paulo"
                                     fill
+                                    unoptimized
                                     className="object-contain"
                                 />
                             </div>
-                            <div className="h-8 w-[1px] bg-border mx-2" />
-                            <div className="relative w-20 h-10">
+                            <div className="h-6 w-[1px] bg-border mx-1" />
+                            <div className="relative w-20 h-8">
                                 <Image
                                     src="/logo-spobras.png"
                                     alt="SPObras"
                                     fill
+                                    unoptimized
                                     className="object-contain"
                                 />
                             </div>
                         </div>
+
                     )}
+
                 </div>
 
                 <div className="flex-1 py-4 overflow-y-auto overflow-x-hidden">

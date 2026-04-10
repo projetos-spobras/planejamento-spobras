@@ -1,10 +1,12 @@
 import { createBrowserClient } from '@supabase/ssr'
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+let cachedClient: ReturnType<typeof createBrowserClient> | null = null
 
 export function createClient() {
-    return createBrowserClient(supabaseUrl, supabaseKey)
+    if (!cachedClient) {
+        const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || ''
+        const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
+        cachedClient = createBrowserClient(supabaseUrl, supabaseKey)
+    }
+    return cachedClient
 }
-
-export const supabase = createClient()

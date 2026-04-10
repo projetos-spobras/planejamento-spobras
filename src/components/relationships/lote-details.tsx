@@ -30,7 +30,7 @@ interface LoteDetailsProps {
     avancosPorEmp?: { id: string, percentualExecutado: number, valorMedidoTotal: number }[]
     avancoConsolidado?: number
     servicos?: (Servico & { contrato?: { numero: string, contratada?: string | null } })[]
-    contratos?: { id: string, numero: string, contratada: string | null, valor_total?: number | null }[]
+    contratos?: { id: string, numero: string, contratada: string | null, tipo?: string | null, valor_total?: number | null }[]
 }
 
 export function LoteDetails({

@@ -1,28 +1,33 @@
 "use server"
 
-import { supabase } from "@/lib/supabase"
+import { createClient } from "@/lib/supabase/server"
 import { getEmpreendimentos, getContratos } from "@/lib/api-client"
 
-export async function getGlobalServices() {
-    const { data: services, error } = await supabase
-        .from('servicos')
-        .select('*')
-        .order('created_at', { ascending: false })
-        .limit(100) // Limit for performance for now
+export async function getGlobalServices(page: number = 1, pageSize: number = 12) {
+    const supabase = await createClient()
 
-    if (error) {
-        console.error("Error fetching global services:", JSON.stringify(error, null, 2))
-        return []
-    }
+    const from = (page - 1) * pageSize;
+    const to = from + pageSize - 1;
 
-    const [empreendimentos, contratos] = await Promise.all([
+    // Parallelize services fetch + lookup data
+    const [{ data: services, count, error }, { data: empreendimentosRaw }, contratos] = await Promise.all([
+        supabase.from('servicos').select('*', { count: 'exact' }).order('created_at', { ascending: false }).range(from, to),
         getEmpreendimentos(supabase),
         getContratos(supabase)
     ])
 
-    return services.map(s => {
-        const emp = empreendimentos.find((e: any) => e.id === s.empreendimento_id);
-        const cont = contratos.find((c: any) => c.id === s.contrato_id);
+    if (error) {
+        console.error("Error fetching global services:", JSON.stringify(error, null, 2))
+        return { data: [], count: 0 }
+    }
+
+    // Pre-build Maps for O(1) lookups instead of O(n) .find() per service
+    const empMap = new Map((empreendimentosRaw || []).map((e: any) => [e.id, e]))
+    const contMap = new Map(contratos.map((c: any) => [c.id, c]))
+
+    const mapped = (services || []).map(s => {
+        const emp = empMap.get(s.empreendimento_id) as any;
+        const cont = contMap.get(s.contrato_id) as any;
 
         return {
             ...s,
@@ -30,8 +35,12 @@ export async function getGlobalServices() {
             contrato: cont ? { id: cont.id, numero: cont.numero } : null
         }
     })
+
+    return { data: mapped, count: count || 0 }
 }
 
 export async function getAllEmpreendimentos() {
-    return await getEmpreendimentos(supabase)
+    const supabase = await createClient()
+    const { data } = await getEmpreendimentos(supabase)
+    return data || []
 }

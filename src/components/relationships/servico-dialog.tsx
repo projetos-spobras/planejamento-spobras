@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect, useCallback, useRef } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
@@ -55,6 +55,16 @@ const SUBTIPOS_CONFIG = {
             "Ações Desap.",
         ],
         regra: "multiplo" as const
+    },
+    "Ambiental": {
+        opcoes: [
+            "LAP",
+            "LAI",
+            "LAO",
+            "Taxa Ambiental",
+            "TCA",
+        ],
+        regra: "multiplo" as const
     }
 }
 
@@ -65,13 +75,18 @@ type TipoComSubtipo = keyof SubtipoConfig
 
 const formSchema = z.object({
     contrato_id: z.string().optional(),
-    codigo: z.string().optional(),
     descricao: z.string().optional(),
+    data_inicio: z.string().optional(),
+    data_fim: z.string().optional(),
+    duracao_dias: z.coerce.number().min(0, "A duração deve ser pelo menos 0 dia").optional(),
     tipo: z.enum([...TIPOS_SERVICO] as [string, ...string[]], {
         message: "Selecione um tipo válido"
     }),
     status: z.enum([...STATUS_SERVICO] as [string, ...string[]]).optional(),
     valor_total: z.coerce.number().min(0).optional(),
+    valor_contratual: z.coerce.number().min(0).optional().nullable(),
+    acompanha_fisico: z.boolean().default(false),
+    acompanha_financeiro: z.boolean().default(false),
 })
 
 type FormData = z.infer<typeof formSchema>
@@ -80,7 +95,7 @@ interface ServicoDialogProps {
     open: boolean
     onOpenChange: (open: boolean) => void
     servicoToEdit?: Servico | null
-    contratos: { id: string, numero: string, contratada: string | null, valor_total?: number | null }[]
+    contratos: { id: string, numero: string, contratada: string | null, tipo?: string | null, valor_total?: number | null, data_inicio?: string | null, data_fim?: string | null }[]
     empreendimentoId: string
     onSuccess: () => void
 }
@@ -119,72 +134,162 @@ export function ServicoDialog({
         resolver: zodResolver(formSchema) as any,
         defaultValues: {
             contrato_id: "",
-            codigo: "",
             descricao: "",
+            data_inicio: "",
+            data_fim: "",
+            duracao_dias: undefined,
             tipo: "Execução de Obras",
             status: "Andamento",
             valor_total: 0,
+            valor_contratual: null,
+            acompanha_fisico: false,
+            acompanha_financeiro: false,
         },
     })
 
+    // ─── Efeito de Hidratação e Sincronização ───
     useEffect(() => {
+        if (!open) {
+            // Limpeza ao fechar o diálogo se não for edição persistente
+            if (!servicoToEdit) {
+                setSubtiposSelecionados([])
+            }
+            return
+        }
+
         if (servicoToEdit) {
+            // Caso de EDIÇÃO
             form.reset({
                 contrato_id: servicoToEdit.contrato_id || "",
-                codigo: servicoToEdit.codigo || "",
                 descricao: servicoToEdit.descricao || "",
+                data_inicio: servicoToEdit.data_inicio ? new Date(servicoToEdit.data_inicio).toISOString().split('T')[0] : "",
+                data_fim: servicoToEdit.data_fim ? new Date(servicoToEdit.data_fim).toISOString().split('T')[0] : "",
+                duracao_dias: servicoToEdit.duracao_dias ?? undefined,
                 tipo: (servicoToEdit.tipo as any) || "Execução de Obras",
                 status: (servicoToEdit.status as any) || "Andamento",
                 valor_total: servicoToEdit.valor_total || 0,
+                valor_contratual: servicoToEdit.valor_contratual ?? null,
+                acompanha_fisico: servicoToEdit.acompanha_fisico ?? false,
+                acompanha_financeiro: servicoToEdit.acompanha_financeiro ?? false,
             })
             setDisplayValue(servicoToEdit.valor_total ? formatBRL(servicoToEdit.valor_total) : "")
-            setSubtiposSelecionados(servicoToEdit.subtipo_receita || [])
+            
+            // SEMPRE carregar os subtipos do objeto sendo editado
+            if (servicoToEdit.tipo === "Ambiental") {
+                setSubtiposSelecionados(servicoToEdit.subtipo_ambiental || [])
+            } else if (servicoToEdit.tipo === "Receita") {
+                setSubtiposSelecionados(servicoToEdit.subtipo_receita || [])
+            } else if (servicoToEdit.tipo === "Desapropriações" || servicoToEdit.tipo === "Desapropriação" || servicoToEdit.tipo === "Desapropriações (Ações e Materiais)" || servicoToEdit.tipo === "AÇÃO EXPROPRIATÓRIA") {
+                // Tenta carregar de subtipo_desapropriacao, com fallback para subtipo_receita
+                const deDesapropriacao = (servicoToEdit as any).subtipo_desapropriacao || []
+                const deReceita = (servicoToEdit as any).subtipo_receita || []
+                setSubtiposSelecionados(deDesapropriacao.length > 0 ? deDesapropriacao : deReceita)
+                
+                // Força o tipo para o padrão para que o formulário exiba as opções corretas
+                if (servicoToEdit.tipo !== "Desapropriações") {
+                    form.setValue("tipo", "Desapropriações")
+                }
+            } else {
+                setSubtiposSelecionados([])
+            }
         } else {
+            // Caso de NOVO SERVIÇO
             const defaultContratoId = contratos.length === 1 ? contratos[0].id : ""
             const defaultValor = contratos.length === 1 ? (contratos[0].valor_total ?? 0) : 0
             form.reset({
                 contrato_id: defaultContratoId,
-                codigo: "",
                 descricao: "",
+                data_inicio: "",
+                data_fim: "",
+                duracao_dias: undefined,
                 tipo: "Execução de Obras",
                 status: "Andamento",
                 valor_total: defaultValor,
+                valor_contratual: null,
+                acompanha_fisico: false,
+                acompanha_financeiro: false,
             })
             setDisplayValue(defaultValor ? formatBRL(defaultValor) : "")
             setSubtiposSelecionados([])
         }
-    }, [servicoToEdit, contratos, form, open, formatBRL])
+    }, [open, servicoToEdit, contratos, form, formatBRL])
 
-    // Auto-fill valor estimado ao selecionar contrato (apenas no cadastro)
+    // Monitorar mudança MANUAL de tipo para limpar subtipos
+    const watchedTipo = form.watch("tipo")
+    const prevTipoRef = useRef<string | null>(null)
+
+    useEffect(() => {
+        // Se o tipo mudou E não é a carga inicial (quando o tipo é igual ao do servicoToEdit)
+        if (prevTipoRef.current && prevTipoRef.current !== watchedTipo) {
+            // Se o usuário trocou manualmente o tipo, limpamos as seleções
+            const isInitialLoad = servicoToEdit && watchedTipo === servicoToEdit.tipo
+            if (!isInitialLoad) {
+                setSubtiposSelecionados([])
+            }
+        }
+        prevTipoRef.current = watchedTipo
+    }, [watchedTipo, servicoToEdit])
+
+    // Auto-fill and sync contract values
     const watchedContratoId = form.watch("contrato_id")
     useEffect(() => {
-        if (servicoToEdit) return
-        if (!watchedContratoId || watchedContratoId === "none") return
+        if (!watchedContratoId || watchedContratoId === "none") {
+            form.setValue("valor_contratual", null)
+            return
+        }
+
         const contrato = contratos.find(c => c.id === watchedContratoId)
-        if (contrato?.valor_total) {
-            form.setValue("valor_total", contrato.valor_total)
-            setDisplayValue(formatBRL(contrato.valor_total))
+        if (contrato) {
+            const valorTotalContrato = contrato.valor_total || 0;
+            const valorOriginalContrato = (contrato as any).valor_original || valorTotalContrato;
+
+            // REGRA: O Valor Contratual do serviço SEMPRE recebe o valor TOTAL do contrato (original + aditamentos)
+            form.setValue("valor_contratual", valorTotalContrato)
+
+            // REGRA: O Valor Estimado (valor_total) depende se é novo ou edição
+            const isAmbiental = form.getValues("tipo") === "Ambiental"
+            if (!servicoToEdit) {
+                // Cadastro Novo:
+                if (isAmbiental) {
+                    // Exceção Ambiental: Não preenchemos o valor total automaticamente, pois é uma "fatia"
+                    form.setValue("valor_total", 0)
+                    setDisplayValue("")
+                } else {
+                    // Outros: Valor Estimado = Valor Contratual (Original do contrato)
+                    form.setValue("valor_total", valorOriginalContrato)
+                    setDisplayValue(formatBRL(valorOriginalContrato))
+                }
+            } else {
+                // Edição: Valor Estimado permanece o preenchido anteriormente (não mexemos aqui caso já exista)
+                // Se por algum motivo estiver zerado, podemos sugerir o original, mas a regra diz para manter.
+            }
+
+            // Auto-preenchimento de metadados apenas para NOVOS registros
+            if (!servicoToEdit) {
+                
+                if (contrato.data_inicio) {
+                    form.setValue("data_inicio", new Date(contrato.data_inicio).toISOString().split('T')[0], { shouldValidate: true })
+                }
+                
+                if (contrato.data_fim) {
+                    form.setValue("data_fim", new Date(contrato.data_fim).toISOString().split('T')[0], { shouldValidate: true })
+                    
+                    if (contrato.data_inicio) {
+                        const start = new Date(contrato.data_inicio).getTime()
+                        const end = new Date(contrato.data_fim).getTime()
+                        if (end >= start) {
+                            form.setValue("duracao_dias", Math.round((end - start) / 86400000))
+                        }
+                    }
+                }
+                
+                if (contrato.tipo && (TIPOS_SERVICO.includes(contrato.tipo as any))) {
+                    form.setValue("tipo", contrato.tipo, { shouldValidate: true })
+                }
+            }
         }
     }, [watchedContratoId, contratos, form, servicoToEdit, formatBRL])
 
-    // Limpar subtipos quando tipo muda
-    const watchedTipo = form.watch("tipo")
-    useEffect(() => {
-        // Se mudou para um tipo que não tem subtipo definido, ou se mudou entre tipos com subtipos diferentes
-        const config = SUBTIPOS_CONFIG[watchedTipo as TipoComSubtipo]
-        if (!config) {
-            setSubtiposSelecionados([])
-        } else {
-            // Se já tínhamos itens selecionados, verificar se pertencem à nova config
-            // Para simplificar, se muda o tipo principal, limpamos os subtipos para garantir consistência
-            // Só não limpamos se for a carga inicial ou se for o mesmo tipo (o que useEffect previne)
-            setSubtiposSelecionados(prev => {
-                // Se o item editado tem o mesmo tipo, mantemos (será setado pelo reset no primeiro useEffect)
-                // Caso contrário (mudança manual do usuário), limpamos.
-                return []
-            })
-        }
-    }, [watchedTipo, servicoToEdit]) // Depender de servicoToEdit para não limpar na carga inicial
 
     // ─── Lógica de seleção de subtipos ───
 
@@ -218,7 +323,16 @@ export function ServicoDialog({
                 if (ativa && cat && ativa !== cat) return prev // bloqueado
             }
 
-            return [...prev, subtipo]
+            const newSelection = [...prev, subtipo]
+
+            // REGRA: Se for Ambiental e houver qualquer subtipo selecionado, 
+            // marcar automaticamente acompanha_fisico e acompanha_financeiro
+            if (tipoAtual === "Ambiental" && newSelection.length > 0) {
+                form.setValue("acompanha_fisico", true)
+                form.setValue("acompanha_financeiro", true)
+            }
+
+            return newSelection
         })
     }
 
@@ -239,7 +353,14 @@ export function ServicoDialog({
                 ...values,
                 empreendimento_id: empreendimentoId,
                 contrato_id: values.contrato_id || null,
+                // Sanitize empty strings to null so Postgres doesn't choke on invalid timestamps
+                data_inicio: values.data_inicio || null,
+                data_fim: values.data_fim || null,
+                duracao_dias: values.duracao_dias ?? null,
                 subtipo_receita: (values.tipo === "Receita" || values.tipo === "Desapropriações") && subtiposSelecionados.length > 0
+                    ? subtiposSelecionados
+                    : null,
+                subtipo_ambiental: (values.tipo === "Ambiental") && subtiposSelecionados.length > 0
                     ? subtiposSelecionados
                     : null,
             }
@@ -333,12 +454,85 @@ export function ServicoDialog({
 
                             <FormField
                                 control={form.control}
-                                name="codigo"
+                                name="data_inicio"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>Código / Item</FormLabel>
+                                        <FormLabel>Data de Início Prevista (Opcional)</FormLabel>
                                         <FormControl>
-                                            <Input placeholder="Ex: 1.1" {...field} />
+                                            <Input 
+                                                type="date" 
+                                                {...field} 
+                                                onChange={(e) => {
+                                                    field.onChange(e)
+                                                    const start = new Date(e.target.value).getTime()
+                                                    const fim = form.getValues("data_fim")
+                                                    const duracao = form.getValues("duracao_dias")
+                                                    
+                                                    if (fim) {
+                                                        const end = new Date(fim).getTime()
+                                                        if (end >= start) form.setValue("duracao_dias", Math.round((end - start) / 86400000))
+                                                    } else if (duracao) {
+                                                        const endDate = new Date(start)
+                                                        endDate.setDate(endDate.getDate() + duracao)
+                                                        form.setValue("data_fim", endDate.toISOString().split('T')[0])
+                                                    }
+                                                }}
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+
+                            <FormField
+                                control={form.control}
+                                name="data_fim"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Data Fim Prevista (Opcional)</FormLabel>
+                                        <FormControl>
+                                            <Input 
+                                                type="date" 
+                                                {...field} 
+                                                onChange={(e) => {
+                                                    field.onChange(e)
+                                                    const end = new Date(e.target.value).getTime()
+                                                    const inicio = form.getValues("data_inicio")
+                                                    if (inicio) {
+                                                        const start = new Date(inicio).getTime()
+                                                        if (end >= start) form.setValue("duracao_dias", Math.round((end - start) / 86400000))
+                                                    }
+                                                }}
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+
+                            <FormField
+                                control={form.control}
+                                name="duracao_dias"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Duração (Dias) (Opcional)</FormLabel>
+                                        <FormControl>
+                                            <Input 
+                                                type="number" 
+                                                min="0" 
+                                                {...field} 
+                                                value={field.value ?? ""}
+                                                onChange={(e) => {
+                                                    field.onChange(e)
+                                                    const duracao = Number(e.target.value)
+                                                    const inicio = form.getValues("data_inicio")
+                                                    if (inicio && duracao >= 0) {
+                                                        const endDate = new Date(inicio)
+                                                        endDate.setDate(endDate.getDate() + duracao)
+                                                        form.setValue("data_fim", endDate.toISOString().split('T')[0])
+                                                    }
+                                                }}
+                                            />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -417,6 +611,34 @@ export function ServicoDialog({
                             </div>
                         )}
 
+                        {/* ─── Subtipos de Ambiental ─── */}
+                        {tipoAtual === "Ambiental" && (
+                            <div className="rounded-md border p-4 space-y-4 bg-emerald-50/30 dark:bg-emerald-950/10 border-emerald-100 dark:border-emerald-900/50">
+                                <div className="flex items-center justify-between">
+                                    <p className="text-sm font-medium text-emerald-800 dark:text-emerald-300">Licenciamento e Taxas Ambientais</p>
+                                    <span className="text-[10px] bg-emerald-100 dark:bg-emerald-900 text-emerald-700 dark:text-emerald-400 px-2 py-0.5 rounded-full font-semibold uppercase">Gestão Ambiental</span>
+                                </div>
+                                <div className="grid grid-cols-2 gap-2">
+                                    {(SUBTIPOS_CONFIG.Ambiental.opcoes as readonly string[]).map(s => (
+                                        <label
+                                            key={s}
+                                            className="flex items-center gap-2 text-sm cursor-pointer hover:bg-emerald-50 dark:hover:bg-emerald-900/20 p-1.5 rounded transition-colors"
+                                        >
+                                            <Checkbox
+                                                checked={subtiposSelecionados.includes(s)}
+                                                onCheckedChange={() => toggleSubtipo(s)}
+                                                className="data-[state=checked]:bg-emerald-600 data-[state=checked]:border-emerald-600"
+                                            />
+                                            {s}
+                                        </label>
+                                    ))}
+                                </div>
+                                <p className="text-[11px] text-emerald-600/80 dark:text-emerald-400/80 italic">
+                                    * Selecionar um subtipo habilita automaticamente o acompanhamento físico e financeiro.
+                                </p>
+                            </div>
+                        )}
+
                         <FormField
                             control={form.control}
                             name="descricao"
@@ -459,6 +681,26 @@ export function ServicoDialog({
 
                             <FormField
                                 control={form.control}
+                                name="valor_contratual"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Valor Contratual (R$)</FormLabel>
+                                        <FormControl>
+                                            <Input
+                                                type="text"
+                                                readOnly
+                                                placeholder="Preenchido ao vincular contrato"
+                                                className="bg-muted/50 cursor-default"
+                                                value={field.value != null ? formatBRL(field.value) : ""}
+                                            />
+                                        </FormControl>
+                                        <p className="text-[11px] text-muted-foreground">Preenchido automaticamente pelo contrato</p>
+                                    </FormItem>
+                                )}
+                            />
+
+                            <FormField
+                                control={form.control}
                                 name="status"
                                 render={({ field }) => (
                                     <FormItem>
@@ -479,6 +721,50 @@ export function ServicoDialog({
                                     </FormItem>
                                 )}
                             />
+                        </div>
+
+                        {/* Checkboxes de Planejamento */}
+                        <div className="rounded-lg border p-4 space-y-3">
+                            <p className="text-sm font-semibold">Planejamento</p>
+                            <p className="text-xs text-muted-foreground">
+                                Defina em quais distribuições este serviço deve aparecer.
+                            </p>
+                            <div className="flex gap-6">
+                                <FormField
+                                    control={form.control}
+                                    name="acompanha_fisico"
+                                    render={({ field }) => (
+                                        <FormItem className="flex flex-row items-center gap-2 space-y-0">
+                                            <FormControl>
+                                                <Checkbox
+                                                    checked={field.value}
+                                                    onCheckedChange={field.onChange}
+                                                />
+                                            </FormControl>
+                                            <FormLabel className="font-normal cursor-pointer">
+                                                Acompanha Físico
+                                            </FormLabel>
+                                        </FormItem>
+                                    )}
+                                />
+                                <FormField
+                                    control={form.control}
+                                    name="acompanha_financeiro"
+                                    render={({ field }) => (
+                                        <FormItem className="flex flex-row items-center gap-2 space-y-0">
+                                            <FormControl>
+                                                <Checkbox
+                                                    checked={field.value}
+                                                    onCheckedChange={field.onChange}
+                                                />
+                                            </FormControl>
+                                            <FormLabel className="font-normal cursor-pointer">
+                                                Acompanha Financeiro
+                                            </FormLabel>
+                                        </FormItem>
+                                    )}
+                                />
+                            </div>
                         </div>
 
                         <DialogFooter>

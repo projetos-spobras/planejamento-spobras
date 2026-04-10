@@ -9,6 +9,7 @@ import { toast } from "sonner"
 import { useRouter } from "next/navigation"
 
 import { Button } from "@/components/ui/button"
+import { Checkbox } from "@/components/ui/checkbox"
 import {
     Dialog,
     DialogContent,
@@ -39,12 +40,16 @@ import { MultiCombobox } from "@/components/ui/multi-combobox"
 
 const formSchema = z.object({
     empreendimentoIds: z.array(z.string()).min(1, "Selecione pelo menos um empreendimento"),
-    codigo: z.string().optional(),
     descricao: z.string().optional(),
+    data_inicio: z.string().optional(),
+    data_fim: z.string().optional(),
+    duracao_dias: z.coerce.number().min(0, "A duração deve ser pelo menos 0 dia").optional(),
     tipo: z.enum([...TIPOS_SERVICO] as [string, ...string[]], {
         message: "Selecione um tipo válido"
     }),
     valor_total: z.coerce.number().min(0).optional(),
+    acompanha_fisico: z.boolean().default(false),
+    acompanha_financeiro: z.boolean().default(false),
 })
 
 type FormData = z.infer<typeof formSchema>
@@ -69,10 +74,14 @@ export function BulkServiceDialog({
         resolver: zodResolver(formSchema) as any,
         defaultValues: {
             empreendimentoIds: [],
-            codigo: "",
             descricao: "",
+            data_inicio: "",
+            data_fim: "",
+            duracao_dias: undefined,
             tipo: "Execução de Obras",
             valor_total: 0,
+            acompanha_fisico: false,
+            acompanha_financeiro: false,
         },
     })
 
@@ -149,12 +158,88 @@ export function BulkServiceDialog({
                             />
                             <FormField
                                 control={form.control}
-                                name="codigo"
+                                name="data_inicio"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>Código / Item</FormLabel>
+                                        <FormLabel>Data de Início Prevista (Opcional)</FormLabel>
                                         <FormControl>
-                                            <Input placeholder="Ex: 1.1" {...field} />
+                                            <Input
+                                                type="date"
+                                                {...field}
+                                                onChange={(e) => {
+                                                    field.onChange(e)
+                                                    const start = new Date(e.target.value).getTime()
+                                                    const fim = form.getValues("data_fim")
+                                                    const duracao = form.getValues("duracao_dias")
+
+                                                    if (fim) {
+                                                        const end = new Date(fim).getTime()
+                                                        if (end >= start) form.setValue("duracao_dias", Math.round((end - start) / 86400000))
+                                                    } else if (duracao) {
+                                                        const endDate = new Date(start)
+                                                        endDate.setDate(endDate.getDate() + duracao)
+                                                        form.setValue("data_fim", endDate.toISOString().split('T')[0])
+                                                    }
+                                                }}
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                        </div>
+
+                        <div className="grid grid-cols-2 gap-4">
+                            <FormField
+                                control={form.control}
+                                name="data_fim"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Data Fim Prevista (Opcional)</FormLabel>
+                                        <FormControl>
+                                            <Input
+                                                type="date"
+                                                {...field}
+                                                onChange={(e) => {
+                                                    field.onChange(e)
+                                                    const end = new Date(e.target.value).getTime()
+                                                    const inicio = form.getValues("data_inicio")
+                                                    if (inicio) {
+                                                        const start = new Date(inicio).getTime()
+                                                        if (end >= start) form.setValue("duracao_dias", Math.round((end - start) / 86400000))
+                                                    }
+                                                }}
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+
+                            <FormField
+                                control={form.control}
+                                name="duracao_dias"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Duração (Dias) (Opcional)</FormLabel>
+                                        <FormControl>
+                                            <Input
+                                                type="number"
+                                                min="0"
+                                                {...field}
+                                                value={field.value ?? ""}
+                                                onChange={(e) => {
+                                                    const val = e.target.value
+                                                    field.onChange(val === "" ? undefined : Number(val))
+                                                    const duracao = Number(val)
+                                                    const inicio = form.getValues("data_inicio")
+                                                    if (inicio && duracao >= 0) {
+                                                        const endDate = new Date(inicio)
+                                                        endDate.setDate(endDate.getDate() + duracao)
+                                                        form.setValue("data_fim", endDate.toISOString().split('T')[0])
+                                                    }
+                                                }}
+                                            />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -190,6 +275,50 @@ export function BulkServiceDialog({
                                     </FormItem>
                                 )}
                             />
+                        </div>
+
+                        {/* Checkboxes de Planejamento */}
+                        <div className="rounded-lg border p-4 space-y-3">
+                            <p className="text-sm font-semibold">Planejamento</p>
+                            <p className="text-xs text-muted-foreground">
+                                Defina em quais distribuições este serviço deve aparecer.
+                            </p>
+                            <div className="flex gap-6">
+                                <FormField
+                                    control={form.control}
+                                    name="acompanha_fisico"
+                                    render={({ field }) => (
+                                        <FormItem className="flex flex-row items-center gap-2 space-y-0">
+                                            <FormControl>
+                                                <Checkbox
+                                                    checked={field.value}
+                                                    onCheckedChange={field.onChange}
+                                                />
+                                            </FormControl>
+                                            <FormLabel className="font-normal cursor-pointer">
+                                                Acompanha Físico
+                                            </FormLabel>
+                                        </FormItem>
+                                    )}
+                                />
+                                <FormField
+                                    control={form.control}
+                                    name="acompanha_financeiro"
+                                    render={({ field }) => (
+                                        <FormItem className="flex flex-row items-center gap-2 space-y-0">
+                                            <FormControl>
+                                                <Checkbox
+                                                    checked={field.value}
+                                                    onCheckedChange={field.onChange}
+                                                />
+                                            </FormControl>
+                                            <FormLabel className="font-normal cursor-pointer">
+                                                Acompanha Financeiro
+                                            </FormLabel>
+                                        </FormItem>
+                                    )}
+                                />
+                            </div>
                         </div>
 
                         <DialogFooter>

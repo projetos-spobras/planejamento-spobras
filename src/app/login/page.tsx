@@ -30,11 +30,12 @@ export default function LoginPage() {
             <Card className="w-full max-w-sm">
                 <CardHeader className="text-center">
                     <div className="flex items-center justify-center gap-4 mb-4">
-                        <div className="relative w-32 h-12">
+                        <div className="relative w-36 h-14">
                             <Image
                                 src="/logo-prefeitura.png"
                                 alt="Prefeitura de São Paulo"
                                 fill
+                                unoptimized
                                 className="object-contain"
                             />
                         </div>
@@ -44,11 +45,13 @@ export default function LoginPage() {
                                 src="/logo-spobras.png"
                                 alt="SPObras"
                                 fill
+                                unoptimized
                                 className="object-contain"
                             />
                         </div>
                     </div>
-                    <CardTitle className="text-2xl font-bold">Sistema de Planejamento</CardTitle>
+
+                    <CardTitle className="text-2xl font-bold">SID - Sistema Integrado de Dados</CardTitle>
                     <CardDescription>
                         Entre com seu e-mail e senha para acessar o sistema.
                     </CardDescription>

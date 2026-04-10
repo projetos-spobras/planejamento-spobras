@@ -1,0 +1,34 @@
+
+> planejamento_spobras@0.1.0 build
+> next build
+
+ÔÜá Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of C:\Users\x437719\Downloads\bun.lockb as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * C:\Users\x437719\Downloads\planejamento_spobras\package-lock.json
+
+Ôû▓ Next.js 16.1.1 (Turbopack)
+- Environments: .env.local
+
+ÔÜá The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+  Creating an optimized production build ...
+Ô£ô Compiled successfully in 4.2s
+  Running TypeScript ...
+Failed to compile.
+
+./src/app/(dashboard)/lotes/_components/lote-dialog.tsx:100:41
+Type error: Argument of type '({ id: any; nome: any; codigo: any; lote_id: any; } | null)[]' is not assignable to parameter of type 'SetStateAction<{ id: string; nome: string; codigo: string; lote_id?: string | undefined; }[]>'.
+  Type '({ id: any; nome: any; codigo: any; lote_id: any; } | null)[]' is not assignable to type '{ id: string; nome: string; codigo: string; lote_id?: string | undefined; }[]'.
+    Type '{ id: any; nome: any; codigo: any; lote_id: any; } | null' is not assignable to type '{ id: string; nome: string; codigo: string; lote_id?: string | undefined; }'.
+      Type 'null' is not assignable to type '{ id: string; nome: string; codigo: string; lote_id?: string | undefined; }'.
+
+   98 |             setIsLoadingEmpreendimentos(true)
+   99 |             const emps = await getEmpreendimentosByContrato(selectedContratoId)
+> 100 |             setAvailableEmpreendimentos(emps)
+      |                                         ^
+  101 |
+  102 |             // If editing, and we loaded results, check which ones belong to this lote
+  103 |             if (loteToEdit && loteToEdit.contrato_id === selectedContratoId) {
+Next.js build worker exited with code: 1 and signal: null

@@ -4,7 +4,7 @@ import { notFound } from "next/navigation"
 import { LoteDetails } from "@/components/relationships/lote-details"
 import { BackButton } from "@/components/ui/back-button"
 
-export const revalidate = 0
+export const dynamic = "force-dynamic"
 
 interface PageProps {
     params: Promise<{ id: string }>

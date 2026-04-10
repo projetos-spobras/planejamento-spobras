@@ -28,6 +28,12 @@ export type Contrato = {
     contratada: string | null
     status: string | null
     valor_total: number
+    valor_aditamento?: number
+    valor_reajuste?: number
+    indice_reajuste?: string | null
+    percentual_reajuste?: string | null
+    indice_nome?: string | null
+    valor_original?: number
     data_inicio: string | null
     data_fim: string | null
     contrato_pai_id: string | null
@@ -86,12 +92,14 @@ export type PlanejamentoFase = {
     tipo_fase: 'receita' | 'despesa' | 'execução' | null
     data_inicio: string | null
     data_fim: string | null
-    valor_planejado: number
+    peso_percentual: number | null
+    valor_planejado: number | null
     ordem: number | null
     descricao: string | null
     responsavel: string | null
     fase_predecessora_id: string | null
     dias_folga: number | null
+    servico_id?: string | null
     created_at: string
     updated_at: string
     created_by: string | null
@@ -110,6 +118,29 @@ export type Servico = {
     tipo: string | null
     status: string | null
     subtipo_receita: string[] | null
+    data_inicio?: string | null
+    data_fim?: string | null
+    duracao_dias?: number | null
+    acompanha_fisico?: boolean
+    acompanha_financeiro?: boolean
+    aditamento_anos?: number | null
+    aditamento_formalizado?: boolean | null
+    valor_contratual?: number | null
+    distribuicao_financeira?: DistribuicaoFinanceira[]
+    subtipo_ambiental?: string[] | null
+    subtipo_desapropriacao?: string[] | null
+    ordem?: number | null
+    created_at: string
+    updated_at: string
+}
+
+export type DistribuicaoFinanceira = {
+    id: string
+    servico_id: string
+    ano: number
+    mes: number
+    valor: number
+    fonte_recurso: string | null
     created_at: string
     updated_at: string
 }

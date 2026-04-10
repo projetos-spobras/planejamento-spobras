@@ -1,39 +1,81 @@
 
 import { createClient } from "@/lib/supabase/server"
 import { EmpenhosClient } from "./_components/client-page"
-import { getEmpreendimentos, getContratos } from "@/lib/api-client"
-import { Empenho } from "@/types"
+import { getEmpreendimentos, getContratos, getContratoEmpreendimentos, getContractEmpenhos } from "@/lib/api-client"
+import { RelatedEmpenho } from "@/components/relationships/related-empenhos-list"
 
-export const revalidate = 0
+export const dynamic = "force-dynamic"
 
 export default async function EmpenhosPage() {
     const supabase = await createClient()
 
-    const { data: empenhos } = await supabase
-        .from("empenhos")
-        .select("*")
-        .order("created_at", { ascending: false })
-
-    // Fetch linkable items using API
-    const [empreendimentos, contratos] = await Promise.all([
+    // 1. Fetch all basic data
+    const [
+        { data: empenhosSupabase },
+        { data: allEmpreendimentos },
+        allContratos,
+    ] = await Promise.all([
+        supabase.from("empenhos").select("*").order("created_at", { ascending: false }),
         getEmpreendimentos(supabase),
         getContratos(supabase)
     ])
 
-    const { data: lotes } = await supabase
-        .from("lotes")
-        .select("id, nome")
+    // 2. Fetch links to find relevant contracts
+    const allLinks = await getContratoEmpreendimentos(supabase, allEmpreendimentos, allContratos)
+    
+    // Identify contracts that are linked to at least one enterprise
+    const linkedContractIds = new Set(allLinks.map(l => l.contrato_id))
+    const linkedContratos = (allContratos || []).filter(c => linkedContractIds.has(c.id) && c._originalId)
 
-    const linkableItems: { id: string, label: string, type: 'empreendimento' | 'contrato' | 'lote' }[] = [
-        ...(empreendimentos?.map(e => ({ id: e.id, label: e.nome, type: 'empreendimento' as const })) || []),
-        ...(contratos?.map(c => ({ id: c.id, label: `Contrato ${c.numero}`, type: 'contrato' as const })) || []),
+    // 3. Fetch API empenhos for linked contracts (Parallel with concurrency limit)
+    // For now, we fetch for all linked contracts. If this is too slow, we might need a more selective approach.
+    const CONCURRENCY_LIMIT = 10
+    const apiEmpenhosList: any[] = []
+    
+    for (let i = 0; i < linkedContratos.length; i += CONCURRENCY_LIMIT) {
+        const batch = linkedContratos.slice(i, i + CONCURRENCY_LIMIT)
+        const batchResults = await Promise.all(
+            batch.map(async (c) => {
+                const results = await getContractEmpenhos(supabase, c._originalId)
+                return results.map(e => ({
+                    ...e,
+                    contrato_numero: c.numero,
+                    valor_contrato: c.valor_total
+                }))
+            })
+        )
+        apiEmpenhosList.push(...batchResults.flat())
+    }
+
+    // 4. Combine and hydrate Supabase empenhos
+    const contratoMap = new Map((allContratos || []).map(c => [c.id, c]))
+    const hydratedSupabaseEmpenhos = (empenhosSupabase || []).map(e => {
+        const contrato = e.tipo_vinculo === 'contrato' ? contratoMap.get(e.vinculo_id) : null
+        return {
+            ...e,
+            contrato_numero: contrato?.numero || null,
+            valor_contrato: contrato?.valor_total || undefined
+        }
+    })
+
+    const allEmpenhos: RelatedEmpenho[] = [
+        ...hydratedSupabaseEmpenhos,
+        ...apiEmpenhosList
+    ]
+
+    // 5. Pre-calculate linkable items for manual creation
+    const { data: lotes } = await supabase.from("lotes").select("id, nome")
+
+    const linkableItems = [
+        ...(allEmpreendimentos?.map(e => ({ id: e.id, label: e.nome, type: 'empreendimento' as const })) || []),
+        ...(allContratos?.map(c => ({ id: c.id, label: `Contrato ${c.numero}`, type: 'contrato' as const })) || []),
         ...(lotes?.map(l => ({ id: l.id, label: `Lote ${l.nome}`, type: 'lote' as const })) || [])
     ]
 
     return (
         <div className="flex-1 space-y-4 p-8 pt-6">
             <EmpenhosClient
-                data={(empenhos as Empenho[]) || []}
+                data={allEmpenhos}
                 linkableItems={linkableItems}
             />
         </div>

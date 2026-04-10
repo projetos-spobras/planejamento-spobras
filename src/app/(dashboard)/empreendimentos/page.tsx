@@ -1,9 +1,9 @@
 
 import { createClient } from "@/lib/supabase/server"
 import { EmpreendimentosClient } from "./_components/client-page"
-import { getEmpreendimentos } from "@/lib/api-client"
+import { getEmpreendimentos, getContratos, getContratoEmpreendimentos } from "@/lib/api-client"
 
-export const revalidate = 0
+export const dynamic = "force-dynamic"
 
 interface EmpreendimentosPageProps {
     searchParams: { [key: string]: string | string[] | undefined }
@@ -16,45 +16,90 @@ export default async function EmpreendimentosPage({ searchParams }: Empreendimen
     const pageSize = Number(params?.pageSize || 12)
     const search = params?.search as string | undefined
     const status = params?.status as string || 'all'
+    const programaFilter = params?.programa as string || 'all'
+    const tipoServicoFilter = params?.tipo_servico as string || 'all'
 
-    // Remove dup declarations
+    try {
+        const { 
+            data: empreendimentosRaw, 
+            count: totalCountFetch,
+            ambientaisCount: ambCount,
+            desapropCount: desCount
+        } = await getEmpreendimentos(supabase, {
+            search,
+            status,
+            programa: programaFilter,
+            page,
+            pageSize
+        });
 
-    // Fetch from API
-    let empreendimentos = await getEmpreendimentos(supabase);
+        const empreendimentoIds = empreendimentosRaw.map(e => e.id);
 
-    if (status !== 'all') {
-        empreendimentos = empreendimentos.filter((e: any) => e.status === status);
+        // Parallelize rest of data fetches
+        const [
+            contratos, 
+            { data: programas }, 
+            { data: distritos }, 
+            { data: gerencias }, 
+            { data: fases }, 
+            { data: servicosSupabase }
+        ] = await Promise.all([
+            getContratos(supabase),
+            supabase.from("programas").select("*"),
+            supabase.from("distritos").select("*"),
+            supabase.from("gerencias").select("*"),
+            supabase.from("empreendimento_fases").select("*"),
+            // Only fetch service types for the current page to avoid N+M issues
+            supabase.from("servicos")
+                .select("empreendimento_id, tipo")
+                .in("empreendimento_id", empreendimentoIds.length > 0 ? empreendimentoIds : ['dummy-id'])
+        ])
+
+        // Map service types to projects from Supabase services
+        const empreendimentosWithTypes = empreendimentosRaw.map(emp => {
+            const empServicos = (servicosSupabase || []).filter(s => s.empreendimento_id === emp.id);
+            const types = Array.from(new Set(empServicos.map(s => s.tipo))).filter(Boolean);
+            return {
+                ...emp,
+                tipos_servico: types
+            };
+        });
+
+        // Get all unique service types for the filter dropdown
+        const allServiceTypes = Array.from(new Set(contratos.map(c => c.tipo))).filter(Boolean).sort();
+
+        return (
+            <EmpreendimentosClient
+                data={empreendimentosWithTypes || []}
+                totalItems={totalCountFetch || 0}
+                programas={programas || []}
+                distritos={distritos || []}
+                gerencias={gerencias || []}
+                fases={fases || []}
+                tiposServico={allServiceTypes}
+                counts={{
+                    ambiental: ambCount ?? 0,
+                    desaprop: desCount ?? 0
+                }}
+            />
+        )
+    } catch (e: any) {
+        return (
+            <div className="p-8 space-y-4 max-w-2xl mx-auto mt-12 bg-red-50 border-l-4 border-red-500 rounded text-red-900">
+                <h2 className="text-xl font-bold">Erro Crítico no Servidor</h2>
+                <p>Ocorreu um erro ao renderizar os dados na Vercel:</p>
+                <pre className="p-4 bg-red-100 rounded text-sm overflow-x-auto whitespace-pre-wrap font-mono">
+                    {e?.message || 'Erro desconhecido'}
+                </pre>
+                {e?.stack && (
+                    <details className="cursor-pointer">
+                        <summary>Ver Stack Trace</summary>
+                        <pre className="p-4 bg-red-100 mt-2 rounded text-xs overflow-x-auto whitespace-pre-wrap font-mono">
+                            {e.stack}
+                        </pre>
+                    </details>
+                )}
+            </div>
+        )
     }
-    if (search) {
-        const lowerSearch = search.toLowerCase();
-        empreendimentos = empreendimentos.filter((e: any) =>
-            (e.nome && e.nome.toLowerCase().includes(lowerSearch)) ||
-            (e.codigo && e.codigo.toLowerCase().includes(lowerSearch))
-        );
-    }
-
-    const count = empreendimentos.length;
-    const from = (page - 1) * pageSize;
-    const to = from + pageSize;
-
-    const paginated = empreendimentos.slice(from, to);
-
-    const { data: programas } = await supabase.from("programas").select("*")
-    const { data: distritos } = await supabase.from("distritos").select("*")
-    const { data: gerencias } = await supabase.from("gerencias").select("*")
-    // Fases is just for internal status mapping if needed, but 'status' column in empreendimentos is text idFase currently
-    // Wait, status in empreendimentos is 'idFase' string.
-    // I should fetch 'empreendimento_fases' too.
-    const { data: fases } = await supabase.from("empreendimento_fases").select("*")
-
-    return (
-        <EmpreendimentosClient
-            data={paginated || []}
-            totalItems={count || 0}
-            programas={programas || []}
-            distritos={distritos || []}
-            gerencias={gerencias || []}
-            fases={fases || []}
-        />
-    )
 }

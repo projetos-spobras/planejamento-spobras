@@ -3,9 +3,9 @@ import { createClient } from "@/lib/supabase/server"
 import { notFound } from "next/navigation"
 import { ContratoDetails } from "@/components/relationships/contrato-details"
 import { BackButton } from "@/components/ui/back-button"
-import { getContratos, getEmpreendimentos } from "@/lib/api-client"
+import { getContratos, getEmpreendimentos, getContratoAditamentos, getContractMedicoes, getContractEmpenhos } from "@/lib/api-client"
 
-export const revalidate = 0
+export const dynamic = "force-dynamic"
 
 interface PageProps {
     params: Promise<{ id: string }>
@@ -88,7 +88,7 @@ export default async function ContratoDetailsPage({ params }: PageProps) {
         .eq("contrato_id", id)
 
     // Fetch all empreendimentos for availability in dialog
-    const allEmpreendimentos = await getEmpreendimentos(supabase);
+    const { data: allEmpreendimentos } = await getEmpreendimentos(supabase);
 
     // Hydrate linkedEmps
     const linkedEmps = (rawLinks || []).map((link: any) => {
@@ -111,12 +111,14 @@ export default async function ContratoDetailsPage({ params }: PageProps) {
         }
     });
 
-    // Fetch direct empenhos
-    const { data: empenhos } = await supabase
-        .from("empenhos")
-        .select("*")
-        .eq("tipo_vinculo", "contrato")
-        .eq("vinculo_id", id)
+    // Fetch Medições from API
+    const medicoes = contrato._originalId ? await getContractMedicoes(supabase, contrato._originalId) : []
+
+    // Fetch Empenhos from API
+    const apiEmpenhos = contrato._originalId ? await getContractEmpenhos(supabase, contrato._originalId) : []
+
+    // Fetch aditamentos from API
+    const aditamentos = contrato._originalId ? await getContratoAditamentos(supabase, contrato._originalId) : []
 
     return (
 
@@ -131,7 +133,9 @@ export default async function ContratoDetailsPage({ params }: PageProps) {
                 hierarchy={hierarchy}
                 allEmpreendimentos={allEmpreendimentos || []}
                 lotes={lotes || []}
-                empenhos={empenhos || []}
+                empenhos={apiEmpenhos || []}
+                aditamentos={aditamentos}
+                medicoes={medicoes}
             />
         </div>
     )

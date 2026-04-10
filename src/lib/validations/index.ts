@@ -64,12 +64,14 @@ export const planejamentoFaseSchema = z.object({
     tipo_fase: z.enum(['receita', 'despesa', 'execução']).nullable(),
     data_inicio: z.date().optional(),
     data_fim: z.date().optional(),
+    peso_percentual: z.coerce.number().min(0).max(100).optional().nullable(),
     valor_planejado: z.coerce.number().min(0, "Valor não pode ser negativo"),
     ordem: z.coerce.number().optional(),
     descricao: z.string().optional().nullable(),
     responsavel: z.string().optional().nullable(),
     fase_predecessora_id: z.string().uuid().optional().nullable(),
     dias_folga: z.coerce.number().optional().nullable(),
+    servico_id: z.string().uuid().optional().nullable(),
 })
 
 export type PlanejamentoFaseFormValues = z.infer<typeof planejamentoFaseSchema>
@@ -89,6 +91,13 @@ export const servicoSchema = z.object({
     quantidade: z.coerce.number().optional(),
     preco_unitario: z.coerce.number().optional(),
     status: z.string().optional(),
+    data_inicio: z.date().optional().nullable(),
+    data_fim: z.date().optional().nullable(),
+    duracao_dias: z.coerce.number().min(0).optional().nullable(),
+    acompanha_fisico: z.boolean().optional().default(false),
+    acompanha_financeiro: z.boolean().optional().default(false),
+    aditamento_anos: z.coerce.number().min(0).optional().nullable(),
+    aditamento_formalizado: z.boolean().optional().nullable(),
 })
 
 export type ServicoFormValues = z.infer<typeof servicoSchema>

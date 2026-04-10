@@ -113,7 +113,7 @@ export async function getEmpreendimentosByContrato(contratoId: string) {
     }
 
     const { getEmpreendimentos } = await import("@/lib/api-client")
-    const apiEmps = await getEmpreendimentos(supabase);
+    const { data: apiEmps } = await getEmpreendimentos(supabase);
 
     // Transform to flatten
     return data.map((item: any) => {

@@ -9,11 +9,21 @@ import {
     Pencil,
     Trash2,
     Search,
+    Download,
+    Loader2,
+    Building2,
 } from "lucide-react"
 import { toast } from "sonner"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select"
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -47,10 +57,18 @@ import {
 
 import { Lote, Contrato } from "@/types"
 import { deleteLote } from "@/app/(dashboard)/lotes/actions"
+import { importLotesFromApi } from "@/app/(dashboard)/lotes/import-lotes-action"
 import { LoteDialog } from "./lote-dialog"
+import { DataTablePagination } from "@/components/ui/data-table-pagination"
+
+const TIPO_BADGE: Record<string, string> = {
+    GERAL: "bg-blue-100 text-blue-800 border border-blue-200",
+    OAE: "bg-amber-100 text-amber-800 border border-amber-200",
+    ESCOLA: "bg-green-100 text-green-800 border border-green-200",
+}
 
 interface LotesClientProps {
-    data: (Lote & { contratos: { numero: string } })[]
+    data: (Lote & { contratos: { numero: string }, emp_count: number })[]
     contratos: Contrato[]
 }
 
@@ -62,10 +80,25 @@ export function LotesClient({ data, contratos }: LotesClientProps) {
     const [isDeleting, setIsDeleting] = useState(false)
 
     const [searchTerm, setSearchTerm] = useState("")
+    const [typeFilter, setTypeFilter] = useState<string>("todos")
+    const [pageSize, setPageSize] = useState(10)
+    const [currentPage, setCurrentPage] = useState(1)
+    const [isImporting, setIsImporting] = useState(false)
 
-    const filteredData = data.filter(item =>
-        item.nome.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        (item.contratos?.numero && item.contratos.numero.toLowerCase().includes(searchTerm.toLowerCase()))
+    const filteredData = data.filter(item => {
+        const matchesSearch = item.nome.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            (item.contratos?.numero && item.contratos.numero.toLowerCase().includes(searchTerm.toLowerCase())) ||
+            (item.tipo && item.tipo.toLowerCase().includes(searchTerm.toLowerCase()))
+        
+        const matchesType = typeFilter === "todos" || item.tipo === typeFilter
+        
+        return matchesSearch && matchesType
+    })
+
+    const totalPages = Math.ceil(filteredData.length / pageSize)
+    const paginatedData = filteredData.slice(
+        (currentPage - 1) * pageSize,
+        currentPage * pageSize
     )
 
     const handleEdit = (item: Lote) => {
@@ -91,31 +124,85 @@ export function LotesClient({ data, contratos }: LotesClientProps) {
         }
     }
 
+    const handleImport = async () => {
+        setIsImporting(true)
+        try {
+            const result = await importLotesFromApi()
+            if (result.success) {
+                if (result.created > 0) {
+                    toast.success(result.message)
+                } else {
+                    toast.info(result.message)
+                }
+                if (result.errors.length > 0) {
+                    result.errors.forEach(err => toast.error(err))
+                }
+            } else {
+                toast.error(result.message)
+            }
+        } catch (e) {
+            toast.error("Erro inesperado na importação")
+        } finally {
+            setIsImporting(false)
+        }
+    }
+
     return (
         <div className="space-y-6">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                 <h1 className="text-3xl font-bold">Lotes</h1>
-                <Button onClick={() => {
-                    setEditingItem(null)
-                    setIsDialogOpen(true)
-                }}>
-                    <Plus className="mr-2 h-4 w-4" /> Novo Lote
-                </Button>
+                <div className="flex gap-2">
+                    <Button
+                        variant="outline"
+                        onClick={handleImport}
+                        disabled={isImporting}
+                    >
+                        {isImporting ? (
+                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        ) : (
+                            <Download className="mr-2 h-4 w-4" />
+                        )}
+                        {isImporting ? "Importando..." : "Importar da API"}
+                    </Button>
+                    <Button onClick={() => {
+                        setEditingItem(null)
+                        setIsDialogOpen(true)
+                    }}>
+                        <Plus className="mr-2 h-4 w-4" /> Novo Lote
+                    </Button>
+                </div>
             </div>
 
             <Card>
                 <CardHeader className="pb-3">
                     <CardTitle>Listagem</CardTitle>
-                    <div className="flex items-center gap-2 pt-2">
-                        <div className="relative flex-1 max-w-sm">
+                    <div className="flex flex-col sm:flex-row items-center gap-4 pt-2">
+                        <div className="relative flex-1 w-full max-w-sm">
                             <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
                             <Input
-                                placeholder="Buscar por lote ou contrato..."
+                                placeholder="Buscar por lote, contrato ou tipo..."
                                 className="pl-8"
                                 value={searchTerm}
-                                onChange={(e) => setSearchTerm(e.target.value)}
+                                onChange={(e) => {
+                                    setSearchTerm(e.target.value)
+                                    setCurrentPage(1)
+                                }}
                             />
                         </div>
+                        <Select value={typeFilter} onValueChange={(v) => {
+                            setTypeFilter(v)
+                            setCurrentPage(1)
+                        }}>
+                            <SelectTrigger className="w-full sm:w-[180px]">
+                                <SelectValue placeholder="Filtrar por Tipo" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectItem value="todos">Todos os Tipos</SelectItem>
+                                <SelectItem value="OAE">OAE</SelectItem>
+                                <SelectItem value="ESCOLA">ESCOLA</SelectItem>
+                                <SelectItem value="GERAL">GERAL</SelectItem>
+                            </SelectContent>
+                        </Select>
                     </div>
                 </CardHeader>
                 <CardContent>
@@ -124,27 +211,44 @@ export function LotesClient({ data, contratos }: LotesClientProps) {
                             <TableHeader>
                                 <TableRow>
                                     <TableHead>Lote</TableHead>
+                                    <TableHead>Tipo</TableHead>
                                     <TableHead>Contrato Vinculado</TableHead>
+                                    <TableHead className="text-center">Empreendimentos</TableHead>
                                     <TableHead>Descrição</TableHead>
                                     <TableHead className="w-[70px]"></TableHead>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
-                                {filteredData.length === 0 ? (
+                                {paginatedData.length === 0 ? (
                                     <TableRow>
-                                        <TableCell colSpan={4} className="text-center h-24 text-muted-foreground">
+                                        <TableCell colSpan={6} className="text-center h-24 text-muted-foreground">
                                             Nenhum lote encontrado.
                                         </TableCell>
                                     </TableRow>
                                 ) : (
-                                    filteredData.map((item) => (
+                                    paginatedData.map((item) => (
                                         <TableRow key={item.id}>
                                             <TableCell className="font-medium">
                                                 <Link href={`/lotes/${item.id}`} className="hover:underline font-semibold text-primary">
                                                     {item.nome}
                                                 </Link>
                                             </TableCell>
+                                            <TableCell>
+                                                {item.tipo ? (
+                                                    <span className={`text-xs font-semibold px-2.5 py-0.5 rounded-full ${TIPO_BADGE[item.tipo] || "bg-muted text-muted-foreground"}`}>
+                                                        {item.tipo}
+                                                    </span>
+                                                ) : (
+                                                    <span className="text-muted-foreground text-xs">—</span>
+                                                )}
+                                            </TableCell>
                                             <TableCell>{item.contratos?.numero || 'Sem contrato'}</TableCell>
+                                            <TableCell className="text-center">
+                                                <div className="flex items-center justify-center gap-1.5">
+                                                    <Building2 className="h-3.5 w-3.5 text-muted-foreground" />
+                                                    <span className="font-medium tabular-nums">{item.emp_count}</span>
+                                                </div>
+                                            </TableCell>
                                             <TableCell className="max-w-[200px] truncate">{item.descricao}</TableCell>
                                             <TableCell>
                                                 <DropdownMenu>
@@ -170,6 +274,18 @@ export function LotesClient({ data, contratos }: LotesClientProps) {
                             </TableBody>
                         </Table>
                     </div>
+
+                    <DataTablePagination
+                        currentPage={currentPage}
+                        totalPages={totalPages}
+                        pageSize={pageSize}
+                        totalItems={filteredData.length}
+                        onPageChange={setCurrentPage}
+                        onPageSizeChange={(size) => {
+                            setPageSize(size)
+                            setCurrentPage(1)
+                        }}
+                    />
                 </CardContent>
             </Card>
 

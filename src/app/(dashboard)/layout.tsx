@@ -1,8 +1,21 @@
 import { DashboardShell } from "@/components/layout/dashboard-shell"
 import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
+import { cache, Suspense } from "react"
+import Loading from "./loading"
 
 export const dynamic = "force-dynamic";
+
+// Cache profile lookup por user ID para deduplicar chamadas dentro do mesmo request
+const getUserProfile = cache(async (userId: string) => {
+    const supabase = await createClient()
+    const { data } = await supabase
+        .from('tb_perfis')
+        .select('funcao, trocar_senha')
+        .eq('id', userId)
+        .single()
+    return data
+})
 
 export default async function DashboardLayout({
     children,
@@ -15,25 +28,10 @@ export default async function DashboardLayout({
     let userRole = 'usuario'
 
     if (user) {
-        const { data: profile } = await supabase
-            .from('tb_perfis')
-            .select('funcao, trocar_senha')
-            .eq('id', user.id)
-            .single()
+        const profile = await getUserProfile(user.id)
 
         if (profile) {
             userRole = profile.funcao
-
-            // Redirect to change password if flag is true
-            // Avoid redirect loop if already on /trocar-senha (but layout wraps dashboard routes, assuming /trocar-senha is NOT inside (dashboard) group?
-            // Wait, /trocar-senha is root level in app directory usually, or check path.
-            // If this layout is ONLY for (dashboard), then reliable.
-            // But if user forces url...
-
-            // Wait, this file is src/app/(dashboard)/layout.tsx
-            // So it only affects dashboard routes.
-            // If /trocar-senha is at src/app/trocar-senha/page.tsx, it creates a new route outside dashboard layout.
-            // So redirecting here is safe.
 
             if (profile.trocar_senha) {
                 redirect('/trocar-senha')
@@ -43,7 +41,10 @@ export default async function DashboardLayout({
 
     return (
         <DashboardShell userRole={userRole}>
-            {children}
+            <Suspense fallback={<Loading />}>
+                {children}
+            </Suspense>
         </DashboardShell>
     )
+
 }

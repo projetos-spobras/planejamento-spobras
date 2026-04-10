@@ -2,27 +2,11 @@
 "use client"
 
 import { useState } from "react"
-import { Plus, Pencil, Trash2, Search } from "lucide-react"
+import { Plus, Search } from "lucide-react"
 import { toast } from "sonner"
-import { format } from "date-fns"
-import { ptBR } from "date-fns/locale"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from "@/components/ui/table"
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
 import {
     AlertDialog,
     AlertDialogAction,
@@ -37,9 +21,12 @@ import {
 import { Empenho } from "@/types"
 import { deleteEmpenho } from "@/app/(dashboard)/empenhos/actions"
 import { EmpenhoDialog } from "./empenho-dialog"
+import { RelatedEmpenhosList, RelatedEmpenho } from "@/components/relationships/related-empenhos-list"
+import { EmpenhosPieChart } from "./empenhos-pie-chart"
+import { EmpenhosYearlyChart } from "./empenhos-yearly-chart"
 
 interface EmpenhosClientProps {
-    data: Empenho[]
+    data: RelatedEmpenho[]
     linkableItems: { id: string, label: string, type: 'empreendimento' | 'contrato' | 'lote' }[]
 }
 
@@ -51,7 +38,7 @@ export function EmpenhosClient({ data, linkableItems }: EmpenhosClientProps) {
 
     const filteredData = data.filter(item =>
         item.numero?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        false // Add more filter conditions if needed
+        item.contrato_numero?.toLowerCase().includes(searchTerm.toLowerCase())
     )
 
     const handleDelete = async () => {
@@ -71,16 +58,11 @@ export function EmpenhosClient({ data, linkableItems }: EmpenhosClientProps) {
         setIsDialogOpen(true)
     }
 
-    const openEditDialog = (empenho: Empenho) => {
-        setEmpenhoToEdit(empenho)
-        setIsDialogOpen(true)
-    }
-
-    const getVinculoInfo = (type: string | null, id: string | null) => {
-        if (!type || !id) return "-"
-        const item = linkableItems.find(i => i.id === id && i.type === type)
-        return item ? `${item.label} (${type})` : "Item não encontrado"
-    }
+    const currentYear = new Date().getFullYear()
+    const currentYearData = filteredData.filter(e => {
+        if (!e.data_empenho) return false
+        return new Date(e.data_empenho).getFullYear() === currentYear
+    })
 
     return (
         <div className="space-y-6">
@@ -88,81 +70,56 @@ export function EmpenhosClient({ data, linkableItems }: EmpenhosClientProps) {
                 <div>
                     <h2 className="text-3xl font-bold tracking-tight">Empenhos</h2>
                     <p className="text-muted-foreground">
-                        Gerencie as notas de empenho e suas vinculações.
+                        Visão consolidada de empenhos agrupados por contrato.
                     </p>
                 </div>
                 <Button onClick={openCreateDialog}>
-                    <Plus className="mr-2 h-4 w-4" /> Novo Empenho
+                    <Plus className="mr-2 h-4 w-4" /> Registrar Manualmente
                 </Button>
+            </div>
+
+            {/* Charts at the top - Stacked Pies + Wide Evolution */}
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                <div className="space-y-4 lg:col-span-1 flex flex-col">
+                    <EmpenhosPieChart 
+                        empenhos={filteredData} 
+                        title="Consolidado Geral" 
+                    />
+                    <EmpenhosPieChart 
+                        empenhos={currentYearData} 
+                        title={`Consolidado ${currentYear}`} 
+                        showBadge={false}
+                    />
+                </div>
+                <div className="lg:col-span-2 flex h-[456px]">
+                    <div className="w-full flex-1 h-full">
+                        <EmpenhosYearlyChart empenhos={filteredData} />
+                    </div>
+                </div>
             </div>
 
             <div className="flex items-center py-4">
                 <Search className="mr-2 h-4 w-4 text-muted-foreground" />
                 <Input
-                    placeholder="Filtrar por número..."
+                    placeholder="Filtrar por número de empenho ou contrato..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     className="max-w-sm"
                 />
             </div>
 
-            <div className="rounded-md border">
-                <Table>
-                    <TableHeader>
-                        <TableRow>
-                            <TableHead>Número</TableHead>
-                            <TableHead>Valor</TableHead>
-                            <TableHead>Data</TableHead>
-                            <TableHead>Vínculo</TableHead>
-                            <TableHead className="w-[100px]">Ações</TableHead>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                        {filteredData.length === 0 ? (
-                            <TableRow>
-                                <TableCell colSpan={5} className="h-24 text-center">
-                                    Nenhum empenho encontrado.
-                                </TableCell>
-                            </TableRow>
-                        ) : (
-                            filteredData.map((item) => (
-                                <TableRow key={item.id}>
-                                    <TableCell className="font-medium">{item.numero || "-"}</TableCell>
-                                    <TableCell>
-                                        {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(item.valor)}
-                                    </TableCell>
-                                    <TableCell>
-                                        {item.data_empenho ? format(new Date(item.data_empenho), "P", { locale: ptBR }) : "-"}
-                                    </TableCell>
-                                    <TableCell>
-                                        {getVinculoInfo(item.tipo_vinculo, item.vinculo_id)}
-                                    </TableCell>
-                                    <TableCell>
-                                        <DropdownMenu>
-                                            <DropdownMenuTrigger asChild>
-                                                <Button variant="ghost" className="h-8 w-8 p-0">
-                                                    <span className="sr-only">Abrir menu</span>
-                                                    <Pencil className="h-4 w-4" />
-                                                </Button>
-                                            </DropdownMenuTrigger>
-                                            <DropdownMenuContent align="end">
-                                                <DropdownMenuItem onClick={() => openEditDialog(item)}>
-                                                    Editar
-                                                </DropdownMenuItem>
-                                                <DropdownMenuItem
-                                                    onClick={() => setDeleteId(item.id)}
-                                                    className="text-red-600 focus:text-red-600"
-                                                >
-                                                    Excluir
-                                                </DropdownMenuItem>
-                                            </DropdownMenuContent>
-                                        </DropdownMenu>
-                                    </TableCell>
-                                </TableRow>
-                            ))
-                        )}
-                    </TableBody>
-                </Table>
+            <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                    <h3 className="text-lg font-semibold">Notas de Empenho</h3>
+                    <p className="text-sm text-muted-foreground">
+                        Mostrando {filteredData.length} de {data.length} empenhos
+                    </p>
+                </div>
+                
+                <RelatedEmpenhosList 
+                    empenhos={filteredData} 
+                    entityType="Contrato" 
+                />
             </div>
 
             <EmpenhoDialog

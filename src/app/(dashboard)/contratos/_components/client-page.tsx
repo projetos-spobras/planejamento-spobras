@@ -219,7 +219,23 @@ export function ContratosClient({ data, totalItems }: ContratosClientProps) {
                                                 {item.data_inicio ? format(new Date(item.data_inicio), "dd/MM/yyyy") : "-"} a {item.data_fim ? format(new Date(item.data_fim), "dd/MM/yyyy") : "-"}
                                             </TableCell>
                                             <TableCell className="text-right">
-                                                {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(item.valor_total || 0)}
+                                                <div className="font-bold">
+                                                    {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(item.valor_total || 0)}
+                                                </div>
+                                                <div className="flex flex-col items-end gap-0.5 mt-1">
+                                                    {item.valor_aditamento && item.valor_aditamento !== 0 ? (
+                                                        <div className="text-[10px] text-emerald-600 font-medium whitespace-nowrap">
+                                                            Adit. + {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', notation: 'compact' }).format(item.valor_aditamento)}
+                                                        </div>
+                                                    ) : null}
+                                                    {item.valor_reajuste && item.valor_reajuste !== 0 ? (
+                                                        <div className="text-[10px] text-blue-600 font-medium whitespace-nowrap opacity-70">
+                                                            ({item.percentual_reajuste || (item.valor_original && item.valor_original > 0 
+                                                                ? ((item.valor_reajuste / item.valor_original) * 100).toFixed(1) + "%"
+                                                                : "0%")} {item.indice_nome && <span className="uppercase">{item.indice_nome}</span>})
+                                                        </div>
+                                                    ) : null}
+                                                </div>
                                             </TableCell>
                                             <TableCell>
                                                 <DropdownMenu>

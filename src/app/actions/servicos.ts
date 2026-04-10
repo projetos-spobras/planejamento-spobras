@@ -29,6 +29,8 @@ export async function getServicosByEmpreendimento(empreendimentoId: string) {
             )
         `)
         .eq("contratos.empreendimento_contratos.empreendimento_id", empreendimentoId)
+        .order("ordem", { ascending: true })
+        .order("created_at", { ascending: false })
 
     if (error) {
         console.error("Error fetching servicos:", error)
@@ -55,6 +57,7 @@ export async function getServicosByEmpreendimentoId(empreendimentoId: string) {
         .from('servicos')
         .select(`*, contrato:contratos(numero, contratada)`)
         .in('contrato_id', contratoIds)
+        .order('ordem', { ascending: true })
         .order('created_at', { ascending: false })
 
     if (error) {
@@ -71,9 +74,18 @@ export async function getServicosByEmpreendimentoId(empreendimentoId: string) {
 
 export async function createServico(data: Partial<Servico>) {
     const supabase = await createClient()
+
+    const sanitized = {
+        ...data,
+        data_inicio: data.data_inicio === "" ? null : data.data_inicio,
+        data_fim: data.data_fim === "" ? null : data.data_fim,
+        duracao_dias: data.duracao_dias ?? null,
+        ordem: data.ordem ?? Math.floor(Date.now() / 1000)
+    }
+
     const { data: inserted, error } = await supabase
         .from("servicos")
-        .insert(data)
+        .insert(sanitized)
         .select('id')
         .single()
 
@@ -81,45 +93,88 @@ export async function createServico(data: Partial<Servico>) {
         return { success: false, error: error.message }
     }
 
-    // [P3] Sincronização com Planejamento — melhor esforço, não bloqueia o serviço
-    let planWarning = false
-    if (data.empreendimento_id && data.descricao) {
-        const { error: planError } = await supabase
-            .from("planejamento_fases")
-            .insert({
-                empreendimento_id: data.empreendimento_id,
-                fase: data.descricao.length > 255 ? data.descricao.substring(0, 252) + "..." : data.descricao,
-                tipo_fase: 'execução',
-                valor_planejado: data.valor_total || 0,
-            })
+        // [P3] Sincronização com Planejamento — melhor esforço, não bloqueia o serviço
+        let planWarning = false
+        if (sanitized.empreendimento_id && sanitized.descricao) {
+            let data_fim = sanitized.data_fim || null
+            if (!data_fim && sanitized.data_inicio && sanitized.duracao_dias !== undefined && sanitized.duracao_dias !== null) {
+                const endDate = new Date(sanitized.data_inicio)
+                endDate.setDate(endDate.getDate() + sanitized.duracao_dias)
+                data_fim = endDate.toISOString().split('T')[0]
+            }
 
-        if (planError) {
-            planWarning = true
-            console.error('[createServico] Falha ao criar fase de planejamento:', {
-                servico_id: inserted?.id,
-                empreendimento_id: data.empreendimento_id,
-                erro: planError.message,
-                codigo: planError.code,
-            })
+            const subtipos = sanitized.subtipo_ambiental || []
+            
+            if (subtipos.length > 0) {
+                // Cria uma linha para cada subtipo ambiental
+                const planPayloads = subtipos.map((sub: string, index: number) => ({
+                    empreendimento_id: sanitized.empreendimento_id,
+                    fase: `${sub} - ${sanitized.descricao}`.substring(0, 255),
+                    tipo_fase: 'execução',
+                    // Atribui o valor total apenas à primeira linha para não triplicar o financeiro se não houver divisão
+                    valor_planejado: index === 0 ? (sanitized.valor_total || 0) : 0, 
+                    data_inicio: sanitized.data_inicio || null,
+                    data_fim: data_fim,
+                    servico_id: inserted?.id || null
+                }))
+
+                const { error: planError } = await supabase
+                    .from("planejamento_fases")
+                    .insert(planPayloads)
+
+                if (planError) {
+                    planWarning = true
+                    console.error('[createServico] Falha ao criar fases ambientais:', planError.message)
+                }
+            } else {
+                // Comportamento padrão (uma única linha)
+                const { error: planError } = await supabase
+                    .from("planejamento_fases")
+                    .insert({
+                        empreendimento_id: sanitized.empreendimento_id,
+                        fase: sanitized.descricao.length > 255 ? sanitized.descricao.substring(0, 252) + "..." : sanitized.descricao,
+                        tipo_fase: 'execução',
+                        valor_planejado: sanitized.valor_total || 0,
+                        data_inicio: sanitized.data_inicio || null,
+                        data_fim: data_fim,
+                        servico_id: inserted?.id || null
+                    })
+
+                if (planError) {
+                    planWarning = true
+                    console.error('[createServico] Falha ao criar fase de planejamento:', planError.message)
+                }
+            }
         }
-    }
 
     revalidatePath("/empreendimentos")
-    revalidatePath(`/empreendimentos/${data.empreendimento_id}`)
+    revalidatePath("/servicos")
+    revalidatePath("/meio-ambiente")
+    revalidatePath(`/empreendimentos/${sanitized.empreendimento_id}`)
     return { success: true, planWarning }
 }
 
 export async function createServiceBatch(empreendimentoIds: string[], data: Partial<Servico>) {
     const supabase = await createClient()
-    const payloads = empreendimentoIds.map(empId => ({
+
+    const sanitizedData = {
         ...data,
+        data_inicio: data.data_inicio === "" ? null : data.data_inicio,
+        data_fim: data.data_fim === "" ? null : data.data_fim,
+        duracao_dias: data.duracao_dias ?? null,
+        ordem: data.ordem ?? Math.floor(Date.now() / 1000)
+    }
+
+    const payloads = empreendimentoIds.map(empId => ({
+        ...sanitizedData,
         empreendimento_id: empId,
         contrato_id: null
     }))
 
-    const { error } = await supabase
+    const { data: insertedServices, error } = await supabase
         .from("servicos")
         .insert(payloads)
+        .select('id, empreendimento_id')
 
     if (error) {
         return { success: false, error: error.message }
@@ -127,13 +182,42 @@ export async function createServiceBatch(empreendimentoIds: string[], data: Part
 
     // [P3] Sincronização com Planejamento — melhor esforço, não bloqueia
     let planWarning = false
-    if (data.descricao) {
-        const planPayloads = empreendimentoIds.map(empId => ({
-            empreendimento_id: empId,
-            fase: data.descricao!.length > 255 ? data.descricao!.substring(0, 252) + "..." : data.descricao,
-            tipo_fase: 'execução',
-            valor_planejado: data.valor_total || 0,
-        }))
+    if (data.descricao && insertedServices) {
+        let data_fim = data.data_fim || null
+        if (!data_fim && data.data_inicio && data.duracao_dias !== undefined && data.duracao_dias !== null) {
+            const endDate = new Date(data.data_inicio)
+            endDate.setDate(endDate.getDate() + data.duracao_dias)
+            data_fim = endDate.toISOString().split('T')[0]
+        }
+
+        const subtipos = data.subtipo_ambiental || []
+        const planPayloads: any[] = []
+
+        insertedServices.forEach(insertedService => {
+            if (subtipos.length > 0) {
+                subtipos.forEach((sub: string, index: number) => {
+                    planPayloads.push({
+                        empreendimento_id: insertedService.empreendimento_id,
+                        fase: `${sub} - ${data.descricao}`.substring(0, 255),
+                        tipo_fase: 'execução',
+                        valor_planejado: index === 0 ? (data.valor_total || 0) : 0,
+                        data_inicio: data.data_inicio || null,
+                        data_fim: data_fim,
+                        servico_id: insertedService.id
+                    })
+                })
+            } else {
+                planPayloads.push({
+                    empreendimento_id: insertedService.empreendimento_id,
+                    fase: data.descricao!.length > 255 ? data.descricao!.substring(0, 252) + "..." : data.descricao,
+                    tipo_fase: 'execução',
+                    valor_planejado: data.valor_total || 0,
+                    data_inicio: data.data_inicio || null,
+                    data_fim: data_fim,
+                    servico_id: insertedService.id
+                })
+            }
+        })
 
         const { error: planError } = await supabase
             .from("planejamento_fases")
@@ -141,25 +225,60 @@ export async function createServiceBatch(empreendimentoIds: string[], data: Part
 
         if (planError) {
             planWarning = true
-            console.error('[createServiceBatch] Falha ao criar fases de planejamento:', {
-                empreendimento_ids: empreendimentoIds,
-                total: empreendimentoIds.length,
-                erro: planError.message,
-                codigo: planError.code,
-            })
+            console.error('[createServiceBatch] Falha ao criar fases de planejamento:', planError.message)
         }
     }
 
     revalidatePath("/empreendimentos")
     revalidatePath("/servicos")
+    revalidatePath("/meio-ambiente")
     return { success: true, planWarning }
 }
 
 export async function updateServico(id: string, data: Partial<Servico>) {
     const supabase = await createClient()
+
+    const sanitized = {
+        ...data
+    }
+    
+    if (data.data_inicio === "") sanitized.data_inicio = null
+    if (data.data_fim === "") sanitized.data_fim = null
+    if (data.duracao_dias === undefined && data.duracao_dias !== null) delete (sanitized as any).duracao_dias
+    
+    // Garantir que subtipos só sejam atualizados se enviados (explicitamente ou como array vazio/null)
+    if (data.subtipo_ambiental === undefined) delete (sanitized as any).subtipo_ambiental
+    if (data.subtipo_receita === undefined) delete (sanitized as any).subtipo_receita
+
     const { error } = await supabase
         .from("servicos")
-        .update(data)
+        .update(sanitized)
+        .eq("id", id)
+
+    if (error) {
+        return { success: false, error: error.message }
+    }
+
+    revalidatePath("/empreendimentos")
+    revalidatePath("/servicos")
+    revalidatePath("/meio-ambiente")
+    
+    // Buscar o empreendimento_id para revalidação específica se não estiver no payload
+    if (data.empreendimento_id) {
+        revalidatePath(`/empreendimentos/${data.empreendimento_id}`)
+    } else {
+        const { data: s } = await supabase.from("servicos").select("empreendimento_id").eq("id", id).single()
+        if (s?.empreendimento_id) revalidatePath(`/empreendimentos/${s.empreendimento_id}`)
+    }
+
+    return { success: true }
+}
+
+export async function deleteServico(id: string) {
+    const supabase = await createClient()
+    const { error } = await supabase
+        .from("servicos")
+        .delete()
         .eq("id", id)
 
     if (error) {
@@ -170,12 +289,19 @@ export async function updateServico(id: string, data: Partial<Servico>) {
     return { success: true }
 }
 
-export async function deleteServico(id: string) {
+export async function updateServicoOrder(orders: { id: string, ordem: number }[]) {
     const supabase = await createClient()
-    const { error } = await supabase
-        .from("servicos")
-        .delete()
-        .eq("id", id)
+
+    // Loop through and update each one individually to avoid constraint violations with upsert
+    const updates = orders.map(async (o) => {
+        return supabase
+            .from("servicos")
+            .update({ ordem: o.ordem })
+            .eq("id", o.id)
+    })
+
+    const results = await Promise.all(updates)
+    const error = results.find(r => r.error)?.error
 
     if (error) {
         return { success: false, error: error.message }

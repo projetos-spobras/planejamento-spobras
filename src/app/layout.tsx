@@ -7,7 +7,7 @@ import { Toaster } from "@/components/ui/sonner"
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "SPObras - Planejamento",
+  title: "SID - Sistema Integrado de Dados",
   description: "Sistema de Planejamento e Gestão de Obras",
   icons: {
     icon: "/logo-spobras.png",

@@ -10,3 +10,5 @@ export function createClient() {
     }
     return cachedClient
 }
+
+export const supabase = createClient()

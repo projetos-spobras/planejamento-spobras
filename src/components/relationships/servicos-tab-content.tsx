@@ -7,6 +7,7 @@ import { toast } from "sonner"
 import { format } from "date-fns"
 import { useRouter } from "next/navigation"
 import { DragDropContext, Droppable, Draggable, DropResult } from "@hello-pangea/dnd"
+import { formatarDataBR, calcularDuracaoDias } from "@/lib/utils"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -220,10 +221,21 @@ export function ServicosTabContent({ servicos, contratos, empreendimentoId }: Se
                                                                 </div>
                                                             </TableCell>
                                                             <TableCell className="text-xs whitespace-nowrap">
-                                                                {item.data_inicio ? format(new Date(item.data_inicio), "dd/MM/yy") : "-"}
+                                                                {formatarDataBR(item.data_inicio)}
                                                             </TableCell>
                                                             <TableCell className="text-xs">
-                                                                {item.duracao_dias ? `${item.duracao_dias} d` : "-"}
+                                                                {(() => {
+                                                                    // Usar duração do banco se disponível
+                                                                    if (item.duracao_dias && item.duracao_dias > 0) {
+                                                                        return `${item.duracao_dias} dias`
+                                                                    }
+                                                                    // Calcular a partir das datas
+                                                                    const dias = calcularDuracaoDias(item.data_inicio, item.data_fim)
+                                                                    if (dias === null) return '-'
+                                                                    if (dias < 30) return `${dias} dias`
+                                                                    const meses = Math.round(dias / 30)
+                                                                    return `~${meses} ${meses === 1 ? 'mês' : 'meses'}`
+                                                                })()}
                                                             </TableCell>
                                                             <TableCell className="font-medium text-xs">
                                                                 {item.contrato?.numero || "Sem contrato"}

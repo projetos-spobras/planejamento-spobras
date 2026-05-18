@@ -70,8 +70,8 @@ export function BulkServiceDialog({
     const router = useRouter()
     const [isLoading, setIsLoading] = useState(false)
 
-    const form = useForm<FormData>({
-        resolver: zodResolver(formSchema) as any,
+    const form = useForm<any>({
+        resolver: zodResolver(formSchema),
         defaultValues: {
             empreendimentoIds: [],
             descricao: "",

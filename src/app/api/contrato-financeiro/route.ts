@@ -1,41 +1,33 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
-import { getContratoAditamentos, getContractEmpenhos, getContractMedicoes, parseApiValue } from '@/lib/api-client'
+import { getContratoAditamentos, getContractEmpenhos, getContractMedicoes, parseApiValue, getEmpreendimentoNamesMap } from '@/lib/api-client'
+import { withAuth } from '@/lib/api-middleware'
+import { z } from 'zod'
+
+const paramsSchema = z.object({
+    contratoOriginalId: z.string().min(1, 'contratoOriginalId is required'),
+    tipo: z.enum(['empenhos', 'medicoes', 'aditamentos'])
+})
 
 /**
  * GET /api/contrato-financeiro?contratoOriginalId=123&tipo=empenhos|medicoes|aditamentos
  *
  * Lazy-loads financial data for a single contract from the external API.
- * Called client-side when the user opens the corresponding tab — avoids blocking
- * the initial page load with N+1 API calls for each linked contract.
+ * Secured by withAuth wrapper (handles session, validation, rate limiting, and errors).
  */
-export async function GET(request: NextRequest) {
-    try {
+export const GET = withAuth({
+    paramsSchema,
+    handler: async ({ params }) => {
+        const { contratoOriginalId, tipo } = params
         const supabase = await createClient()
-        const { data: { user } } = await supabase.auth.getUser()
-
-        if (!user) {
-            return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-        }
-
-        const { searchParams } = new URL(request.url)
-        const contratoOriginalId = searchParams.get('contratoOriginalId')
-        const tipo = searchParams.get('tipo')
-
-        if (!contratoOriginalId || !tipo) {
-            return NextResponse.json({ error: 'Missing params: contratoOriginalId and tipo are required' }, { status: 400 })
-        }
-
-        if (!['empenhos', 'medicoes', 'aditamentos'].includes(tipo)) {
-            return NextResponse.json({ error: 'tipo must be one of: empenhos, medicoes, aditamentos' }, { status: 400 })
-        }
 
         let data: any[] = []
 
         if (tipo === 'empenhos') {
             data = await getContractEmpenhos(supabase, contratoOriginalId)
         } else if (tipo === 'medicoes') {
-            data = await getContractMedicoes(supabase, contratoOriginalId)
+            const namesMap = await getEmpreendimentoNamesMap()
+            data = await getContractMedicoes(supabase, contratoOriginalId, namesMap)
         } else if (tipo === 'aditamentos') {
             const raw = await getContratoAditamentos(supabase, contratoOriginalId)
             let totalAdit = 0
@@ -61,8 +53,6 @@ export async function GET(request: NextRequest) {
                 'Cache-Control': 'private, s-maxage=60, stale-while-revalidate=300'
             }
         })
-    } catch (error: any) {
-        console.error('[/api/contrato-financeiro] Error:', error)
-        return NextResponse.json({ error: error.message || 'Internal error' }, { status: 500 })
     }
-}
+})
+

@@ -7,8 +7,8 @@ import { revalidatePath } from 'next/cache'
 export async function updatePassword(password: string) {
     const supabase = await createClient()
 
-    const { data: { user } } = await supabase.auth.getUser()
-    if (!user) return { error: 'Não autenticado' }
+    const { data: { user }, error: authError } = await supabase.auth.getUser()
+    if (authError || !user) return { error: 'Não autorizado' }
 
     // 1. Update Auth Password
     const { error: updateError } = await supabase.auth.updateUser({
@@ -16,7 +16,8 @@ export async function updatePassword(password: string) {
     })
 
     if (updateError) {
-        return { error: 'Erro ao atualizar senha: ' + updateError.message }
+        console.error("[updatePassword]", updateError)
+        return { error: 'Ocorreu um erro interno. Por favor, contate o suporte.' }
     }
 
     // 2. Update Profile Flag using Service Role (since RLS might restrict update of other columns if not careful, 
@@ -29,10 +30,11 @@ export async function updatePassword(password: string) {
         .from('tb_perfis')
         .update({ trocar_senha: false })
         .eq('id', user.id)
+        .eq('sistema', 'planejamento')
 
     if (profileError) {
-        console.error('Erro ao atualizar flag de trocar senha:', profileError)
-        return { error: 'Senha atualizada, mas houve um erro ao atualizar seu perfil. Entre em contato com o suporte.' }
+        console.error("[updatePassword]", profileError)
+        return { error: 'Ocorreu um erro interno. Por favor, contate o suporte.' }
     }
 
     revalidatePath('/')

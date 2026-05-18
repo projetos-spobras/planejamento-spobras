@@ -5,6 +5,8 @@ import { revalidatePath } from "next/cache"
 
 export async function getEmpreendimentoDesapropriacoes(empreendimentoId: string) {
     const supabase = await createClient();
+    const { data: { user }, error: authError } = await supabase.auth.getUser()
+    if (authError || !user) return null
 
     // 1. Obter o Empreendimento
     const { data: empreendimento, error: empError } = await supabase
@@ -16,7 +18,7 @@ export async function getEmpreendimentoDesapropriacoes(empreendimentoId: string)
         .single();
 
     if (empError || !empreendimento) {
-        console.error("Error fetching empreendimento:", empError);
+        console.error("[getEmpreendimentoDesapropriacoes]", empError);
         return null;
     }
 
@@ -31,7 +33,7 @@ export async function getEmpreendimentoDesapropriacoes(empreendimentoId: string)
         .in('tipo', ['Desapropriação', 'Desapropriações', 'Desapropriações (Ações e Materiais)', 'AÇÃO EXPROPRIATÓRIA']);
 
     if (sError) {
-        console.error("Error fetching expropriation services relative to empreendimento:", sError);
+        console.error("[getEmpreendimentoDesapropriacoes]", sError);
         return null;
     }
 
@@ -149,8 +151,8 @@ export async function addProcesso(data: {
     descricao?: string
 }) {
     const supabase = await createClient()
-    const { data: { user } } = await supabase.auth.getUser()
-    if (!user) return { success: false, error: 'Unauthorized' }
+    const { data: { user }, error: authError } = await supabase.auth.getUser()
+    if (authError || !user) return { success: false, error: 'Não autorizado' }
 
     const { error } = await supabase
         .from('desapropriacao_processos')
@@ -161,22 +163,32 @@ export async function addProcesso(data: {
             perfil_id: user.id
         })
 
-    if (!error) revalidatePath('/desapropriacoes')
-    return { success: !error, error: error?.message }
+    if (error) {
+        console.error("[addProcesso]", error)
+        return { success: false, error: 'Ocorreu um erro interno. Por favor, contate o suporte.' }
+    }
+
+    revalidatePath('/desapropriacoes')
+    return { success: true }
 }
 
 export async function deleteProcesso(id: string) {
     const supabase = await createClient()
-    const { data: { user } } = await supabase.auth.getUser()
-    if (!user) return { success: false, error: 'Unauthorized' }
+    const { data: { user }, error: authError } = await supabase.auth.getUser()
+    if (authError || !user) return { success: false, error: 'Não autorizado' }
 
     const { error } = await supabase
         .from('desapropriacao_processos')
         .delete()
         .eq('id', id)
 
-    if (!error) revalidatePath('/desapropriacoes')
-    return { success: !error, error: error?.message }
+    if (error) {
+        console.error("[deleteProcesso]", error)
+        return { success: false, error: 'Ocorreu um erro interno. Por favor, contate o suporte.' }
+    }
+
+    revalidatePath('/desapropriacoes')
+    return { success: true }
 }
 
 export async function addProcessoComentario(data: {
@@ -185,8 +197,8 @@ export async function addProcessoComentario(data: {
     anexos?: any[]
 }) {
     const supabase = await createClient()
-    const { data: { user } } = await supabase.auth.getUser()
-    if (!user) return { success: false, error: 'Unauthorized' }
+    const { data: { user }, error: authError } = await supabase.auth.getUser()
+    if (authError || !user) return { success: false, error: 'Não autorizado' }
 
     const { data: comentario, error: cError } = await supabase
         .from('processo_comentarios')
@@ -198,7 +210,10 @@ export async function addProcessoComentario(data: {
         .select()
         .single()
 
-    if (cError) return { success: false, error: cError.message }
+    if (cError) {
+        console.error("[addProcessoComentario]", cError)
+        return { success: false, error: 'Ocorreu um erro interno. Por favor, contate o suporte.' }
+    }
 
     if (data.anexos && data.anexos.length > 0) {
         const { error: aError } = await supabase
@@ -209,7 +224,7 @@ export async function addProcessoComentario(data: {
                 comentario_id: comentario.id,
                 perfil_id: user.id
             })))
-        if (aError) console.error("Error adding process comment anexos:", aError);
+        if (aError) console.error("[addProcessoComentario]", aError);
     }
 
     revalidatePath('/desapropriacoes')
@@ -218,16 +233,21 @@ export async function addProcessoComentario(data: {
 
 export async function deleteProcessoComentario(id: string) {
     const supabase = await createClient()
-    const { data: { user } } = await supabase.auth.getUser()
-    if (!user) return { success: false, error: 'Unauthorized' }
+    const { data: { user }, error: authError } = await supabase.auth.getUser()
+    if (authError || !user) return { success: false, error: 'Não autorizado' }
 
     const { error } = await supabase
         .from('processo_comentarios')
         .delete()
         .eq('id', id)
 
-    if (!error) revalidatePath('/desapropriacoes')
-    return { success: !error, error: error?.message }
+    if (error) {
+        console.error("[deleteProcessoComentario]", error)
+        return { success: false, error: 'Ocorreu um erro interno. Por favor, contate o suporte.' }
+    }
+
+    revalidatePath('/desapropriacoes')
+    return { success: true }
 }
 
 export async function addProcessoAnexo(data: {
@@ -238,8 +258,8 @@ export async function addProcessoAnexo(data: {
     tipo_arquivo: string
 }) {
     const supabase = await createClient()
-    const { data: { user } } = await supabase.auth.getUser()
-    if (!user) return { success: false, error: 'Unauthorized' }
+    const { data: { user }, error: authError } = await supabase.auth.getUser()
+    if (authError || !user) return { success: false, error: 'Não autorizado' }
 
     const { error } = await supabase
         .from('processo_anexos')
@@ -252,28 +272,38 @@ export async function addProcessoAnexo(data: {
             perfil_id: user.id
         })
 
-    if (!error) revalidatePath('/desapropriacoes')
-    return { success: !error, error: error?.message }
+    if (error) {
+        console.error("[addProcessoAnexo]", error)
+        return { success: false, error: 'Ocorreu um erro interno. Por favor, contate o suporte.' }
+    }
+
+    revalidatePath('/desapropriacoes')
+    return { success: true }
 }
 
 export async function deleteProcessoAnexo(id: string, path: string) {
     const supabase = await createClient()
-    const { data: { user } } = await supabase.auth.getUser()
-    if (!user) return { success: false, error: 'Unauthorized' }
+    const { data: { user }, error: authError } = await supabase.auth.getUser()
+    if (authError || !user) return { success: false, error: 'Não autorizado' }
 
     const { error: storageError } = await supabase.storage
         .from('servico-anexos')
         .remove([path])
 
-    if (storageError) console.warn("Error deleting file from storage:", storageError);
+    if (storageError) console.warn("[deleteProcessoAnexo]", storageError);
 
     const { error } = await supabase
         .from('processo_anexos')
         .delete()
         .eq('id', id)
 
-    if (!error) revalidatePath('/desapropriacoes')
-    return { success: !error, error: error?.message }
+    if (error) {
+        console.error("[deleteProcessoAnexo]", error)
+        return { success: false, error: 'Ocorreu um erro interno. Por favor, contate o suporte.' }
+    }
+
+    revalidatePath('/desapropriacoes')
+    return { success: true }
 }
 
 export async function addComentario(data: { 
@@ -288,9 +318,8 @@ export async function addComentario(data: {
     }[]
 }) {
     const supabase = await createClient()
-    const { data: { user } } = await supabase.auth.getUser()
-
-    if (!user) throw new Error("Unauthorized")
+    const { data: { user }, error: authError } = await supabase.auth.getUser()
+    if (authError || !user) return { error: 'Não autorizado' }
 
     // 1. Criar o comentário
     const { data: comment, error } = await supabase
@@ -304,7 +333,10 @@ export async function addComentario(data: {
         .select()
         .single()
 
-    if (error) return { success: false, error: error.message }
+    if (error) {
+        console.error("[addComentario]", error)
+        return { success: false, error: 'Ocorreu um erro interno. Por favor, contate o suporte.' }
+    }
 
     // 2. Se houver anexos, vincular ao comentário (Inclusão em lote)
     if (data.anexos && data.anexos.length > 0 && comment) {
@@ -327,9 +359,8 @@ export async function addComentario(data: {
 
 export async function deleteComentario(id: string, servico_id: string) {
     const supabase = await createClient()
-    const { data: { user } } = await supabase.auth.getUser()
-
-    if (!user) throw new Error("Unauthorized")
+    const { data: { user }, error: authError } = await supabase.auth.getUser()
+    if (authError || !user) return { error: 'Não autorizado' }
 
     // 1. Buscar caminhos dos arquivos de anexos vinculados a este comentário para limpeza física
     const { data: anexos } = await supabase
@@ -351,11 +382,13 @@ export async function deleteComentario(id: string, servico_id: string) {
         .eq('id', id)
         .eq('perfil_id', user.id)
 
-    if (!error) {
-        revalidatePath(`/desapropriacoes/${servico_id}`)
+    if (error) {
+        console.error("[deleteComentario]", error)
+        return { success: false, error: 'Ocorreu um erro interno. Por favor, contate o suporte.' }
     }
 
-    return { success: !error, error: error?.message }
+    revalidatePath(`/desapropriacoes/${servico_id}`)
+    return { success: true }
 }
 
 export async function addAnexo(data: { 
@@ -367,9 +400,8 @@ export async function addAnexo(data: {
     tipo_arquivo: string
 }) {
     const supabase = await createClient()
-    const { data: { user } } = await supabase.auth.getUser()
-
-    if (!user) throw new Error("Unauthorized")
+    const { data: { user }, error: authError } = await supabase.auth.getUser()
+    if (authError || !user) return { error: 'Não autorizado' }
 
     const { error } = await supabase
         .from('servico_anexos')
@@ -378,21 +410,26 @@ export async function addAnexo(data: {
             perfil_id: user.id
         })
 
-    if (!error) {
-        revalidatePath(`/desapropriacoes/${data.servico_id}`)
+    if (error) {
+        console.error("[addAnexo]", error)
+        return { success: false, error: 'Ocorreu um erro interno. Por favor, contate o suporte.' }
     }
 
-    return { success: !error, error: error?.message }
+    revalidatePath(`/desapropriacoes/${data.servico_id}`)
+    return { success: true }
 }
 
 export async function getSignedUrl(path: string) {
     const supabase = await createClient()
+    const { data: { user }, error: authError } = await supabase.auth.getUser()
+    if (authError || !user) return null
+
     const { data, error } = await supabase.storage
         .from('servico-anexos')
         .createSignedUrl(path, 3600) // 1 hora de validade
 
     if (error) {
-        console.error("Error generating signed URL:", error)
+        console.error("[getSignedUrl]", error)
         return null
     }
 
@@ -401,6 +438,8 @@ export async function getSignedUrl(path: string) {
 
 export async function deleteAnexo(id: string, path: string) {
     const supabase = await createClient()
+    const { data: { user }, error: authError } = await supabase.auth.getUser()
+    if (authError || !user) return { error: 'Não autorizado' }
     
     // 1. Deletar do Storage
     const { error: sError } = await supabase.storage
@@ -408,7 +447,7 @@ export async function deleteAnexo(id: string, path: string) {
         .remove([path])
 
     if (sError) {
-        console.error("Error removing from storage:", sError)
+        console.error("[deleteAnexo]", sError)
     }
 
     // 2. Deletar do Banco
@@ -417,9 +456,11 @@ export async function deleteAnexo(id: string, path: string) {
         .delete()
         .eq('id', id)
 
-    if (!bError) {
-        revalidatePath('/desapropriacoes')
+    if (bError) {
+        console.error("[deleteAnexo]", bError)
+        return { success: false, error: 'Ocorreu um erro interno. Por favor, contate o suporte.' }
     }
 
-    return { success: !bError, error: bError?.message }
+    revalidatePath('/desapropriacoes')
+    return { success: true }
 }

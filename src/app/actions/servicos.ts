@@ -7,6 +7,8 @@ import { Servico } from "@/types"
 
 export async function getServicosByEmpreendimento(empreendimentoId: string) {
     const supabase = await createClient()
+    const { data: { user }, error: authError } = await supabase.auth.getUser()
+    if (authError || !user) return []
     // First get linked contracts
     // We assume there is a relationship table or logic. Based on EmpreendimentoDetails, lets check how it gets contracts.
     // It seems it passes `contratosVinculados`. 
@@ -33,7 +35,7 @@ export async function getServicosByEmpreendimento(empreendimentoId: string) {
         .order("created_at", { ascending: false })
 
     if (error) {
-        console.error("Error fetching servicos:", error)
+        console.error("[getServicosByEmpreendimento]", error)
         return []
     }
 
@@ -42,6 +44,8 @@ export async function getServicosByEmpreendimento(empreendimentoId: string) {
 
 export async function getServicosByEmpreendimentoId(empreendimentoId: string) {
     const supabase = await createClient()
+    const { data: { user }, error: authError } = await supabase.auth.getUser()
+    if (authError || !user) return { data: [] }
     // We need to find the Contracts linked to this Empreendimento.
     // Assuming table `empreendimento_contratos`.
     const { data: links } = await supabase
@@ -61,12 +65,8 @@ export async function getServicosByEmpreendimentoId(empreendimentoId: string) {
         .order('created_at', { ascending: false })
 
     if (error) {
-        console.error("Error getting servicos:", error)
-        return { data: [] } // Return object to match destructuring in page? No, page uses `const { data: servicos } = await ...`
-        // Wait, the page component uses: `const { data: servicos } = await getServicosByEmpreendimentoId(id)`
-        // But here I was returning just `servicos` or `[]`.
-        // The page destructures `data`.
-        // So I should return `{ data: servicos }` or `{ data: [] }`.
+        console.error("[getServicosByEmpreendimentoId]", error)
+        return { data: [] }
     }
 
     return { data: servicos }
@@ -74,6 +74,8 @@ export async function getServicosByEmpreendimentoId(empreendimentoId: string) {
 
 export async function createServico(data: Partial<Servico>) {
     const supabase = await createClient()
+    const { data: { user }, error: authError } = await supabase.auth.getUser()
+    if (authError || !user) return { success: false, error: 'Não autorizado' }
 
     const sanitized = {
         ...data,
@@ -149,13 +151,15 @@ export async function createServico(data: Partial<Servico>) {
 
     revalidatePath("/empreendimentos")
     revalidatePath("/servicos")
-    revalidatePath("/meio-ambiente")
+    revalidatePath("/ambiental")
     revalidatePath(`/empreendimentos/${sanitized.empreendimento_id}`)
     return { success: true, planWarning }
 }
 
 export async function createServiceBatch(empreendimentoIds: string[], data: Partial<Servico>) {
     const supabase = await createClient()
+    const { data: { user }, error: authError } = await supabase.auth.getUser()
+    if (authError || !user) return { success: false, error: 'Não autorizado' }
 
     const sanitizedData = {
         ...data,
@@ -231,12 +235,14 @@ export async function createServiceBatch(empreendimentoIds: string[], data: Part
 
     revalidatePath("/empreendimentos")
     revalidatePath("/servicos")
-    revalidatePath("/meio-ambiente")
+    revalidatePath("/ambiental")
     return { success: true, planWarning }
 }
 
 export async function updateServico(id: string, data: Partial<Servico>) {
     const supabase = await createClient()
+    const { data: { user }, error: authError } = await supabase.auth.getUser()
+    if (authError || !user) return { success: false, error: 'Não autorizado' }
 
     const sanitized = {
         ...data
@@ -261,7 +267,7 @@ export async function updateServico(id: string, data: Partial<Servico>) {
 
     revalidatePath("/empreendimentos")
     revalidatePath("/servicos")
-    revalidatePath("/meio-ambiente")
+    revalidatePath("/ambiental")
     
     // Buscar o empreendimento_id para revalidação específica se não estiver no payload
     if (data.empreendimento_id) {
@@ -276,6 +282,8 @@ export async function updateServico(id: string, data: Partial<Servico>) {
 
 export async function deleteServico(id: string) {
     const supabase = await createClient()
+    const { data: { user }, error: authError } = await supabase.auth.getUser()
+    if (authError || !user) return { success: false, error: 'Não autorizado' }
     const { error } = await supabase
         .from("servicos")
         .delete()
@@ -291,6 +299,8 @@ export async function deleteServico(id: string) {
 
 export async function updateServicoOrder(orders: { id: string, ordem: number }[]) {
     const supabase = await createClient()
+    const { data: { user }, error: authError } = await supabase.auth.getUser()
+    if (authError || !user) return { success: false, error: 'Não autorizado' }
 
     // Loop through and update each one individually to avoid constraint violations with upsert
     const updates = orders.map(async (o) => {

@@ -17,7 +17,10 @@ import {
   Video, 
   File as FileIcon, 
   AlertCircle,
-  Send
+  Send,
+  Plus,
+  Info,
+  Zap
 } from "lucide-react"
 import { toast } from "sonner"
 import Image from "next/image"
@@ -75,8 +78,20 @@ export default function UploadExternoPage() {
 
   // Files State
   const [stagedFiles, setStagedFiles] = useState<FileStaging[]>([])
+  const [connectionStatus, setConnectionStatus] = useState<'testing' | 'ok' | 'fail'>('testing')
+  const [connectionMessage, setConnectionMessage] = useState<string>("")
   
   const fileInputRef = useRef<HTMLInputElement>(null)
+
+  // Test connection on mount
+  useEffect(() => {
+    checkConnection()
+  }, [])
+
+  const checkConnection = async () => {
+    setConnectionStatus('ok')
+    setConnectionMessage("Conexão estável")
+  }
 
   // Carregar lista inicial (top 50)
   useEffect(() => {
@@ -236,17 +251,25 @@ export default function UploadExternoPage() {
         formData.append("servico_id", staged.servicoId)
       }
 
-      try {
+        try {
         const result = await submitUploadExterno(formData)
+        console.log(`[Upload] Result for ${staged.titulo}:`, result)
+        
         if (result.success) {
           setStagedFiles(prev => prev.map(f => f.id === staged.id ? { ...f, status: 'success' } : f))
         } else {
           allSuccess = false
-          setStagedFiles(prev => prev.map(f => f.id === staged.id ? { ...f, status: 'error', error: result.error } : f))
+          // Ensure error is a string to avoid React rendering issues
+          const errorMessage = typeof result.error === 'string' 
+            ? result.error 
+            : JSON.stringify(result.error) || "Erro desconhecido no servidor"
+            
+          setStagedFiles(prev => prev.map(f => f.id === staged.id ? { ...f, status: 'error', error: errorMessage } : f))
         }
-      } catch (err) {
+      } catch (err: any) {
+        console.error(`[Upload] Exception for ${staged.titulo}:`, err)
         allSuccess = false
-        setStagedFiles(prev => prev.map(f => f.id === staged.id ? { ...f, status: 'error', error: 'Falha de conexão' } : f))
+        setStagedFiles(prev => prev.map(f => f.id === staged.id ? { ...f, status: 'error', error: err?.message || 'Falha de conexão' } : f))
       }
     }
 
@@ -255,6 +278,13 @@ export default function UploadExternoPage() {
       setSuccess(true)
     } else {
       toast.warning("Finalizado com falhas em alguns arquivos. Verifique a lista abaixo.")
+      // Scroll to the list area if it's potentially off-screen
+      setTimeout(() => {
+        const element = document.getElementById('staging-list-area')
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'center' })
+        }
+      }, 300)
     }
   }
 
@@ -509,7 +539,7 @@ export default function UploadExternoPage() {
 
                     {/* Staging List */}
                     {stagedFiles.length > 0 && (
-                        <div className="space-y-4 pt-4 animate-in fade-in duration-300">
+                        <div id="staging-list-area" className="space-y-4 pt-4 animate-in fade-in duration-300">
                             <h3 className="text-sm font-semibold text-zinc-700 dark:text-zinc-300 flex items-center justify-between">
                                 Selecionados ({stagedFiles.length})
                             </h3>

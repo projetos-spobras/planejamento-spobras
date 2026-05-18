@@ -6,6 +6,8 @@ import { startOfDay, endOfDay } from "date-fns"
 
 export async function getEmpreendimentoAnexos(empreendimentoId: string) {
     const supabase = await createClient()
+    const { data: { user }, error: authError } = await supabase.auth.getUser()
+    if (authError || !user) return []
 
     const { data: anexos, error } = await supabase
         .from('empreendimento_anexos')
@@ -19,7 +21,7 @@ export async function getEmpreendimentoAnexos(empreendimentoId: string) {
         .order('created_at', { ascending: false })
 
     if (error) {
-        console.error("Erro ao buscar anexos:", error)
+        console.error("[getEmpreendimentoAnexos]", error)
         return []
     }
 
@@ -28,9 +30,8 @@ export async function getEmpreendimentoAnexos(empreendimentoId: string) {
 
 export async function addEmpreendimentoAnexo(formData: FormData) {
     const supabase = await createClient()
-    const { data: { user } } = await supabase.auth.getUser()
-
-    if (!user) throw new Error("Não autorizado")
+    const { data: { user }, error: authError } = await supabase.auth.getUser()
+    if (authError || !user) return { success: false, error: 'Não autorizado' }
 
     const empreendimentoId = formData.get("id") as string
     const titulo = formData.get("titulo") as string
@@ -54,8 +55,8 @@ export async function addEmpreendimentoAnexo(formData: FormData) {
         .lte('created_at', fimDia)
 
     if (countError) {
-        console.error("Erro ao contar anexos do dia:", countError)
-        return { success: false, error: "Erro ao gerar numeração" }
+        console.error("[addEmpreendimentoAnexo]", countError)
+        return { success: false, error: 'Ocorreu um erro interno. Por favor, contate o suporte.' }
     }
 
     const proximoNumero = (count || 0) + 1
@@ -70,8 +71,8 @@ export async function addEmpreendimentoAnexo(formData: FormData) {
         .upload(filePath, file)
 
     if (uploadError) {
-        console.error("Erro no upload do storage:", uploadError)
-        return { success: false, error: "Erro ao salvar arquivo físico" }
+        console.error("[addEmpreendimentoAnexo]", uploadError)
+        return { success: false, error: 'Ocorreu um erro interno. Por favor, contate o suporte.' }
     }
 
     // 3. Salvar no Banco
@@ -91,8 +92,8 @@ export async function addEmpreendimentoAnexo(formData: FormData) {
     if (insertError) {
         // Rollback storage if database fails
         await supabase.storage.from('empreendimento-anexos').remove([filePath])
-        console.error("Erro ao salvar no banco:", insertError)
-        return { success: false, error: "Erro ao salvar metadados" }
+        console.error("[addEmpreendimentoAnexo]", insertError)
+        return { success: false, error: 'Ocorreu um erro interno. Por favor, contate o suporte.' }
     }
 
     revalidatePath(`/empreendimentos/${empreendimentoId}`)
@@ -101,9 +102,8 @@ export async function addEmpreendimentoAnexo(formData: FormData) {
 
 export async function deleteEmpreendimentoAnexo(id: string, path: string, empreendimentoId: string) {
     const supabase = await createClient()
-    const { data: { user } } = await supabase.auth.getUser()
-
-    if (!user) throw new Error("Não autorizado")
+    const { data: { user }, error: authError } = await supabase.auth.getUser()
+    if (authError || !user) return { success: false, error: 'Não autorizado' }
 
     // 1. Deletar do Storage
     const { error: storageError } = await supabase.storage
@@ -111,7 +111,7 @@ export async function deleteEmpreendimentoAnexo(id: string, path: string, empree
         .remove([path])
 
     if (storageError) {
-        console.warn("Erro ao remover do storage (continuando deleção no banco):", storageError)
+        console.warn("[deleteEmpreendimentoAnexo]", storageError)
     }
 
     // 2. Deletar do Banco
@@ -121,8 +121,8 @@ export async function deleteEmpreendimentoAnexo(id: string, path: string, empree
         .eq('id', id)
 
     if (dbError) {
-        console.error("Erro ao deletar do banco:", dbError)
-        return { success: false, error: dbError.message }
+        console.error("[deleteEmpreendimentoAnexo]", dbError)
+        return { success: false, error: 'Ocorreu um erro interno. Por favor, contate o suporte.' }
     }
 
     revalidatePath(`/empreendimentos/${empreendimentoId}`)
@@ -131,9 +131,8 @@ export async function deleteEmpreendimentoAnexo(id: string, path: string, empree
 
 export async function editEmpreendimentoAnexo(id: string, empreendimentoId: string, titulo: string, servicoId: string | null) {
     const supabase = await createClient()
-    const { data: { user } } = await supabase.auth.getUser()
-
-    if (!user) throw new Error("Não autorizado")
+    const { data: { user }, error: authError } = await supabase.auth.getUser()
+    if (authError || !user) return { success: false, error: 'Não autorizado' }
 
     const { error } = await supabase
         .from('empreendimento_anexos')
@@ -146,8 +145,8 @@ export async function editEmpreendimentoAnexo(id: string, empreendimentoId: stri
         .eq('id', id)
 
     if (error) {
-        console.error("Erro ao atualizar anexo:", error)
-        return { success: false, error: "Falha ao editar os dados da imagem" }
+        console.error("[editEmpreendimentoAnexo]", error)
+        return { success: false, error: 'Ocorreu um erro interno. Por favor, contate o suporte.' }
     }
 
     revalidatePath(`/empreendimentos/${empreendimentoId}`)

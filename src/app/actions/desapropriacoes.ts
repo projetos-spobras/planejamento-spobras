@@ -1,6 +1,6 @@
 "use server"
 
-import { createClient, createAdminClient } from "@/lib/supabase/server"
+import { createClient } from "@/lib/supabase/server"
 
 // ============================================ //
 // Ações do Dashboard (Autenticadas)
@@ -8,6 +8,8 @@ import { createClient, createAdminClient } from "@/lib/supabase/server"
 
 export async function getDesapropriacoesAgrupadas(page: number = 1, limit: number = 10) {
     const supabase = await createClient()
+    const { data: { user }, error: authError } = await supabase.auth.getUser()
+    if (authError || !user) return { data: [], count: 0 }
 
     const from = (page - 1) * limit;
     const to = from + limit - 1;
@@ -31,8 +33,8 @@ export async function getDesapropriacoesAgrupadas(page: number = 1, limit: numbe
         .range(from, to)
 
     if (error) {
-        console.error("Error fetching grouped expropriation services:", error)
-        return { data: [], count: 0 }
+        console.error("[getDesapropriacoesAgrupadas]", error)
+        return { data: [], count: 0, error: 'Ocorreu um erro interno. Por favor, contate o suporte.' }
     }
 
     if (!data || data.length === 0) {
@@ -89,13 +91,13 @@ export async function submitDesapropriacaoPublica(formData: {
     valor_estimado: number
     observacoes?: string
 }) {
-    // Usamos admin client pois o formulário é público e pode bater na RLS
-    const supabaseAdmin = createAdminClient()
+    // Usamos client anon pois o formulário é público. RLS deve permitir INSERT.
+    const supabase = await createClient()
 
     // Preparar o payload. O campo `codigo` ou `descricao` pode ser genérico ou gerado.
     const descricao = `Cadastro de Desapropriações Públicas`
 
-    const { data, error } = await supabaseAdmin
+    const { data, error } = await supabase
         .from('servicos')
         .insert({
             empreendimento_id: formData.empreendimento_id,
@@ -113,39 +115,39 @@ export async function submitDesapropriacaoPublica(formData: {
         .single()
 
     if (error) {
-        console.error("Erro ao enviar desapropriação:", error)
-        return { success: false, error: error.message }
+        console.error("[submitDesapropriacaoPublica]", error)
+        return { success: false, error: 'Ocorreu um erro interno. Por favor, contate o suporte.' }
     }
 
     return { success: true, data }
 }
 
 export async function getEmpreendimentosPublicos() {
-    const supabaseAdmin = createAdminClient()
+    const supabase = await createClient()
     
     // Buscar todos os empreendimentos ativos para o combobox
-    const { data, error } = await supabaseAdmin
+    const { data, error } = await supabase
         .from('empreendimentos')
         .select('id, nome, codigo')
         .order('nome', { ascending: true })
 
     if (error) {
-        console.error("Error fetching empreendimentos:", error)
+        console.error("[getEmpreendimentosPublicos]", error)
         return []
     }
     return data || []
 }
 
 export async function getContratosPublicos() {
-    const supabaseAdmin = createAdminClient()
+    const supabase = await createClient()
     
-    const { data, error } = await supabaseAdmin
+    const { data, error } = await supabase
         .from('contratos')
         .select('id, numero, contratada, tipo')
         .order('numero', { ascending: true })
 
     if (error) {
-        console.error("Error fetching contratos:", error)
+        console.error("[getContratosPublicos]", error)
         return []
     }
     return data || []

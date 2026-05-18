@@ -10,9 +10,10 @@ import Image from "next/image"
 interface DashboardShellProps {
     children: React.ReactNode
     userRole?: string
+    modulosAcesso?: string[]
 }
 
-export function DashboardShell({ children, userRole }: DashboardShellProps) {
+export function DashboardShell({ children, userRole, modulosAcesso }: DashboardShellProps) {
     const [isCollapsed, setIsCollapsed] = useState(false)
 
     return (
@@ -28,6 +29,7 @@ export function DashboardShell({ children, userRole }: DashboardShellProps) {
                     isCollapsed={isCollapsed}
                     toggleCollapse={() => setIsCollapsed(!isCollapsed)}
                     userRole={userRole}
+                    modulosAcesso={modulosAcesso}
                 />
             </div>
 
@@ -39,15 +41,18 @@ export function DashboardShell({ children, userRole }: DashboardShellProps) {
                 )}
             >
                 <header className="h-14 border-b flex items-center px-4 md:hidden shrink-0 gap-3">
-                    <MobileSidebar />
+                    <MobileSidebar modulosAcesso={modulosAcesso} userRole={userRole} />
+
                     <div className="flex items-center gap-2">
                         <div className="relative w-28 h-8">
                             <Image
                                 src="/logo-prefeitura.png"
-                                alt="Prefeitura"
+                                alt="Prefeitura de São Paulo"
                                 fill
                                 unoptimized
                                 className="object-contain"
+                                priority
+                                sizes="160px"
                             />
                         </div>
                         <div className="h-6 w-[1px] bg-border" />
@@ -58,6 +63,8 @@ export function DashboardShell({ children, userRole }: DashboardShellProps) {
                                 fill
                                 unoptimized
                                 className="object-contain"
+                                priority
+                                sizes="64px"
                             />
                         </div>
                     </div>

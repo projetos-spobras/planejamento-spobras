@@ -7,6 +7,7 @@ export type Empreendimento = {
     localizacao: string | null
     gerencia_id: string | null
     status: string | null
+    status_nome?: string | null
     valor_total: number
     programa: string | null
     subprefeitura: string | null

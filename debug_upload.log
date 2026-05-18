@@ -1,0 +1,144 @@
+[2026-04-10T17:07:44.017Z] [testConnection] Chamada de teste recebida
+[2026-04-10T17:07:56.431Z] [submitUploadExterno] INICIADO
+[2026-04-10T17:07:56.432Z] [submitUploadExterno] Dados recebidos: titulo=Estação_Chucri_Zaidan_(2018), file=Estação_Chucri_Zaidan_(2018).jpg, size=1455461
+[2026-04-10T17:07:56.438Z] [submitUploadExterno] Env Check: URL=true, ServiceKey=false, AnonKey=true
+[2026-04-10T17:07:56.438Z] [submitUploadExterno] Contando anexos para emp: 17a8c6b2-5489-4a76-848c-f43e5bc0b24f
+[2026-04-10T17:07:56.668Z] [submitUploadExterno] Próximo número: 1
+[2026-04-10T17:07:56.669Z] [submitUploadExterno] Uploading para storage: 17a8c6b2-5489-4a76-848c-f43e5bc0b24f/1775840876669-521pst8zrxv.jpg
+[2026-04-10T17:07:57.226Z] [submitUploadExterno] Erro no storage: new row violates row-level security policy
+[2026-04-10T17:12:05.498Z] [testConnection] Chamada de teste recebida
+[2026-04-10T17:12:14.899Z] [submitUploadExterno] INICIADO
+[2026-04-10T17:12:14.901Z] [submitUploadExterno] Dados recebidos: titulo=Estação_Chucri_Zaidan_(2018), file=Estação_Chucri_Zaidan_(2018).jpg, size=1455461
+[2026-04-10T17:12:14.901Z] [submitUploadExterno] Env Check: URL=true, ServiceKey=true, AnonKey=true
+[2026-04-10T17:12:14.902Z] [submitUploadExterno] Contando anexos para emp: 17a8c6b2-5489-4a76-848c-f43e5bc0b24f
+[2026-04-10T17:12:15.074Z] [submitUploadExterno] Próximo número: 1
+[2026-04-10T17:12:15.075Z] [submitUploadExterno] Uploading para storage: 17a8c6b2-5489-4a76-848c-f43e5bc0b24f/1775841135075-qbzkw32rcs.jpg
+[2026-04-10T17:12:15.722Z] [submitUploadExterno] Salvando no banco: Estação_Chucri_Zaidan_(2018)
+[2026-04-10T17:12:15.958Z] [submitUploadExterno] SUCESSO: Estação_Chucri_Zaidan_(2018)
+[2026-04-10T17:12:37.459Z] [Proxy] Redirecting to login: /
+[2026-04-10T17:17:10.362Z] [Proxy] Redirecting to home: /login
+[2026-04-10T17:18:26.699Z] [testConnection] Chamada de teste recebida
+[2026-04-10T17:18:51.265Z] [submitUploadExterno] INICIADO
+[2026-04-10T17:18:51.266Z] [submitUploadExterno] Dados recebidos: titulo=1, file=1. Quadra 12 - Rede Secundária ENEL.png, size=380123
+[2026-04-10T17:18:51.266Z] [submitUploadExterno] Env Check: URL=true, ServiceKey=true, AnonKey=true
+[2026-04-10T17:18:51.267Z] [submitUploadExterno] Contando anexos para emp: 9c67a5e3-20e3-44bd-8be6-733e962b17c3
+[2026-04-10T17:18:51.480Z] [submitUploadExterno] Próximo número: 1
+[2026-04-10T17:18:51.481Z] [submitUploadExterno] Uploading para storage: 9c67a5e3-20e3-44bd-8be6-733e962b17c3/1775841531480-2y5tbo02u1i.png
+[2026-04-10T17:18:52.026Z] [submitUploadExterno] Salvando no banco: 1
+[2026-04-10T17:18:52.221Z] [submitUploadExterno] SUCESSO: 1
+[2026-04-10T17:18:52.240Z] [submitUploadExterno] INICIADO
+[2026-04-10T17:18:52.241Z] [submitUploadExterno] Dados recebidos: titulo=2, file=2. Exec. Acab. pelo CCI.png, size=307564
+[2026-04-10T17:18:52.241Z] [submitUploadExterno] Env Check: URL=true, ServiceKey=true, AnonKey=true
+[2026-04-10T17:18:52.241Z] [submitUploadExterno] Contando anexos para emp: 9c67a5e3-20e3-44bd-8be6-733e962b17c3
+[2026-04-10T17:18:52.367Z] [submitUploadExterno] Próximo número: 2
+[2026-04-10T17:18:52.368Z] [submitUploadExterno] Uploading para storage: 9c67a5e3-20e3-44bd-8be6-733e962b17c3/1775841532368-acuridvtjc.png
+[2026-04-10T17:18:52.666Z] [submitUploadExterno] Salvando no banco: 2
+[2026-04-10T17:18:52.803Z] [submitUploadExterno] SUCESSO: 2
+[2026-04-10T17:18:52.818Z] [submitUploadExterno] INICIADO
+[2026-04-10T17:18:52.819Z] [submitUploadExterno] Dados recebidos: titulo=3, file=3. Preparação para Binder.png, size=336398
+[2026-04-10T17:18:52.819Z] [submitUploadExterno] Env Check: URL=true, ServiceKey=true, AnonKey=true
+[2026-04-10T17:18:52.820Z] [submitUploadExterno] Contando anexos para emp: 9c67a5e3-20e3-44bd-8be6-733e962b17c3
+[2026-04-10T17:18:52.943Z] [submitUploadExterno] Próximo número: 3
+[2026-04-10T17:18:52.944Z] [submitUploadExterno] Uploading para storage: 9c67a5e3-20e3-44bd-8be6-733e962b17c3/1775841532944-o6ayca7xrik.png
+[2026-04-10T17:18:53.161Z] [submitUploadExterno] Salvando no banco: 3
+[2026-04-10T17:18:53.282Z] [submitUploadExterno] SUCESSO: 3
+[2026-04-10T17:18:53.299Z] [submitUploadExterno] INICIADO
+[2026-04-10T17:18:53.300Z] [submitUploadExterno] Dados recebidos: titulo=4, file=4. Sinal. Horizontal CET.png, size=418342
+[2026-04-10T17:18:53.301Z] [submitUploadExterno] Env Check: URL=true, ServiceKey=true, AnonKey=true
+[2026-04-10T17:18:53.301Z] [submitUploadExterno] Contando anexos para emp: 9c67a5e3-20e3-44bd-8be6-733e962b17c3
+[2026-04-10T17:18:53.395Z] [submitUploadExterno] Próximo número: 4
+[2026-04-10T17:18:53.395Z] [submitUploadExterno] Uploading para storage: 9c67a5e3-20e3-44bd-8be6-733e962b17c3/1775841533395-wawag1nnnyq.png
+[2026-04-10T17:18:53.915Z] [submitUploadExterno] Salvando no banco: 4
+[2026-04-10T17:18:54.005Z] [submitUploadExterno] SUCESSO: 4
+[2026-04-10T17:18:54.022Z] [submitUploadExterno] INICIADO
+[2026-04-10T17:18:54.022Z] [submitUploadExterno] Dados recebidos: titulo=5, file=5. Prep. Subleito da Calçada - Quadra 46.png, size=363668
+[2026-04-10T17:18:54.023Z] [submitUploadExterno] Env Check: URL=true, ServiceKey=true, AnonKey=true
+[2026-04-10T17:18:54.023Z] [submitUploadExterno] Contando anexos para emp: 9c67a5e3-20e3-44bd-8be6-733e962b17c3
+[2026-04-10T17:18:54.091Z] [submitUploadExterno] Próximo número: 5
+[2026-04-10T17:18:54.091Z] [submitUploadExterno] Uploading para storage: 9c67a5e3-20e3-44bd-8be6-733e962b17c3/1775841534091-stz4xwdec7i.png
+[2026-04-10T17:18:54.578Z] [submitUploadExterno] Salvando no banco: 5
+[2026-04-10T17:18:54.673Z] [submitUploadExterno] SUCESSO: 5
+[2026-04-10T17:18:54.697Z] [submitUploadExterno] INICIADO
+[2026-04-10T17:18:54.698Z] [submitUploadExterno] Dados recebidos: titulo=6, file=6. Lanç. Reforço SMA.png, size=335536
+[2026-04-10T17:18:54.698Z] [submitUploadExterno] Env Check: URL=true, ServiceKey=true, AnonKey=true
+[2026-04-10T17:18:54.699Z] [submitUploadExterno] Contando anexos para emp: 9c67a5e3-20e3-44bd-8be6-733e962b17c3
+[2026-04-10T17:18:54.769Z] [submitUploadExterno] Próximo número: 6
+[2026-04-10T17:18:54.769Z] [submitUploadExterno] Uploading para storage: 9c67a5e3-20e3-44bd-8be6-733e962b17c3/1775841534769-nmt5cpry2d.png
+[2026-04-10T17:18:54.966Z] [submitUploadExterno] Salvando no banco: 6
+[2026-04-10T17:18:55.042Z] [submitUploadExterno] SUCESSO: 6
+[2026-04-10T17:21:04.463Z] [testConnection] Chamada de teste recebida
+[2026-04-10T17:45:08.245Z] [testConnection] Chamada de teste recebida
+[2026-04-10T17:45:43.112Z] [testConnection] Chamada de teste recebida
+[2026-04-10T17:49:37.980Z] [submitUploadExterno] INICIADO
+[2026-04-10T17:49:37.981Z] [submitUploadExterno] Dados recebidos: titulo=Terminal Itaquera 14102025, file=Terminal Itaquera 14102025.jpeg, size=377634
+[2026-04-10T17:49:37.981Z] [submitUploadExterno] Env Check: URL=true, ServiceKey=true, AnonKey=true
+[2026-04-10T17:49:37.982Z] [submitUploadExterno] Contando anexos para emp: 90bbf04b-6cad-4482-8a76-d77e221798eb
+[2026-04-10T17:49:38.125Z] [submitUploadExterno] Próximo número: 1
+[2026-04-10T17:49:38.126Z] [submitUploadExterno] Uploading para storage: 90bbf04b-6cad-4482-8a76-d77e221798eb/1775843378126-oecburrqjeq.jpeg
+[2026-04-10T17:49:38.597Z] [submitUploadExterno] Salvando no banco: Terminal Itaquera 14102025
+[2026-04-10T17:49:38.777Z] [submitUploadExterno] SUCESSO: Terminal Itaquera 14102025
+[2026-04-10T17:49:52.008Z] [testConnection] Chamada de teste recebida
+[2026-04-10T17:53:46.021Z] [testConnection] Chamada de teste recebida
+[2026-04-10T18:28:39.316Z] [testConnection] Chamada de teste recebida
+[2026-04-10T18:30:03.566Z] [testConnection] Chamada de teste recebida
+[2026-04-13T10:58:03.892Z] [testConnection] Chamada de teste recebida
+[2026-04-13T12:57:10.925Z] [Proxy] Redirecting to login: /empreendimentos
+[2026-04-13T12:57:12.657Z] [Proxy] Redirecting to login: /empreendimentos/026af965-76c1-44ad-89d3-6348a53e979e
+[2026-04-13T12:57:12.678Z] [Proxy] Redirecting to login: /empreendimentos/0a5ea10f-2935-4420-8021-3f0e311fdc66
+[2026-04-13T12:57:12.713Z] [Proxy] Redirecting to login: /empreendimentos/78859c51-c7fc-4ad4-893d-9a05d91a7ee5
+[2026-04-13T12:57:12.744Z] [Proxy] Redirecting to login: /empreendimentos/7fa34558-5d8a-494f-870c-aca016aade58
+[2026-04-13T13:59:43.196Z] [Proxy] Redirecting to login: /
+[2026-04-13T14:00:13.135Z] [Proxy] Redirecting to home: /login
+[2026-04-13T14:06:45.021Z] [testConnection] Chamada de teste recebida
+[2026-04-13T14:15:58.238Z] [Proxy] Redirecting to login: /
+[2026-04-13T14:16:09.461Z] [Proxy] Redirecting to home: /login
+[2026-04-13T18:40:25.399Z] [Proxy] Redirecting to login: /empreendimentos
+[2026-04-13T18:40:34.029Z] [Proxy] Redirecting to home: /login
+[2026-04-14T18:20:22.290Z] [testConnection] Chamada de teste recebida
+[2026-04-15T16:27:12.405Z] [testConnection] Chamada de teste recebida
+[2026-04-15T19:10:07.016Z] [Proxy] Redirecting to login: /
+[2026-04-15T19:10:07.668Z] [Proxy] Redirecting to login: /
+[2026-04-15T19:10:07.682Z] [Proxy] Redirecting to login: /
+[2026-04-17T13:11:49.268Z] [Proxy] Redirecting to login: /usuarios
+[2026-04-17T13:26:19.170Z] [Proxy] Redirecting to login: /
+[2026-04-22T14:10:15.705Z] [Proxy] Redirecting to login: /api/proxy-sid
+[2026-04-22T14:10:15.863Z] [Proxy] Redirecting to login: /api/proxy-sid
+[2026-04-22T14:10:16.767Z] [Proxy] Redirecting to login: /api/proxy-sid
+[2026-04-22T14:21:55.359Z] [Proxy] Redirecting to login: /api/proxy-sid
+[2026-04-22T14:21:55.369Z] [Proxy] Redirecting to login: /api/proxy-sid
+[2026-04-22T14:21:55.694Z] [Proxy] Redirecting to login: /api/proxy-sid
+[2026-04-22T14:25:32.303Z] [Proxy] Redirecting to login: /api/proxy-sid
+[2026-04-22T14:31:24.961Z] [Proxy] Redirecting to login: /api/proxy-sid
+[2026-04-22T14:31:25.178Z] [Proxy] Redirecting to login: /api/proxy-sid
+[2026-04-22T14:31:25.524Z] [Proxy] Redirecting to login: /api/proxy-sid
+[2026-04-22T14:39:48.187Z] [Proxy] Redirecting to login: /api/proxy-sid
+[2026-04-22T14:46:32.603Z] [Proxy] Redirecting to login: /api/proxy-sid
+[2026-04-22T14:46:49.233Z] [Proxy] Redirecting to login: /contratos
+[2026-04-22T14:46:52.744Z] [Proxy] Redirecting to login: /api/proxy-sid
+[2026-04-22T14:46:53.027Z] [Proxy] Redirecting to login: /api/proxy-sid
+[2026-04-22T14:47:02.537Z] [Proxy] Redirecting to home: /login
+[2026-04-22T14:58:05.217Z] [Proxy] Redirecting to login: /api/proxy-sid
+[2026-04-22T14:58:05.222Z] [Proxy] Redirecting to login: /api/proxy-sid
+[2026-04-22T14:58:05.565Z] [Proxy] Redirecting to login: /api/proxy-sid
+[2026-04-22T15:06:36.581Z] [Proxy] Redirecting to login: /empreendimentos
+[2026-04-22T15:06:45.989Z] [Proxy] Redirecting to home: /login
+[2026-04-22T15:31:40.950Z] [Proxy] Redirecting to login: /
+[2026-04-22T15:31:49.312Z] [Proxy] Redirecting to home: /login
+[2026-04-22T15:41:49.210Z] [Proxy] Redirecting to login: /empreendimentos
+[2026-04-22T15:42:03.554Z] [Proxy] Redirecting to home: /login
+[2026-05-15T18:18:00.263Z] [submitUploadExterno] INICIADO
+[2026-05-15T18:18:00.624Z] [submitUploadExterno] Uploading: af67fd39-3e98-489a-85d0-d7298684c476/f07f9c8a-ce8b-4dfe-b1dc-16a9d40bdd91.jpg (Original: Imagem1.jpg)
+[2026-05-15T18:18:01.611Z] [submitUploadExterno] INICIADO
+[2026-05-15T18:18:01.696Z] [submitUploadExterno] Uploading: af67fd39-3e98-489a-85d0-d7298684c476/f1e48b1d-b784-4394-9c05-2cb0834b5256.jpg (Original: Imagem2.jpg)
+[2026-05-15T18:18:02.131Z] [submitUploadExterno] INICIADO
+[2026-05-15T18:18:02.212Z] [submitUploadExterno] Uploading: af67fd39-3e98-489a-85d0-d7298684c476/3786b137-34cd-4dce-b3ee-b122dd2f3a61.jpg (Original: Imagem3.jpg)
+[2026-05-15T18:18:02.801Z] [submitUploadExterno] INICIADO
+[2026-05-15T18:18:02.976Z] [submitUploadExterno] Uploading: af67fd39-3e98-489a-85d0-d7298684c476/931fd3b1-bc75-4daa-bbfc-19bfa9a4a28a.jpg (Original: Imagem4.jpg)
+[2026-05-15T18:18:03.494Z] [submitUploadExterno] INICIADO
+[2026-05-15T18:18:03.602Z] [submitUploadExterno] Uploading: af67fd39-3e98-489a-85d0-d7298684c476/878c6df7-44a3-40e6-8e68-5fc1e9b3aa4d.jpg (Original: Imagem6.jpg)
+[2026-05-15T18:18:04.087Z] [submitUploadExterno] INICIADO
+[2026-05-15T18:18:04.178Z] [submitUploadExterno] Uploading: af67fd39-3e98-489a-85d0-d7298684c476/25abb284-b741-4428-bc31-acfeb04c311b.jpg (Original: Imagem7.jpg)
+[2026-05-18T19:53:28.169Z] [submitUploadExterno] INICIADO
+[2026-05-18T19:53:28.372Z] [submitUploadExterno] Uploading: af67fd39-3e98-489a-85d0-d7298684c476/d09a5690-23b7-4f35-b3b5-9eeacdf197af.png (Original: Gemini_Generated_Image_i5e27yi5e27yi5e2-removebg-preview.png)
+[2026-05-18T20:53:38.333Z] [submitUploadExterno] INICIADO
+[2026-05-18T20:53:39.381Z] [submitUploadExterno] Uploading: af67fd39-3e98-489a-85d0-d7298684c476/ddce3f4c-4158-4a8f-954d-e5b92136180a.jpg (Original: Estacao_Chucri_Zaidan__2018_.jpg)

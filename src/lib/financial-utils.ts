@@ -157,3 +157,30 @@ export function calculateFinancialIndicators(
         valorPlanejadoTotal
     }
 }
+
+/**
+ * Calcula o percentual medido (0–100) baseado na soma das medições (P0 + Reajuste)
+ * em relação à soma dos contratos (Original + Aditamentos).
+ */
+export function calcularPercentualMedido(
+    medicoes: any[],
+    contratos: any[]
+): number {
+    if (!medicoes?.length || !contratos?.length) return 0
+
+    const totalMedido = medicoes.reduce((acc, m) => {
+        // Campos reais da API: valor_p0 e valor_reajuste
+        return acc + (Number(m.valor_p0) || 0) + (Number(m.valor_reajuste) || 0)
+    }, 0)
+
+    const totalContratado = contratos.reduce((acc, cv) => {
+        // Campos reais da API: valor_original e valor_aditamento
+        const c = cv.contrato
+        return acc + (Number(c?.valor_original) || 0) + (Number(c?.valor_aditamento) || 0)
+    }, 0)
+
+    if (totalContratado <= 0) return 0
+
+    const percentual = (totalMedido / totalContratado) * 100
+    return Math.min(Math.round(percentual * 10) / 10, 100)
+}

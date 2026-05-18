@@ -1,7 +1,7 @@
 
 "use client"
 
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect, useCallback, useMemo } from "react"
 import { useParams } from "next/navigation"
 import { format } from "date-fns"
 import { ptBR } from "date-fns/locale"
@@ -9,7 +9,8 @@ import { Link2, Trash2, ExternalLink, Banknote, CalendarDays, FilePen, Hammer } 
 import { toast } from "sonner"
 import Link from "next/link"
 
-import { AvancoFisicoCard } from "@/components/medicoes/avanco-fisico-card"
+import { AvancoFinanceiroCard } from "@/components/empreendimentos/AvancoFinanceiroCard"
+import { calcularPercentualMedido } from "@/lib/financial-utils"
 import { RelatedMedicoesList, RelatedMedicao } from "@/components/relationships/related-medicoes-list"
 
 import { Button } from "@/components/ui/button"
@@ -42,6 +43,8 @@ import { Badge } from "@/components/ui/badge"
 import { PlanningTabContent } from "@/components/planning/planning-tab-content"
 import { ServicosTabContent } from "@/components/relationships/servicos-tab-content"
 import { AnexosTabContent } from "@/components/relationships/anexos-tab-content"
+import { AditamentosTabContent } from "@/components/aditamentos/aditamentos-tab-content"
+import { type Aditamento, importLegacyAditamentos } from "@/app/actions/aditamentos"
 
 interface EmpreendimentoDetailsProps {
     empreendimento: Empreendimento
@@ -96,6 +99,12 @@ interface EmpreendimentoDetailsProps {
     tiposServico?: string[]
     anexos?: any[]
     contratosComOriginalId?: { id: string; numero: string; _originalId: string | number }[]
+    aditamentos?: Aditamento[]
+    valorTotalContratos?: number
+    valorMedidoData?: number
+    totalPlanejadoObras?: number
+    hasAmbiental?: boolean
+    hasPendenciaAmbiental?: boolean
 }
 
 export function EmpreendimentoDetails({
@@ -113,15 +122,25 @@ export function EmpreendimentoDetails({
     tiposServico = [],
     anexos = [],
     contratosComOriginalId = [],
+    aditamentos: aditamentosIniciais = [],
+    valorTotalContratos,
+    valorMedidoData,
+    totalPlanejadoObras,
+    hasAmbiental = false,
+    hasPendenciaAmbiental = false,
 }: EmpreendimentoDetailsProps) {
     // ── Lazy-load state para dados pesados das tabs ──────────────────────────
     const [empenhos, setEmpenhos] = useState<RelatedEmpenho[]>(empenhosIniciais)
     const [medicoes, setMedicoes] = useState<RelatedMedicao[]>(medicoesIniciais)
+    const [aditamentos, setAditamentos] = useState<Aditamento[]>(aditamentosIniciais)
     const [indicators, setIndicators] = useState(indicatorsIniciais)
     const [empenhosLoading, setEmpenhosLoading] = useState(false)
     const [medicoesLoading, setMedicoesLoading] = useState(false)
     const [empenhosLoaded, setEmpenhosLoaded] = useState(false)
     const [medicoesLoaded, setMedicoesLoaded] = useState(false)
+    const [aditamentosLoaded, setAditamentosLoaded] = useState(false)
+    const [aditamentosLoading, setAditamentosLoading] = useState(false)
+
 
     // Carrega empenhos da API sob demanda (ao abrir a tab)
     const loadEmpenhos = useCallback(async () => {
@@ -162,12 +181,83 @@ export function EmpreendimentoDetails({
                 )
             )
             const flat: RelatedMedicao[] = results.flat()
-            setMedicoes(flat)
+            
+            // CORREÇÃO: Comparar ID legado com ID legado (não misturar com UUID Supabase)
+            const idLegado = String(empreendimento.original_id || empreendimento.codigo || '')
+            const filtradas = flat.filter(m => {
+                const medIdLegado = String(m.idEmpreendimento || '')
+                return medIdLegado === idLegado || medIdLegado === String(empreendimento.id)
+            })
+
+            setMedicoes(filtradas)
             setMedicoesLoaded(true)
         } finally {
             setMedicoesLoading(false)
         }
-    }, [medicoesLoaded, medicoesLoading, contratosComOriginalId])
+    }, [medicoesLoaded, medicoesLoading, contratosComOriginalId, empreendimento.original_id, empreendimento.codigo, empreendimento.id])
+
+    // Carrega aditamentos da API legada automaticamente ao abrir a tab
+    const loadAditamentos = useCallback(async () => {
+        if (aditamentosLoaded || aditamentosLoading || contratosVinculados.length === 0) return
+        
+        setAditamentosLoading(true)
+        try {
+            const results = await Promise.all(
+                contratosVinculados.map(cv => 
+                    importLegacyAditamentos(cv.contrato_id, empreendimento.id)
+                )
+            )
+            
+            const totalImported = results.reduce((sum, res) => sum + (res.success && typeof (res as any).count === 'number' ? (res as any).count : 0), 0)
+            
+            if (totalImported > 0) {
+                // Como importLegacyAditamentos faz revalidatePath, 
+                // para atualizar a UI localmente sem recarregar a página inteira, 
+                // idealmente buscaríamos os dados novos, mas o revalidatePath 
+                // geralmente cuida disso se usarmos Server Components.
+                // Como este é um componente "use client", mostramos um aviso.
+                toast.success(`${totalImported} aditamentos importados automaticamente do sistema legado.`)
+                // Recarrega a página para atualizar o Server State que alimenta aditamentosIniciais
+                window.location.reload()
+            }
+            setAditamentosLoaded(true)
+        } catch (error) {
+            console.error("Erro no carregamento automático de aditamentos:", error)
+        } finally {
+            setAditamentosLoading(false)
+        }
+    }, [aditamentosLoaded, aditamentosLoading, contratosVinculados, empreendimento.id])
+
+    // REPOSICIONAMENTO: useMemo e useEffect após as declarações das funções (evita erro de inicialização)
+    const totalMedidoCalculado = useMemo(() => {
+        if (!medicoes || medicoes.length === 0) return null
+        return medicoes.reduce((sum, m) => sum + (Number(m.valor_total) || 0), 0)
+    }, [medicoes])
+
+    useEffect(() => {
+        // Disparar lazy-load das medições (1.5s delay)
+        const medTimer = setTimeout(() => {
+            if (!medicoesLoaded && !medicoesLoading && contratosComOriginalId.length > 0) {
+                loadMedicoes()
+            }
+        }, 1500)
+
+        // Disparar lazy-load dos empenhos (0.5s delay - prioridade maior que medições)
+        const empTimer = setTimeout(() => {
+            if (!empenhosLoaded && !empenhosLoading && contratosComOriginalId.length > 0) {
+                loadEmpenhos()
+            }
+        }, 500)
+
+        return () => {
+            clearTimeout(medTimer)
+            clearTimeout(empTimer)
+        }
+    }, [
+        medicoesLoaded, medicoesLoading, loadMedicoes,
+        empenhosLoaded, empenhosLoading, loadEmpenhos,
+        contratosComOriginalId.length
+    ])
     const [isLinkDialogOpen, setIsLinkDialogOpen] = useState(false)
     const [unlinkId, setUnlinkId] = useState<{ empId: string, contId: string } | null>(null)
 
@@ -197,6 +287,12 @@ export function EmpreendimentoDetails({
     const totalAditamentos = contratosComServicos.reduce((sum, cv) => sum + (Number(cv.contrato?.valor_aditamento) || 0), 0);
     const totalReajustes = contratosComServicos.reduce((sum, cv) => sum + (Number(cv.contrato?.valor_reajuste) || 0), 0);
     const totalGlobal = totalOriginal + totalAditamentos + totalReajustes;
+    const calculatedValorPlanejadoTotal = useMemo(() => 
+        indicators?.valorPlanejadoTotal ?? totalPlanejadoObras ?? 0,
+    [indicators, totalPlanejadoObras]);
+
+    // Alias defensivo para evitar ReferenceError caso algum código oculto procure por este nome
+    const valorPlanejadoTotal = calculatedValorPlanejadoTotal;
 
     return (
         <div className="flex-1 space-y-4 p-8 pt-6">
@@ -205,10 +301,24 @@ export function EmpreendimentoDetails({
                     <div className="flex flex-wrap items-center gap-2">
                         <h2 className="text-3xl font-bold tracking-tight">{empreendimento.nome}</h2>
                         <div className="flex gap-2">
-                            {tiposServico.includes("Ambiental") && (
-                                <Badge variant="secondary" className="bg-emerald-100 text-emerald-700 hover:bg-emerald-100 border-emerald-200">
-                                    Ambi.
-                                </Badge>
+                            {hasAmbiental && (
+                                <Link 
+                                    href={`/ambiental?empreendimento=${empreendimento.id}`} 
+                                    target="_blank"
+                                >
+                                    <Badge 
+                                        variant="secondary" 
+                                        className={cn(
+                                            "cursor-pointer flex items-center gap-1 transition-all",
+                                            hasPendenciaAmbiental 
+                                                ? "bg-amber-100 text-amber-700 hover:bg-amber-200 border-amber-300" 
+                                                : "bg-emerald-100 text-emerald-700 hover:bg-emerald-200 border-emerald-300"
+                                        )}
+                                        title={hasPendenciaAmbiental ? "Possui licenciamento pendente (P)" : "Registros ambientais em dia"}
+                                    >
+                                        🌿 Ambiental
+                                    </Badge>
+                                </Link>
                             )}
                             {tiposServico.some(t => t?.toLowerCase().includes("desaprop")) && (
                                 <Badge variant="secondary" className="bg-amber-100 text-amber-700 hover:bg-amber-100 border-amber-200">
@@ -276,138 +386,124 @@ export function EmpreendimentoDetails({
                     );
                 };
 
+                const valorMedidoP0Reajuste = medicoes.reduce((acc, m) => acc + (Number(m.valor_p0) || 0) + (Number(m.valor_reajuste) || 0), 0);
+
                 return (
-                    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
-                        <Card>
-                            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                                <CardTitle className="text-sm font-medium">Contratos</CardTitle>
-                                <FilePen className="h-4 w-4 text-muted-foreground" />
-                            </CardHeader>
-                            <CardContent>
-                                <div className="flex items-baseline gap-2">
-                                    <div className="text-2xl font-bold">{contratosComServicos.length}</div>
-                                    <div className="text-sm font-semibold text-emerald-600 dark:text-emerald-500">
-                                        {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', notation: "compact" }).format(totalGlobal)}
+                    <div className="grid gap-4 items-stretch" style={{ gridTemplateColumns: '1fr 1fr 1fr 2.5fr' }}>
+                        <Card className="h-full flex flex-col">
+                            <div className="flex-1 flex flex-col justify-between p-5">
+                                <CardHeader className="p-0 flex flex-row items-center justify-between space-y-0 pb-3">
+                                    <CardTitle className="text-[13px] font-semibold text-muted-foreground uppercase tracking-wider">Contratos</CardTitle>
+                                    <FilePen className="h-5 w-5 text-muted-foreground" />
+                                </CardHeader>
+                                <div className="flex flex-col gap-1">
+                                    <div className="flex items-baseline gap-2">
+                                        <div className="text-3xl font-bold tabular-nums">{contratosComServicos.length}</div>
+                                        <div className="text-base font-bold text-emerald-600 dark:text-emerald-500 tabular-nums">
+                                            {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', notation: "compact" }).format(totalGlobal)}
+                                        </div>
                                     </div>
                                 </div>
-                                <div className="mt-2 space-y-0.5 border-t pt-2">
-                                    <div className="flex justify-between text-[10px] text-muted-foreground">
-                                        <span>Valor Contratual:</span>
-                                        <span className="font-medium text-foreground">
+                                <div className="mt-4 space-y-1 border-t pt-3">
+                                    <div className="flex justify-between text-[14px]">
+                                        <span className="text-muted-foreground">Contratual:</span>
+                                        <span className="font-bold text-foreground tabular-nums">
                                             {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', notation: "compact" }).format(totalOriginal)}
                                         </span>
                                     </div>
-                                    <div className="flex justify-between text-[10px] text-muted-foreground">
-                                        <span>Valor Aditado:</span>
-                                        <span className="font-medium text-emerald-600">
+                                    <div className="flex justify-between text-[14px]">
+                                        <span className="text-muted-foreground">Aditado:</span>
+                                        <span className="font-bold text-emerald-600 tabular-nums">
                                             + {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', notation: "compact" }).format(totalAditamentos)}
                                         </span>
                                     </div>
-                                    <div className="flex justify-between text-[10px] text-muted-foreground">
-                                        <span>Reajuste:</span>
-                                        <span className="font-medium text-blue-600">
+                                    <div className="flex justify-between text-[14px]">
+                                        <span className="text-muted-foreground">Reajuste:</span>
+                                        <span className="font-bold text-blue-600 tabular-nums">
                                             + {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', notation: "compact" }).format(totalReajustes)}
                                         </span>
                                     </div>
                                 </div>
-                            </CardContent>
+                            </div>
                         </Card>
-                        <Card>
-                            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                                <CardTitle className="text-sm font-medium">Serviços</CardTitle>
-                                <Hammer className="h-4 w-4 text-muted-foreground" />
-                            </CardHeader>
-                            <CardContent>
+
+                        <Card className="h-full flex flex-col">
+                            <div className="flex-1 flex flex-col justify-between p-5">
+                                <CardHeader className="p-0 flex flex-row items-center justify-between space-y-0 pb-3">
+                                    <CardTitle className="text-[13px] font-semibold text-muted-foreground uppercase tracking-wider">Serviços</CardTitle>
+                                    <Hammer className="h-5 w-5 text-muted-foreground" />
+                                </CardHeader>
                                 <div className="flex justify-between items-end">
                                     <div>
-                                        <div className="text-2xl font-bold">{servicos?.length || 0}</div>
-                                        <p className="text-xs text-muted-foreground">Total</p>
+                                        <div className="text-3xl font-bold tabular-nums">{servicos?.length || 0}</div>
+                                        <p className="text-[13px] font-medium text-muted-foreground">Total</p>
                                     </div>
                                     <div className="text-right">
-                                        <div className="text-2xl font-bold text-amber-600 dark:text-amber-500">
+                                        <div className="text-3xl font-bold text-amber-600 dark:text-amber-500 tabular-nums">
                                             {servicos?.filter(s => !s.contrato_id).length || 0}
                                         </div>
-                                        <p className="text-xs text-muted-foreground">Sem contrato</p>
+                                        <p className="text-[13px] font-medium text-muted-foreground">Sem contrato</p>
                                     </div>
                                 </div>
-                                <div className="mt-3 pt-3 border-t">
-                                    <div className="text-xs font-semibold text-orange-600 dark:text-orange-500">
+                                <div className="mt-4 pt-3 border-t">
+                                    <div className="text-[14px] font-bold text-orange-600 dark:text-orange-500 tabular-nums">
                                         A Contratar: {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', notation: "compact" }).format(valorAContratar)}
                                     </div>
-                                    <p className="text-[10px] text-muted-foreground">Valor estimado sem contrato</p>
+                                    <p className="text-[12px] text-muted-foreground mt-0.5">Estimado s/ contrato</p>
                                 </div>
-                            </CardContent>
+                            </div>
                         </Card>
-                        <Card>
-                            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                                <CardTitle className="text-sm font-medium">Exec. Financeira Planejada</CardTitle>
-                                <Banknote className="h-4 w-4 text-muted-foreground" />
-                            </CardHeader>
-                            <CardContent>
-                                <div className="text-2xl font-bold">
-                                    {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', notation: "compact" }).format(indicators?.valorPlanejadoTotal || 0)}
-                                </div>
-                                <div className="mt-3 pt-3 border-t">
-                                    <div className="text-xs font-semibold text-blue-600 dark:text-blue-400">
-                                        {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', notation: "compact" }).format(indicators?.valorPlanejadoAno || 0)}
+
+                        <Card className="h-full flex flex-col">
+                            <div className="flex-1 flex flex-col justify-between p-5">
+                                <CardHeader className="p-0 flex flex-row items-center justify-between space-y-0 pb-3">
+                                    <CardTitle className="text-[13px] font-semibold text-muted-foreground uppercase tracking-wider">Exec. Planejada</CardTitle>
+                                    <Banknote className="h-5 w-5 text-muted-foreground" />
+                                </CardHeader>
+                                <div>
+                                    <div className="text-3xl font-bold tabular-nums">
+                                        {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', notation: "compact", maximumFractionDigits: 1 }).format(valorPlanejadoTotal)}
                                     </div>
-                                    <p className="text-[10px] text-muted-foreground">Planejado para {new Date().getFullYear()}</p>
+                                    <p className="text-[13px] font-medium text-muted-foreground">Valor Total Planejado</p>
                                 </div>
-                            </CardContent>
-                        </Card>
-                        <Card>
-                            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1">
-                                <CardTitle className="text-sm font-medium">Empenhos</CardTitle>
-                                <div className="text-[10px] font-bold text-emerald-600 px-1.5 py-0.5 bg-emerald-100 rounded-full">PIZZA</div>
-                            </CardHeader>
-                            <CardContent className="pt-0">
-                                <div className="flex items-center gap-3">
-                                    <PieChart liquidado={totalLiquidado} saldo={saldoEmpenho} total={totalEmpenhoLiquido} />
-                                    <div className="flex flex-col gap-1 flex-1">
-                                        <div className="flex justify-between items-baseline gap-2">
-                                            <span className="text-[9px] text-muted-foreground uppercase font-bold">Líquido</span>
-                                            <span className="text-xs font-bold">{new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', notation: "compact" }).format(totalEmpenhoLiquido)}</span>
-                                        </div>
-                                        <div className="flex justify-between items-baseline gap-2">
-                                            <div className="flex items-center gap-1">
-                                                <div className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                                                <span className="text-[9px] text-muted-foreground uppercase font-bold">Liquidado</span>
-                                            </div>
-                                            <span className="text-xs font-bold text-emerald-600">{new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', notation: "compact" }).format(totalLiquidado)}</span>
-                                        </div>
-                                        <div className="flex justify-between items-baseline gap-2">
-                                            <div className="flex items-center gap-1">
-                                                <div className="w-1.5 h-1.5 rounded-full bg-amber-400" />
-                                                <span className="text-[9px] text-muted-foreground uppercase font-bold">Saldo</span>
-                                            </div>
-                                            <span className="text-xs font-bold text-amber-600">{new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', notation: "compact" }).format(saldoEmpenho)}</span>
-                                        </div>
+                                <div className="mt-4 pt-3 border-t">
+                                    <div className="text-[14px] font-bold text-blue-600 dark:text-blue-400 tabular-nums">
+                                        {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', notation: "compact", maximumFractionDigits: 1 }).format(indicators?.valorPlanejadoAno || 0)}
                                     </div>
+                                    <p className="text-[12px] text-muted-foreground mt-0.5">Para o ano de {new Date().getFullYear()}</p>
                                 </div>
-                            </CardContent>
+                            </div>
                         </Card>
-                        {avancoFisico && avancoFisico.valorMedidoTotal > 0 && (
-                            <AvancoFisicoCard
-                                percentualExecutado={avancoFisico.percentualExecutado}
-                                valorMedidoTotal={avancoFisico.valorMedidoTotal}
-                                valorContrato={avancoFisico.valorContrato}
-                                ultimaMedicao={avancoFisico.ultimaMedicao}
-                                valorLabel="planejado p/ Exec. de Obras"
-                            />
-                        )}
+
+                        <AvancoFinanceiroCard
+                            totalEmpenhoLiquido={totalEmpenhoLiquido}
+                            totalLiquidado={totalLiquidado}
+                            saldoEmpenho={saldoEmpenho}
+                            valorMedido={valorMedidoP0Reajuste}
+                            valorEmpenhado={totalEmpenhoLiquido}
+                            valorLiquidado={totalLiquidado}
+                            valorPlanejado={valorPlanejadoTotal}
+                            pctMedido={calcularPercentualMedido(medicoes, contratosVinculados)}
+                            pctEmpenhado={((totalEmpenhoLiquido / (totalGlobal || 1)) * 100)}
+                            pctLiquidadoBarra={((totalLiquidado / (totalGlobal || 1)) * 100)}
+                            pctPlanejado={valorPlanejadoTotal / (totalGlobal || 1) * 100}
+                            isLoading={empenhosLoading || (medicoesLoading && !totalMedidoCalculado)}
+                        />
                     </div>
                 );
             })()}
 
-            <Tabs defaultValue="detalhes" className="space-y-4" onValueChange={(val) => {
+            <Tabs id={`empreendimento-tabs-${empreendimento.id}`} defaultValue="detalhes" className="space-y-4" onValueChange={(val) => {
                 if (val === 'empenhos') loadEmpenhos()
                 if (val === 'medicoes') loadMedicoes()
+                if (val === 'aditamentos') loadAditamentos()
             }}>
                 <TabsList>
                     <TabsTrigger value="detalhes">Detalhes</TabsTrigger>
                     <TabsTrigger value="servicos">Serviços</TabsTrigger>
                     <TabsTrigger value="contratos">Contratos Vinculados</TabsTrigger>
                     <TabsTrigger value="planejamento">Planejamento</TabsTrigger>
+                    <TabsTrigger value="aditamentos">Aditamentos</TabsTrigger>
                     <TabsTrigger value="empenhos">Empenhos</TabsTrigger>
                     <TabsTrigger value="medicoes">Medições</TabsTrigger>
                     <TabsTrigger value="anexos">Anexos</TabsTrigger>
@@ -505,13 +601,15 @@ export function EmpreendimentoDetails({
                 </TabsContent>
 
                 <TabsContent value="planejamento">
+                    {/* Tab de planejamento com variáveis estabilizadas */}
                     <PlanningTabContent
                         empreendimentoId={empreendimento.id}
                         empreendimentoNome={empreendimento.nome}
                         fases={fases}
                         servicos={servicos}
                         avancoFisico={avancoFisico?.percentualExecutado}
-                        valorTotalContratos={contratosVinculados.reduce((sum, cv) => sum + (Number(cv.contrato?.valor_total) || 0), 0)}
+                        valorTotalContratos={totalGlobal || 0}
+                        valorPlanejadoTotal={valorPlanejadoTotal || 0}
                     />
                 </TabsContent>
 
@@ -646,6 +744,23 @@ export function EmpreendimentoDetails({
                         anexos={anexos} 
                         empreendimentoId={empreendimento.id} 
                         servicos={servicos.filter(s => s.acompanha_fisico).map(s => ({ id: s.id, descricao: s.descricao }))}
+                    />
+                </TabsContent>
+
+                {/* Aba de Aditamentos do Empreendimento */}
+                <TabsContent value="aditamentos" className="mt-4">
+                    <AditamentosTabContent
+                        aditamentos={aditamentos}
+                        tipoVinculo="empreendimento"
+                        empreendimentos={[{ id: empreendimento.id, nome: empreendimento.nome }]}
+                        contratos={contratosVinculados.map(cv => ({
+                            id: cv.contrato_id,
+                            numero: cv.contrato.numero,
+                            contratada: cv.contrato.contratada || null,
+                        }))}
+                        defaultEmpreendimentoId={empreendimento.id}
+                        defaultContratoId={contratosVinculados.length > 0 ? contratosVinculados[0].contrato_id : undefined}
+                        revalidatePaths={[`/empreendimentos/${empreendimento.id}`]}
                     />
                 </TabsContent>
             </Tabs>

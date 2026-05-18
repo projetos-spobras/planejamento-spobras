@@ -31,6 +31,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { createServico, updateServico } from "@/app/actions/servicos"
 import { Servico } from "@/types"
 import { TIPOS_SERVICO, STATUS_SERVICO } from "@/lib/constants"
+import { paraFormatoInputDate, calcularDuracaoDias } from "@/lib/utils"
 
 // ─── Subtipos por Tipo de Serviço ───────────────────────────────────────────
 const SUBTIPOS_CONFIG = {
@@ -162,8 +163,8 @@ export function ServicoDialog({
             form.reset({
                 contrato_id: servicoToEdit.contrato_id || "",
                 descricao: servicoToEdit.descricao || "",
-                data_inicio: servicoToEdit.data_inicio ? new Date(servicoToEdit.data_inicio).toISOString().split('T')[0] : "",
-                data_fim: servicoToEdit.data_fim ? new Date(servicoToEdit.data_fim).toISOString().split('T')[0] : "",
+                data_inicio: paraFormatoInputDate(servicoToEdit.data_inicio),
+                data_fim: paraFormatoInputDate(servicoToEdit.data_fim),
                 duracao_dias: servicoToEdit.duracao_dias ?? undefined,
                 tipo: (servicoToEdit.tipo as any) || "Execução de Obras",
                 status: (servicoToEdit.status as any) || "Andamento",
@@ -268,17 +269,16 @@ export function ServicoDialog({
             if (!servicoToEdit) {
                 
                 if (contrato.data_inicio) {
-                    form.setValue("data_inicio", new Date(contrato.data_inicio).toISOString().split('T')[0], { shouldValidate: true })
+                    form.setValue("data_inicio", paraFormatoInputDate(contrato.data_inicio), { shouldValidate: true })
                 }
                 
                 if (contrato.data_fim) {
-                    form.setValue("data_fim", new Date(contrato.data_fim).toISOString().split('T')[0], { shouldValidate: true })
+                    form.setValue("data_fim", paraFormatoInputDate(contrato.data_fim), { shouldValidate: true })
                     
                     if (contrato.data_inicio) {
-                        const start = new Date(contrato.data_inicio).getTime()
-                        const end = new Date(contrato.data_fim).getTime()
-                        if (end >= start) {
-                            form.setValue("duracao_dias", Math.round((end - start) / 86400000))
+                        const dias = calcularDuracaoDias(contrato.data_inicio, contrato.data_fim)
+                        if (dias !== null) {
+                            form.setValue("duracao_dias", dias)
                         }
                     }
                 }
@@ -461,20 +461,25 @@ export function ServicoDialog({
                                         <FormControl>
                                             <Input 
                                                 type="date" 
+                                                lang="pt-BR"
                                                 {...field} 
+                                                value={paraFormatoInputDate(field.value)}
                                                 onChange={(e) => {
                                                     field.onChange(e)
-                                                    const start = new Date(e.target.value).getTime()
+                                                    const start = e.target.value
                                                     const fim = form.getValues("data_fim")
                                                     const duracao = form.getValues("duracao_dias")
                                                     
                                                     if (fim) {
-                                                        const end = new Date(fim).getTime()
-                                                        if (end >= start) form.setValue("duracao_dias", Math.round((end - start) / 86400000))
+                                                        const dias = calcularDuracaoDias(start, fim)
+                                                        if (dias !== null) form.setValue("duracao_dias", dias)
                                                     } else if (duracao) {
-                                                        const endDate = new Date(start)
-                                                        endDate.setDate(endDate.getDate() + duracao)
-                                                        form.setValue("data_fim", endDate.toISOString().split('T')[0])
+                                                        const match = start.match(/^(\d{4})-(\d{2})-(\d{2})/)
+                                                        if (match) {
+                                                            const endDate = new Date(Date.UTC(Number(match[1]), Number(match[2]) - 1, Number(match[3])))
+                                                            endDate.setUTCDate(endDate.getUTCDate() + duracao)
+                                                            form.setValue("data_fim", endDate.toISOString().split('T')[0])
+                                                        }
                                                     }
                                                 }}
                                             />
@@ -493,14 +498,16 @@ export function ServicoDialog({
                                         <FormControl>
                                             <Input 
                                                 type="date" 
+                                                lang="pt-BR"
                                                 {...field} 
+                                                value={paraFormatoInputDate(field.value)}
                                                 onChange={(e) => {
                                                     field.onChange(e)
-                                                    const end = new Date(e.target.value).getTime()
+                                                    const end = e.target.value
                                                     const inicio = form.getValues("data_inicio")
                                                     if (inicio) {
-                                                        const start = new Date(inicio).getTime()
-                                                        if (end >= start) form.setValue("duracao_dias", Math.round((end - start) / 86400000))
+                                                        const dias = calcularDuracaoDias(inicio, end)
+                                                        if (dias !== null) form.setValue("duracao_dias", dias)
                                                     }
                                                 }}
                                             />
@@ -527,9 +534,12 @@ export function ServicoDialog({
                                                     const duracao = Number(e.target.value)
                                                     const inicio = form.getValues("data_inicio")
                                                     if (inicio && duracao >= 0) {
-                                                        const endDate = new Date(inicio)
-                                                        endDate.setDate(endDate.getDate() + duracao)
-                                                        form.setValue("data_fim", endDate.toISOString().split('T')[0])
+                                                        const match = inicio.match(/^(\d{4})-(\d{2})-(\d{2})/)
+                                                        if (match) {
+                                                            const endDate = new Date(Date.UTC(Number(match[1]), Number(match[2]) - 1, Number(match[3])))
+                                                            endDate.setUTCDate(endDate.getUTCDate() + duracao)
+                                                            form.setValue("data_fim", endDate.toISOString().split('T')[0])
+                                                        }
                                                     }
                                                 }}
                                             />

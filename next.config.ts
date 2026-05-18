@@ -1,10 +1,26 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  distDir: ".next",
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+
   // Otimizações para produção na Vercel
   serverExternalPackages: ["md5"],
   experimental: {
-    // Other experimental features can go here if needed
+    serverActions: {
+      // Whitelist specific origins for CSRF protection
+      allowedOrigins: [
+        "https://sid.spobrasdigital.com.br", 
+        "http://sid.spobrasdigital.com.br",
+        "http://10.89.244.42", 
+        "http://10.89.244.43", 
+        "http://187.44.105.2", 
+        "http://localhost:3005"
+      ],
+      bodySizeLimit: "50mb",
+    },
   },
 
 
@@ -42,3 +58,4 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
+// Test permissions

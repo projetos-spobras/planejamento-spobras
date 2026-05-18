@@ -97,8 +97,11 @@ export function RelatedEmpenhosList({ empenhos, entityType }: RelatedEmpenhosLis
                         const db = b.data_empenho ? new Date(b.data_empenho).getTime() : 0;
                         return db - da;
                     }).map((empenho) => {
-                        const liquidValue = empenho.valor_liquido || (empenho.valor - (empenho.valor_cancelado || 0));
-                        const saldoLine = liquidValue - (empenho.valor_liquidado || 0);
+                        const empenhado = Number(empenho.valor || 0);
+                        const cancelado = Number(empenho.valor_cancelado || 0);
+                        const liquidado = Number(empenho.valor_liquidado || 0);
+                        const liquidValue = Number(empenho.valor_liquido ?? (empenhado - cancelado));
+                        const saldoLine = Number(empenho.valor_saldo ?? (liquidValue - liquidado));
                         
                         return (
                             <TableRow key={empenho.id} className="hover:bg-muted/50 border-b last:border-0">
@@ -107,16 +110,16 @@ export function RelatedEmpenhosList({ empenhos, entityType }: RelatedEmpenhosLis
                                     {empenho.data_empenho ? format(new Date(empenho.data_empenho), "dd/MM/yyyy") : "-"}
                                 </TableCell>
                                 <TableCell className="text-right font-mono text-[10px]">
-                                    {currencyFormatter.format(empenho.valor)}
+                                    {currencyFormatter.format(empenhado)}
                                 </TableCell>
                                 <TableCell className="text-right font-mono text-[10px] text-red-500">
-                                    {currencyFormatter.format(empenho.valor_cancelado || 0)}
+                                    {currencyFormatter.format(cancelado)}
                                 </TableCell>
                                 <TableCell className="text-right font-mono text-[10px] text-blue-600 font-semibold">
                                     {currencyFormatter.format(liquidValue)}
                                 </TableCell>
                                 <TableCell className="text-right font-mono text-[10px] text-emerald-600">
-                                    {currencyFormatter.format(empenho.valor_liquidado || 0)}
+                                    {currencyFormatter.format(liquidado)}
                                 </TableCell>
                                 <TableCell className="text-right font-mono text-[10px] text-amber-600 pr-6 font-semibold">
                                     {currencyFormatter.format(saldoLine)}
@@ -133,9 +136,12 @@ export function RelatedEmpenhosList({ empenhos, entityType }: RelatedEmpenhosLis
         <div className="space-y-4">
             {groupKeys.map((groupKey) => {
                 const groupEmpenhos = grouped[groupKey];
-                const totalValue = groupEmpenhos.reduce((sum, e) => sum + e.valor, 0);
-                const totalNet = groupEmpenhos.reduce((sum, e) => sum + (e.valor_liquido || e.valor - (e.valor_cancelado || 0)), 0);
-                const totalLiquidated = groupEmpenhos.reduce((sum, e) => sum + (e.valor_liquidado || 0), 0);
+                const totalValue = groupEmpenhos.reduce((sum, e) => sum + Number(e.valor || 0), 0);
+                const totalNet = groupEmpenhos.reduce((sum, e) => {
+                    const liq = Number(e.valor_liquido);
+                    return sum + (!isNaN(liq) ? liq : (Number(e.valor || 0) - Number(e.valor_cancelado || 0)));
+                }, 0);
+                const totalLiquidated = groupEmpenhos.reduce((sum, e) => sum + Number(e.valor_liquidado || 0), 0);
                 const saldo = totalNet - totalLiquidated;
                 
                 // Find latest date
@@ -237,8 +243,11 @@ export function RelatedEmpenhosList({ empenhos, entityType }: RelatedEmpenhosLis
                                             const db = b.data_empenho ? new Date(b.data_empenho).getTime() : 0;
                                             return db - da; // Multi-descending by date
                                         }).map((empenho) => {
-                                            const liquidValue = empenho.valor_liquido || (empenho.valor - (empenho.valor_cancelado || 0));
-                                            const saldoLine = liquidValue - (empenho.valor_liquidado || 0);
+                                            const empenhado = Number(empenho.valor || 0);
+                                            const cancelado = Number(empenho.valor_cancelado || 0);
+                                            const liquidado = Number(empenho.valor_liquidado || 0);
+                                            const liquidValue = Number(empenho.valor_liquido ?? (empenhado - cancelado));
+                                            const saldoLine = Number(empenho.valor_saldo ?? (liquidValue - liquidado));
                                             
                                             return (
                                                 <TableRow key={empenho.id} className="hover:bg-muted/50 border-b last:border-0">
@@ -247,16 +256,16 @@ export function RelatedEmpenhosList({ empenhos, entityType }: RelatedEmpenhosLis
                                                         {empenho.data_empenho ? format(new Date(empenho.data_empenho), "dd/MM/yyyy") : "-"}
                                                     </TableCell>
                                                     <TableCell className="text-right font-mono text-[10px]">
-                                                        {currencyFormatter.format(empenho.valor)}
+                                                        {currencyFormatter.format(empenhado)}
                                                     </TableCell>
                                                     <TableCell className="text-right font-mono text-[10px] text-red-500">
-                                                        {currencyFormatter.format(empenho.valor_cancelado || 0)}
+                                                        {currencyFormatter.format(cancelado)}
                                                     </TableCell>
                                                     <TableCell className="text-right font-mono text-[10px] text-blue-600 font-semibold">
                                                         {currencyFormatter.format(liquidValue)}
                                                     </TableCell>
                                                     <TableCell className="text-right font-mono text-[10px] text-emerald-600">
-                                                        {currencyFormatter.format(empenho.valor_liquidado || 0)}
+                                                        {currencyFormatter.format(liquidado)}
                                                     </TableCell>
                                                     <TableCell className="text-right font-mono text-[10px] text-amber-600 pr-6 font-semibold">
                                                         {currencyFormatter.format(saldoLine)}

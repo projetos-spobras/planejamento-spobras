@@ -34,6 +34,7 @@ interface MultiComboboxProps {
     className?: string
     modal?: boolean
     disabled?: boolean
+    id?: string
 }
 
 export function MultiCombobox({
@@ -44,7 +45,8 @@ export function MultiCombobox({
     emptyText = "Nenhum resultado encontrado.",
     className,
     modal = false,
-    disabled = false
+    disabled = false,
+    id
 }: MultiComboboxProps) {
     const [open, setOpen] = React.useState(false)
 
@@ -56,6 +58,7 @@ export function MultiCombobox({
         <Popover open={open} onOpenChange={setOpen} modal={modal}>
             <PopoverTrigger asChild>
                 <Button
+                    id={id}
                     variant="outline"
                     role="combobox"
                     aria-expanded={open}

@@ -62,6 +62,14 @@ interface PlanejamentoClientProps {
     empreendimentos: { id: string, nome: string }[]
     hideEmpreendimento?: boolean
     totalServicos?: number
+    kpiTotalContratadoGlobal?: number
+    kpiValorEstimadoGlobal?: number
+    kpiAContratarGlobal?: number
+    kpiTotalPlanejadoGlobal?: number
+    contratosPlanejadosValorGlobal?: number
+    contratosSemPlanoValorGlobal?: number
+    estimadosSemPlanoValorGlobal?: number
+    contratosAPlanejarCountGlobal?: number
 }
 
 const mesesNomes = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"]
@@ -102,7 +110,20 @@ export const parseCurrencyValue = (value: string) => {
     return parseFloat(cleanValue) || 0
 }
 
-export function PlanejamentoClient({ servicos, empreendimentos, hideEmpreendimento = false, totalServicos: totalServicosProp }: PlanejamentoClientProps) {
+export function PlanejamentoClient({ 
+    servicos, 
+    empreendimentos, 
+    hideEmpreendimento = false, 
+    totalServicos: totalServicosProp,
+    kpiTotalContratadoGlobal,
+    kpiValorEstimadoGlobal,
+    kpiAContratarGlobal,
+    kpiTotalPlanejadoGlobal,
+    contratosPlanejadosValorGlobal,
+    contratosSemPlanoValorGlobal,
+    estimadosSemPlanoValorGlobal,
+    contratosAPlanejarCountGlobal
+}: PlanejamentoClientProps) {
     const [searchTerm, setSearchTerm] = useState("")
     const [expandedServicos, setExpandedServicos] = useState<Set<string>>(new Set())
 
@@ -491,7 +512,7 @@ export function PlanejamentoClient({ servicos, empreendimentos, hideEmpreendimen
     }
 
     // ─── Global KPI calculations ───────────────────────────────────────────────
-    const kpiValorEstimado = servicos.reduce((acc, s) => {
+    const kpiValorEstimado = kpiValorEstimadoGlobal ?? servicos.reduce((acc, s) => {
         const isAmbiental = s.tipo === 'Ambiental'
         const val = isAmbiental 
             ? (s.valor_total) 
@@ -499,7 +520,7 @@ export function PlanejamentoClient({ servicos, empreendimentos, hideEmpreendimen
         return acc + Number(val || 0)
     }, 0)
 
-    const kpiTotalContratado = servicos
+    const kpiTotalContratado = kpiTotalContratadoGlobal ?? servicos
         .filter(s => !!s.contrato_id)
         .reduce((acc, s) => {
             const isAmbiental = s.tipo === 'Ambiental'
@@ -508,10 +529,10 @@ export function PlanejamentoClient({ servicos, empreendimentos, hideEmpreendimen
         }, 0)
 
     // 3.3 A Contratar: diferença entre estimado total e contratado
-    const kpiAContratar = kpiValorEstimado - kpiTotalContratado
+    const kpiAContratar = kpiAContratarGlobal ?? (kpiValorEstimado - kpiTotalContratado)
 
     // 3.4 Total Planejado Global: soma de todas as distribuições financeiras
-    const kpiTotalPlanejado = servicos.reduce((acc, s) => {
+    const kpiTotalPlanejado = kpiTotalPlanejadoGlobal ?? servicos.reduce((acc, s) => {
         const distSum = s.distribuicao_financeira?.reduce((sum: number, d: any) => sum + Number(d.valor || 0), 0) || 0
         return acc + distSum
     }, 0)
@@ -670,7 +691,7 @@ export function PlanejamentoClient({ servicos, empreendimentos, hideEmpreendimen
                         <div className="mt-3" />
                         {(() => {
                             // 1 - Valor de contratos que já foram planejados (apenas o que foi distribuído)
-                            const valorContratosPlanejados = servicos
+                            const valorContratosPlanejados = contratosPlanejadosValorGlobal ?? servicos
                                 .filter(s => !!s.contrato_id)
                                 .reduce((acc, s) => {
                                     const planejado = s.distribuicao_financeira?.reduce((sum: number, d: any) => sum + Number(d.valor || 0), 0) || 0
@@ -678,7 +699,7 @@ export function PlanejamentoClient({ servicos, empreendimentos, hideEmpreendimen
                                 }, 0)
 
                             // 2 - Valores contratados sem planejamento (o que falta para atingir o valor contratual)
-                            const valorContratosSemPlano = servicos
+                            const valorContratosSemPlano = contratosSemPlanoValorGlobal ?? servicos
                                 .filter(s => !!s.contrato_id)
                                 .reduce((acc, s) => {
                                     const total = Number(s.valor_contratual || s.valor_total || 0)
@@ -688,7 +709,7 @@ export function PlanejamentoClient({ servicos, empreendimentos, hideEmpreendimen
                                 }, 0)
 
                             // 3 - Valores estimados (sem contrato) que faltam planejar
-                            const valorEstimadosSemPlano = servicos
+                            const valorEstimadosSemPlano = estimadosSemPlanoValorGlobal ?? servicos
                                 .filter(s => !s.contrato_id)
                                 .reduce((acc, s) => {
                                     const total = Number(s.valor_total || 0)
@@ -702,7 +723,7 @@ export function PlanejamentoClient({ servicos, empreendimentos, hideEmpreendimen
                             const pctCSem = total > 0 ? (valorContratosSemPlano / total) * 100 : 0
                             const pctESem = total > 0 ? (valorEstimadosSemPlano / total) * 100 : 0
 
-                            const qtdContratosSemPlano = servicos.filter(s => {
+                            const qtdContratosSemPlano = contratosAPlanejarCountGlobal ?? servicos.filter(s => {
                                 if (!s.contrato_id) return false
                                 const temDist = s.distribuicao_financeira && s.distribuicao_financeira.length > 0
                                 const temFases = s.fases && s.fases.some((f: any) => Number(f.valor_planejado || 0) > 0)
@@ -1010,8 +1031,9 @@ export function PlanejamentoClient({ servicos, empreendimentos, hideEmpreendimen
                                                                                                 <Button 
                                                                                                     variant="ghost" 
                                                                                                     size="sm" 
-                                                                                                    className="h-6 w-6 p-0 opacity-0 group-hover:opacity-100 transition-opacity"
+                                                                                                    className="h-6 w-6 p-0 opacity-0 group-hover:opacity-100 transition-opacity text-blue-500"
                                                                                                     onClick={() => handleOpenAmendmentDialog(servico)}
+                                                                                                    title="Ver informações sobre Aditamentos"
                                                                                                 >
                                                                                                     <Plus className="h-3 w-3" />
                                                                                                 </Button>
@@ -1387,6 +1409,7 @@ export function PlanejamentoClient({ servicos, empreendimentos, hideEmpreendimen
                 servicoId={selectedServicoForAditamento?.id || ""}
                 defaultAnos={selectedServicoForAditamento?.aditamento_anos}
                 defaultFormalizado={selectedServicoForAditamento?.aditamento_formalizado}
+                empreendimentoId={selectedServicoForAditamento?.empreendimento_id || ""}
             />
 
             <AlertDialog open={!!deleteId} onOpenChange={(open) => !open && setDeleteId(null)}>

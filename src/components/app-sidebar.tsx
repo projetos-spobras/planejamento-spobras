@@ -1,11 +1,10 @@
 "use client"
- 
+
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import {
     ChevronLeft,
     ChevronRight,
-    LayoutDashboard,
     Building2,
     FilePen,
     Layers,
@@ -22,7 +21,6 @@ import Image from "next/image"
 import { cn } from "@/lib/utils"
 
 import { Button } from "@/components/ui/button"
-import { ScrollArea } from "@/components/ui/scroll-area"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { useState, useEffect } from "react"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
@@ -31,55 +29,64 @@ interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {
     isCollapsed?: boolean
     toggleCollapse?: () => void
     userRole?: string
+    modulosAcesso?: string[]
 }
 
-export function AppSidebar({ className, isCollapsed = false, toggleCollapse, userRole }: SidebarProps) {
+export function AppSidebar({ className, isCollapsed = false, toggleCollapse, userRole, modulosAcesso = [] }: SidebarProps) {
     const pathname = usePathname()
 
-    const routes = [
+    const allRoutes = [
         {
+            key: "empreendimentos",
             label: "Empreendimentos",
             icon: Building2,
             href: "/empreendimentos",
             active: pathname.startsWith("/empreendimentos"),
         },
         {
+            key: "contratos",
             label: "Contratos",
             icon: FilePen,
             href: "/contratos",
             active: pathname.startsWith("/contratos"),
         },
         {
+            key: "servicos",
             label: "Serviços",
             icon: Hammer,
             href: "/servicos",
             active: pathname.startsWith("/servicos"),
         },
         {
+            key: "lotes",
             label: "Lotes",
             icon: Layers,
             href: "/lotes",
             active: pathname.startsWith("/lotes"),
         },
         {
+            key: "planejamento",
             label: "Planejamento",
             icon: CalendarDays,
             href: "/planejamento",
             active: pathname.startsWith("/planejamento"),
         },
         {
+            key: "ambiental",
             label: "Meio Ambiente",
             icon: Leaf,
-            href: "/meio-ambiente",
-            active: pathname.startsWith("/meio-ambiente"),
+            href: "/ambiental",
+            active: pathname.startsWith("/ambiental"),
         },
         {
+            key: "desapropriacoes",
             label: "Desapropriações",
             icon: Home,
             href: "/desapropriacoes",
             active: pathname.startsWith("/desapropriacoes"),
         },
         {
+            key: "empenhos",
             label: "Empenhos",
             icon: Banknote,
             href: "/empenhos",
@@ -87,8 +94,14 @@ export function AppSidebar({ className, isCollapsed = false, toggleCollapse, use
         },
     ]
 
+    // Admin passes directly, others are filtered by modulosAcesso
+    const routes = allRoutes.filter(route => 
+        userRole === 'admin' || modulosAcesso.includes(route.key)
+    )
+
     if (userRole === 'admin') {
         routes.push({
+            key: "usuarios",
             label: "Usuários",
             icon: Users,
             href: "/usuarios",
@@ -137,6 +150,8 @@ export function AppSidebar({ className, isCollapsed = false, toggleCollapse, use
                                 fill
                                 unoptimized
                                 className="object-contain"
+                                priority
+                                sizes="40px"
                             />
                         </div>
 
@@ -149,6 +164,8 @@ export function AppSidebar({ className, isCollapsed = false, toggleCollapse, use
                                     fill
                                     unoptimized
                                     className="object-contain"
+                                    priority
+                                    sizes="160px"
                                 />
                             </div>
                             <div className="h-6 w-[1px] bg-border mx-1" />
@@ -159,6 +176,8 @@ export function AppSidebar({ className, isCollapsed = false, toggleCollapse, use
                                     fill
                                     unoptimized
                                     className="object-contain"
+                                    priority
+                                    sizes="80px"
                                 />
                             </div>
                         </div>
@@ -206,7 +225,7 @@ export function AppSidebar({ className, isCollapsed = false, toggleCollapse, use
     )
 }
 
-export function MobileSidebar() {
+export function MobileSidebar({ modulosAcesso = [], userRole }: { modulosAcesso?: string[], userRole?: string }) {
     const [open, setOpen] = useState(false);
     const [isMounted, setIsMounted] = useState(false);
 
@@ -230,7 +249,7 @@ export function MobileSidebar() {
                 </Button>
             </SheetTrigger>
             <SheetContent side="left" className="p-0 w-72">
-                <AppSidebar />
+                <AppSidebar modulosAcesso={modulosAcesso} userRole={userRole} />
             </SheetContent>
         </Sheet>
     )

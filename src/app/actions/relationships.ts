@@ -10,6 +10,8 @@ export async function linkContratoToEmpreendimento(
     loteId?: string | null
 ) {
     const supabase = await createClient()
+    const { data: { user }, error: authError } = await supabase.auth.getUser()
+    if (authError || !user) return { success: false, error: 'Não autorizado' }
     const { error } = await supabase
         .from("empreendimentos_contratos")
         .insert({
@@ -22,7 +24,8 @@ export async function linkContratoToEmpreendimento(
         if (error.code === '23505') { // Unique violation
             return { success: false, error: "Este contrato já está vinculado a este empreendimento." }
         }
-        return { success: false, error: error.message }
+        console.error("[linkContratoToEmpreendimento]", error)
+        return { success: false, error: 'Ocorreu um erro interno. Por favor, contate o suporte.' }
     }
 
     revalidatePath("/empreendimentos")
@@ -38,13 +41,16 @@ export async function unlinkContratoFromEmpreendimento(
     contratoId: string
 ) {
     const supabase = await createClient()
+    const { data: { user }, error: authError } = await supabase.auth.getUser()
+    if (authError || !user) return { success: false, error: 'Não autorizado' }
     const { error } = await supabase
         .from("empreendimentos_contratos")
         .delete()
         .match({ empreendimento_id: empreendimentoId, contrato_id: contratoId })
 
     if (error) {
-        return { success: false, error: error.message }
+        console.error("[unlinkContratoFromEmpreendimento]", error)
+        return { success: false, error: 'Ocorreu um erro interno. Por favor, contate o suporte.' }
     }
 
     revalidatePath("/empreendimentos")
@@ -61,6 +67,8 @@ export async function assignEmpreendimentoToLote(
     loteId: string
 ) {
     const supabase = await createClient()
+    const { data: { user }, error: authError } = await supabase.auth.getUser()
+    if (authError || !user) return { success: false, error: 'Não autorizado' }
     // [P4] Guard: verificar cardinalidade de lotes OAE (máx. 5 empreendimentos)
     const { data: lote } = await supabase
         .from('lotes')
@@ -91,7 +99,8 @@ export async function assignEmpreendimentoToLote(
         )
 
     if (error) {
-        return { success: false, error: error.message }
+        console.error("[assignEmpreendimentoToLote]", error)
+        return { success: false, error: 'Ocorreu um erro interno. Por favor, contate o suporte.' }
     }
 
     return { success: true }
@@ -99,6 +108,8 @@ export async function assignEmpreendimentoToLote(
 
 export async function getEmpreendimentosByContrato(contratoId: string) {
     const supabase = await createClient()
+    const { data: { user }, error: authError } = await supabase.auth.getUser()
+    if (authError || !user) return []
     const { data, error } = await supabase
         .from("empreendimentos_contratos")
         .select(`
@@ -108,7 +119,7 @@ export async function getEmpreendimentosByContrato(contratoId: string) {
         .eq("contrato_id", contratoId)
 
     if (error) {
-        console.error("Error fetching empreendimentos:", error)
+        console.error("[getEmpreendimentosByContrato]", error)
         return []
     }
 
@@ -130,6 +141,8 @@ export async function getEmpreendimentosByContrato(contratoId: string) {
 
 export async function updateLoteEmpreendimentos(loteId: string, empreendimentoIds: string[], contratoId: string) {
     const supabase = await createClient()
+    const { data: { user }, error: authError } = await supabase.auth.getUser()
+    if (authError || !user) return { success: false, error: 'Não autorizado' }
     // [P4] Guard: verificar cardinalidade de lotes OAE antes de fazer qualquer atualização
     const { data: lote } = await supabase
         .from('lotes')
@@ -150,7 +163,10 @@ export async function updateLoteEmpreendimentos(loteId: string, empreendimentoId
         .update({ lote_id: null })
         .eq("lote_id", loteId)
 
-    if (clearError) return { success: false, error: clearError.message }
+    if (clearError) {
+        console.error("[updateLoteEmpreendimentos]", clearError)
+        return { success: false, error: 'Ocorreu um erro interno. Por favor, contate o suporte.' }
+    }
 
     if (empreendimentoIds.length === 0) {
         revalidatePath("/lotes")
@@ -164,7 +180,10 @@ export async function updateLoteEmpreendimentos(loteId: string, empreendimentoId
         .eq("contrato_id", contratoId)
         .in("empreendimento_id", empreendimentoIds)
 
-    if (updateError) return { success: false, error: updateError.message }
+    if (updateError) {
+        console.error("[updateLoteEmpreendimentos]", updateError)
+        return { success: false, error: 'Ocorreu um erro interno. Por favor, contate o suporte.' }
+    }
 
     revalidatePath("/lotes")
     revalidatePath(`/lotes/${loteId}`)

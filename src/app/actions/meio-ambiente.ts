@@ -5,6 +5,8 @@ import { Servico } from "@/types"
 
 export async function getServicosAmbientais() {
     const supabase = await createClient()
+    const { data: { user }, error: authError } = await supabase.auth.getUser()
+    if (authError || !user) return []
 
     // 1. Buscar todos os serviços do tipo 'Ambiental'
     const { data, error } = await supabase
@@ -23,7 +25,7 @@ export async function getServicosAmbientais() {
         .order('created_at', { ascending: false })
 
     if (error) {
-        console.error("Error fetching environmental services:", error)
+        console.error("[getServicosAmbientais]", error)
         return []
     }
 

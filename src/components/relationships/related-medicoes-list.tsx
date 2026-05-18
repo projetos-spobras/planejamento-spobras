@@ -38,6 +38,7 @@ export interface RelatedMedicao {
     idEmpreendimento: number | string
     contrato_numero?: string | null
     empreendimento_nome?: string | null
+    nmEmpreendimento?: string | null
 }
 
 interface RelatedMedicoesListProps {
@@ -60,10 +61,12 @@ export function RelatedMedicoesList({ medicoes, entityType }: RelatedMedicoesLis
         )
     }
 
-    // Group medicoes by contract or empreendimento depending on entityType
+    // Group medicoes by number for Lotes, or by contract/empreendimento for others
     const grouped = medicoes.reduce((acc, med) => {
         let key = "";
-        if (entityType === "Contrato") {
+        if (entityType === "Lote") {
+            key = med.numero || "Sem Número";
+        } else if (entityType === "Contrato") {
             key = med.empreendimento_nome || med.idEmpreendimento?.toString() || "Empreendimento Desconhecido";
         } else {
             key = med.contrato_numero || "Medições Diretas";
@@ -75,9 +78,11 @@ export function RelatedMedicoesList({ medicoes, entityType }: RelatedMedicoesLis
     }, {} as Record<string, RelatedMedicao[]>);
 
     const groupKeys = Object.keys(grouped).sort((a, b) => {
-        if (a === "Medições Diretas" || a === "Empreendimento Desconhecido") return 1;
-        if (b === "Medições Diretas" || b === "Empreendimento Desconhecido") return -1;
-        return a.localeCompare(b);
+        // Try to sort numerically if possible
+        const numA = parseInt(a.replace(/\D/g, ''));
+        const numB = parseInt(b.replace(/\D/g, ''));
+        if (!isNaN(numA) && !isNaN(numB)) return numB - numA;
+        return b.localeCompare(a);
     });
 
     const currencyFormatter = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
@@ -108,17 +113,17 @@ export function RelatedMedicoesList({ medicoes, entityType }: RelatedMedicoesLis
                                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                                     <div className="flex items-center gap-3">
                                         <div className="p-2 rounded-full bg-emerald-100 text-emerald-600">
-                                            <Ruler className="h-5 w-5" />
+                                            <Calendar className="h-5 w-5" />
                                         </div>
                                         <div>
                                             <CardTitle className="text-lg">
-                                                {entityType === "Contrato" 
-                                                    ? `Obra: ${groupKey}` 
-                                                    : (groupKey === "Medições Diretas" ? groupKey : `Contrato: ${groupKey}`)}
+                                                {entityType === "Lote" 
+                                                    ? `Medição ${groupKey}` 
+                                                    : (entityType === "Contrato" ? `Obra: ${groupKey}` : `Contrato: ${groupKey}`)}
                                             </CardTitle>
                                             <CardDescription className="flex items-center gap-2 mt-1">
                                                 <Badge variant="secondary" className="font-normal bg-emerald-50 text-emerald-700 border-emerald-100">
-                                                    {groupMedicoes.length} medição(ões) para esta unidade
+                                                    {groupMedicoes.length} item(ns) nesta medição
                                                 </Badge>
                                             </CardDescription>
                                         </div>
@@ -169,7 +174,9 @@ export function RelatedMedicoesList({ medicoes, entityType }: RelatedMedicoesLis
                                 <Table>
                                     <TableHeader className="bg-muted/30">
                                         <TableRow>
-                                            <TableHead className="pl-6">Nº Medição</TableHead>
+                                            <TableHead className="pl-6">
+                                                {entityType === "Lote" ? "Empreendimento" : "Nº Medição"}
+                                            </TableHead>
                                             <TableHead>Período</TableHead>
                                             <TableHead className="text-right">Medido P0</TableHead>
                                             <TableHead className="text-right">Reajuste</TableHead>
@@ -186,7 +193,11 @@ export function RelatedMedicoesList({ medicoes, entityType }: RelatedMedicoesLis
                                         }).map((med) => {
                                             return (
                                                 <TableRow key={med.id} className="hover:bg-muted/50 border-b last:border-0">
-                                                    <TableCell className="font-medium pl-6">{med.numero}</TableCell>
+                                                    <TableCell className="font-medium pl-6">
+                                                        {entityType === "Lote" 
+                                                            ? (med.empreendimento_nome || `Obra ${med.idEmpreendimento}`)
+                                                            : med.numero}
+                                                    </TableCell>
                                                     <TableCell className="text-muted-foreground text-xs">
                                                         {med.data_inicio && med.data_fim 
                                                             ? `${format(new Date(med.data_inicio), "dd/MM/yy")} - ${format(new Date(med.data_fim), "dd/MM/yy")}`

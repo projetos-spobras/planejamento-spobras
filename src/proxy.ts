@@ -1,5 +1,6 @@
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
+import { debugLog } from '@/lib/debug-logger'
 
 export async function proxy(request: NextRequest) {
     let supabaseResponse = NextResponse.next({
@@ -34,33 +35,40 @@ export async function proxy(request: NextRequest) {
 
     const { pathname } = request.nextUrl
 
-    // 1. Skip auth for static assets and public routes like /uploadsex
+    // 1. Skip auth for static assets and public routes
     if (
         pathname.startsWith('/_next') ||
         pathname.includes('.') ||
         pathname.startsWith('/uploadsex') ||
         pathname.startsWith('/auth') ||
-        pathname.startsWith('/api/trigger')
+        pathname.startsWith('/api/trigger') ||
+        pathname.includes('/api/proxy-sid') ||
+        pathname.includes('/api/diagnostic')
     ) {
         return supabaseResponse
     }
 
-    const {
-        data: { user },
-    } = await supabase.auth.getUser()
+    try {
+        const {
+            data: { user },
+        } = await supabase.auth.getUser()
 
-    // 2. Redirect non-logged in users from internal pages to /login
-    if (!user && !pathname.startsWith('/login')) {
-        return NextResponse.redirect(new URL('/login', request.url))
-    }
+        // 2. Redirect non-logged in users from internal pages to /login
+        if (!user && !pathname.startsWith('/login')) {
+            console.log(`[Proxy] Redirecting UNKNOWN user from ${pathname} to /login`)
+            return NextResponse.redirect(new URL('/login', request.url))
+        }
 
-    // 3. Redirect logged in users away from /login to dashboard
-    if (user && pathname.startsWith('/login')) {
-        return NextResponse.redirect(new URL('/', request.url))
+        // 3. Redirect logged in users away from /login to dashboard
+        if (user && pathname.startsWith('/login')) {
+            console.log(`[Proxy] Redirecting LOGGED user from ${pathname} to /`)
+            return NextResponse.redirect(new URL('/', request.url))
+        }
+    } catch (e: any) {
+        console.error(`[Proxy] Auth Error at ${pathname}:`, e?.message || e)
     }
 
     return supabaseResponse
-
 }
 
 export const config = {

@@ -77,8 +77,10 @@ export async function createServico(data: Partial<Servico>) {
     const { data: { user }, error: authError } = await supabase.auth.getUser()
     if (authError || !user) return { success: false, error: 'Não autorizado' }
 
+    const { licencas, ...sanitizedData } = data as any
+
     const sanitized = {
-        ...data,
+        ...sanitizedData,
         data_inicio: data.data_inicio === "" ? null : data.data_inicio,
         data_fim: data.data_fim === "" ? null : data.data_fim,
         duracao_dias: data.duracao_dias ?? null,
@@ -94,60 +96,150 @@ export async function createServico(data: Partial<Servico>) {
     if (error) {
         return { success: false, error: error.message }
     }
-
-        // [P3] Sincronização com Planejamento — melhor esforço, não bloqueia o serviço
-        let planWarning = false
-        if (sanitized.empreendimento_id && sanitized.descricao) {
-            let data_fim = sanitized.data_fim || null
-            if (!data_fim && sanitized.data_inicio && sanitized.duracao_dias !== undefined && sanitized.duracao_dias !== null) {
-                const endDate = new Date(sanitized.data_inicio)
-                endDate.setDate(endDate.getDate() + sanitized.duracao_dias)
-                data_fim = endDate.toISOString().split('T')[0]
+    // --- SINCRONIZAÇÃO BIDIRECIONAL (Serviços -> Ambiental) ---
+    if (data.tipo === "Ambiental" || data.tipo === "SERVIÇOS AMBIENTAIS") {
+        try {
+            let ambStatus = 'Em andamento'
+            if (sanitized.status === 'Concluído') {
+                ambStatus = 'Concluído'
+            } else if (sanitized.status === 'Suspenso') {
+                ambStatus = 'Suspenso'
+            } else if (sanitized.status === 'Planejado' || sanitized.status === 'Licitado') {
+                ambStatus = 'À licitar'
+            } else if (sanitized.status === 'Cancelado') {
+                ambStatus = 'Suspenso'
             }
 
-            const subtipos = sanitized.subtipo_ambiental || []
-            
-            if (subtipos.length > 0) {
-                // Cria uma linha para cada subtipo ambiental
-                const planPayloads = subtipos.map((sub: string, index: number) => ({
+            let contratoNumero: string | null = null
+            let contratadaNome: string | null = null
+            if (sanitized.contrato_id) {
+                const { data: contratoData } = await supabase
+                    .from('contratos')
+                    .select('numero, contratada')
+                    .eq('id', sanitized.contrato_id)
+                    .maybeSingle()
+                if (contratoData) {
+                    contratoNumero = contratoData.numero
+                    contratadaNome = contratoData.contratada
+                }
+            }
+
+            let nomeEmpreendimento: string | null = null
+            if (sanitized.empreendimento_id) {
+                const { data: empData } = await supabase
+                    .from('empreendimentos')
+                    .select('nome')
+                    .eq('id', sanitized.empreendimento_id)
+                    .maybeSingle()
+                if (empData) {
+                    nomeEmpreendimento = empData.nome
+                }
+            }
+
+            const ambPayload: any = {
+                empreendimento_id: sanitized.empreendimento_id,
+                nome_empreendimento: nomeEmpreendimento,
+                valor_contrato: sanitized.valor_total || null,
+                prazo: sanitized.data_fim || null,
+                status: ambStatus
+            }
+
+            if (contratoNumero) ambPayload.contrato_spobras = contratoNumero
+            if (contratadaNome) ambPayload.contratada = contratadaNome
+
+            // Verificar se já existe registro em ambiental_empreendimentos para este empreendimento
+            const { data: existingAmb } = await supabase
+                .from('ambiental_empreendimentos')
+                .select('id')
+                .eq('empreendimento_id', sanitized.empreendimento_id)
+                .limit(1)
+                .maybeSingle()
+
+            if (existingAmb) {
+                await supabase
+                    .from('ambiental_empreendimentos')
+                    .update(ambPayload)
+                    .eq('id', existingAmb.id)
+            } else {
+                await supabase
+                    .from('ambiental_empreendimentos')
+                    .insert(ambPayload)
+            }
+        } catch (syncErr: any) {
+            console.error('[createServico] Falha na sincronização bidirecional:', syncErr.message)
+        }
+    }
+
+    // Inserir licenciamentos ambientais marcados
+    if ((data.tipo === "Ambiental" || data.tipo === "SERVIÇOS AMBIENTAIS") && licencas && licencas.length > 0) {
+        const licPayloads = licencas.map((tipo: string) => ({
+            servico_id: inserted.id,
+            tipo,
+            status: null
+        }))
+
+        const { error: licError } = await supabase
+            .from("ambiental_licenciamentos")
+            .insert(licPayloads)
+
+        if (licError) {
+            console.error('[createServico] Falha ao criar licenciamentos ambientais:', licError.message)
+        }
+    }
+
+    // [P3] Sincronização com Planejamento — melhor esforço, não bloqueia o serviço
+    let planWarning = false
+    if (sanitized.empreendimento_id && sanitized.descricao) {
+        let data_fim = sanitized.data_fim || null
+        if (!data_fim && sanitized.data_inicio && sanitized.duracao_dias !== undefined && sanitized.duracao_dias !== null) {
+            const endDate = new Date(sanitized.data_inicio)
+            endDate.setDate(endDate.getDate() + sanitized.duracao_dias)
+            data_fim = endDate.toISOString().split('T')[0]
+        }
+
+        const subtipos = sanitized.subtipo_ambiental || []
+        
+        if (subtipos.length > 0) {
+            // Cria uma linha para cada subtipo ambiental
+            const planPayloads = subtipos.map((sub: string, index: number) => ({
+                empreendimento_id: sanitized.empreendimento_id,
+                fase: `${sub} - ${sanitized.descricao}`.substring(0, 255),
+                tipo_fase: 'execução',
+                // Atribui o valor total apenas à primeira linha para não triplicar o financeiro se não houver divisão
+                valor_planejado: index === 0 ? (sanitized.valor_total || 0) : 0, 
+                data_inicio: sanitized.data_inicio || null,
+                data_fim: data_fim,
+                servico_id: inserted?.id || null
+            }))
+
+            const { error: planError } = await supabase
+                .from("planejamento_fases")
+                .insert(planPayloads)
+
+            if (planError) {
+                planWarning = true
+                console.error('[createServico] Falha ao criar fases ambientais:', planError.message)
+            }
+        } else {
+            // Comportamento padrão (uma única linha)
+            const { error: planError } = await supabase
+                .from("planejamento_fases")
+                .insert({
                     empreendimento_id: sanitized.empreendimento_id,
-                    fase: `${sub} - ${sanitized.descricao}`.substring(0, 255),
+                    fase: sanitized.descricao.length > 255 ? sanitized.descricao.substring(0, 252) + "..." : sanitized.descricao,
                     tipo_fase: 'execução',
-                    // Atribui o valor total apenas à primeira linha para não triplicar o financeiro se não houver divisão
-                    valor_planejado: index === 0 ? (sanitized.valor_total || 0) : 0, 
+                    valor_planejado: sanitized.valor_total || 0,
                     data_inicio: sanitized.data_inicio || null,
                     data_fim: data_fim,
                     servico_id: inserted?.id || null
-                }))
+                })
 
-                const { error: planError } = await supabase
-                    .from("planejamento_fases")
-                    .insert(planPayloads)
-
-                if (planError) {
-                    planWarning = true
-                    console.error('[createServico] Falha ao criar fases ambientais:', planError.message)
-                }
-            } else {
-                // Comportamento padrão (uma única linha)
-                const { error: planError } = await supabase
-                    .from("planejamento_fases")
-                    .insert({
-                        empreendimento_id: sanitized.empreendimento_id,
-                        fase: sanitized.descricao.length > 255 ? sanitized.descricao.substring(0, 252) + "..." : sanitized.descricao,
-                        tipo_fase: 'execução',
-                        valor_planejado: sanitized.valor_total || 0,
-                        data_inicio: sanitized.data_inicio || null,
-                        data_fim: data_fim,
-                        servico_id: inserted?.id || null
-                    })
-
-                if (planError) {
-                    planWarning = true
-                    console.error('[createServico] Falha ao criar fase de planejamento:', planError.message)
-                }
+            if (planError) {
+                planWarning = true
+                console.error('[createServico] Falha ao criar fase de planejamento:', planError.message)
             }
         }
+    }
 
     revalidatePath("/empreendimentos")
     revalidatePath("/servicos")
@@ -256,6 +348,10 @@ export async function updateServico(id: string, data: Partial<Servico>) {
     if (data.subtipo_ambiental === undefined) delete (sanitized as any).subtipo_ambiental
     if (data.subtipo_receita === undefined) delete (sanitized as any).subtipo_receita
 
+    // Remover campo auxiliar de licenças do payload da tabela principal
+    const { licencas } = data as any
+    delete (sanitized as any).licencas
+
     const { error } = await supabase
         .from("servicos")
         .update(sanitized)
@@ -263,6 +359,114 @@ export async function updateServico(id: string, data: Partial<Servico>) {
 
     if (error) {
         return { success: false, error: error.message }
+    }
+
+    // Atualizar licenciamentos ambientais
+    if (licencas !== undefined) {
+        const { error: deleteError } = await supabase
+            .from("ambiental_licenciamentos")
+            .delete()
+            .eq("servico_id", id)
+
+        if (deleteError) {
+            console.error("[updateServico] Falha ao limpar licenciamentos ambientais:", deleteError.message)
+        }
+
+        if ((data.tipo === "Ambiental" || data.tipo === "SERVIÇOS AMBIENTAIS") && licencas && licencas.length > 0) {
+            const licPayloads = licencas.map((tipo: string) => ({
+                servico_id: id,
+                tipo,
+                status: null
+            }))
+
+            const { error: licError } = await supabase
+                .from("ambiental_licenciamentos")
+                .insert(licPayloads)
+
+            if (licError) {
+                console.error("[updateServico] Falha ao criar licenciamentos ambientais:", licError.message)
+            }
+        }
+    }
+
+    // --- SINCRONIZAÇÃO BIDIRECIONAL (Serviços -> Ambiental) ---
+    try {
+        const { data: servicoCompleto } = await supabase
+            .from('servicos')
+            .select('*')
+            .eq('id', id)
+            .maybeSingle()
+
+        if (servicoCompleto && (servicoCompleto.tipo === "Ambiental" || servicoCompleto.tipo === "SERVIÇOS AMBIENTAIS")) {
+            let ambStatus = 'Em andamento'
+            if (servicoCompleto.status === 'Concluído') {
+                ambStatus = 'Concluído'
+            } else if (servicoCompleto.status === 'Suspenso') {
+                ambStatus = 'Suspenso'
+            } else if (servicoCompleto.status === 'Planejado' || servicoCompleto.status === 'Licitado') {
+                ambStatus = 'À licitar'
+            } else if (servicoCompleto.status === 'Cancelado') {
+                ambStatus = 'Suspenso'
+            }
+
+            let contratoNumero: string | null = null
+            let contratadaNome: string | null = null
+            if (servicoCompleto.contrato_id) {
+                const { data: contratoData } = await supabase
+                    .from('contratos')
+                    .select('numero, contratada')
+                    .eq('id', servicoCompleto.contrato_id)
+                    .maybeSingle()
+                if (contratoData) {
+                    contratoNumero = contratoData.numero
+                    contratadaNome = contratoData.contratada
+                }
+            }
+
+            const ambPayload: any = {
+                valor_contrato: servicoCompleto.valor_total || null,
+                prazo: servicoCompleto.data_fim || null,
+                status: ambStatus
+            }
+
+            if (contratoNumero) ambPayload.contrato_spobras = contratoNumero
+            if (contratadaNome) ambPayload.contratada = contratadaNome
+
+            if (servicoCompleto.empreendimento_id) {
+                const { data: existingAmb } = await supabase
+                    .from('ambiental_empreendimentos')
+                    .select('id')
+                    .eq('empreendimento_id', servicoCompleto.empreendimento_id)
+                    .limit(1)
+                    .maybeSingle()
+
+                if (existingAmb) {
+                    await supabase
+                        .from('ambiental_empreendimentos')
+                        .update(ambPayload)
+                        .eq('id', existingAmb.id)
+                } else {
+                    let nomeEmpreendimento: string | null = null
+                    const { data: empData } = await supabase
+                        .from('empreendimentos')
+                        .select('nome')
+                        .eq('id', servicoCompleto.empreendimento_id)
+                        .maybeSingle()
+                    if (empData) {
+                        nomeEmpreendimento = empData.nome
+                    }
+
+                    ambPayload.empreendimento_id = servicoCompleto.empreendimento_id
+                    ambPayload.nome_empreendimento = nomeEmpreendimento
+
+                    await supabase
+                        .from('ambiental_empreendimentos')
+                        .insert(ambPayload)
+                }
+            }
+        }
+    } catch (syncErr: any) {
+        console.error('[updateServico] Falha na sincronização bidirecional:', syncErr.message)
     }
 
     revalidatePath("/empreendimentos")

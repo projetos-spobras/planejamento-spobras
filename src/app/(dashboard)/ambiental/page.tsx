@@ -1,19 +1,19 @@
 import { Metadata } from "next"
 import { getAmbientalDashboardData, getAmbientalFilterOptions } from "@/app/actions/ambiental-dashboard"
-import { AmbientalDashboardClient } from "./_components/ambiental-dashboard-client"
+import { MeioAmbienteDashboardClient } from "./_components/meio-ambiente-dashboard-client"
 
 export const metadata: Metadata = {
-    title: "Módulo Ambiental | SID",
-    description: "Painel de controle e monitoramento ambiental da GMA.",
+    title: "Gestão Ambiental | SID",
+    description: "Monitoramento e licenciamento de serviços ambientais vinculados aos empreendimentos.",
 }
 
 export const dynamic = "force-dynamic"
 
-interface AmbientalPageProps {
-    searchParams: { [key: string]: string | string[] | undefined }
+interface MeioAmbientePageProps {
+    searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }
 
-export default async function AmbientalPage({ searchParams }: AmbientalPageProps) {
+export default async function MeioAmbientePage({ searchParams }: MeioAmbientePageProps) {
     const params = await searchParams
     
     // Parsing search params
@@ -35,11 +35,7 @@ export default async function AmbientalPage({ searchParams }: AmbientalPageProps
 
     return (
         <div className="flex-1 space-y-4 p-8 pt-6">
-            <div className="flex items-center justify-between space-y-2">
-                <h2 className="text-3xl font-bold tracking-tight">Painel Ambiental</h2>
-            </div>
-            
-            <AmbientalDashboardClient 
+            <MeioAmbienteDashboardClient 
                 initialData={dashboardData.data}
                 totalCount={dashboardData.totalCount}
                 indicators={dashboardData.indicators}

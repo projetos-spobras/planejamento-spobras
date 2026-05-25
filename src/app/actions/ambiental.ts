@@ -12,7 +12,7 @@ const LICENCIAMENTOS_TIPOS = [
 export async function getAmbientalData(id: string) {
     const supabase = await createClient()
 
-    const { data: empreendimentoData, error: empError } = await supabase
+    let { data: empreendimentoData, error: empError } = await supabase
         .from('ambiental_empreendimentos')
         .select('*, empreendimento:empreendimentos(id, nome)')
         .eq('id', id)
@@ -23,22 +23,116 @@ export async function getAmbientalData(id: string) {
         return null
     }
 
+    // Fallback if not found by id: try searching by empreendimento_id
+    if (!empreendimentoData) {
+        const { data: byEmp, error: byEmpError } = await supabase
+            .from('ambiental_empreendimentos')
+            .select('*, empreendimento:empreendimentos(id, nome)')
+            .eq('empreendimento_id', id)
+            .maybeSingle()
+
+        if (byEmpError) {
+            console.error("Erro ao buscar ambiental_empreendimentos por empreendimento_id:", byEmpError)
+        } else if (byEmp) {
+            empreendimentoData = byEmp
+        } else {
+            // If still not found, fetch from empreendimentos table to build a mock record
+            const { data: empInfo, error: empInfoError } = await supabase
+                .from('empreendimentos')
+                .select('id, nome')
+                .eq('id', id)
+                .maybeSingle()
+
+            if (empInfoError) {
+                console.error("Erro ao buscar empreendimentos:", empInfoError)
+            } else if (empInfo) {
+                empreendimentoData = {
+                    id: '', // Empty means not created yet
+                    empreendimento_id: empInfo.id,
+                    nome_empreendimento: empInfo.nome,
+                    empreendimento: empInfo,
+                    sei_processo: null,
+                    contrato_spobras: null,
+                    contrato_siurb: null,
+                    programa: null,
+                    tipo_servico: null,
+                    gerencia: null,
+                    contratada: null,
+                    gestor: null,
+                    fiscal: null,
+                    tecnico_gma: null,
+                    status: 'Não Iniciado',
+                    estagio_contratacao: null,
+                    prazo: null,
+                    valor_contrato: 0,
+                    valor_medido: 0,
+                    percentual_conclusao: 0,
+                    tem_empenho: false,
+                    observacoes: null
+                }
+            }
+        }
+    }
+
     let licenciamentosData: any[] = []
     
-    if (empreendimentoData) {
+    if (empreendimentoData && empreendimentoData.id) {
         const { data: licData, error: licError } = await supabase
             .from('ambiental_licenciamentos')
             .select('*')
-            .eq('ambiental_empreendimento_id', id)
+            .eq('ambiental_empreendimento_id', empreendimentoData.id)
 
         if (!licError && licData) {
             licenciamentosData = licData
         }
     }
 
+    let servicosAmbientais: any[] = []
+    if (empreendimentoData && empreendimentoData.empreendimento_id) {
+        const { data: servData, error: servError } = await supabase
+            .from('servicos')
+            .select(`
+                id, 
+                contrato_id, 
+                codigo, 
+                descricao, 
+                unidade, 
+                quantidade, 
+                preco_unitario, 
+                valor_total, 
+                tipo, 
+                status, 
+                subtipo_receita, 
+                data_inicio, 
+                data_fim, 
+                duracao_dias, 
+                acompanha_fisico, 
+                acompanha_financeiro, 
+                aditamento_anos, 
+                aditamento_formalizado, 
+                valor_contratual, 
+                subtipo_ambiental, 
+                subtipo_desapropriacao, 
+                ordem,
+                created_at,
+                updated_at,
+                contratos(numero)
+            `)
+            .eq('empreendimento_id', empreendimentoData.empreendimento_id)
+            .in('tipo', ['Ambiental', 'SERVIÇOS AMBIENTAIS'])
+            .order('created_at', { ascending: true })
+
+        if (!servError && servData) {
+            servicosAmbientais = servData
+        } else if (servError) {
+            console.error("Erro ao buscar servicos ambientais:", servError.message)
+        }
+    }
+
     return {
         empreendimento: empreendimentoData || null,
-        licenciamentos: licenciamentosData
+        licenciamentos: licenciamentosData,
+        servicosAmbientais: servicosAmbientais
     }
 }
 
@@ -78,11 +172,24 @@ export async function saveAmbientalData(
 
     try {
         // 2. Busca o registro principal se existir
-        let { data: existingEmp } = await supabase
-            .from('ambiental_empreendimentos')
-            .select('id, observacoes')
-            .eq('id', id)
-            .maybeSingle()
+        let existingEmp = null
+        if (id) {
+            const { data } = await supabase
+                .from('ambiental_empreendimentos')
+                .select('id, observacoes')
+                .eq('id', id)
+                .maybeSingle()
+            existingEmp = data
+        }
+        
+        if (!existingEmp && ambientalEmpData.empreendimento_id) {
+            const { data } = await supabase
+                .from('ambiental_empreendimentos')
+                .select('id, observacoes')
+                .eq('empreendimento_id', ambientalEmpData.empreendimento_id)
+                .maybeSingle()
+            existingEmp = data
+        }
 
         // 3. Processa append na observação
         let finalObservacoes = existingEmp?.observacoes || ""
@@ -196,7 +303,8 @@ export async function saveAmbientalData(
             if (licError) throw licError
         }
 
-        revalidatePath(`/ambiental/${id}`)
+        revalidatePath("/ambiental")
+        revalidatePath(`/empreendimentos/${id}`)
         return { success: true }
     } catch (err: any) {
         console.error("Erro ao salvar dados ambientais:", err)

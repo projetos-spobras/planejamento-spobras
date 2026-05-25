@@ -32,6 +32,22 @@ import { createServico, updateServico } from "@/app/actions/servicos"
 import { Servico } from "@/types"
 import { TIPOS_SERVICO, STATUS_SERVICO } from "@/lib/constants"
 import { paraFormatoInputDate, calcularDuracaoDias } from "@/lib/utils"
+import { supabase } from "@/lib/supabase/client"
+
+const LICENCAS_OPCOES = [
+    "LAP",
+    "LAI",
+    "LAO",
+    "TCA",
+    "Arqueologia",
+    "DAEE",
+    "Dispensa de Licença",
+    "Áreas Contaminadas",
+    "Plantio",
+    "EVA",
+    "EIA/RIMA",
+    "Taxa Ambiental"
+]
 
 // ─── Subtipos por Tipo de Serviço ───────────────────────────────────────────
 const SUBTIPOS_CONFIG = {
@@ -116,6 +132,10 @@ export function ServicoDialog({
     // Subtipos selecionados — lista de strings (armazenado no banco como subtipo_receita)
     const [subtiposSelecionados, setSubtiposSelecionados] = useState<string[]>([])
 
+    // Licenças ambientais marcadas para inserção direta
+    const [licencasSelecionadas, setLicencasSelecionadas] = useState<string[]>([])
+    const [isLicencasExpanded, setIsLicencasExpanded] = useState(false)
+
     const formatBRL = useCallback((value: number) => {
         if (!value && value !== 0) return ""
         return new Intl.NumberFormat('pt-BR', {
@@ -154,11 +174,26 @@ export function ServicoDialog({
             // Limpeza ao fechar o diálogo se não for edição persistente
             if (!servicoToEdit) {
                 setSubtiposSelecionados([])
+                setLicencasSelecionadas([])
             }
             return
         }
 
         if (servicoToEdit) {
+            // Se for ambiental, buscar também as licenças vinculadas a este serviço
+            if (servicoToEdit.tipo === "Ambiental") {
+                supabase
+                    .from("ambiental_licenciamentos")
+                    .select("tipo")
+                    .eq("servico_id", servicoToEdit.id)
+                    .then(({ data, error }) => {
+                        if (data && !error) {
+                            setLicencasSelecionadas(data.map(l => l.tipo))
+                        }
+                    })
+            } else {
+                setLicencasSelecionadas([])
+            }
             // Caso de EDIÇÃO
             form.reset({
                 contrato_id: servicoToEdit.contrato_id || "",
@@ -226,6 +261,7 @@ export function ServicoDialog({
             const isInitialLoad = servicoToEdit && watchedTipo === servicoToEdit.tipo
             if (!isInitialLoad) {
                 setSubtiposSelecionados([])
+                setLicencasSelecionadas([])
             }
         }
         prevTipoRef.current = watchedTipo
@@ -363,6 +399,7 @@ export function ServicoDialog({
                 subtipo_ambiental: (values.tipo === "Ambiental") && subtiposSelecionados.length > 0
                     ? subtiposSelecionados
                     : null,
+                licencas: values.tipo === "Ambiental" ? licencasSelecionadas : []
             }
 
             if (servicoToEdit) {
@@ -776,6 +813,53 @@ export function ServicoDialog({
                                 />
                             </div>
                         </div>
+
+                        {/* ─── Tipos de Licença (Módulo Ambiental) ─── */}
+                        {tipoAtual === "Ambiental" && (
+                            <div className="rounded-lg border border-emerald-100 dark:border-emerald-900 bg-emerald-50/20 dark:bg-emerald-950/10 overflow-hidden transition-all duration-300 shadow-sm">
+                                <button
+                                    type="button"
+                                    onClick={() => setIsLicencasExpanded(!isLicencasExpanded)}
+                                    className="w-full flex items-center justify-between p-4 font-medium text-sm text-emerald-800 dark:text-emerald-300 hover:bg-emerald-50/50 dark:hover:bg-emerald-900/10 transition-colors"
+                                >
+                                    <div className="flex items-center gap-2">
+                                        <span>🌿 Tipos de Licença</span>
+                                        {licencasSelecionadas.length > 0 && (
+                                            <span className="text-[10px] bg-emerald-600 text-white px-2 py-0.5 rounded-full font-semibold">
+                                                {licencasSelecionadas.length} selecionada(s)
+                                            </span>
+                                        )}
+                                    </div>
+                                    <span className={`text-xs transition-transform duration-300 ${isLicencasExpanded ? 'rotate-180' : ''}`}>
+                                        ▼
+                                    </span>
+                                </button>
+
+                                {isLicencasExpanded && (
+                                    <div className="p-4 pt-0 border-t border-emerald-100/50 dark:border-emerald-900/50 grid grid-cols-1 sm:grid-cols-3 gap-3 animate-in fade-in slide-in-from-top-2 duration-300">
+                                        {LICENCAS_OPCOES.map((lic) => (
+                                            <label
+                                                key={lic}
+                                                className="flex items-center gap-2.5 text-xs text-muted-foreground hover:text-foreground cursor-pointer p-2 rounded-md hover:bg-emerald-50/50 dark:hover:bg-emerald-950/20 transition-all border border-transparent hover:border-emerald-100/30"
+                                            >
+                                                <Checkbox
+                                                    checked={licencasSelecionadas.includes(lic)}
+                                                    onCheckedChange={(checked) => {
+                                                        if (checked) {
+                                                            setLicencasSelecionadas(prev => [...prev, lic])
+                                                        } else {
+                                                            setLicencasSelecionadas(prev => prev.filter(l => l !== lic))
+                                                        }
+                                                    }}
+                                                    className="data-[state=checked]:bg-emerald-600 data-[state=checked]:border-emerald-600"
+                                                />
+                                                <span className="font-medium">{lic}</span>
+                                            </label>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                        )}
 
                         <DialogFooter>
                             <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>Cancelar</Button>

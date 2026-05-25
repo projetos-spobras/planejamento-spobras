@@ -240,15 +240,36 @@ export function MeioAmbienteDashboardClient({
                                             </div>
                                         </TableCell>
                                         <TableCell>
-                                            <div className="flex items-center gap-2 flex-wrap">
-                                                {(row.tipo_servico_raw || []).map((sub: string) => (
-                                                    <Badge key={sub} variant="secondary" className="text-[10px] px-1.5 py-0.5 font-medium bg-emerald-50 text-emerald-800 dark:bg-emerald-950/30 dark:text-emerald-400 border border-emerald-200/50 dark:border-emerald-800/30">
-                                                        {sub}
-                                                    </Badge>
-                                                ))}
-                                                <span className="text-[11px] text-muted-foreground font-semibold ml-1">
-                                                    ({row.total_servicos || 0} {row.total_servicos === 1 ? 'serv.' : 'serv.'})
-                                                </span>
+                                            <div className="flex flex-col gap-1.5">
+                                                {(row.servicos_list && row.servicos_list.length > 0) ? (
+                                                    row.servicos_list.map((sv: any) => (
+                                                        <div key={sv.id} className="flex items-start gap-1.5 flex-wrap">
+                                                            <Link
+                                                                href={`/ambiental/${sv.id}`}
+                                                                className="text-xs font-semibold text-primary hover:underline max-w-[200px] truncate"
+                                                                title={sv.descricao}
+                                                            >
+                                                                {sv.descricao}
+                                                            </Link>
+                                                            {(sv.subtipo_ambiental || []).map((sub: string) => (
+                                                                <Badge key={sub} variant="secondary" className="text-[10px] px-1.5 py-0.5 font-medium bg-emerald-50 text-emerald-800 dark:bg-emerald-950/30 dark:text-emerald-400 border border-emerald-200/50 dark:border-emerald-800/30">
+                                                                    {sub}
+                                                                </Badge>
+                                                            ))}
+                                                        </div>
+                                                    ))
+                                                ) : (
+                                                    <div className="flex items-center gap-2 flex-wrap">
+                                                        {(row.tipo_servico_raw || []).map((sub: string) => (
+                                                            <Badge key={sub} variant="secondary" className="text-[10px] px-1.5 py-0.5 font-medium bg-emerald-50 text-emerald-800 dark:bg-emerald-950/30 dark:text-emerald-400 border border-emerald-200/50 dark:border-emerald-800/30">
+                                                                {sub}
+                                                            </Badge>
+                                                        ))}
+                                                        <span className="text-[11px] text-muted-foreground font-semibold ml-1">
+                                                            ({row.total_servicos || 0} serv.)
+                                                        </span>
+                                                    </div>
+                                                )}
                                             </div>
                                         </TableCell>
                                         <TableCell>

@@ -124,21 +124,7 @@ export async function createServico(data: Partial<Servico>) {
                 }
             }
 
-            let nomeEmpreendimento: string | null = null
-            if (sanitized.empreendimento_id) {
-                const { data: empData } = await supabase
-                    .from('empreendimentos')
-                    .select('nome')
-                    .eq('id', sanitized.empreendimento_id)
-                    .maybeSingle()
-                if (empData) {
-                    nomeEmpreendimento = empData.nome
-                }
-            }
-
             const ambPayload: any = {
-                empreendimento_id: sanitized.empreendimento_id,
-                nome_empreendimento: nomeEmpreendimento,
                 valor_contrato: sanitized.valor_total || null,
                 prazo: sanitized.data_fim || null,
                 status: ambStatus
@@ -147,22 +133,23 @@ export async function createServico(data: Partial<Servico>) {
             if (contratoNumero) ambPayload.contrato_spobras = contratoNumero
             if (contratadaNome) ambPayload.contratada = contratadaNome
 
-            // Verificar se já existe registro em ambiental_empreendimentos para este empreendimento
+            // Verificar se já existe registro em ambiental_detalhes para este servico_id
             const { data: existingAmb } = await supabase
-                .from('ambiental_empreendimentos')
+                .from('ambiental_detalhes')
                 .select('id')
-                .eq('empreendimento_id', sanitized.empreendimento_id)
+                .eq('servico_id', inserted.id)
                 .limit(1)
                 .maybeSingle()
 
             if (existingAmb) {
                 await supabase
-                    .from('ambiental_empreendimentos')
+                    .from('ambiental_detalhes')
                     .update(ambPayload)
                     .eq('id', existingAmb.id)
             } else {
+                ambPayload.servico_id = inserted.id
                 await supabase
-                    .from('ambiental_empreendimentos')
+                    .from('ambiental_detalhes')
                     .insert(ambPayload)
             }
         } catch (syncErr: any) {
@@ -432,37 +419,24 @@ export async function updateServico(id: string, data: Partial<Servico>) {
             if (contratoNumero) ambPayload.contrato_spobras = contratoNumero
             if (contratadaNome) ambPayload.contratada = contratadaNome
 
-            if (servicoCompleto.empreendimento_id) {
-                const { data: existingAmb } = await supabase
-                    .from('ambiental_empreendimentos')
-                    .select('id')
-                    .eq('empreendimento_id', servicoCompleto.empreendimento_id)
-                    .limit(1)
-                    .maybeSingle()
+            // Verificar se já existe registro em ambiental_detalhes para este servico_id
+            const { data: existingAmb } = await supabase
+                .from('ambiental_detalhes')
+                .select('id')
+                .eq('servico_id', id)
+                .limit(1)
+                .maybeSingle()
 
-                if (existingAmb) {
-                    await supabase
-                        .from('ambiental_empreendimentos')
-                        .update(ambPayload)
-                        .eq('id', existingAmb.id)
-                } else {
-                    let nomeEmpreendimento: string | null = null
-                    const { data: empData } = await supabase
-                        .from('empreendimentos')
-                        .select('nome')
-                        .eq('id', servicoCompleto.empreendimento_id)
-                        .maybeSingle()
-                    if (empData) {
-                        nomeEmpreendimento = empData.nome
-                    }
-
-                    ambPayload.empreendimento_id = servicoCompleto.empreendimento_id
-                    ambPayload.nome_empreendimento = nomeEmpreendimento
-
-                    await supabase
-                        .from('ambiental_empreendimentos')
-                        .insert(ambPayload)
-                }
+            if (existingAmb) {
+                await supabase
+                    .from('ambiental_detalhes')
+                    .update(ambPayload)
+                    .eq('id', existingAmb.id)
+            } else {
+                ambPayload.servico_id = id
+                await supabase
+                    .from('ambiental_detalhes')
+                    .insert(ambPayload)
             }
         }
     } catch (syncErr: any) {

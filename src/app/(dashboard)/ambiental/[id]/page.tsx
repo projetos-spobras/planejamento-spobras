@@ -74,11 +74,11 @@ export default async function MeioAmbienteDetalhePage({ params }: PageProps) {
         notFound()
     }
 
-    const { empreendimento, licenciamentos, servicosAmbientais } = data
+    const { empreendimento, licenciamentos, servicosAmbientais, comentarios } = data
 
     // 3. Map to the shape expected by MeioAmbienteDetalheClient
     const mockServico = {
-        id: empreendimento.id,
+        id: id, // servico_id
         nome: empreendimento.nome_empreendimento || empreendimento.empreendimento?.nome || "Ficha Ambiental",
         tipo: "Ambiental",
         status: empreendimento.status || "Não Iniciado",
@@ -90,7 +90,7 @@ export default async function MeioAmbienteDetalhePage({ params }: PageProps) {
     }
 
     const mockDetalhes = {
-        id: empreendimento.id,
+        id: id, // servico_id
         tecnico_gma: empreendimento.tecnico_gma,
         gestor: empreendimento.gestor,
         fiscal: empreendimento.fiscal,
@@ -100,7 +100,7 @@ export default async function MeioAmbienteDetalhePage({ params }: PageProps) {
         contrato_siurb: empreendimento.contrato_siurb,
         sei_processo: empreendimento.sei_processo,
         programa: empreendimento.programa,
-        estagio: empreendimento.estagio_contratacao ? Number(empreendimento.estagio_contratacao) : 0,
+        estagio: empreendimento.estagio !== undefined ? Number(empreendimento.estagio) : 0,
         status: empreendimento.status,
         prazo: empreendimento.prazo,
         valor_contrato: empreendimento.valor_contrato,
@@ -111,7 +111,7 @@ export default async function MeioAmbienteDetalhePage({ params }: PageProps) {
     }
 
     // 4. Parse comments from the observations feed
-    const formattedComentarios = parseObservacoes(empreendimento.observacoes)
+    const formattedComentarios = comentarios || []
 
     // 5. Determine if user can edit
     const canEdit = profile.nivel_acesso === 'Admin' || 
@@ -125,15 +125,15 @@ export default async function MeioAmbienteDetalhePage({ params }: PageProps) {
     // 7. Fetch contracts associated with this project
     const supabase = await createClient()
     const { data: contratosVinculados } = await supabase
-        .from('empreendimento_contrato')
+        .from('empreendimentos_contratos')
         .select(`
             contrato_id,
-            contrato:contratos(id, numero, contratada, tipo, valor_total, data_inicio, data_fim)
+            contratos(id, numero, contratada, tipo, valor_total, data_inicio, data_fim)
         `)
         .eq('empreendimento_id', empreendimento.empreendimento_id)
 
     const contratosFormatados = (contratosVinculados || [])
-        .map((cv: any) => cv.contrato)
+        .map((cv: any) => cv.contratos)
         .filter(Boolean)
 
     return (

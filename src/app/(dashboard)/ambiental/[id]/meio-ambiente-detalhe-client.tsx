@@ -867,101 +867,131 @@ export function MeioAmbienteDetalheClient({
                         </CardContent>
                     </Card>
 
-                    {/* Section 3: Licenciamentos */}
+                    {/* Section 3: Licenciamentos por Serviço */}
                     <Card className="shadow-sm border-slate-100 dark:border-slate-800">
                         <CardHeader className="border-b border-slate-50 dark:border-slate-800/50 pb-3">
                             <CardTitle className="text-sm font-semibold flex items-center gap-2 text-slate-800 dark:text-slate-200">
                                 <Landmark className="h-4 w-4 text-emerald-600" />
-                                Licenciamentos do Serviço ({servico.ambiental_licenciamentos?.length || 0})
+                                Licenciamentos por Serviço
                             </CardTitle>
                         </CardHeader>
                         <CardContent className="p-0">
-                            {(!servico.ambiental_licenciamentos || servico.ambiental_licenciamentos.length === 0) ? (
+                            {servicosAmbientais.length === 0 ? (
                                 <div className="p-6 text-center text-sm text-muted-foreground">
-                                    Nenhum tipo de licença configurado para este serviço.
+                                    Nenhum serviço ambiental cadastrado para exibir licenciamentos.
                                 </div>
                             ) : (
-                                <div className="overflow-x-auto">
-                                    <table className="w-full text-left border-collapse">
-                                        <thead>
-                                            <tr className="border-b bg-muted/40 dark:bg-muted/10 text-xs font-semibold text-muted-foreground uppercase">
-                                                <th className="px-4 py-3">Tipo</th>
-                                                <th className="px-4 py-3 text-center">Status</th>
-                                                <th className="px-4 py-3">Observação</th>
-                                                <th className="px-4 py-3">Atualização</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody className="divide-y text-sm">
-                                            {servico.ambiental_licenciamentos.map((lic: any) => {
-                                                const statusDet = getStatusDetails(lic.status)
-                                                return (
-                                                    <tr key={lic.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-900/20 transition-colors">
-                                                        <td className="px-4 py-3.5 font-semibold text-slate-700 dark:text-slate-300">
-                                                            {lic.tipo}
-                                                        </td>
-                                                        <td className="px-4 py-3.5 text-center">
-                                                            <button
-                                                                type="button"
-                                                                onClick={() => handleCycleStatus(lic)}
-                                                                disabled={!canEdit}
-                                                                className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold border shadow-sm transition-all focus:outline-none ${statusDet.style} ${canEdit ? 'cursor-pointer hover:brightness-95 active:scale-95' : 'cursor-not-allowed'}`}
-                                                            >
-                                                                {statusDet.label}
-                                                            </button>
-                                                        </td>
-                                                        <td className="px-4 py-3.5 max-w-[240px]">
-                                                            {editingObsId === lic.id ? (
-                                                                <div className="flex items-center gap-1">
-                                                                    <Input
-                                                                        value={obsValue}
-                                                                        onChange={(e) => setObsValue(e.target.value)}
-                                                                        onKeyDown={(e) => {
-                                                                            if (e.key === "Enter") handleSaveObservacao(lic.id)
-                                                                            if (e.key === "Escape") setEditingObsId(null)
-                                                                        }}
-                                                                        autoFocus
-                                                                        className="h-8 text-xs py-1"
-                                                                    />
-                                                                    <Button 
-                                                                        size="sm" 
-                                                                        variant="ghost" 
-                                                                        className="h-8 w-8 p-0 text-emerald-600 hover:text-emerald-700" 
-                                                                        onClick={() => handleSaveObservacao(lic.id)}
-                                                                    >
-                                                                        <Save className="h-4 w-4" />
-                                                                    </Button>
-                                                                    <Button 
-                                                                        size="sm" 
-                                                                        variant="ghost" 
-                                                                        className="h-8 w-8 p-0 text-rose-600 hover:text-rose-755" 
-                                                                        onClick={() => setEditingObsId(null)}
-                                                                    >
-                                                                        <X className="h-4 w-4" />
-                                                                    </Button>
-                                                                </div>
-                                                            ) : (
-                                                                <div 
-                                                                    onClick={() => handleStartEditObservacao(lic)}
-                                                                    className={`min-h-[2rem] flex items-center p-1 rounded hover:bg-slate-100/50 dark:hover:bg-slate-800/50 transition-colors ${canEdit ? 'cursor-pointer' : ''}`}
-                                                                >
-                                                                    {lic.observacao ? (
-                                                                        <span className="text-slate-600 dark:text-slate-300 break-words">{lic.observacao}</span>
-                                                                    ) : (
-                                                                        <span className="text-muted-foreground italic text-xs font-normal">
-                                                                            {canEdit ? "Clique para adicionar obs..." : "Sem observação"}
-                                                                        </span>
-                                                                    )}
-                                                                </div>
-                                                            )}
-                                                        </td>
-                                                        <td className="px-4 py-3.5 text-xs text-muted-foreground font-mono">
-                                                            {lic.updated_at ? new Date(lic.updated_at).toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' }) : "-"}
-                                                        </td>
-                                                    </tr>
-                                                )
-                                            })}
-                                        </tbody>
-                                    </table>
+                                <div className="divide-y divide-slate-100 dark:divide-slate-800/50">
+                                    {servicosAmbientais.map((sv: any) => {
+                                        const svLics: any[] = sv.ambiental_licenciamentos || []
+                                        const isCurrentServico = sv.id === servico.id
+                                        return (
+                                            <div key={sv.id} className={`${isCurrentServico ? 'bg-emerald-50/30 dark:bg-emerald-950/10' : ''}`}>
+                                                <div className="px-4 py-2.5 flex items-center gap-2 border-b border-slate-100/80 dark:border-slate-800/30">
+                                                    <Hammer className="h-3.5 w-3.5 text-emerald-600 shrink-0" />
+                                                    <span className="text-xs font-semibold text-slate-700 dark:text-slate-300 truncate flex-1" title={sv.descricao}>
+                                                        {sv.descricao || sv.codigo || 'Serviço Ambiental'}
+                                                    </span>
+                                                    {isCurrentServico && (
+                                                        <Badge variant="outline" className="text-[10px] bg-emerald-100 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 border-emerald-200 shrink-0">
+                                                            Serviço atual
+                                                        </Badge>
+                                                    )}
+                                                    <Badge variant="secondary" className="text-[10px] shrink-0">
+                                                        {svLics.length} {svLics.length === 1 ? 'licença' : 'licenças'}
+                                                    </Badge>
+                                                </div>
+                                                {svLics.length === 0 ? (
+                                                    <div className="px-4 py-4 text-center text-xs text-muted-foreground italic">
+                                                        Nenhum tipo de licença configurado para este serviço.
+                                                    </div>
+                                                ) : (
+                                                    <div className="overflow-x-auto">
+                                                        <table className="w-full text-left border-collapse">
+                                                            <thead>
+                                                                <tr className="text-xs font-semibold text-muted-foreground uppercase bg-muted/20">
+                                                                    <th className="px-4 py-2">Tipo</th>
+                                                                    <th className="px-4 py-2 text-center">Status</th>
+                                                                    <th className="px-4 py-2">Observação</th>
+                                                                    <th className="px-4 py-2">Atualização</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody className="divide-y text-sm">
+                                                                {svLics.map((lic: any) => {
+                                                                    const statusDet = getStatusDetails(lic.status)
+                                                                    return (
+                                                                        <tr key={lic.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-900/20 transition-colors">
+                                                                            <td className="px-4 py-3 font-semibold text-slate-700 dark:text-slate-300">
+                                                                                {lic.tipo}
+                                                                            </td>
+                                                                            <td className="px-4 py-3 text-center">
+                                                                                <button
+                                                                                    type="button"
+                                                                                    onClick={() => canEdit && handleCycleStatus(lic)}
+                                                                                    disabled={!canEdit}
+                                                                                    className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold border shadow-sm transition-all focus:outline-none ${statusDet.style} ${canEdit ? 'cursor-pointer hover:brightness-95 active:scale-95' : 'cursor-not-allowed'}`}
+                                                                                >
+                                                                                    {statusDet.label}
+                                                                                </button>
+                                                                            </td>
+                                                                            <td className="px-4 py-3 max-w-[240px]">
+                                                                                {editingObsId === lic.id ? (
+                                                                                    <div className="flex items-center gap-1">
+                                                                                        <Input
+                                                                                            value={obsValue}
+                                                                                            onChange={(e) => setObsValue(e.target.value)}
+                                                                                            onKeyDown={(e) => {
+                                                                                                if (e.key === "Enter") handleSaveObservacao(lic.id)
+                                                                                                if (e.key === "Escape") setEditingObsId(null)
+                                                                                            }}
+                                                                                            autoFocus
+                                                                                            className="h-8 text-xs py-1"
+                                                                                        />
+                                                                                        <Button
+                                                                                            size="sm"
+                                                                                            variant="ghost"
+                                                                                            className="h-8 w-8 p-0 text-emerald-600 hover:text-emerald-700"
+                                                                                            onClick={() => handleSaveObservacao(lic.id)}
+                                                                                        >
+                                                                                            <Save className="h-4 w-4" />
+                                                                                        </Button>
+                                                                                        <Button
+                                                                                            size="sm"
+                                                                                            variant="ghost"
+                                                                                            className="h-8 w-8 p-0 text-rose-600 hover:text-rose-700"
+                                                                                            onClick={() => setEditingObsId(null)}
+                                                                                        >
+                                                                                            <X className="h-4 w-4" />
+                                                                                        </Button>
+                                                                                    </div>
+                                                                                ) : (
+                                                                                    <div
+                                                                                        onClick={() => handleStartEditObservacao(lic)}
+                                                                                        className={`min-h-[2rem] flex items-center p-1 rounded hover:bg-slate-100/50 dark:hover:bg-slate-800/50 transition-colors ${canEdit ? 'cursor-pointer' : ''}`}
+                                                                                    >
+                                                                                        {lic.observacao ? (
+                                                                                            <span className="text-slate-600 dark:text-slate-300 break-words">{lic.observacao}</span>
+                                                                                        ) : (
+                                                                                            <span className="text-muted-foreground italic text-xs font-normal">
+                                                                                                {canEdit ? "Clique para adicionar obs..." : "Sem observação"}
+                                                                                            </span>
+                                                                                        )}
+                                                                                    </div>
+                                                                                )}
+                                                                            </td>
+                                                                            <td className="px-4 py-3 text-xs text-muted-foreground font-mono">
+                                                                                {lic.updated_at ? new Date(lic.updated_at).toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' }) : "-"}
+                                                                            </td>
+                                                                        </tr>
+                                                                    )
+                                                                })}
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        )
+                                    })}
                                 </div>
                             )}
                         </CardContent>

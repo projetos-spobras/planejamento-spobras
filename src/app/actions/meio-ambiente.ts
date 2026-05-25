@@ -8,7 +8,7 @@ export async function getServicosAmbientais() {
     const { data: { user }, error: authError } = await supabase.auth.getUser()
     if (authError || !user) return []
 
-    // 1. Buscar todos os serviços do tipo 'Ambiental'
+    // 1. Buscar todos os serviços do tipo 'Ambiental' ou 'SERVIÇOS AMBIENTAIS'
     const { data, error } = await supabase
         .from('servicos')
         .select(`
@@ -21,7 +21,7 @@ export async function getServicosAmbientais() {
                 data_fim
             )
         `)
-        .eq('tipo', 'Ambiental')
+        .in('tipo', ['Ambiental', 'SERVIÇOS AMBIENTAIS'])
         .order('created_at', { ascending: false })
 
     if (error) {
@@ -33,18 +33,49 @@ export async function getServicosAmbientais() {
         return []
     }
 
+    // Resolve missing empreendimento link via contract
+    const contratoIds = data
+        .filter(s => !s.empreendimento_id && s.contrato_id)
+        .map(s => s.contrato_id)
+
+    const contratoToEmpMap = new Map<string, { id: string; nome: string; codigo: string }>()
+    if (contratoIds.length > 0) {
+        const { data: ecLinks } = await supabase
+            .from('empreendimentos_contratos')
+            .select('contrato_id, empreendimento_id, empreendimentos(id, nome, codigo)')
+            .in('contrato_id', contratoIds)
+
+        if (ecLinks) {
+            ecLinks.forEach((ec: any) => {
+                if (ec.contrato_id && ec.empreendimentos) {
+                    contratoToEmpMap.set(ec.contrato_id, {
+                        id: ec.empreendimentos.id,
+                        nome: ec.empreendimentos.nome,
+                        codigo: ec.empreendimentos.codigo
+                    })
+                }
+            })
+        }
+    }
+
     // 2. Agrupar por Empreendimento
     const groupedData: Record<string, any> = {}
 
     data.forEach((servico: any) => {
-        const empId = servico.empreendimento_id
+        let empId = servico.empreendimento_id
+        let empData = servico.empreendimento
+        if (!empId && servico.contrato_id && contratoToEmpMap.has(servico.contrato_id)) {
+            const m = contratoToEmpMap.get(servico.contrato_id)!
+            empId = m.id
+            empData = m
+        }
         if (!empId) return // Ignorar na listagem agrupada se não tiver vínculo
 
         if (!groupedData[empId]) {
             groupedData[empId] = {
                 id: empId, // ID principal da linha agora é o do empreendimento
                 empreendimento_id: empId,
-                empreendimento: servico.empreendimento,
+                empreendimento: empData,
                 subtipos: new Set<string>(),
                 servicos_count: 0,
                 alerta_aditivo: false,

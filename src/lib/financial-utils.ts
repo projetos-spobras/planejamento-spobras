@@ -102,9 +102,22 @@ export function calculateFinancialIndicators(
         const distribuicoes: any[] = servico.distribuicao_financeira || []
         const isObras = servico.tipo === 'Execução de Obras'
 
+        const getValAno = (d: any) => {
+            if (d.ano !== null && d.ano !== undefined && d.ano !== '') {
+                const numAno = Number(d.ano)
+                if (!isNaN(numAno)) return numAno
+            }
+            if (d.mes_referencia) {
+                const date = new Date(d.mes_referencia)
+                const y = date.getFullYear()
+                if (!isNaN(y)) return y
+            }
+            return null
+        }
+
         for (const d of distribuicoes) {
             // distribuicao_financeira rows have: mes (1-12), ano (yyyy), valor
-            const dAno = Number(d.ano ?? new Date(d.mes_referencia ?? '').getFullYear())
+            const dAno = getValAno(d)
             if (dAno === currentYear) {
                 const val = Number(d.valor ?? 0)
                 valorPlanejadoAno += val
@@ -114,8 +127,13 @@ export function calculateFinancialIndicators(
 
         // Also consider servico.valor_total as planned if no distribuicao but has data within year
         if (distribuicoes.length === 0 && servico.valor_total) {
-            const startYear = servico.data_inicio ? new Date(servico.data_inicio).getFullYear() : null
-            const endYear = servico.data_fim ? new Date(servico.data_fim).getFullYear() : null
+            const getYearSafe = (dateStr: any) => {
+                if (!dateStr) return null
+                const y = new Date(dateStr).getFullYear()
+                return isNaN(y) ? null : y
+            }
+            const startYear = getYearSafe(servico.data_inicio)
+            const endYear = getYearSafe(servico.data_fim)
             if (startYear === currentYear || endYear === currentYear) {
                 valorPlanejadoAno += Number(servico.valor_total)
                 if (isObras) valorPlanejadoObrasAno += Number(servico.valor_total)

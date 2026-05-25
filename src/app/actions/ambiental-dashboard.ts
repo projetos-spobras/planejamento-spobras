@@ -24,110 +24,172 @@ export async function getAmbientalDashboardData(options: {
             subtipo_ambiental,
             updated_at,
             empreendimento_id,
+            contrato_id,
             empreendimentos (
                 id,
                 nome,
-                codigo,
-                ambiental_empreendimentos (
-                    id,
-                    tecnico_gma,
-                    sei_processo,
-                    status,
-                    estagio_contratacao,
-                    prazo,
-                    percentual_conclusao,
-                    programa,
-                    observacoes,
-                    valor_contrato,
-                    ambiental_licenciamentos (
-                        tipo,
-                        status,
-                        observacao
-                    )
-                )
+                codigo
             )
         `)
         .in('tipo', ['Ambiental', 'SERVIÇOS AMBIENTAIS'])
-
-    console.log('[Ambiental] servicos carregados com sucesso:', servicos?.length)
 
     if (error) {
         console.error("Error fetching services for environmental dashboard:", error)
         return { data: [], totalCount: 0, indicators: { totalAtivos: 0, pendentes: 0, vencidos: 0, distribuicao: {} } }
     }
 
+    // Resolve missing empreendimento link via contract
+    const contratoIds = (servicos || [])
+        .filter(s => !s.empreendimento_id && s.contrato_id)
+        .map(s => s.contrato_id)
+
+    const contratoToEmpMap = new Map<string, { id: string; nome: string; codigo: string }>()
+    if (contratoIds.length > 0) {
+        const { data: ecLinks } = await supabase
+            .from('empreendimentos_contratos')
+            .select('contrato_id, empreendimento_id, empreendimentos(id, nome, codigo)')
+            .in('contrato_id', contratoIds)
+
+        if (ecLinks) {
+            ecLinks.forEach((ec: any) => {
+                if (ec.contrato_id && ec.empreendimentos) {
+                    contratoToEmpMap.set(ec.contrato_id, {
+                        id: ec.empreendimentos.id,
+                        nome: ec.empreendimentos.nome,
+                        codigo: ec.empreendimentos.codigo
+                    })
+                }
+            })
+        }
+    }
+
+    const servicoIds = (servicos || []).map(s => s.id)
+
+    // Consultas secundárias paralelas protegidas contra erros de tabela/coluna ausente
+    const [detalhesResult, licsResult] = await Promise.all([
+        servicoIds.length > 0
+            ? supabase.from('ambiental_detalhes').select('*').in('servico_id', servicoIds)
+            : Promise.resolve({ data: [] as any[], error: null }),
+        servicoIds.length > 0
+            ? supabase.from('ambiental_licenciamentos').select('servico_id, tipo, status, observacao').in('servico_id', servicoIds)
+            : Promise.resolve({ data: [] as any[], error: null })
+    ])
+
+    const detalhes = (!detalhesResult.error && detalhesResult.data) ? detalhesResult.data : []
+    if (detalhesResult.error) {
+        console.warn("Erro ao buscar ambiental_detalhes no dashboard:", detalhesResult.error)
+    }
+
+    const licenciamentos = (!licsResult.error && licsResult.data) ? licsResult.data : []
+    if (licsResult.error) {
+        console.warn("Erro ao buscar ambiental_licenciamentos no dashboard:", licsResult.error)
+    }
+
+    // Mapear em O(1) para enriquecer os serviços
+    const detalhesMap = new Map<string, any>()
+    detalhes.forEach((d: any) => {
+        if (d.servico_id) {
+            detalhesMap.set(d.servico_id, d)
+        }
+    })
+
+    const licsGrouped = new Map<string, any[]>()
+    licenciamentos.forEach((l: any) => {
+        if (l.servico_id) {
+            const arr = licsGrouped.get(l.servico_id) || []
+            arr.push(l)
+            licsGrouped.set(l.servico_id, arr)
+        }
+    })
+
+    // Enriquecer os serviços carregados
+    const servicosEnriquecidos = (servicos || []).map(s => {
+        let empId = s.empreendimento_id
+        let empData = s.empreendimentos
+        if (!empId && s.contrato_id && contratoToEmpMap.has(s.contrato_id)) {
+            const m = contratoToEmpMap.get(s.contrato_id)!
+            empId = m.id
+            empData = m
+        }
+        const ambDetalhe = detalhesMap.get(s.id) || null
+        const ambLics = licsGrouped.get(s.id) || []
+        return {
+            ...s,
+            empreendimento_id: empId,
+            empreendimentos: empData,
+            ambiental_detalhes: ambDetalhe,
+            ambiental_licenciamentos: ambLics,
+            "ambiental_licenciamentos!ambiental_licenciamentos_servico_id_fkey": ambLics
+        }
+    })
+
+    console.log('[Ambiental] servicos carregados e enriquecidos com sucesso:', servicosEnriquecidos?.length)
+
     // 2. Group by empreendimento_id
-    const groups: Record<string, any> = {}
-    for (const s of (servicos || [])) {
-        if (!s.empreendimento_id || !s.empreendimentos) continue
-        const empId = s.empreendimento_id
+    const agrupado = new Map<string, any>()
+    
+    servicosEnriquecidos.forEach(s => {
+        const emp = s.empreendimentos || { id: `sem-emp-${s.id}`, nome: 'Sem Empreendimento', codigo: '' }
+        const empId = emp.id
         
-        if (!groups[empId]) {
-            const emp = s.empreendimentos
-            const amb = emp.ambiental_empreendimentos?.[0] || null
-            
-            groups[empId] = {
-                id: amb?.id || emp.id, // Fallback to empreendimento ID so we can navigate to detail page
-                empreendimento_id: emp.id,
+        if (!agrupado.has(empId)) {
+            const amb = s.ambiental_detalhes || null
+            agrupado.set(empId, {
+                id: empId, // Link para /ambiental/[id] (id do empreendimento)
+                empreendimento_id: empId,
                 nome_empreendimento: emp.nome,
                 codigo_obra: emp.codigo,
-                empreendimento: {
-                    id: emp.id,
-                    nome: emp.nome,
-                    codigo: emp.codigo
-                },
+                empreendimento: emp,
                 sei_processo: amb?.sei_processo || null,
                 tecnico_gma: amb?.tecnico_gma || null,
-                tipo_servico_list: [] as string[],
-                status: amb?.status || 'Não Iniciado',
-                estagio_contratacao: amb?.estagio_contratacao || null,
+                tipo_servico: '',
+                tipo_servico_raw: [],
+                status: amb?.status || s.status || 'Não Iniciado',
+                estagio_contratacao: amb?.estagio !== null && amb?.estagio !== undefined ? String(amb.estagio) : null,
                 prazo: amb?.prazo || null,
                 percentual_conclusao: amb?.percentual_conclusao || 0,
                 programa: amb?.programa || null,
-                valor_contrato: amb?.valor_contrato || 0,
-                licenciamentos: amb?.ambiental_licenciamentos ? [...amb.ambiental_licenciamentos] : [],
+                valor_contrato: amb?.valor_contrato || s.valor_total || 0,
+                licenciamentos: [],
+                servicos_list: [],
                 updated_at: s.updated_at || null,
                 total_servicos: 0
-            }
+            })
         }
         
-        // Count total services
-        groups[empId].total_servicos += 1
-
-        // Merge service-level licenses
-        if (s.ambiental_licenciamentos && s.ambiental_licenciamentos.length > 0) {
-            const existingTypes = new Set(groups[empId].licenciamentos.map((l: any) => l.tipo))
-            s.ambiental_licenciamentos.forEach((lic: any) => {
-                if (!existingTypes.has(lic.tipo)) {
-                    groups[empId].licenciamentos.push(lic)
+        const g = agrupado.get(empId)
+        g.total_servicos += 1
+        
+        // Acumular tipos de serviço
+        if (s.subtipo_ambiental && s.subtipo_ambiental.length > 0) {
+            s.subtipo_ambiental.forEach((t: string) => {
+                if (!g.tipo_servico_raw.includes(t)) {
+                    g.tipo_servico_raw.push(t)
                 }
             })
         }
         
-        // Keep track of latest updated_at among services
-        if (s.updated_at && (!groups[empId].updated_at || s.updated_at > groups[empId].updated_at)) {
-            groups[empId].updated_at = s.updated_at
+        // Acumular licenciamentos
+        if (s.ambiental_licenciamentos && s.ambiental_licenciamentos.length > 0) {
+            s.ambiental_licenciamentos.forEach((l: any) => {
+                if (!g.licenciamentos.find((xl: any) => xl.id === l.id)) {
+                    g.licenciamentos.push(l)
+                }
+            })
         }
         
-        // Collect types/subtypes
-        if (s.subtipo_ambiental) {
-            for (const sub of s.subtipo_ambiental) {
-                if (!groups[empId].tipo_servico_list.includes(sub)) {
-                    groups[empId].tipo_servico_list.push(sub)
-                }
-            }
-        }
-    }
-
-    // Convert groups to array and format tipo_servico
-    let groupedArray = Object.values(groups).map(g => {
-        const { tipo_servico_list, ...rest } = g
-        return {
-            ...rest,
-            tipo_servico: tipo_servico_list.join(', '),
-            tipo_servico_raw: tipo_servico_list // keep as array for filtering
-        }
+        // Adicionar o serviço em si à lista
+        g.servicos_list.push({
+            id: s.id,
+            descricao: s.descricao || s.codigo || 'Serviço Ambiental',
+            subtipo_ambiental: s.subtipo_ambiental || []
+        })
+        
+        // Atualizar o tipo_servico formatado
+        g.tipo_servico = g.tipo_servico_raw.join(', ')
     })
+    
+    let groupedArray = Array.from(agrupado.values())
 
     // 3. Apply Filters in JS
     if (options.search) {
@@ -171,29 +233,27 @@ export async function getAmbientalDashboardData(options: {
     // Sort: sort alphabetically by project name
     groupedArray.sort((a, b) => a.nome_empreendimento.localeCompare(b.nome_empreendimento))
 
-    // 4. Calculate Indicators (based on total grouped list, prior to filtering to represent overall GMA status)
-    const allGrouped = Object.values(groups)
-    
-    // Total ativos (status != Concluído, Finalizado, Encerrado)
-    const totalAtivos = allGrouped.filter(g => 
+    // 4. Calculate Indicators (based on total mapped services, prior to filtering to represent overall GMA status)
+    const allGroups = Array.from(agrupado.values())
+    const totalAtivos = allGroups.filter(g => 
         !['Concluído', 'Finalizado', 'Encerrado'].includes(g.status)
     ).length
 
     // Com licenciamento pendente (pelo menos um 'P')
-    const pendentes = allGrouped.filter(g => 
+    const pendentes = allGroups.filter(g => 
         g.licenciamentos.some((l: any) => l.status === 'P')
     ).length
 
     // Em andamento com prazo vencido
     const hoje = new Date().toISOString().split('T')[0]
-    const vencidos = allGrouped.filter(g => 
+    const vencidos = allGroups.filter(g => 
         g.status === 'Em andamento' && g.prazo && g.prazo < hoje
     ).length
 
     // Distribuição por tipo de serviço
     const distribuicao: Record<string, number> = {}
-    allGrouped.forEach(g => {
-        g.tipo_servico_list.forEach((t: string) => {
+    allGroups.forEach(g => {
+        g.tipo_servico_raw.forEach((t: string) => {
             distribuicao[t] = (distribuicao[t] || 0) + 1
         })
     })
@@ -221,14 +281,26 @@ export async function getAmbientalFilterOptions() {
 
     // Buscamos valores únicos existentes no banco para popular os filtros
     const [
-        { data: tecnicos },
-        { data: programas },
-        { data: status }
+        tecnicosRes,
+        programasRes,
+        statusRes
     ] = await Promise.all([
-        supabase.from('ambiental_empreendimentos').select('tecnico_gma').not('tecnico_gma', 'is', null),
-        supabase.from('ambiental_empreendimentos').select('programa').not('programa', 'is', null),
-        supabase.from('ambiental_empreendimentos').select('status').not('status', 'is', null),
+        supabase.from('ambiental_detalhes').select('tecnico_gma').not('tecnico_gma', 'is', null),
+        supabase.from('ambiental_detalhes').select('programa').not('programa', 'is', null),
+        supabase.from('ambiental_detalhes').select('status').not('status', 'is', null),
     ])
+
+    const tecnicos = !tecnicosRes.error && tecnicosRes.data ? tecnicosRes.data : []
+    const programas = !programasRes.error && programasRes.data ? programasRes.data : []
+    const status = !statusRes.error && statusRes.data ? statusRes.data : []
+
+    if (tecnicosRes.error || programasRes.error || statusRes.error) {
+        console.warn("Erro ao buscar opções de filtro de ambiental_detalhes (tabela pode não existir):", {
+            tecnicosError: tecnicosRes.error,
+            programasError: programasRes.error,
+            statusError: statusRes.error
+        })
+    }
 
     const uniqueTecnicos = Array.from(new Set((tecnicos || []).map(t => t.tecnico_gma))).filter(Boolean).sort()
     const uniqueProgramas = Array.from(new Set((programas || []).map(p => p.programa))).filter(Boolean).sort()

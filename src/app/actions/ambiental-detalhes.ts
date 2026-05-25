@@ -4,12 +4,13 @@ import { createClient } from "@/lib/supabase/server"
 import { getCurrentUserProfile } from "@/lib/auth-utils"
 import { revalidatePath } from "next/cache"
 
+// ambEmpId aqui é o servico_id (UUID da tabela servicos)
 export async function saveAmbientalDetalhes(ambEmpId: string, data: any) {
     const supabase = await createClient()
     const { data: { user }, error: authError } = await supabase.auth.getUser()
     if (authError || !user) return { success: false, error: 'Não autorizado' }
 
-    // Check permissions: user must have "ambiental" in modulos_acesso or nivel_acesso in ('Admin', 'Gestor')
+    // Verifica permissão: Admin, Gestor ou acesso ao módulo ambiental
     const profile = await getCurrentUserProfile()
     const canEdit = profile && (
         profile.nivel_acesso === 'Admin' || 
@@ -19,6 +20,7 @@ export async function saveAmbientalDetalhes(ambEmpId: string, data: any) {
     if (!canEdit) return { success: false, error: 'Sem permissão de edição' }
 
     const payload = {
+        servico_id: ambEmpId,
         tecnico_gma: data.tecnico_gma || null,
         gestor: data.gestor || null,
         fiscal: data.fiscal || null,
@@ -28,7 +30,7 @@ export async function saveAmbientalDetalhes(ambEmpId: string, data: any) {
         contrato_siurb: data.contrato_siurb || null,
         sei_processo: data.sei_processo || null,
         programa: data.programa || null,
-        estagio_contratacao: data.estagio !== undefined && data.estagio !== "" ? String(data.estagio) : null,
+        estagio: data.estagio !== undefined && data.estagio !== "" ? Number(data.estagio) : null,
         status: data.status || null,
         prazo: data.prazo || null,
         valor_contrato: data.valor_contrato !== undefined && data.valor_contrato !== "" ? Number(data.valor_contrato) : null,
@@ -37,10 +39,10 @@ export async function saveAmbientalDetalhes(ambEmpId: string, data: any) {
         tem_empenho: data.tem_empenho !== undefined ? Boolean(data.tem_empenho) : null,
     }
 
+    // Upsert em ambiental_detalhes pelo servico_id
     const { error } = await supabase
-        .from('ambiental_empreendimentos')
-        .update(payload)
-        .eq('id', ambEmpId)
+        .from('ambiental_detalhes')
+        .upsert(payload, { onConflict: 'servico_id' })
 
     if (error) {
         console.error("[saveAmbientalDetalhes] Error:", error.message)
@@ -49,56 +51,43 @@ export async function saveAmbientalDetalhes(ambEmpId: string, data: any) {
 
     // --- SINCRONIZAÇÃO BIDIRECIONAL (Ambiental -> Serviços) ---
     try {
-        const { data: currentAmb } = await supabase
-            .from('ambiental_empreendimentos')
-            .select('empreendimento_id')
-            .eq('id', ambEmpId)
-            .single()
-
-        if (currentAmb && currentAmb.empreendimento_id) {
-            let servicoStatus = 'Andamento'
-            if (payload.status) {
-                const statusLower = payload.status.toLowerCase()
-                if (statusLower.includes('concl') || statusLower.includes('final') || statusLower.includes('encerr')) {
-                    servicoStatus = 'Concluído'
-                } else if (statusLower.includes('susp')) {
-                    servicoStatus = 'Suspenso'
-                } else if (statusLower.includes('licit')) {
-                    servicoStatus = 'Licitado'
-                }
+        let servicoStatus = 'Andamento'
+        if (payload.status) {
+            const statusLower = payload.status.toLowerCase()
+            if (statusLower.includes('concl') || statusLower.includes('final') || statusLower.includes('encerr')) {
+                servicoStatus = 'Concluído'
+            } else if (statusLower.includes('susp')) {
+                servicoStatus = 'Suspenso'
+            } else if (statusLower.includes('licit')) {
+                servicoStatus = 'Licitado'
             }
-
-            let contratoIdToUpdate: string | null = undefined
-            if (payload.contrato_spobras) {
-                const { data: matchingContrato } = await supabase
-                    .from('contratos')
-                    .select('id')
-                    .ilike('numero', `%${payload.contrato_spobras}%`)
-                    .limit(1)
-                    .maybeSingle()
-
-                if (matchingContrato) {
-                    contratoIdToUpdate = matchingContrato.id
-                }
-            }
-
-            const servicoUpdatePayload: any = {
-                valor_total: payload.valor_contrato,
-                data_fim: payload.prazo,
-                status: servicoStatus
-            }
-
-            if (contratoIdToUpdate !== undefined) {
-                servicoUpdatePayload.contrato_id = contratoIdToUpdate
-            }
-
-            // Atualiza todos os serviços do tipo ambiental associados a esse empreendimento_id
-            await supabase
-                .from('servicos')
-                .update(servicoUpdatePayload)
-                .eq('empreendimento_id', currentAmb.empreendimento_id)
-                .in('tipo', ['Ambiental', 'SERVIÇOS AMBIENTAIS'])
         }
+
+        let contratoIdToUpdate: string | null | undefined = undefined
+        if (payload.contrato_spobras) {
+            const { data: matchingContrato } = await supabase
+                .from('contratos')
+                .select('id')
+                .ilike('numero', `%${payload.contrato_spobras}%`)
+                .limit(1)
+                .maybeSingle()
+
+            if (matchingContrato) {
+                contratoIdToUpdate = matchingContrato.id
+            }
+        }
+
+        const servicoUpdatePayload: any = {
+            data_fim: payload.prazo,
+            status: servicoStatus
+        }
+        if (payload.valor_contrato) servicoUpdatePayload.valor_total = payload.valor_contrato
+        if (contratoIdToUpdate !== undefined) servicoUpdatePayload.contrato_id = contratoIdToUpdate
+
+        await supabase
+            .from('servicos')
+            .update(servicoUpdatePayload)
+            .eq('id', ambEmpId)
     } catch (syncErr: any) {
         console.error("[saveAmbientalDetalhes] Sincronização falhou:", syncErr.message)
     }
@@ -163,52 +152,25 @@ export async function updateLicenciamentoObservacao(id: string, ambEmpId: string
     return { success: true }
 }
 
+// ambEmpId aqui é o servico_id (UUID da tabela servicos)
 export async function addAmbientalComentario(ambEmpId: string, texto: string, mencoes: string[]) {
     const supabase = await createClient()
     const { data: { user }, error: authError } = await supabase.auth.getUser()
     if (authError || !user) return { success: false, error: 'Não autorizado' }
 
-    // 1. Obter nome do perfil do autor
-    const { data: profile, error: profileError } = await supabase
-        .from('profiles')
-        .select('full_name')
-        .eq('id', user.id)
-        .single()
+    // Inserir diretamente na tabela ambiental_comentarios pelo servico_id
+    const { error: insertError } = await supabase
+        .from('ambiental_comentarios')
+        .insert({
+            servico_id: ambEmpId,
+            autor_id: user.id,
+            texto: texto.trim(),
+            mencoes: mencoes || []
+        })
 
-    if (profileError) {
-        console.error("[addAmbientalComentario] Error fetching profile:", profileError.message)
-    }
-    const autorNome = profile?.full_name || 'Usuário'
-
-    // 2. Buscar observações legadas da tabela ambiental_empreendimentos
-    const { data: emp, error: empError } = await supabase
-        .from('ambiental_empreendimentos')
-        .select('observacoes')
-        .eq('id', ambEmpId)
-        .single()
-
-    if (empError || !emp) {
-        console.error("[addAmbientalComentario] Error fetching ambiental_empreendimento:", empError?.message)
-        return { success: false, error: 'Registro não encontrado' }
-    }
-
-    // 3. Formatar e anexar a nova observação (formato append-only)
-    const dataHora = new Intl.DateTimeFormat('pt-BR', { dateStyle: 'short', timeStyle: 'short' }).format(new Date())
-    const appendText = `[${dataHora}] ${autorNome}: ${texto.trim()}`
-    
-    const novasObservacoes = emp.observacoes 
-        ? `${emp.observacoes}\n\n${appendText}` 
-        : appendText
-
-    // 4. Salvar de volta na tabela
-    const { error: updateError } = await supabase
-        .from('ambiental_empreendimentos')
-        .update({ observacoes: novasObservacoes })
-        .eq('id', ambEmpId)
-
-    if (updateError) {
-        console.error("[addAmbientalComentario] Error saving observacoes:", updateError.message)
-        return { success: false, error: updateError.message }
+    if (insertError) {
+        console.error("[addAmbientalComentario] Erro ao inserir comentário:", insertError.message)
+        return { success: false, error: insertError.message }
     }
 
     revalidatePath(`/ambiental/${ambEmpId}`)

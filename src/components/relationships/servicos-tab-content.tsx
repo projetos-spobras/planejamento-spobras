@@ -206,7 +206,7 @@ export function ServicosTabContent({ servicos, contratos, empreendimentoId }: Se
                                                                         </TooltipProvider>
                                                                     )}
                                                                 </div>
-                                                                {/* Exibição de Subtipos */}
+                                                                {/* Exibição de Subtipos e Licenciamentos */}
                                                                 <div className="flex flex-wrap gap-1 mt-1">
                                                                     {(item as any).tipo === 'Ambiental' && (item as any).subtipo_ambiental?.map((sub: string) => (
                                                                         <Badge key={sub} variant="outline" className="text-[9px] h-4 px-1.5 bg-emerald-50 text-emerald-700 border-emerald-200">
@@ -218,6 +218,25 @@ export function ServicosTabContent({ servicos, contratos, empreendimentoId }: Se
                                                                             {sub}
                                                                         </Badge>
                                                                     ))}
+                                                                    
+                                                                    {/* Chips de Licenciamento Ambiental */}
+                                                                    {((item as any).tipo === 'Ambiental' || (item as any).tipo === 'SERVIÇOS AMBIENTAIS') && 
+                                                                        (item as any).ambiental_licenciamentos?.filter((lic: any) => lic.status && lic.status.trim() !== "").map((lic: any) => {
+                                                                            let colorClasses = "bg-gray-50 text-gray-700 border-gray-200"
+                                                                            if (lic.status === "E" || lic.status?.toLowerCase() === "emitida") {
+                                                                                colorClasses = "bg-emerald-50 text-emerald-700 border-emerald-200"
+                                                                            } else if (lic.status === "P" || lic.status?.toLowerCase() === "pendente") {
+                                                                                colorClasses = "bg-amber-50 text-amber-700 border-amber-200"
+                                                                            } else if (lic.status === "N" || lic.status?.toLowerCase() === "não aplicável") {
+                                                                                colorClasses = "bg-slate-100 text-slate-500 border-slate-200"
+                                                                            }
+                                                                            return (
+                                                                                <Badge key={lic.tipo} variant="outline" className={`text-[9px] h-4 px-1.5 font-semibold ${colorClasses}`}>
+                                                                                    {lic.tipo}: {lic.status}
+                                                                                </Badge>
+                                                                            )
+                                                                        })
+                                                                    }
                                                                 </div>
                                                             </TableCell>
                                                             <TableCell className="text-xs whitespace-nowrap">

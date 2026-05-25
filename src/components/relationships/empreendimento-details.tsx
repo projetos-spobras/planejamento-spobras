@@ -8,6 +8,7 @@ import { ptBR } from "date-fns/locale"
 import { Link2, Trash2, ExternalLink, Banknote, CalendarDays, FilePen, Hammer } from "lucide-react"
 import { toast } from "sonner"
 import Link from "next/link"
+import { cn } from "@/lib/utils"
 
 import { AvancoFinanceiroCard } from "@/components/empreendimentos/AvancoFinanceiroCard"
 import { calcularPercentualMedido } from "@/lib/financial-utils"
@@ -282,10 +283,20 @@ export function EmpreendimentoDetails({
         .filter(s => !s.contrato_id)
         .reduce((sum, s) => sum + (Number(s.valor_total) || 0), 0);
 
-    const contratosComServicos = contratosVinculados.filter(cv => contratoIdsComServicos.has(cv.contrato_id));
-    const totalOriginal = contratosComServicos.reduce((sum, cv) => sum + (Number(cv.contrato?.valor_original) || 0), 0);
-    const totalAditamentos = contratosComServicos.reduce((sum, cv) => sum + (Number(cv.contrato?.valor_aditamento) || 0), 0);
-    const totalReajustes = contratosComServicos.reduce((sum, cv) => sum + (Number(cv.contrato?.valor_reajuste) || 0), 0);
+    // Deduplica os contratos vinculados pelo ID do contrato para evitar somas duplicadas
+    const contratosDeduplicados = useMemo(() => {
+        const seen = new Set<string>()
+        return contratosVinculados.filter(cv => {
+            if (!cv.contrato_id) return true
+            if (seen.has(cv.contrato_id)) return false
+            seen.add(cv.contrato_id)
+            return true
+        })
+    }, [contratosVinculados])
+
+    const totalOriginal = contratosDeduplicados.reduce((sum, cv) => sum + (Number(cv.contrato?.valor_original) || 0), 0);
+    const totalAditamentos = contratosDeduplicados.reduce((sum, cv) => sum + (Number(cv.contrato?.valor_aditamento) || 0), 0);
+    const totalReajustes = contratosDeduplicados.reduce((sum, cv) => sum + (Number(cv.contrato?.valor_reajuste) || 0), 0);
     const totalGlobal = totalOriginal + totalAditamentos + totalReajustes;
     const calculatedValorPlanejadoTotal = useMemo(() => 
         indicators?.valorPlanejadoTotal ?? totalPlanejadoObras ?? 0,
@@ -398,7 +409,7 @@ export function EmpreendimentoDetails({
                                 </CardHeader>
                                 <div className="flex flex-col gap-1">
                                     <div className="flex items-baseline gap-2">
-                                        <div className="text-3xl font-bold tabular-nums">{contratosComServicos.length}</div>
+                                        <div className="text-3xl font-bold tabular-nums">{contratosDeduplicados.length}</div>
                                         <div className="text-base font-bold text-emerald-600 dark:text-emerald-500 tabular-nums">
                                             {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', notation: "compact" }).format(totalGlobal)}
                                         </div>

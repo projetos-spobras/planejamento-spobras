@@ -10,7 +10,7 @@ import { getCurrentUserProfile } from '@/lib/auth-utils'
  * Restrito apenas ao perfil 'Admin'.
  */
 export const GET = withAuth({
-    handler: async ({ user }) => {
+    handler: async ({ req, user }) => {
         // 1. Verificar permissão de Admin (Camada adicional de segurança)
         const profile = await getCurrentUserProfile()
         
@@ -51,10 +51,10 @@ export const GET = withAuth({
         let paginationTest: any = null
         try {
             const fetchTest = async (page: number) => {
-                const url = new URL(`${request.nextUrl.origin}/api/proxy-sid`)
+                const url = new URL(`${req.nextUrl.origin}/api/proxy-sid`)
                 url.searchParams.set('path', `/api/Empreendimentos?pagina=${page}&quantidade=2`)
                 const res = await fetch(url.toString(), {
-                    headers: { 'Cookie': request.headers.get('cookie') || '' }
+                    headers: { 'Cookie': req.headers.get('cookie') || '' }
                 })
                 if (!res.ok) return { error: res.status }
                 const data = await res.json()

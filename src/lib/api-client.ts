@@ -7,49 +7,92 @@ import { unstable_cache } from 'next/cache'
 // TTL de 5 minutos para dados da API externa
 const CACHE_TTL_SECONDS = 300
 
-/**
- * Robust helper for calls to the SPObras legacy API via the 'proxy-sid' Edge Function.
- * This function abstracts authentication and isolates service credentials.
- * 
- * @param supabase Authenticated Supabase client.
- * @param path Relative path to the legacy API (e.g., '/api/Empreendimentos').
- * @param options Standard RequestInit options.
- * @returns The JSON response from the legacy API.
- * @throws Error if the proxy call fails or returns an error.
- */
+let legacyToken: { value: string; expiresAt: number } | null = null
+
+async function getLegacyToken() {
+    if (legacyToken && legacyToken.expiresAt > Date.now() + 60000) {
+        return legacyToken.value
+    }
+
+    const baseUrl = process.env.SPOBRAS_API_URL
+    const username = process.env.SPOBRAS_API_USER
+    const password = process.env.SPOBRAS_API_PASSWORD
+
+    if (!baseUrl || !username || !password) {
+        throw new Error('Configurações da API SPObras ausentes.')
+    }
+
+    const res = await fetch(`${baseUrl}/api/Login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ usuario: username, senha: password }),
+    })
+
+    if (!res.ok) {
+        throw new Error(`Falha na autenticação da API legado: ${res.status}`)
+    }
+
+    const data = await res.json()
+    const tokenStr = typeof data === 'string' ? data : data.token || data.access_token
+
+    if (!tokenStr) {
+        throw new Error('Token não encontrado na resposta.')
+    }
+
+    // Decode JWT exp claim
+    const parts = tokenStr.split('.')
+    if (parts.length !== 3) {
+        throw new Error('Formato JWT inválido.')
+    }
+
+    const payloadRaw = Buffer.from(parts[1], 'base64').toString('utf8')
+    const payload = JSON.parse(payloadRaw)
+
+    // JWT exp is in seconds
+    const exp = payload.exp ? payload.exp * 1000 : Date.now() + 3600000
+
+    legacyToken = { value: tokenStr, expiresAt: exp }
+    return legacyToken.value
+}
+
 export async function fetchFromProxy(path: string, options?: RequestInit) {
     const method = (options?.method as any) || 'GET';
     const cleanPath = path.startsWith('/') ? path : `/${path}`;
 
     try {
-        // Proxied via Next.js Route Handler (server-side, same network as legacy API)
-        // NOTE: The ternary operator precedence fix: wrap the condition correctly so
-        // NEXT_PUBLIC_APP_URL takes priority when set, otherwise fall back to localhost.
-        const appUrl = process.env.NEXT_PUBLIC_APP_URL
-        const baseUrl = appUrl ? appUrl : 'http://localhost:3005';
-        const targetUrl = `${baseUrl}/api/proxy-sid?path=${encodeURIComponent(cleanPath)}`;
-        
-        const internalKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
-        
-        const res = await fetch(targetUrl, {
+        const token = await getLegacyToken()
+        const baseUrl = process.env.SPOBRAS_API_URL
+        const targetUrl = `${baseUrl}${cleanPath}`
+
+        const controller = new AbortController()
+        const timeoutId = setTimeout(() => controller.abort(), 30000)
+
+        const fetchOptions: RequestInit = {
             method: method,
-            headers: { 
+            headers: {
+                'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json',
-                'x-internal-key': internalKey
             },
-            body: options?.body
-        });
+            signal: controller.signal,
+        }
+
+        if (method !== 'GET' && method !== 'HEAD') {
+            fetchOptions.body = options?.body
+        }
+
+        const res = await fetch(targetUrl, fetchOptions)
+        clearTimeout(timeoutId)
 
         if (!res.ok) {
             const errBody = await res.text().catch(() => '');
-            console.error(`[fetchFromProxy] Error calling proxy-sid for ${cleanPath}:`, res.status, errBody);
-            throw new Error(`Proxy error: ${res.statusText || 'Unknown error'}`);
+            console.error(`[fetchFromProxy] Error calling legacy API for ${cleanPath}:`, res.status, errBody);
+            throw new Error(`Legacy API error: ${res.statusText || 'Unknown error'}`);
         }
 
         const data = await res.json();
         return data;
     } catch (err: any) {
-        console.error(`[fetchFromProxy] Exception calling proxy-sid for ${cleanPath}:`, err);
+        console.error(`[fetchFromProxy] Exception calling legacy API for ${cleanPath}:`, err);
         throw err;
     }
 }
@@ -268,20 +311,20 @@ async function fetchAllPages<T = any>(
 // ─────────────────────────────────────────────────────────────────────────────
 
 const fetchApiEmpreendimentos = unstable_cache(
-    async (role: string, supabaseUrl: string, supabaseKey: string): Promise<any[]> => {
+    async (): Promise<any[]> => {
         try {
-            return await fetchAllPages('/api/Empreendimentos', { pageSize: 1000 })
+            return await fetchAllPages('/api/Empreendimentos', { pageSize: 1000, totalField: 'none' })
         } catch (err) {
             console.error('[fetchApiEmpreendimentos] Failed to fetch data from Proxy.', err)
             return []
         }
     },
-    ['empreendimentos', 'all', 'v3'],
+    ['empreendimentos', 'all', 'v4'],
     { revalidate: 600, tags: ['api-empreendimentos'] }
 )
 
 const fetchApiEmpenhosGeral = unstable_cache(
-    async (role: string, supabaseUrl: string, supabaseKey: string): Promise<any[]> => {
+    async (): Promise<any[]> => {
         try {
             return await fetchAllPages('/api/Empenhos', { pageSize: 1000 })
         } catch (err) {
@@ -289,13 +332,13 @@ const fetchApiEmpenhosGeral = unstable_cache(
             return []
         }
     },
-    ['api-empenhos-geral-v1'],
+    ['api-empenhos-geral-v2'],
     { revalidate: CACHE_TTL_SECONDS, tags: ['api-empenhos'] }
 )
 
 
 const fetchApiContratos = unstable_cache(
-    async (role: string, supabaseUrl: string, supabaseKey: string): Promise<any[]> => {
+    async (): Promise<any[]> => {
         try {
             return await fetchAllPages('/api/Contratos', { pageSize: 1000 })
         } catch (err) {
@@ -303,12 +346,12 @@ const fetchApiContratos = unstable_cache(
             return []
         }
     },
-    ['api-contratos-v6'],
+    ['api-contratos-v7'],
     { revalidate: CACHE_TTL_SECONDS, tags: ['api-contratos'] }
 )
 
 const fetchApiContratoEmpreendimentos = unstable_cache(
-    async (role: string, supabaseUrl: string, supabaseKey: string): Promise<any[]> => {
+    async (): Promise<any[]> => {
         try {
             return await fetchAllPages('/api/ContratoEmpreendimentos', { pageSize: 1000 })
         } catch (err) {
@@ -316,14 +359,12 @@ const fetchApiContratoEmpreendimentos = unstable_cache(
             return []
         }
     },
-    ['api-contrato-empreendimentos-v6'],
+    ['api-contrato-empreendimentos-v7'],
     { revalidate: CACHE_TTL_SECONDS, tags: ['api-contrato-empreendimentos'] }
 )
 
 const fetchApiProgramas = unstable_cache(
-    async (role: string, supabaseUrl: string, supabaseKey: string): Promise<{ id: number; nome: string }[]> => {
-        const { createClient } = await import('@supabase/supabase-js')
-        const sb = createClient(supabaseUrl, supabaseKey)
+    async (): Promise<{ id: number; nome: string }[]> => {
         try {
             const data = await fetchFromProxy('/api/Programas')
             return Array.isArray(data)
@@ -337,14 +378,14 @@ const fetchApiProgramas = unstable_cache(
             return []
         }
     },
-    ['api-programas-v2'],
+    ['api-programas-v3'],
     { revalidate: CACHE_TTL_SECONDS, tags: ['api-programas'] }
 )
 
 const fetchMergedEmpreendimentosSelection = unstable_cache(
-    async (role: string, supabaseUrl: string, supabaseKey: string): Promise<any[]> => {
+    async (): Promise<any[]> => {
         try {
-            const rawData = await fetchApiEmpreendimentos(role, supabaseUrl, supabaseKey)
+            const rawData = await fetchApiEmpreendimentos()
             const list = Array.isArray(rawData) ? rawData : []
             const apiEmps = list.map(mapEmpreendimentoSelection)
             return apiEmps
@@ -355,18 +396,20 @@ const fetchMergedEmpreendimentosSelection = unstable_cache(
             return []
         }
     },
-    ['api-only-empreendimento-selection-v12'],
+    ['api-only-empreendimento-selection-v13'],
     { revalidate: CACHE_TTL_SECONDS, tags: ['empreendimentos', 'api-empreendimentos'] }
 )
 
 const fetchMergedEmpreendimentos = unstable_cache(
-    async (supabaseUrl: string, supabaseKey: string, role: string): Promise<any[]> => {
+    async (): Promise<any[]> => {
         const { createClient } = await import('@supabase/supabase-js')
+        const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || ''
+        const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
         const sb = createClient(supabaseUrl, supabaseKey)
 
         try {
             const [apiResult, localResult] = await Promise.allSettled([
-                fetchApiEmpreendimentos(role, supabaseUrl, supabaseKey),
+                fetchApiEmpreendimentos(),
                 sb.from('empreendimentos').select('*').limit(5000)
             ])
 
@@ -425,13 +468,15 @@ const fetchMergedEmpreendimentos = unstable_cache(
             return []
         }
     },
-    ['merged-empreendimentos-list-v12'],
+    ['merged-empreendimentos-list-v13'],
     { revalidate: CACHE_TTL_SECONDS, tags: ['empreendimentos', 'api-empreendimentos'] }
 )
 
 const fetchServicosSummary = unstable_cache(
-    async (supabaseUrl: string, supabaseKey: string): Promise<Record<string, { types: string[], subtypes: string[] }>> => {
+    async (): Promise<Record<string, { types: string[], subtypes: string[] }>> => {
         const { createClient } = await import('@supabase/supabase-js')
+        const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || ''
+        const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
         const sb = createClient(supabaseUrl, supabaseKey)
         
         const { data: links } = await sb.from('empreendimento_contratos').select('empreendimento_id, contrato_id')
@@ -486,7 +531,7 @@ const fetchServicosSummary = unstable_cache(
         })
         return result
     },
-    ['servicos-summary-v27'],
+    ['servicos-summary-v28'],
     { revalidate: CACHE_TTL_SECONDS, tags: ['servicos', 'empreendimentos', 'empreendimento_contratos'] }
 )
 
@@ -505,14 +550,8 @@ export const getEmpreendimentos = cache(async (
         pageSize?: number
     }
 ) => {
-    const { getCurrentUserProfile } = await import('./auth-utils')
-    const profile = await getCurrentUserProfile()
-    const role = profile?.nivel_acesso || 'Analista'
-    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || ''
-    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
-
-    let list = await fetchMergedEmpreendimentos(supabaseUrl, supabaseKey, role)
-    const servicosMap = await fetchServicosSummary(supabaseUrl, supabaseKey)
+    let list = await fetchMergedEmpreendimentos()
+    const servicosMap = await fetchServicosSummary()
 
     const contratos = await getContratos(supabase)
     const links = await getContratoEmpreendimentos(supabase, list, contratos)
@@ -587,7 +626,7 @@ export const getEmpreendimentos = cache(async (
 
     const totalCount = list.length
     const uniquePhasesMap = new Map<string, { id: string, nome: string }>()
-    const fullDataset = await fetchMergedEmpreendimentos(supabaseUrl, supabaseKey, role)
+    const fullDataset = await fetchMergedEmpreendimentos()
     fullDataset.forEach(e => {
         if (e.status && e.status_nome) {
             uniquePhasesMap.set(String(e.status), { id: String(e.status), nome: String(e.status_nome).trim() })
@@ -605,12 +644,7 @@ export const getEmpreendimentos = cache(async (
 })
 
 export const getEmpreendimentosSelectionList = cache(async (supabase: SupabaseClient) => {
-    const { getCurrentUserProfile } = await import('./auth-utils')
-    const profile = await getCurrentUserProfile()
-    const role = profile?.nivel_acesso || 'Analista'
-    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || ''
-    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
-    return fetchMergedEmpreendimentosSelection(role, supabaseUrl, supabaseKey)
+    return fetchMergedEmpreendimentosSelection()
 })
 
 export async function getEmpreendimentoById(supabase: SupabaseClient, originalId: number | string) {
@@ -675,14 +709,8 @@ function mapContrato(row: any) {
 }
 
 export const getContratos = cache(async (supabase: SupabaseClient) => {
-    const { getCurrentUserProfile } = await import('./auth-utils')
-    const profile = await getCurrentUserProfile()
-    const role = profile?.nivel_acesso || 'Analista'
-    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || ''
-    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
-
     const [rawData, { data: localData }] = await Promise.all([
-        fetchApiContratos(role, supabaseUrl, supabaseKey),
+        fetchApiContratos(),
         supabase.from('contratos').select('*').limit(3000)
     ])
 
@@ -712,12 +740,7 @@ export const getContratos = cache(async (supabase: SupabaseClient) => {
 })
 
 export const getProgramas = cache(async (supabase: SupabaseClient): Promise<{ id: number; nome: string }[]> => {
-    const { getCurrentUserProfile } = await import('./auth-utils')
-    const profile = await getCurrentUserProfile()
-    const role = profile?.nivel_acesso || 'Analista'
-    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || ''
-    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
-    return fetchApiProgramas(role, supabaseUrl, supabaseKey)
+    return fetchApiProgramas()
 })
 
 export async function getContratoById(supabase: SupabaseClient, originalId: number | string) {
@@ -731,14 +754,8 @@ export async function getContratoById(supabase: SupabaseClient, originalId: numb
 }
 
 export const getContratoEmpreendimentos = cache(async (supabase: SupabaseClient, empreendimentosList?: any[], contratosList?: any[]) => {
-    const { getCurrentUserProfile } = await import('./auth-utils')
-    const profile = await getCurrentUserProfile()
-    const role = profile?.nivel_acesso || 'Analista'
-    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || ''
-    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
-
     const [rawData, { data: localLinks }] = await Promise.all([
-        fetchApiContratoEmpreendimentos(role, supabaseUrl, supabaseKey),
+        fetchApiContratoEmpreendimentos(),
         supabase.from('empreendimentos_contratos').select('*').limit(15000)
     ])
 
@@ -785,14 +802,8 @@ export async function getContratoAditamentos(supabase: SupabaseClient, contractO
 }
 
 export async function getAllEmpenhos(supabase: SupabaseClient) {
-    const { getCurrentUserProfile } = await import('./auth-utils')
-    const profile = await getCurrentUserProfile()
-    const role = profile?.nivel_acesso || 'Analista'
-    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || ''
-    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
-
     try {
-        const data = await fetchApiEmpenhosGeral(role, supabaseUrl, supabaseKey)
+        const data = await fetchApiEmpenhosGeral()
         return data.map((row: any) => {
             const contractId = row.idContrato ?? row.IdContrato ?? row.idContratoOriginal ?? row.IdContratoOriginal ?? row.contratoId ?? row.ContratoId;
             return mapApiEmpenho(row, contractId);
@@ -872,13 +883,7 @@ export function parseApiValue(val: any): number {
 }
 
 export async function getEmpreendimentoNamesMap(): Promise<Record<string, string>> {
-    const { getCurrentUserProfile } = await import('./auth-utils')
-    const profile = await getCurrentUserProfile()
-    const role = profile?.nivel_acesso || 'Analista'
-    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || ''
-    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
-    
-    const apiData = await fetchApiEmpreendimentos(role, supabaseUrl, supabaseKey)
+    const apiData = await fetchApiEmpreendimentos()
     const map: Record<string, string> = {}
     if (Array.isArray(apiData)) {
         apiData.forEach(row => {

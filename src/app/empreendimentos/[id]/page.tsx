@@ -53,7 +53,10 @@ export default async function EmpreendimentoDetailsPage({ params }: PageProps) {
         supabase.rpc('get_valor_medido_total', { p_empreendimento_id: id }),
         supabase.rpc('get_ultima_medicao_aprovada', { p_empreendimento_id: id }),
         getEmpreendimentoAnexos(id),
-        supabase.from('ambiental_empreendimentos').select('id, ambiental_licenciamentos(status)').eq('empreendimento_id', id),
+        supabase.from("servicos")
+            .select("id")
+            .eq("empreendimento_id", id)
+            .in("tipo", ["Ambiental", "SERVIÇOS AMBIENTAIS"]),
     ])
 
     // Busca links de contrato-empreendimento via API (também cacheados)
@@ -145,11 +148,24 @@ export default async function EmpreendimentoDetailsPage({ params }: PageProps) {
         return true
     })
 
-    // Fetch distribuicao_financeira
+    // Fetch distribuicao_financeira e ambiental_licenciamentos
     const servicoIds = servicosSemContratosLocalizados.map(s => s.id)
-    const { data: distribuicoes } = servicoIds.length > 0
-        ? await supabase.from("distribuicao_financeira").select("*").in("servico_id", servicoIds)
-        : { data: [] }
+    const [
+        { data: distribuicoes },
+        licsResult
+    ] = await Promise.all([
+        servicoIds.length > 0
+            ? supabase.from("distribuicao_financeira").select("*").in("servico_id", servicoIds)
+            : Promise.resolve({ data: [] }),
+        servicoIds.length > 0
+            ? supabase.from("ambiental_licenciamentos").select("servico_id, tipo, status, observacao").in("servico_id", servicoIds)
+            : Promise.resolve({ data: [] as any[], error: null })
+    ])
+
+    const licenciamentos = (!licsResult.error && licsResult.data) ? licsResult.data : []
+    if (licsResult.error) {
+        console.warn("Erro ao buscar licenciamentos (pode ser coluna servico_id ausente):", licsResult.error)
+    }
 
     // Mapas para enriquecimento O(1) de serviços
     const fasesGrouped = new Map<string, any[]>()
@@ -164,18 +180,29 @@ export default async function EmpreendimentoDetailsPage({ params }: PageProps) {
         arr.push(d)
         distGrouped.set(d.servico_id, arr)
     })
+    const licsGrouped = new Map<string, any[]>()
+    licenciamentos.forEach((l: any) => {
+        if (l.servico_id) {
+            const arr = licsGrouped.get(l.servico_id) || []
+            arr.push(l)
+            licsGrouped.set(l.servico_id, arr)
+        }
+    })
 
     // Hidrata serviços
     const servicos = servicosSemContratosLocalizados.map(s => {
         const c = s.contrato_id ? contratoMap.get(s.contrato_id) || null : null
         const totalContrato = c?.valor_total ?? s.valor_contratual
+        const sLics = licsGrouped.get(s.id) || []
         return {
             ...s,
             valor_contratual: totalContrato,
             valor_total: s.valor_total,
             contrato: c,
             distribuicao_financeira: distGrouped.get(s.id) || [],
-            fases: fasesGrouped.get(s.id) || []
+            fases: fasesGrouped.get(s.id) || [],
+            ambiental_licenciamentos: sLics,
+            "ambiental_licenciamentos!ambiental_licenciamentos_servico_id_fkey": sLics
         }
     })
 
@@ -219,10 +246,21 @@ export default async function EmpreendimentoDetailsPage({ params }: PageProps) {
             _originalId: lc.contrato._originalId
         }))
 
+    // Obter licenciamentos dos serviços ambientais verificados para checar pendências
+    let licsForCheck: any[] = []
+    const checkServicoIds = (ambientalCheck?.data || []).map((s: any) => s.id)
+    if (checkServicoIds.length > 0) {
+        const { data: checkLics, error: checkLicsError } = await supabase
+            .from("ambiental_licenciamentos")
+            .select("servico_id, status")
+            .in("servico_id", checkServicoIds)
+        if (!checkLicsError && checkLics) {
+            licsForCheck = checkLics
+        }
+    }
+
     const hasAmbiental = (ambientalCheck?.data?.length || 0) > 0
-    const hasPendenciaAmbiental = ambientalCheck?.data?.some((ae: any) => 
-        ae.ambiental_licenciamentos?.some((l: any) => l.status === 'P')
-    )
+    const hasPendenciaAmbiental = licsForCheck.some((l: any) => l.status === 'P')
 
     return (
         <div className="space-y-6">
